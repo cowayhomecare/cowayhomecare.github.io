@@ -12,7 +12,7 @@
     .content-wrapper { padding: 0 20px; }
 
     /* 위치 카드 */
-    .location-card { background-color: #005bb5; color: white; border-radius: 20px; padding: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(0, 91, 181, 0.2); }
+    .location-card { background-color: #005bb5; color: white; border-radius: 20px; padding: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(0, 91, 181, 0.2); cursor: pointer; }
     .location-icon { font-size: 20px; margin-right: 8px; }
     .location-text { font-size: 16px; font-weight: 800; }
 
@@ -32,15 +32,15 @@
     .who .box-status { color: #dc2626; }
     .box-value { font-size: 11px; color: #888; }
 
-    /* 동적 경고 박스 (상태에 따라 색상/문구 변경) */
+    /* 동적 경고 박스 */
     .dynamic-warning-box { border-radius: 12px; padding: 16px; border-left: 4px solid #ccc; background-color: #f9f9f9; }
     .dynamic-warning-text { font-size: 13.5px; font-weight: 700; line-height: 1.5; margin: 0; color: #333; }
 
     /* 습도 영역 */
     .humidity-value { font-size: 36px; font-weight: 900; color: #0ea5e9; text-align: center; margin-bottom: 12px; }
 
-    /* 네이버 다이렉트 버튼 */
-    .naver-btn { display: block; width: 100%; background-color: #03c75a; color: white; text-align: center; text-decoration: none; padding: 16px; border-radius: 16px; font-size: 15px; font-weight: 800; margin-top: 24px; box-shadow: 0 4px 12px rgba(3, 199, 90, 0.2); }
+    /* AQICN 다이렉트 버튼 */
+    .aqi-btn { display: block; width: 100%; background-color: #03c75a; color: white; text-align: center; text-decoration: none; padding: 16px; border-radius: 16px; font-size: 15px; font-weight: 800; margin-top: 24px; box-shadow: 0 4px 12px rgba(3, 199, 90, 0.2); box-sizing: border-box; }
   </style>
 </head>
 <body>
@@ -52,9 +52,9 @@
   </div>
 
   <div class="content-wrapper">
-    <div class="location-card" id="locationCard" onclick="getLocation()" style="cursor: pointer;">
+    <div class="location-card" id="locationCard" onclick="getLocation()">
       <span class="location-icon">📍</span>
-      <span class="location-text" id="locationText">위치 탐색 중...</span>
+      <span class="location-text" id="locationText">위치 탐색 중... (터치 시 재탐색)</span>
     </div>
 
     <div class="fact-card">
@@ -71,7 +71,6 @@
           <div class="box-value pm-value">-- ㎍/㎥</div>
         </div>
       </div>
-      <!-- 미세미세 동적 멘트 영역 -->
       <div class="dynamic-warning-box" id="dustWarningBox">
         <p class="dynamic-warning-text" id="dustWarningText">데이터를 분석하고 있습니다...</p>
       </div>
@@ -80,28 +79,26 @@
     <div class="fact-card">
       <div class="card-title"><span>💧</span>실내 습도 경고</div>
       <div class="humidity-value" id="humidityText">현재 --%</div>
-      <!-- 습도 동적 멘트 영역 -->
       <div class="dynamic-warning-box" id="humWarningBox">
         <p class="dynamic-warning-text" id="humWarningText">데이터를 분석하고 있습니다...</p>
       </div>
     </div>
 
-    <!-- 네이버 날씨 연동 버튼 -->
-    <a href="#" target="_blank" class="naver-btn" id="naverLink">네이버 날씨 공식 데이터 확인하기</a>
+    <!-- 네이버 말고 전세계 대기오염 측정 사이트로 고정 연결 -->
+    <a href="https://aqicn.org/here/kr/" target="_blank" class="aqi-btn">🌍 세계 대기오염 지수(AQICN) 확인하기</a>
   </div>
 
   <script>
-<script>
     const KAKAO_KEY = "07adc21fce7961141670d19411cdeebd";
     const WEATHER_KEY = "35847ad064da378714ab9a787830e7f2";
     const AIR_KEY = "yQjFNB%2FZCz9Sy3dysD19JBOTgQSCT%2Fb3algDDmoHWeXsnz43EEkXV7ncbbOnZoko7lYKQbwYBrokiL3NezX4vQ%3D%3D";
     let currentGuName = "김해시";
 
-    // 10초 대기 옵션 장착 완료
+    // 5초 안에 안 나오면 칼같이 포기하고 김해로 넘어가는 무적 옵션
     const geoOptions = {
-      enableHighAccuracy: false, 
-      timeout: 10000,             
-      maximumAge: 60000          
+      enableHighAccuracy: false,
+      timeout: 5000,
+      maximumAge: 60000
     };
 
     function getLocation() {
@@ -109,11 +106,7 @@
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (position) => { fetchAllData(position.coords.latitude, position.coords.longitude); },
-          (error) => { 
-            // 5~10초 못 잡으면 뜨는 경고창
-            alert("위치 신호가 약하거나 권한이 거부되어 기본 위치(김해)로 표시됩니다.");
-            fetchAllData(35.2285, 128.8894); 
-          },
+          (error) => { fetchAllData(35.2285, 128.8894); }, 
           geoOptions
         );
       } else {
@@ -123,6 +116,7 @@
 
     async function fetchAllData(lat, lon) {
       try {
+        // 1. 동네 이름 가져오기
         const regionRes = await fetch(`https://dapi.kakao.com/v2/local/geo/coord2regioncode.json?x=${lon}&y=${lat}`, {
           headers: { 'Authorization': `KakaoAK ${KAKAO_KEY}` }
         });
@@ -131,16 +125,15 @@
           currentGuName = regionData.documents[0].region_2depth_name; 
         }
         document.getElementById('locationText').innerText = `${currentGuName} 실시간 케어 리포트`;
-        
-        // 네이버 대신 빡센 글로벌 대기오염 사이트로 연결
-        document.getElementById('naverLink').href = `https://aqicn.org/here/kr/`;
 
+        // 2. 날씨/습도 가져오기
         const weatherRes = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_KEY}`);
         const weatherData = await weatherRes.json();
         const humidity = weatherData.main.humidity;
         document.getElementById('humidityText').innerText = `현재 ${humidity}%`;
         updateHumidityUI(humidity);
 
+        // 3. 미세먼지 가져오기 (정부API -> 실패시 오픈웨더)
         let pm25 = 0;
         try {
           const tmRes = await fetch(`https://dapi.kakao.com/v2/local/geo/transcoord.json?x=${lon}&y=${lat}&input_coord=WGS84&output_coord=TM`, { headers: { 'Authorization': `KakaoAK ${KAKAO_KEY}` }});
@@ -162,7 +155,7 @@
         updateDustUI(Math.round(pm25));
 
       } catch (error) {
-        document.getElementById('locationText').innerText = `데이터 연결 실패 (새로고침 요망)`;
+        document.getElementById('locationText').innerText = `데이터 연결 실패 (터치하여 새로고침)`;
       }
     }
 
