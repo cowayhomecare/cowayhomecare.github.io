@@ -5,101 +5,60 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>COWAY 영업 지원 시스템</title>
   <style>
-    body { background-color: #f4f7f9; font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif; margin: 0; padding-bottom: 40px; }
+    body { background-color: #f2f4f6; font-family: -apple-system, BlinkMacSystemFont, sans-serif; margin: 0; padding-bottom: 40px; }
+    .header { background: #ffffff; padding: 40px 20px 30px 20px; border-bottom-left-radius: 24px; border-bottom-right-radius: 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.02); margin-bottom: 20px; }
+    .header-logo { font-size: 20px; font-weight: 900; color: #005bb5; letter-spacing: -0.5px; margin-bottom: 8px; }
+    .header-greeting { font-size: 22px; font-weight: 800; color: #191f28; }
     
-    /* 1000061753.jpg 오리지널 감성 완벽 복구 (그라데이션 & 둥근 밑단) */
-    .header { background: linear-gradient(135deg, #00A8E1, #005bb5); padding: 30px 20px 50px 20px; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; color: white; }
-    .header-logo { font-size: 24px; font-weight: 900; letter-spacing: -1px; margin-bottom: 10px; }
-    .header-greeting { font-size: 18px; font-weight: 300; }
-    .header-greeting span { font-weight: 700; }
-
-    /* 카드가 헤더 위로 살짝 올라타는 겹침 효과 (-30px) */
-    .menu-container { padding: 0 20px; display: flex; flex-direction: column; gap: 16px; margin-top: -30px; }
+    /* 🎯 가로 2개, 세로 3개 꽉 차는 마법의 그리드 */
+    .menu-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; padding: 0 20px; }
     
-    /* 메뉴 카드 스타일 (기존 둥글고 부드러운 느낌) */
-    .menu-card { background: white; border-radius: 20px; padding: 20px; display: flex; align-items: center; text-decoration: none; color: inherit; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.2s; }
-    .menu-card:active { transform: scale(0.98); background-color: #fafafa; }
+    .menu-card { background: white; border-radius: 20px; padding: 24px 16px; display: flex; flex-direction: column; align-items: center; text-align: center; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.03); transition: transform 0.2s; }
+    .menu-card:active { transform: scale(0.96); background-color: #fafafa; }
     
-    /* 아이콘 감싸는 둥근 배경 */
-    .menu-icon-wrap { width: 50px; height: 50px; border-radius: 16px; background-color: #f4f8ff; display: flex; justify-content: center; align-items: center; font-size: 24px; margin-right: 16px; flex-shrink: 0; }
+    .menu-icon-wrap { width: 56px; height: 56px; border-radius: 18px; background-color: #f4f8ff; display: flex; justify-content: center; align-items: center; font-size: 28px; margin-bottom: 16px; }
     
-    .menu-text-wrap { flex-grow: 1; }
-    .menu-title { font-size: 16px; font-weight: 900; color: #333; margin-bottom: 4px; }
-    .menu-sub { font-size: 12px; color: #888; font-weight: 500; }
-    
-    .menu-arrow { color: #ccc; font-size: 20px; font-weight: bold; }
+    .menu-title { font-size: 15px; font-weight: 800; color: #333; margin-bottom: 6px; }
+    .menu-sub { font-size: 12px; color: #8b95a1; font-weight: 600; line-height: 1.3; }
   </style>
 </head>
 <body>
-
   <div class="header">
     <div class="header-logo">COWAY</div>
-    <div class="header-greeting">오늘도 파이팅입니다! <span>전문가님</span></div>
+    <div class="header-greeting">오늘도 파이팅입니다!<br><span style="color:#005bb5;">전문가님 🚀</span></div>
   </div>
-
+  
   <div class="menu-container">
-    
-    <!-- 1. 프로모션 -->
     <a href="#" class="menu-card">
       <div class="menu-icon-wrap">🎁</div>
-      <div class="menu-text-wrap">
-        <div class="menu-title">이달의 프로모션 혜택</div>
-        <div class="menu-sub">8월 고객 맞춤 사은품 & 할인 총정리</div>
-      </div>
-      <div class="menu-arrow">›</div>
+      <div class="menu-title">프로모션 혜택</div>
+      <div class="menu-sub">사은품 & 할인</div>
     </a>
-
-    <!-- 2. 날씨 (연동) -->
     <a href="weather.html" class="menu-card">
       <div class="menu-icon-wrap">🌬️</div>
-      <div class="menu-text-wrap">
-        <div class="menu-title">우리동네 안심 케어 리포트</div>
-        <div class="menu-sub">실시간 미세먼지 & 습도 팩트 체크</div>
-      </div>
-      <div class="menu-arrow">›</div>
+      <div class="menu-title">안심 케어 리포트</div>
+      <div class="menu-sub">미세먼지 & 습도</div>
     </a>
-
-    <!-- 3. 갤러리 (연동) -->
     <a href="gallery.html" class="menu-card">
       <div class="menu-icon-wrap">🖼️</div>
-      <div class="menu-text-wrap">
-        <div class="menu-title">갤러리</div>
-        <div class="menu-sub">프리미엄 설치 & 케어 실사</div>
-      </div>
-      <div class="menu-arrow">›</div>
+      <div class="menu-title">시공 갤러리</div>
+      <div class="menu-sub">프리미엄 실사</div>
     </a>
-
-    <!-- 4. 베스트셀러 -->
     <a href="#" class="menu-card">
       <div class="menu-icon-wrap">💧</div>
-      <div class="menu-text-wrap">
-        <div class="menu-title">코웨이 베스트셀러</div>
-        <div class="menu-sub">인기 모델 라인업 및 상세 스펙</div>
-      </div>
-      <div class="menu-arrow">›</div>
+      <div class="menu-title">베스트셀러</div>
+      <div class="menu-sub">인기 모델 라인업</div>
     </a>
-
-    <!-- 5. 계산기 (연동) -->
     <a href="calc.html" class="menu-card">
       <div class="menu-icon-wrap">📑</div>
-      <div class="menu-text-wrap">
-        <div class="menu-title">맞춤 견적 계산기</div>
-        <div class="menu-sub">고객 맞춤형 렌탈료 즉시 산출</div>
-      </div>
-      <div class="menu-arrow">›</div>
+      <div class="menu-title">맞춤 견적 계산기</div>
+      <div class="menu-sub">렌탈료 즉시 산출</div>
     </a>
-
-    <!-- 6. 제휴카드 (부활 완료!) -->
     <a href="#" class="menu-card">
       <div class="menu-icon-wrap">💳</div>
-      <div class="menu-text-wrap">
-        <div class="menu-title">제휴카드 할인 꿀팁</div>
-        <div class="menu-sub">최대 청구할인 혜택 매뉴얼</div>
-      </div>
-      <div class="menu-arrow">›</div>
+      <div class="menu-title">제휴카드 할인</div>
+      <div class="menu-sub">청구할인 매뉴얼</div>
     </a>
-
   </div>
-
 </body>
 </html>
