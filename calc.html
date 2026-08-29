@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>맞춤 견적 계산기</title>
   
-  <link rel="icon" href="logo.png" type="image/png">
+  <!-- 💎 로고 경로 완벽 수정 -->
+  <link rel="icon" href="img/icon/logo.png" type="image/png">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,600,1,0" />
 
   <style>
@@ -16,373 +17,218 @@
     .back-btn { font-size: 24px; text-decoration: none; color: #333; position: absolute; left: 0; font-weight: bold; padding: 10px; }
     .page-title-logo { height: 26px; object-fit: contain; }
 
-    .cat-container { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; margin-bottom: 16px; }
-    .cat-btn { background: white; border-radius: 14px; padding: 10px 2px; text-align: center; cursor: pointer; border: 2px solid transparent; box-shadow: 0 2px 6px rgba(0,0,0,0.02); transition: 0.2s; }
-    .cat-btn.active { border-color: #3182f6; background: #e8f3ff; }
-    .cat-btn span { font-size: 20px; display: block; margin-bottom: 2px; }
-    .cat-btn div { font-size: 10.5px; font-weight: 800; color: #4e5968; letter-spacing: -0.5px; }
-    .cat-btn.active div { color: #1b64da; }
-
     .card { background: #ffffff; padding: 20px; border-radius: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.02); margin-bottom: 16px; }
     .card-title { font-size: 15px; font-weight: 800; color: #191f28; margin-bottom: 16px; display: flex; align-items: center; gap: 6px; }
     
+    /* 💎 썸네일 & 색상 스와치 레이아웃 */
+    .product-header { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px dashed #e4e7ec; }
+    
+    .thumb-area { width: 70px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .thumb-img-box { width: 64px; height: 64px; border-radius: 16px; border: 1px solid #e4e7ec; overflow: hidden; cursor: pointer; background: #f9fafb; display: flex; justify-content: center; align-items: center; position: relative; box-shadow: 0 2px 6px rgba(0,0,0,0.03); }
+    .thumb-img-box img { width: 100%; height: 100%; object-fit: cover; }
+    .zoom-icon { position: absolute; bottom: 2px; right: 2px; background: rgba(0,0,0,0.5); color: white; border-radius: 50%; font-size: 14px; padding: 2px; pointer-events: none; }
+    
+    .swatch-container { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
+    .color-swatch { width: 20px; height: 20px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.1); transition: 0.2s; }
+    .color-swatch.active { border-color: #3182f6; transform: scale(1.1); box-shadow: 0 2px 6px rgba(49, 130, 246, 0.4); }
+
+    .product-info { flex: 1; }
     .input-group { margin-bottom: 14px; }
     .input-group label { display: block; font-size: 11.5px; color: #8b95a1; margin-bottom: 4px; font-weight: 700; }
     select { width: 100%; padding: 12px 14px; border: 1px solid #e4e7ec; background-color: #f9fafb; border-radius: 12px; font-size: 14px; font-weight: 700; color: #191f28; box-sizing: border-box; outline: none; transition: 0.2s; appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b95a1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 14px center; background-size: 14px; }
     
-    /* 장바구니 담기 버튼 */
     .add-cart-btn { width: 100%; padding: 14px; background: #e8f3ff; color: #1b64da; border: 1px dashed #3182f6; border-radius: 14px; font-size: 14px; font-weight: 800; cursor: pointer; transition: 0.2s; margin-top: 6px; display: flex; justify-content: center; align-items: center; gap: 6px; }
-    .add-cart-btn:active { background: #d0e5ff; transform: scale(0.98); }
-
-    /* 💎 장바구니 리스트 영역 */
-    .cart-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
-    .cart-item { background: #f8fafc; border: 1px solid #e4e7ec; padding: 12px 14px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; }
-    .cart-item-info { flex: 1; }
-    .cart-item-title { font-size: 13.5px; font-weight: 800; color: #191f28; }
-    .cart-item-sub { font-size: 11px; color: #8b95a1; margin-top: 2px; }
-    .cart-item-price { font-size: 14px; font-weight: 800; color: #3182f6; }
-    .cart-del-btn { background: none; border: none; color: #f04452; padding: 4px; cursor: pointer; display: flex; align-items: center; margin-left: 8px; }
-
-    /* 결과 카드 */
-    .result-card { background: #191f28; color: white; border-radius: 20px; padding: 22px; text-align: center; box-shadow: 0 8px 20px rgba(0,0,0,0.15); margin-top: 10px; }
-    .original-price { font-size: 13px; color: #8b95a1; text-decoration: line-through; font-weight: 600; margin-bottom: 2px; }
-    .final-price-title { font-size: 12px; color: #abb8c6; font-weight: 700; margin-bottom: 2px; }
-    .final-price { font-size: 34px; font-weight: 900; color: #3182f6; letter-spacing: -1px; }
-    .final-price span { font-size: 18px; color: #ffffff; }
-    .discount-tag { display: inline-flex; align-items: center; gap: 4px; margin-top: 10px; background: #f04452; color: white; padding: 6px 12px; border-radius: 10px; font-size: 12px; font-weight: 800; }
     
-    .detail-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px; margin-top: 14px; background: rgba(255,255,255,0.15); color: #ffffff; padding: 10px 18px; border-radius: 12px; font-size: 13px; font-weight: 800; border: none; cursor: pointer; width: 100%; }
-
-    /* 💎 다기기 통합 영수증 모달 */
-    .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 9999; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; }
-    .receipt-modal { background: white; width: 100%; max-width: 380px; border-radius: 24px; padding: 24px; color: #191f28; box-shadow: 0 10px 30px rgba(0,0,0,0.3); animation: popUp 0.3s ease; }
-    @keyframes popUp { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-    .receipt-header { text-align: center; border-bottom: 2px dashed #e4e7ec; padding-bottom: 14px; margin-bottom: 14px; }
-    .receipt-title { font-size: 18px; font-weight: 900; color: #005bb5; }
-    .receipt-sub { font-size: 11px; color: #8b95a1; margin-top: 4px; font-weight: 600; }
-    
-    .rec-item-list { max-height: 120px; overflow-y: auto; margin-bottom: 14px; }
-    .rec-item-row { display: flex; justify-content: space-between; font-size: 12px; color: #4e5968; margin-bottom: 6px; font-weight: 600; }
-    .rec-item-row b { color: #191f28; }
-
-    .receipt-row { display: flex; justify-content: space-between; font-size: 13.5px; font-weight: 700; margin-bottom: 10px; color: #4e5968; }
-    .receipt-row.minus { color: #f04452; }
-    .receipt-row.total { border-top: 2px solid #191f28; padding-top: 14px; margin-top: 14px; font-size: 18px; font-weight: 900; color: #191f28; }
-    .close-modal-btn { width: 100%; padding: 14px; background: #191f28; color: white; border: none; border-radius: 14px; font-size: 14px; font-weight: 800; cursor: pointer; margin-top: 20px; }
+    /* 💎 팝업 모달 */
+    .img-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 9999; justify-content: center; align-items: center; flex-direction: column; }
+    .img-modal-content { width: 90%; max-width: 400px; background: white; border-radius: 20px; overflow: hidden; position: relative; }
+    .img-modal-img { width: 100%; height: auto; display: block; }
+    .img-modal-close { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.6); color: white; border: none; border-radius: 50%; width: 32px; height: 32px; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
   </style>
 </head>
 <body>
   <div class="app-container">
-    
     <div class="header">
       <a href="main.html" class="back-btn">←</a>
+      <!-- 💎 로고 경로 완벽 수정 -->
       <a href="main.html">
-        <img src="logo.png" alt="COWAY" class="page-title-logo" onerror="this.outerHTML='<div style=\'font-size:20px;font-weight:900;color:#005bb5;\'>COWAY</div>'">
+        <img src="img/icon/logo.png" alt="COWAY" class="page-title-logo" onerror="this.outerHTML='<div style=\'font-size:20px;font-weight:900;color:#005bb5;\'>COWAY</div>'">
       </a>
     </div>
 
-    <!-- 5칸 카테고리 탭 -->
-    <div class="cat-container">
-      <div class="cat-btn active" onclick="selectCat(this)"><span>🛏️</span><div>매트리스</div></div>
-      <div class="cat-btn" onclick="selectCat(this, '공기청정기 준비중')"><span>🌬️</span><div>청정기</div></div>
-      <div class="cat-btn" onclick="selectCat(this, '안마의자 준비중')"><span>💆</span><div>안마의자</div></div>
-      <div class="cat-btn" onclick="selectCat(this, '임시 카테고리')"><span>⚙️</span><div>임시</div></div>
-      <div class="cat-btn" onclick="selectCat(this, 'ETC 카테고리')"><span>📦</span><div>ETC</div></div>
-    </div>
-
-    <!-- 1. 제품 선택 영역 -->
     <div class="card">
       <div class="card-title">
-        <span class="material-symbols-rounded" style="color: #3182f6;">add_shopping_cart</span>
-        렌탈 제품 담기
+        <span class="material-symbols-rounded" style="color: #3182f6;">bed</span>
+        비렉스 프레임 견적
       </div>
       
-      <div class="input-group">
-        <label>고객 구분</label>
-        <select id="userTypeOpt"><option value="신규">신규 렌탈 (약정할인가)</option><option value="재렌탈">재렌탈 (우대할인가)</option></select>
+      <!-- 💎 프사 썸네일 & 정보 영역 -->
+      <div class="product-header">
+        <div class="thumb-area">
+          <div class="thumb-img-box" onclick="openImgModal()">
+            <img id="productThumb" src="" onerror="this.src='https://via.placeholder.com/150?text=No+Img'">
+            <span class="material-symbols-rounded zoom-icon">zoom_in</span>
+          </div>
+          <!-- 색상 동그라미가 표시될 곳 -->
+          <div class="swatch-container" id="swatchContainer"></div>
+        </div>
+
+        <div class="product-info">
+          <div class="input-group" style="margin-bottom:0;">
+            <label>프레임 모델</label>
+            <select id="modelOpt" onchange="changeModel()">
+              <option value="루나프레임">루나프레임</option>
+              <option value="코지프레임">코지프레임</option>
+              <option value="컴포트프레임">컴포트프레임</option>
+            </select>
+          </div>
+        </div>
       </div>
-      <div class="input-group">
-        <label>매트리스 모델</label>
-        <select id="modelOpt">
-          <option value="루네어">루네어 (SE03)</option><option value="하이브리드4" selected>하이브리드4 (PRO04)</option>
-          <option value="시그니처컴포트">시그니처 컴포트 (SP01SC)</option><option value="스마트S8">스마트 매트리스 (S8+)</option>
-        </select>
-      </div>
+
       <div class="input-group">
         <label>사이즈</label>
-        <select id="sizeOpt"><option value="SS">슈퍼싱글 (SS)</option><option value="Q">퀸 (Q)</option><option value="K">킹 (K)</option><option value="LK" selected>라지킹 (LK)</option></select>
-      </div>
-      <div class="input-group">
-        <label>의무 약정 기간</label>
-        <select id="periodOpt"><option value="5년">5년 약정</option><option value="7년">7년 약정</option><option value="9년" selected>9년 약정</option></select>
-      </div>
-      <div class="input-group">
-        <label>케어 서비스 방문 방식</label>
-        <select id="careOpt"><option value="토탈케어" selected>토탈케어</option><option value="스페셜체인지">스페셜체인지</option><option value="베이직케어">베이직케어</option><option value="서비스프리">서비스프리 (자가관리)</option></select>
+        <select id="sizeOpt" onchange="changeSize()"></select>
       </div>
 
       <button class="add-cart-btn" onclick="addToCart()">
-        <span class="material-symbols-rounded" style="font-size:20px;">check_circle</span> 견적함에 담기
+        <span class="material-symbols-rounded" style="font-size:20px;">add_shopping_cart</span> 견적함에 담기
       </button>
     </div>
-
-    <!-- 2. 장바구니 & 다기기 할인 세팅 영역 -->
-    <div class="card">
-      <div class="card-title">
-        <span class="material-symbols-rounded" style="color: #0ca678;">shopping_bag</span>
-        내 견적함 (<span id="cartCount">0</span>개)
-      </div>
-      
-      <!-- 담긴 제품 리스트 -->
-      <div class="cart-list" id="cartList">
-        <div style="font-size:12px; color:#8b95a1; text-align:center; padding:10px;">위에서 제품을 선택해 담아주세요.</div>
-      </div>
-
-      <hr style="border:0; border-top:1px dashed #e4e7ec; margin:16px 0;">
-
-      <!-- 다기기 프로모션 선택 (합계에 적용) -->
-      <div class="input-group">
-        <label>🎁 다기기 / 결합 프로모션 일괄 적용</label>
-        <select id="promoOpt" onchange="calculateCartTotal()">
-          <option value="0" selected>적용 없음 (정상가)</option>
-          <option value="0.05">🤝 기존 고객 결합 할인 (총액 5% 할인)</option>
-          <option value="0.10">📦 2대 이상 동시구매 (총액 10% 할인)</option>
-          <option value="0.15">🎁 패키지 프로모션 (총액 15% 할인)</option>
-        </select>
-      </div>
-
-      <!-- 제휴카드 선택 (합계에 적용) -->
-      <div class="input-group">
-        <label>💳 제휴카드 청구 할인 일괄 적용</label>
-        <select id="cardDiscount" onchange="calculateCartTotal()">
-          <option value="0" selected>미적용 (0원)</option>
-          <option value="13000">전월 30만원 실적 (-13,000원)</option>
-          <option value="17000">전월 70/80만원 실적 (-17,000원)</option>
-          <option value="24000">🔥 신규카드 최고혜택 (-24,000원)</option>
-          <option value="30000">🔥 신규카드 최대혜택 (-30,000원)</option>
-        </select>
-      </div>
-    </div>
-
-    <!-- 3. 최종 결과 영수증 카드 -->
-    <div class="result-card">
-      <div class="original-price" id="originalPrice">총 렌탈약정가 합계 월 0원</div>
-      <div class="final-price-title">고객님 최종 월 납입금 (다기기 일괄적용)</div>
-      <div class="final-price" id="finalPrice">0 <span>원</span></div>
-      <div class="discount-tag" id="discountTag" style="display:none;"></div>
-      
-      <button class="detail-btn" onclick="openReceiptModal()">
-        <span class="material-symbols-rounded">receipt_long</span>
-        맞춤 견적 상세 내역 보기
-      </button>
-    </div>
-
   </div>
 
-  <!-- 💎 통합 영수증 팝업 모달 -->
-  <div class="modal-overlay" id="receiptModal">
-    <div class="receipt-modal">
-      <div class="receipt-header">
-        <div class="receipt-title">COWAY 다기기 맞춤 견적</div>
-        <div class="receipt-sub">실시간 견적 산출 완료</div>
-      </div>
-
-      <div class="receipt-row" style="margin-bottom:4px;">
-        <span>담긴 제품 목록</span><span></span>
-      </div>
-      <!-- 담긴 제품들이 쭉 나열됨 -->
-      <div class="rec-item-list" id="recItemList"></div>
-
-      <div class="receipt-row" style="margin-top:12px; border-top:1px solid #f1f3f5; padding-top:10px;">
-        <span>총 렌탈약정가 합계</span>
-        <span id="recBaseTotal">월 0원</span>
-      </div>
-      <div class="receipt-row minus">
-        <span>🎁 결합/프로모션 일괄 할인</span>
-        <span id="recPromoTotal">-0원</span>
-      </div>
-      <div class="receipt-row minus">
-        <span>💳 제휴카드 할인</span>
-        <span id="recCardTotal">-0원</span>
-      </div>
-
-      <div class="receipt-row total">
-        <span>최종 월 납입금</span>
-        <span id="recFinalTotal" style="color:#005bb5;">월 0원</span>
-      </div>
-
-      <button class="close-modal-btn" onclick="closeReceiptModal()">확인 완료</button>
+  <!-- 💎 이미지 확대 팝업 -->
+  <div class="img-modal" id="imgModal" onclick="closeImgModal(event)">
+    <div class="img-modal-content" onclick="event.stopPropagation()">
+      <button class="img-modal-close" onclick="closeImgModal(event)">✕</button>
+      <img id="modalImg" class="img-modal-img" src="">
     </div>
   </div>
 
   <script>
-    // 월요일 데이터가 오면 이 부분만 수정하면 끝납니다!
-    const mattressData = {
-      "루네어": {
-        "SS": { "5년": { "토탈케어": [35900, 32300], "스페셜체인지": [33900, 30500], "베이직케어": [31900, 28700], "서비스프리": [29900, 26900] }, "7년": { "토탈케어": [28900, 26000], "스페셜체인지": [26900, 24200], "베이직케어": [24900, 22400], "서비스프리": [22900, 20600] }, "9년": { "토탈케어": [24900, 22400], "스페셜체인지": [22900, 20600], "베이직케어": [20900, 18800], "서비스프리": [18900, 17000] } },
-        "Q": { "5년": { "토탈케어": [40900, 36800], "스페셜체인지": [38900, 35000], "베이직케어": [36900, 33200], "서비스프리": [34900, 31400] }, "7년": { "토탈케어": [32900, 29600], "스페셜체인지": [30900, 27800], "베이직케어": [28900, 26000], "서비스프리": [26900, 24200] }, "9년": { "토탈케어": [28900, 26000], "스페셜체인지": [26900, 24200], "베이직케어": [24900, 22400], "서비스프리": [22900, 20600] } },
-        "K": { "5년": { "토탈케어": [45900, 41300], "스페셜체인지": [43900, 39500], "베이직케어": [41900, 37700], "서비스프리": [39900, 35900] }, "7년": { "토탈케어": [36900, 33200], "스페셜체인지": [34900, 31400], "베이직케어": [32900, 29600], "서비스프리": [30900, 27800] }, "9년": { "토탈케어": [32900, 29600], "스페셜체인지": [30900, 27800], "베이직케어": [28900, 26000], "서비스프리": [26900, 24200] } },
-        "LK": { "5년": { "토탈케어": [53900, 48500], "스페셜체인지": [51900, 46700], "베이직케어": [49900, 44900], "서비스프리": [47900, 43100] }, "7년": { "토탈케어": [41900, 37700], "스페셜체인지": [39900, 35900], "베이직케어": [37900, 34100], "서비스프리": [35900, 32300] }, "9년": { "토탈케어": [37900, 34100], "스페셜체인지": [35900, 32300], "베이직케어": [33900, 30500], "서비스프리": [31900, 28700] } }
+    // 💎 팀장님이 정리하신 파일명/사이즈/색상 규칙 데이터베이스!
+    const frameData = {
+      "루나프레임": {
+        folder: "img/calc/berexbed/frame/",
+        sizes: {
+          "LK": { 
+            colors: [ { name: "아이보리", code: "iv", colorHex: "#f5f5dc", img: "lktm14_iv.jpg" } ],
+            defaultColor: "iv" 
+          }
+        }
       },
-      "하이브리드4": {
-        "SS": { "5년": { "토탈케어": [39500, 35500], "스페셜체인지": [37700, 33900], "베이직케어": [35000, 31500], "서비스프리": [33200, 29900] }, "7년": { "토탈케어": [32300, 29000], "스페셜체인지": [30500, 27400], "베이직케어": [27800, 25000], "서비스프리": [26000, 23400] }, "9년": { "토탈케어": [27800, 25000], "스페셜체인지": [26000, 23400], "베이직케어": [23300, 20900], "서비스프리": [21500, 19300] } },
-        "Q": { "5년": { "토탈케어": [42200, 38000], "스페셜체인지": [40400, 36300], "베이직케어": [37700, 33900], "서비스프리": [35900, 32300] }, "7년": { "토탈케어": [35000, 31500], "스페셜체인지": [33200, 29900], "베이직케어": [30500, 27400], "서비스프리": [28700, 25800] }, "9년": { "토탈케어": [30500, 27400], "스페셜체인지": [28700, 25800], "베이직케어": [26000, 23400], "서비스프리": [24200, 21700] } },
-        "K": { "5년": { "토탈케어": [48500, 43600], "스페셜체인지": [46700, 42000], "베이직케어": [44000, 39600], "서비스프리": [42200, 38000] }, "7년": { "토탈케어": [41300, 37100], "스페셜체인지": [39500, 35500], "베이직케어": [36800, 33100], "서비스프리": [35000, 31500] }, "9년": { "토탈케어": [36800, 33100], "스페셜체인지": [35000, 31500], "베이직케어": [32300, 29000], "서비스프리": [30500, 27400] } },
-        "LK": { "5년": { "토탈케어": [56600, 50900], "스페셜체인지": [54800, 49300], "베이직케어": [52100, 46800], "서비스프리": [50300, 45200] }, "7년": { "토탈케어": [48500, 43600], "스페셜체인지": [46700, 42000], "베이직케어": [44000, 39600], "서비스프리": [42200, 38000] }, "9년": { "토탈케어": [43100, 38700], "스페셜체인지": [41300, 37100], "베이직케어": [38600, 34700], "서비스프리": [36800, 33100] } }
+      "코지프레임": {
+        folder: "img/calc/berexbed/frame/",
+        sizes: {
+          "LK": { 
+            colors: [
+              { name: "아이보리", code: "iv", colorHex: "#f3ede3", img: "lktm13_iv.jpg" },
+              { name: "그레이", code: "gr", colorHex: "#9e9e9e", img: "lktm13_gr.jpg" },
+              { name: "베이지", code: "bg", colorHex: "#d7ccc8", img: "lktm13_bg.jpg" }
+            ],
+            defaultColor: "iv" 
+          }
+        }
       },
-      "시그니처컴포트": {
-        "SS": { "5년": { "토탈케어": [60200, 54100], "스페셜체인지": [58400, 52500], "베이직케어": [54800, 49300], "서비스프리": [53000, 47700] }, "7년": { "토탈케어": [51200, 46000], "스페셜체인지": [49400, 44400], "베이직케어": [45800, 41200], "서비스프리": [44000, 39600] }, "9년": { "토탈케어": [45800, 41200], "스페셜체인지": [44000, 39600], "베이직케어": [40400, 36300], "서비스프리": [38600, 34700] } },
-        "Q": { "5년": { "토탈케어": [66500, 59800], "스페셜체인지": [64700, 58200], "베이직케어": [61100, 55000], "서비스프리": [59300, 53300] }, "7년": { "토탈케어": [57500, 51700], "스페셜체인지": [55700, 50100], "베이직케어": [52100, 46800], "서비스프리": [50300, 45200] }, "9년": { "토탈케어": [52100, 46800], "스페셜체인지": [50300, 45200], "베이직케어": [46700, 42000], "서비스프리": [44900, 40400] } },
-        "K": { "5년": { "토탈케어": [72800, 65500], "스페셜체인지": [71000, 63900], "베이직케어": [67400, 60600], "서비스프리": [65600, 59000] }, "7년": { "토탈케어": [63800, 57400], "스페셜체인지": [62000, 55800], "베이직케어": [58400, 52500], "서비스프리": [56600, 50900] }, "9년": { "토탈케어": [58400, 52500], "스페셜체인지": [56600, 50900], "베이직케어": [53000, 47700], "서비스프리": [51200, 46000] } },
-        "LK": { "5년": { "토탈케어": [80000, 72000], "스페셜체인지": [78200, 70300], "베이직케어": [74600, 67100], "서비스프리": [72800, 65500] }, "7년": { "토탈케어": [71000, 63900], "스페셜체인지": [69200, 62200], "베이직케어": [65600, 59000], "서비스프리": [63800, 57400] }, "9년": { "토탈케어": [65600, 59000], "스페셜체인지": [63800, 57400], "베이직케어": [60200, 54100], "서비스프리": [58400, 52500] } }
-      },
-      "스마트S8": {
-        "SS": { "5년": { "토탈케어": [97900, 88100], "스페셜체인지": [95900, 86300], "베이직케어": [93900, 84500], "서비스프리": [91900, 82700] }, "7년": { "토탈케어": [76900, 69200], "스페셜체인지": [74900, 67400], "베이직케어": [72900, 65600], "서비스프리": [70900, 63800] }, "9년": { "토탈케어": [69200, 62200], "스페셜체인지": [67400, 60600], "베이직케어": [65600, 59000], "서비스프리": [63800, 57400] } },
-        "Q": { "5년": { "토탈케어": [126900, 114200], "스페셜체인지": [124900, 112400], "베이직케어": [122900, 110600], "서비스프리": [120900, 108800] }, "7년": { "토탈케어": [98900, 89000], "스페셜체인지": [96900, 87200], "베이직케어": [94900, 85400], "서비스프리": [92900, 83600] }, "9년": { "토탈케어": [89000, 80100], "스페셜체인지": [87200, 78400], "베이직케어": [85400, 76800], "서비스프리": [83600, 75200] } },
-        "K": { "5년": { "토탈케어": [134900, 121400], "스페셜체인지": [132900, 119600], "베이직케어": [130900, 117800], "서비스프리": [128900, 116000] }, "7년": { "토탈케어": [104900, 94400], "스페셜체인지": [102900, 92600], "베이직케어": [100900, 90800], "서비스프리": [98900, 89000] }, "9년": { "토탈케어": [94400, 84900], "스페셜체인지": [92600, 83300], "베이직케어": [90800, 81700], "서비스프리": [89000, 80100] } },
-        "LK": { "5년": { "토탈케어": [148900, 134000], "스페셜체인지": [146900, 132200], "베이직케어": [144900, 130400], "서비스프리": [142900, 128600] }, "7년": { "토탈케어": [115900, 104300], "스페셜체인지": [113900, 102500], "베이직케어": [111900, 100700], "서비스프리": [109900, 98900] }, "9년": { "토탈케어": [104300, 93800], "스페셜체인지": [102500, 92200], "베이직케어": [100700, 90600], "서비스프리": [98900, 89000] } }
+      "컴포트프레임": {
+        folder: "img/calc/berexbed/frame/",
+        sizes: {
+          "SS": { 
+            colors: [ { name: "베이지", code: "bg", colorHex: "#d7ccc8", img: "sscb01_bg.jpg" } ],
+            defaultColor: "bg" 
+          },
+          "Q": { 
+            colors: [ { name: "베이지", code: "bg", colorHex: "#d7ccc8", img: "qkcb01_bg.jpg" } ], // Q/K는 qkcb01 공통 이미지 사용
+            defaultColor: "bg" 
+          },
+          "K": { 
+            colors: [ { name: "베이지", code: "bg", colorHex: "#d7ccc8", img: "qkcb01_bg.jpg" } ],
+            defaultColor: "bg" 
+          }
+        }
       }
     };
 
-    // 💎 장바구니 배열 (데이터 저장용)
-    let cart = [];
+    let currentModel = "";
+    let currentSize = "";
+    let currentColor = "";
+    let currentImgPath = "";
 
-    function selectCat(element, msg) {
-      document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
-      element.classList.add('active');
-      if(msg) alert(`${msg} 입니다. 월요일 업데이트 예정!`);
+    function init() {
+      changeModel(); // 초기 세팅
     }
 
-    // 1. 장바구니에 담기
-    function addToCart() {
-      const uType = document.getElementById('userTypeOpt').value;
-      const model = document.getElementById('modelOpt').value;
-      const size = document.getElementById('sizeOpt').value;
-      const period = document.getElementById('periodOpt').value;
-      const care = document.getElementById('careOpt').value;
+    // 1. 모델 변경 시 -> 사이즈 옵션 업데이트
+    function changeModel() {
+      currentModel = document.getElementById("modelOpt").value;
+      const sizeSelect = document.getElementById("sizeOpt");
+      sizeSelect.innerHTML = ""; // 기존 사이즈 초기화
 
-      try {
-        const priceArray = mattressData[model][size][period][care];
-        const basePrice = (uType === '신규') ? priceArray[0] : priceArray[1];
-        
-        // 장바구니 배열에 추가
-        cart.push({ id: Date.now(), uType, model, size, period, care, basePrice });
-        
-        // 프로모션 자동 권장 로직
-        const promoSelect = document.getElementById('promoOpt');
-        if (cart.length === 2) promoSelect.value = "0.10"; // 2대면 10% 추천
-        else if (cart.length >= 3) promoSelect.value = "0.15"; // 3대 이상이면 15% 추천
-
-        updateCartUI();
-        calculateCartTotal();
-      } catch(e) {
-        alert("선택하신 조합의 요금 데이터가 없습니다.");
-      }
-    }
-
-    // 2. 장바구니 목록에서 삭제
-    function removeFromCart(id) {
-      cart = cart.filter(item => item.id !== id);
+      const availableSizes = Object.keys(frameData[currentModel].sizes);
       
-      // 개수가 줄어들면 프로모션도 되돌림
-      const promoSelect = document.getElementById('promoOpt');
-      if (cart.length === 1) promoSelect.value = "0.05";
-      else if (cart.length === 0) promoSelect.value = "0";
+      availableSizes.forEach(size => {
+        const option = document.createElement("option");
+        option.value = size;
+        option.text = size + " 사이즈";
+        sizeSelect.appendChild(option);
+      });
 
-      updateCartUI();
-      calculateCartTotal();
+      changeSize(); // 사이즈가 바뀌었으니 색상도 재세팅
     }
 
-    // 3. 장바구니 화면 그려주기
-    function updateCartUI() {
-      document.getElementById('cartCount').innerText = cart.length;
-      const listDiv = document.getElementById('cartList');
+    // 2. 사이즈 변경 시 -> 색상 동그라미 스와치 업데이트
+    function changeSize() {
+      currentSize = document.getElementById("sizeOpt").value;
+      const sizeData = frameData[currentModel].sizes[currentSize];
       
-      if (cart.length === 0) {
-        listDiv.innerHTML = '<div style="font-size:12px; color:#8b95a1; text-align:center; padding:10px;">위에서 제품을 선택해 담아주세요.</div>';
-        return;
-      }
+      currentColor = sizeData.defaultColor; // 기본 색상으로 세팅
+      renderSwatches(sizeData.colors);
+      updateImage();
+    }
 
-      listDiv.innerHTML = '';
-      cart.forEach((item, index) => {
-        listDiv.innerHTML += `
-          <div class="cart-item">
-            <div class="cart-item-info">
-              <div class="cart-item-title">${item.model} (${item.size})</div>
-              <div class="cart-item-sub">${item.period} / ${item.care} [${item.uType}]</div>
-            </div>
-            <div class="cart-item-price">${item.basePrice.toLocaleString()}원</div>
-            <button class="cart-del-btn" onclick="removeFromCart(${item.id})">
-              <span class="material-symbols-rounded" style="font-size:18px;">close</span>
-            </button>
-          </div>
-        `;
+    // 3. 색상 스와치(동그라미) 그리기
+    function renderSwatches(colors) {
+      const container = document.getElementById("swatchContainer");
+      container.innerHTML = "";
+
+      // 색상이 1개뿐이면 굳이 동그라미를 안 보여줘도 깔끔함
+      if (colors.length <= 1) return;
+
+      colors.forEach(c => {
+        const div = document.createElement("div");
+        div.className = "color-swatch";
+        div.style.backgroundColor = c.colorHex;
+        if (c.code === currentColor) div.classList.add("active");
+        
+        div.onclick = () => {
+          currentColor = c.code;
+          renderSwatches(colors); // active 효과 재랜더링
+          updateImage(); // 사진 변경
+        };
+        container.appendChild(div);
       });
     }
 
-    // 4. 총 합계 & 다기기 할인 계산
-    function calculateCartTotal() {
-      if (cart.length === 0) {
-        document.getElementById('originalPrice').innerText = `총 렌탈약정가 합계 월 0원`;
-        document.getElementById('finalPrice').innerHTML = `0 <span>원</span>`;
-        document.getElementById('discountTag').style.display = "none";
-        return;
-      }
-
-      let totalBase = cart.reduce((sum, item) => sum + item.basePrice, 0);
+    // 4. 사진 업데이트
+    function updateImage() {
+      const folder = frameData[currentModel].folder;
+      const sizeData = frameData[currentModel].sizes[currentSize];
+      const colorInfo = sizeData.colors.find(c => c.code === currentColor);
       
-      const promoVal = parseFloat(document.getElementById('promoOpt').value);
-      const cardDiscount = parseInt(document.getElementById('cardDiscount').value);
-
-      let totalPromoDiscount = 0;
-      if (promoVal > 0 && promoVal < 1) {
-        totalPromoDiscount = Math.round(totalBase * promoVal); // 총액 % 할인
-      }
-
-      let finalPrice = totalBase - totalPromoDiscount - cardDiscount;
-      if(finalPrice < 0) finalPrice = 0;
-
-      const totalSavings = totalPromoDiscount + cardDiscount;
-
-      // 메인 결과 화면 갱신
-      document.getElementById('originalPrice').innerText = `총 렌탈약정가 합계 월 ${totalBase.toLocaleString()}원`;
-      document.getElementById('finalPrice').innerHTML = `${finalPrice.toLocaleString()} <span>원</span>`;
+      currentImgPath = folder + colorInfo.img; // 예: img/calc/berexbed/frame/lktm13_iv.jpg
       
-      const tagBox = document.getElementById('discountTag');
-      if (totalSavings > 0) {
-        tagBox.style.display = "inline-flex";
-        tagBox.innerHTML = `<span class="material-symbols-rounded" style="font-size:16px;">verified</span> 일괄 총 ${totalSavings.toLocaleString()}원 할인 혜택!`;
-      } else {
-        tagBox.style.display = "none";
-      }
-
-      // 모달용 데이터 갱신
-      document.getElementById('recBaseTotal').innerText = `월 ${totalBase.toLocaleString()}원`;
-      document.getElementById('recPromoTotal').innerText = `-${totalPromoDiscount.toLocaleString()}원`;
-      document.getElementById('recCardTotal').innerText = `-${cardDiscount.toLocaleString()}원`;
-      document.getElementById('recFinalTotal').innerText = `월 ${finalPrice.toLocaleString()}원`;
-
-      // 모달 내 제품 리스트 갱신
-      const recList = document.getElementById('recItemList');
-      recList.innerHTML = '';
-      cart.forEach(item => {
-        recList.innerHTML += `<div class="rec-item-row"><span>- ${item.model} (${item.size})</span><b>${item.basePrice.toLocaleString()}원</b></div>`;
-      });
+      document.getElementById("productThumb").src = currentImgPath;
+      document.getElementById("modalImg").src = currentImgPath;
     }
 
-    function openReceiptModal() {
-      if (cart.length === 0) {
-        alert("견적함에 제품을 먼저 담아주세요!");
-        return;
-      }
-      document.getElementById('receiptModal').style.display = "flex";
+    // 팝업 컨트롤
+    function openImgModal() {
+      document.getElementById("imgModal").style.display = "flex";
+    }
+    function closeImgModal(e) {
+      document.getElementById("imgModal").style.display = "none";
     }
 
-    function closeReceiptModal() {
-      document.getElementById('receiptModal').style.display = "none";
-    }
-
-    window.onload = function() { updateCartUI(); calculateCartTotal(); }
+    window.onload = init;
   </script>
 </body>
 </html>
