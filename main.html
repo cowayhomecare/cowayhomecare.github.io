@@ -7,23 +7,24 @@
   <style>
     body { background-color: #f4f7f9; font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif; margin: 0; padding-bottom: 40px; }
     
-    /* 상단 헤더 (원래 쓰시던 깔끔한 디자인) */
-    .header { background-color: #005bb5; padding: 30px 20px 40px 20px; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; color: white; margin-bottom: -20px; box-shadow: 0 4px 15px rgba(0, 91, 181, 0.2); }
+    /* 1000061753.jpg 오리지널 감성 완벽 복구 (그라데이션 & 둥근 밑단) */
+    .header { background: linear-gradient(135deg, #00A8E1, #005bb5); padding: 30px 20px 50px 20px; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; color: white; }
     .header-logo { font-size: 24px; font-weight: 900; letter-spacing: -1px; margin-bottom: 10px; }
     .header-greeting { font-size: 18px; font-weight: 300; }
     .header-greeting span { font-weight: 700; }
 
-    /* 메뉴 그리드 */
-    .menu-container { padding: 0 20px; display: flex; flex-direction: column; gap: 16px; }
+    /* 카드가 헤더 위로 살짝 올라타는 겹침 효과 (-30px) */
+    .menu-container { padding: 0 20px; display: flex; flex-direction: column; gap: 16px; margin-top: -30px; }
     
-    /* 메뉴 카드 스타일 */
-    .menu-card { background: white; border-radius: 20px; padding: 20px; display: flex; align-items: center; text-decoration: none; color: inherit; box-shadow: 0 4px 12px rgba(0,0,0,0.03); transition: transform 0.2s; }
+    /* 메뉴 카드 스타일 (기존 둥글고 부드러운 느낌) */
+    .menu-card { background: white; border-radius: 20px; padding: 20px; display: flex; align-items: center; text-decoration: none; color: inherit; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.2s; }
     .menu-card:active { transform: scale(0.98); background-color: #fafafa; }
     
-    .menu-icon-wrap { width: 48px; height: 48px; border-radius: 14px; background-color: #f4f8ff; display: flex; justify-content: center; align-items: center; font-size: 22px; margin-right: 16px; flex-shrink: 0; }
+    /* 아이콘 감싸는 둥근 배경 */
+    .menu-icon-wrap { width: 50px; height: 50px; border-radius: 16px; background-color: #f4f8ff; display: flex; justify-content: center; align-items: center; font-size: 24px; margin-right: 16px; flex-shrink: 0; }
     
     .menu-text-wrap { flex-grow: 1; }
-    .menu-title { font-size: 16px; font-weight: 800; color: #333; margin-bottom: 4px; }
+    .menu-title { font-size: 16px; font-weight: 900; color: #333; margin-bottom: 4px; }
     .menu-sub { font-size: 12px; color: #888; font-weight: 500; }
     
     .menu-arrow { color: #ccc; font-size: 20px; font-weight: bold; }
@@ -38,6 +39,7 @@
 
   <div class="menu-container">
     
+    <!-- 1. 프로모션 -->
     <a href="#" class="menu-card">
       <div class="menu-icon-wrap">🎁</div>
       <div class="menu-text-wrap">
@@ -47,6 +49,7 @@
       <div class="menu-arrow">›</div>
     </a>
 
+    <!-- 2. 날씨 (연동) -->
     <a href="weather.html" class="menu-card">
       <div class="menu-icon-wrap">🌬️</div>
       <div class="menu-text-wrap">
@@ -56,6 +59,7 @@
       <div class="menu-arrow">›</div>
     </a>
 
+    <!-- 3. 갤러리 (연동) -->
     <a href="gallery.html" class="menu-card">
       <div class="menu-icon-wrap">🖼️</div>
       <div class="menu-text-wrap">
@@ -65,6 +69,7 @@
       <div class="menu-arrow">›</div>
     </a>
 
+    <!-- 4. 베스트셀러 -->
     <a href="#" class="menu-card">
       <div class="menu-icon-wrap">💧</div>
       <div class="menu-text-wrap">
@@ -74,11 +79,22 @@
       <div class="menu-arrow">›</div>
     </a>
 
+    <!-- 5. 계산기 (연동) -->
     <a href="calc.html" class="menu-card">
       <div class="menu-icon-wrap">📑</div>
       <div class="menu-text-wrap">
         <div class="menu-title">맞춤 견적 계산기</div>
         <div class="menu-sub">고객 맞춤형 렌탈료 즉시 산출</div>
+      </div>
+      <div class="menu-arrow">›</div>
+    </a>
+
+    <!-- 6. 제휴카드 (부활 완료!) -->
+    <a href="#" class="menu-card">
+      <div class="menu-icon-wrap">💳</div>
+      <div class="menu-text-wrap">
+        <div class="menu-title">제휴카드 할인 꿀팁</div>
+        <div class="menu-sub">최대 청구할인 혜택 매뉴얼</div>
       </div>
       <div class="menu-arrow">›</div>
     </a>
