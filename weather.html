@@ -6,11 +6,9 @@
   <title>우리동네 안심 케어 리포트</title>
   <style>
     body { background-color: #f7f9fa; font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif; margin: 0; padding: 0; box-sizing: border-box; padding-bottom: 40px; }
-    
     .header-banner { background-color: #ffffff; padding: 20px 20px 24px 20px; text-align: center; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; box-shadow: 0 4px 24px rgba(0, 0, 0, 0.03); margin-bottom: 20px; position: relative; }
     .header-banner img { height: 32px; object-fit: contain; }
     .back-btn { position: absolute; left: 20px; top: 25px; font-size: 20px; text-decoration: none; color: #333; font-weight: bold; }
-
     .content-wrapper { padding: 0 20px; }
 
     /* 위치 카드 */
@@ -42,8 +40,6 @@
     .humidity-value { font-size: 36px; font-weight: 900; color: #0ea5e9; text-align: center; margin-bottom: 12px; }
     .humidity-warning { background-color: #eff6ff; border-radius: 12px; padding: 12px 16px; border-left: 4px solid #3b82f6; }
     .humidity-warning p { font-size: 13px; font-weight: 700; color: #1d4ed8; line-height: 1.5; margin: 0; }
-
-    /* 공식 출처 링크 (자세히 보기) */
     .official-link { display: block; text-align: center; margin-top: 24px; font-size: 12px; font-weight: 600; color: #888; text-decoration: underline; text-underline-offset: 4px; }
   </style>
 </head>
@@ -56,7 +52,6 @@
   </div>
 
   <div class="content-wrapper">
-    
     <div class="location-card" id="locationCard" onclick="getLocation()">
       <span class="location-icon">📍</span>
       <span class="location-text" id="locationText">위치 탐색 중...</span>
@@ -67,58 +62,122 @@
       <div class="dust-compare">
         <div class="dust-box korea">
           <div class="box-title">국내 환경부 기준</div>
-          <div class="box-status">보통 🟢</div>
-          <div class="box-value">22 ㎍/㎥</div>
+          <div class="box-status" id="korStatus">분석중</div>
+          <div class="box-value pm-value">-- ㎍/㎥</div>
         </div>
         <div class="dust-box who">
           <div class="box-title">WHO 국제 기준</div>
-          <div class="box-status">나쁨 🔴</div>
-          <div class="box-value">22 ㎍/㎥</div>
+          <div class="box-status" id="whoStatus">분석중</div>
+          <div class="box-value pm-value">-- ㎍/㎥</div>
         </div>
       </div>
       <div class="warning-box">
-        <p class="warning-text">⚠️ 고객님, 네이버 날씨 보고 환기하셨죠?<br>우리나라 기준으론 '보통'이지만, 선진국 WHO 기준으로는 현재 환기 불가 수준입니다.<br>이 먼지가 다 매트리스로 가라앉습니다.</p>
+        <p class="warning-text">⚠️ 고객님, 네이버 날씨 보고 환기하셨죠?<br>우리나라 기준으론 '보통'이지만, 선진국 WHO 기준으로는 환기 불가 수준입니다.<br>이 먼지가 다 매트리스로 가라앉습니다.</p>
       </div>
     </div>
 
     <div class="fact-card">
       <div class="card-title"><span>💧</span>실내 습도 경고</div>
-      <div class="humidity-value">현재 74%</div>
+      <div class="humidity-value" id="humidityText">현재 --%</div>
       <div class="humidity-warning">
         <p>⚠️ 비상! 집먼지진드기 번식 위험 구간!<br>습도 60% 이상 시 진드기 번식률이 평소의 5배로 폭증합니다. 매트리스 딥 클리닝이 시급합니다.</p>
       </div>
     </div>
 
-    <!-- 버튼 삭제 후 공식 링크로 대체 -->
     <a href="https://www.airkorea.or.kr" target="_blank" class="official-link">자세히 보기 (환경부 에어코리아 실시간 데이터)</a>
-
   </div>
 
   <script>
-    function getLocation() {
-      const locText = document.getElementById("locationText");
-      locText.innerText = "위치 탐색 중...";
+    // 형님이 캐오신 API 무기고
+    const KAKAO_KEY = "07adc21fce7961141670d19411cdeebd";
+    const WEATHER_KEY = "35847ad064da378714ab9a787830e7f2";
+    const AIR_KEY = "yQjFNB%2FZCz9Sy3dysD19JBOTgQSCT%2Fb3algDDmoHWeXsnz43EEkXV7ncbbOnZoko7lYKQbwYBrokiL3NezX4vQ%3D%3D";
 
+    // 1. 앱 켜자마자 GPS 위치 가져오기
+    function getLocation() {
+      document.getElementById("locationText").innerText = "위치 탐색 및 데이터 분석 중...";
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
-          function(position) {
-            // 위치 동의 시: 형님 계신 사상구로 임시 표시 (디자인 확인용)
-            locText.innerText = "사상구 실시간 케어 리포트"; 
-          }, 
-          function(error) {
-            // 위치 거부 시: 형님이 요청하신 '김해시'로 자동 폴백(Fallback)
-            locText.innerText = "김해시 실시간 케어 리포트";
-          }
+          (position) => { fetchAllData(position.coords.latitude, position.coords.longitude); },
+          (error) => { fetchAllData(35.2285, 128.8894); } // 위치 거부 시 '김해시' 좌표로 강제 실행
         );
       } else {
-        locText.innerText = "김해시 실시간 케어 리포트";
+        fetchAllData(35.2285, 128.8894);
       }
     }
 
-    window.onload = function() {
-      getLocation();
-    }
-  </script>
+    // 2. 3대장 API 융단폭격 함수
+    async function fetchAllData(lat, lon) {
+      try {
+        // [작전 1] 카카오: 좌표를 동네 이름으로 번역
+        const regionRes = await fetch(`https://dapi.kakao.com/v2/local/geo/coord2regioncode.json?x=${lon}&y=${lat}`, {
+          headers: { 'Authorization': `KakaoAK ${KAKAO_KEY}` }
+        });
+        const regionData = await regionRes.json();
+        let guName = "김해시";
+        if(regionData.documents && regionData.documents.length > 0) {
+          guName = regionData.documents[0].region_2depth_name; // 구/시 단위 추출
+        }
+        document.getElementById('locationText').innerText = `${guName} 실시간 케어 리포트`;
 
+        // [작전 2] 오픈웨더: 실시간 습도 추출
+        const weatherRes = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_KEY}`);
+        const weatherData = await weatherRes.json();
+        document.getElementById('humidityText').innerText = `현재 ${weatherData.main.humidity}%`;
+
+        // [작전 3] 에어코리아 미세먼지 추출 (정부 API -> 실패 시 오픈웨더 API로 자동 대체되는 무적 방어코드)
+        let pm25 = 0;
+        try {
+          // 카카오 좌표변환 (WGS84 -> TM)
+          const tmRes = await fetch(`https://dapi.kakao.com/v2/local/geo/transcoord.json?x=${lon}&y=${lat}&input_coord=WGS84&output_coord=TM`, { headers: { 'Authorization': `KakaoAK ${KAKAO_KEY}` }});
+          const tmData = await tmRes.json();
+          // 에어코리아 인근 측정소 찾기
+          const stationRes = await fetch(`https://apis.data.go.kr/B552584/MsrstnInfoInqireSvc/getNearbyMsrstnList?tmX=${tmData.documents[0].x}&tmY=${tmData.documents[0].y}&returnType=json&serviceKey=${AIR_KEY}`);
+          const stationData = await stationRes.json();
+          const stationName = stationData.response.body.items[0].stationName;
+          // 에어코리아 미세먼지 수치 요청
+          const dustRes = await fetch(`https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?stationName=${encodeURIComponent(stationName)}&dataTerm=DAILY&pageNo=1&numOfRows=1&returnType=json&ver=1.0&serviceKey=${AIR_KEY}`);
+          const dustData = await dustRes.json();
+          pm25 = dustData.response.body.items[0].pm25Value;
+          if(!pm25 || pm25 === '-') throw new Error("Data empty"); // 데이터 없으면 예외처리로 던짐
+        } catch(e) {
+          // 정부 서버 뻗었을 때 1초 만에 오픈웨더 위성 데이터로 가로채기 (고객은 모름)
+          const backupRes = await fetch(`https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${WEATHER_KEY}`);
+          const backupData = await backupRes.json();
+          pm25 = backupData.list[0].components.pm2_5;
+        }
+
+        updateDustUI(Math.round(pm25));
+
+      } catch (error) {
+        document.getElementById('locationText').innerText = `김해시 실시간 케어 리포트 (데이터 연결중)`;
+      }
+    }
+
+    // 3. 한국 기준 vs WHO 기준 팩트 폭격 UI 업데이트
+    function updateDustUI(pm25) {
+      document.querySelectorAll('.pm-value').forEach(el => el.innerText = `${pm25} ㎍/㎥`);
+
+      // 한국 기준 (15이하 좋음, 35이하 보통, 75이하 나쁨)
+      let korStatus = "보통 🟢"; let korColor = "#16a34a";
+      if(pm25 <= 15) { korStatus = "좋음 🔵"; korColor = "#2563eb"; }
+      else if(pm25 <= 35) { korStatus = "보통 🟢"; korColor = "#16a34a"; }
+      else { korStatus = "나쁨 🔴"; korColor = "#dc2626"; }
+      
+      const korBox = document.getElementById('korStatus');
+      korBox.innerText = korStatus; korBox.style.color = korColor;
+
+      // WHO 국제 기준 (5이하 좋음, 15이하 보통, 초과시 무조건 나쁨) - 공포 마케팅 핵심
+      let whoStatus = "나쁨 🔴"; let whoColor = "#dc2626";
+      if(pm25 <= 5) { whoStatus = "좋음 🔵"; whoColor = "#2563eb"; }
+      else if(pm25 <= 15) { whoStatus = "보통 🟢"; whoColor = "#16a34a"; }
+      else { whoStatus = "나쁨 🔴"; whoColor = "#dc2626"; }
+
+      const whoBox = document.getElementById('whoStatus');
+      whoBox.innerText = whoStatus; whoBox.style.color = whoColor;
+    }
+
+    window.onload = function() { getLocation(); }
+  </script>
 </body>
 </html>
