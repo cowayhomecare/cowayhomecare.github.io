@@ -27,11 +27,13 @@
     .modal-img { max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.3s ease; cursor: zoom-in; }
     .modal-img.zoomed { transform: scale(2.5); cursor: zoom-out; }
 
-    /* 모달 컨트롤 버튼들 */
+    /* 모달 컨트롤 버튼들 (반투명하게, 확대 시 숨김 클래스 추가) */
     .close-btn { position: absolute; top: 20px; right: 20px; color: white; font-size: 36px; font-weight: bold; cursor: pointer; z-index: 1001; }
-    .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); color: white; font-size: 40px; font-weight: bold; cursor: pointer; padding: 20px; z-index: 1001; background: rgba(0,0,0,0.3); border-radius: 50%; width: 30px; height: 30px; display: flex; justify-content: center; align-items: center; }
-    .prev-btn { left: 10px; }
-    .next-btn { right: 10px; }
+    .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); color: rgba(255, 255, 255, 0.4); font-size: 50px; font-weight: 300; cursor: pointer; padding: 20px; z-index: 1001; text-shadow: 0 2px 10px rgba(0,0,0,0.3); -webkit-tap-highlight-color: transparent; transition: opacity 0.2s; }
+    .nav-btn:active { color: white; }
+    .nav-btn.hidden { opacity: 0; pointer-events: none; } /* 확대 시 싹 사라지는 마법의 클래스 */
+    .prev-btn { left: 5px; }
+    .next-btn { right: 5px; }
     
     /* 하단 사진 카운터 */
     .counter { color: white; font-size: 16px; font-weight: 500; position: absolute; bottom: 30px; letter-spacing: 2px; }
@@ -98,20 +100,21 @@ const imageList = [
       modal.style.display = "flex";
     }
 
-    // 3. 팝업 닫기
+    // 3. 팝업 닫을 땐 화살표 다시 살림
     function closeModal() {
       modal.style.display = "none";
-      modalImg.classList.remove("zoomed"); // 닫을 때 확대된 거 원상복구
+      modalImg.classList.remove("zoomed"); 
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('hidden'));
     }
 
-    // 4. 좌우 이동 (다음/이전 사진)
+    // 4. 좌우 이동할 때도 화살표 다시 살림
     function changeImage(step) {
       currentIndex += step;
-      // 끝에 도달하면 처음/마지막으로 자연스럽게 순환
       if (currentIndex >= imageList.length) currentIndex = 0;
       if (currentIndex < 0) currentIndex = imageList.length - 1;
       
-      modalImg.classList.remove("zoomed"); // 사진 넘어갈 때 줌 풀기
+      modalImg.classList.remove("zoomed"); 
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('hidden'));
       updateModal();
     }
 
@@ -121,11 +124,17 @@ const imageList = [
       counter.innerText = `${currentIndex + 1} / ${imageList.length}`;
     }
 
-    // 6. 꿀기능: 사진 더블클릭(터치) 시 2.5배 확대/축소
+    // 6. 꿀기능: 사진 확대 시 화살표 싹 숨기기!
     function toggleZoom() {
       modalImg.classList.toggle("zoomed");
-    }
-  </script>
+      
+      // zoomed 클래스가 있으면 hidden 클래스를 붙여서 화살표를 숨김
+      const isZoomed = modalImg.classList.contains("zoomed");
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        if(isZoomed) btn.classList.add('hidden');
+        else btn.classList.remove('hidden');
+      });
+    }  </script>
 
 </body>
 </html>
