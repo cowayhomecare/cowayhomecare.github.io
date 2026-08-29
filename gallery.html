@@ -9,45 +9,41 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,600,1,0" />
 
   <style>
-    /* 공통 앱 스타일 */
     body { background-color: #f2f4f6; font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif; margin: 0; padding-bottom: 40px; display: flex; justify-content: center; }
     .app-container { width: 100%; max-width: 480px; background-color: #f2f4f6; min-height: 100vh; box-shadow: 0 0 20px rgba(0,0,0,0.05); }
     
-    /* 헤더 */
-    .header { background: #ffffff; display: flex; align-items: center; justify-content: center; padding: 20px 0; margin-bottom: 16px; position: relative; border-bottom-left-radius: 24px; border-bottom-right-radius: 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
+    .header { background: #ffffff; display: flex; align-items: center; justify-content: center; padding: 20px 0; margin-bottom: 12px; position: relative; border-bottom-left-radius: 24px; border-bottom-right-radius: 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
     .back-btn { font-size: 24px; text-decoration: none; color: #333; position: absolute; left: 16px; font-weight: bold; padding: 10px; }
     .page-title-logo { height: 26px; object-fit: contain; }
 
-    /* 페이지 타이틀 */
-    .page-title { padding: 0 20px; font-size: 20px; font-weight: 800; color: #191f28; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-    .page-title span { color: #3182f6; }
+    .page-title { padding: 0 20px; font-size: 18px; font-weight: 900; color: #191f28; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
 
-    /* 갤러리 썸네일 바둑판 그리드 */
+    /* 💎 1안: 가로 스와이프 칩(Chip) 메뉴 스타일 */
+    .chip-container { display: flex; gap: 8px; padding: 0 20px 16px 20px; overflow-x: auto; scroll-behavior: smooth; }
+    .chip-container::-webkit-scrollbar { display: none; } /* 스크롤바 숨기기 */
+    .chip-btn { padding: 8px 16px; background: #ffffff; border: 1px solid #e4e7ec; border-radius: 20px; font-size: 13.5px; font-weight: 700; color: #4e5968; cursor: pointer; white-space: nowrap; transition: 0.2s; box-shadow: 0 2px 6px rgba(0,0,0,0.02); -webkit-tap-highlight-color: transparent; }
+    .chip-btn.active { background: #3182f6; color: white; border-color: #3182f6; box-shadow: 0 4px 12px rgba(49, 130, 246, 0.25); }
+
     .gallery-grid { padding: 0 20px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
     .gallery-item { width: 100%; aspect-ratio: 1 / 1; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.03); cursor: pointer; background-color: #e4e7ec; position: relative; }
     .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.2s; }
     .gallery-item:active img { transform: scale(0.95); }
+    .empty-msg { grid-column: span 2; text-align: center; padding: 40px 0; color: #8b95a1; font-size: 14px; font-weight: 700; }
 
-    /* 💎 팝업 모달 (이미지 스와이프 화면) */
+    /* 모달 (스와이프 화면) */
     .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.95); z-index: 9999; flex-direction: column; justify-content: center; align-items: center; }
-    
-    .modal-img-container { width: 100%; height: 80vh; display: flex; justify-content: center; align-items: center; overflow: hidden; position: relative; touch-action: none; /* 스와이프 시 화면 안 흔들리게 */ }
+    .modal-img-container { width: 100%; height: 80vh; display: flex; justify-content: center; align-items: center; overflow: hidden; position: relative; touch-action: none; }
     .modal-img { max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.3s ease; }
-
-    /* 모달 컨트롤 (화살표 & 닫기) */
     .close-btn { position: absolute; top: 20px; right: 20px; color: white; font-size: 32px; font-weight: bold; cursor: pointer; z-index: 10001; padding: 10px; background: rgba(0,0,0,0.5); border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; }
-    
     .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); color: white; font-size: 36px; font-weight: 300; cursor: pointer; padding: 20px; z-index: 10001; -webkit-tap-highlight-color: transparent; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
     .prev-btn { left: 0; }
     .next-btn { right: 0; }
-    
     .counter { color: white; font-size: 14px; font-weight: 700; position: absolute; bottom: 40px; letter-spacing: 2px; background: rgba(255,255,255,0.2); backdrop-filter: blur(4px); padding: 8px 20px; border-radius: 20px; }
   </style>
 </head>
 <body>
   <div class="app-container">
     
-    <!-- 헤더 -->
     <div class="header">
       <a href="main.html" class="back-btn">←</a>
       <a href="main.html">
@@ -56,58 +52,91 @@
     </div>
 
     <div class="page-title">
-      <span class="material-symbols-rounded">photo_library</span>
+      <span class="material-symbols-rounded" style="color: #3182f6;">photo_library</span>
       프리미엄 갤러리
     </div>
 
-    <!-- 갤러리 바둑판 -->
-    <div class="gallery-grid" id="galleryGrid">
-      <!-- 자바스크립트로 사진이 자동으로 꽂힙니다 -->
+    <!-- 💎 1안: 가로 스와이프 칩 메뉴 -->
+    <div class="chip-container" id="chipContainer">
+      <div class="chip-btn active" onclick="filterGallery('전체', this)">전체보기</div>
+      <div class="chip-btn" onclick="filterGallery('페블', this)">안마의자 페블</div>
+      <div class="chip-btn" onclick="filterGallery('사제', this)">사제/타사 비교</div>
+      <div class="chip-btn" onclick="filterGallery('정수기', this)">아이콘 정수기</div>
+      <div class="chip-btn" onclick="filterGallery('매트리스', this)">스마트 매트리스</div>
+      <div class="chip-btn" onclick="filterGallery('비데', this)">룰루 비데</div>
     </div>
+
+    <!-- 갤러리 바둑판 -->
+    <div class="gallery-grid" id="galleryGrid"></div>
   </div>
 
-  <!-- 💎 이미지 스와이프 팝업 모달 -->
+  <!-- 이미지 모달 -->
   <div class="modal" id="imageModal">
     <div class="close-btn" onclick="closeModal()">✕</div>
-    
-    <!-- 양옆 화살표 (터치/클릭 모두 가능) -->
     <div class="nav-btn prev-btn" onclick="changeImage(-1)">‹</div>
-    
-    <!-- 사진이 보이는 영역 (여기서 스와이프 감지) -->
     <div class="modal-img-container" id="swipeZone">
       <img src="" class="modal-img" id="modalImg">
     </div>
-    
     <div class="nav-btn next-btn" onclick="changeImage(1)">›</div>
-    
-    <!-- 사진 번호 카운터 -->
     <div class="counter" id="imgCounter">1 / 1</div>
   </div>
 
   <script>
-    // 💎 팀장님이 올려주신 사진 파일명 11장 완벽 연동
-    const imageList = [
-      "pade1.jpg", "pade2.jpg", "pade3.jpg", "pade4.jpg", "pade5.jpg", "pade6.jpg",
-      "saje1.jpg", "saje2.jpg", "saje3.jpg", "saje4.jpg", "saje5.jpg"
+    // 💎 사진 데이터베이스 (카테고리 태그 추가)
+    const allImages = [
+      { src: "pade1.jpg", cat: "페블" }, { src: "pade2.jpg", cat: "페블" },
+      { src: "pade3.jpg", cat: "페블" }, { src: "pade4.jpg", cat: "페블" },
+      { src: "pade5.jpg", cat: "페블" }, { src: "pade6.jpg", cat: "페블" },
+      { src: "saje1.jpg", cat: "사제" }, { src: "saje2.jpg", cat: "사제" },
+      { src: "saje3.jpg", cat: "사제" }, { src: "saje4.jpg", cat: "사제" },
+      { src: "saje5.jpg", cat: "사제" }
     ];
 
+    let filteredList = [...allImages]; // 현재 화면에 보이는 리스트
     let currentIndex = 0;
+
+    // 카테고리 필터링 함수
+    function filterGallery(category, btnElement) {
+      // 1. 버튼 색상 변경
+      document.querySelectorAll('.chip-btn').forEach(btn => btn.classList.remove('active'));
+      btnElement.classList.add('active');
+
+      // 2. 버튼이 화면 중앙에 오도록 스크롤 이동 애니메이션
+      btnElement.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+
+      // 3. 사진 리스트 거르기
+      if (category === '전체') {
+        filteredList = [...allImages];
+      } else {
+        filteredList = allImages.filter(item => item.cat === category);
+      }
+
+      renderGrid();
+    }
+
+    // 바둑판 그리기 함수
+    function renderGrid() {
+      const grid = document.getElementById("galleryGrid");
+      grid.innerHTML = "";
+
+      if (filteredList.length === 0) {
+        grid.innerHTML = `<div class="empty-msg">해당 카테고리의 시공 사진이<br>아직 업데이트되지 않았습니다.</div>`;
+        return;
+      }
+
+      filteredList.forEach((item, index) => {
+        const div = document.createElement("div");
+        div.className = "gallery-item";
+        div.onclick = () => openModal(index);
+        div.innerHTML = `<img src="${item.src}" alt="${item.cat} 사진" onerror="this.src='https://via.placeholder.com/400x400?text=No+Image'">`;
+        grid.appendChild(div);
+      });
+    }
+
+    // 모달 관련 함수
     const modal = document.getElementById("imageModal");
     const modalImg = document.getElementById("modalImg");
     const counter = document.getElementById("imgCounter");
-    const swipeZone = document.getElementById("swipeZone");
-
-    // 화면 켜지자마자 바둑판 세팅
-    window.onload = function() {
-      const grid = document.getElementById("galleryGrid");
-      imageList.forEach((src, index) => {
-        const item = document.createElement("div");
-        item.className = "gallery-item";
-        item.onclick = () => openModal(index);
-        item.innerHTML = `<img src="${src}" alt="갤러리 사진 ${index + 1}" onerror="this.src='https://via.placeholder.com/400x400?text=Image+Not+Found'">`;
-        grid.appendChild(item);
-      });
-    }
 
     function openModal(index) {
       currentIndex = index;
@@ -115,46 +144,34 @@
       modal.style.display = "flex";
     }
 
-    function closeModal() {
-      modal.style.display = "none";
-    }
+    function closeModal() { modal.style.display = "none"; }
 
     function changeImage(step) {
       currentIndex += step;
-      // 끝에 도달하면 처음으로, 처음에 도달하면 끝으로 무한 롤링
-      if (currentIndex >= imageList.length) currentIndex = 0;
-      if (currentIndex < 0) currentIndex = imageList.length - 1;
-      
+      if (currentIndex >= filteredList.length) currentIndex = 0;
+      if (currentIndex < 0) currentIndex = filteredList.length - 1;
       updateModal();
     }
 
     function updateModal() {
-      modalImg.src = imageList[currentIndex];
-      counter.innerText = `${currentIndex + 1} / ${imageList.length}`;
+      modalImg.src = filteredList[currentIndex].src;
+      counter.innerText = `${currentIndex + 1} / ${filteredList.length}`;
     }
 
-    // 💎 아이폰급 부드러운 터치 스와이프(밀어서 넘기기) 마법 코드
+    // 스와이프 기능
+    const swipeZone = document.getElementById("swipeZone");
     let touchStartX = 0;
     let touchEndX = 0;
 
-    swipeZone.addEventListener('touchstart', e => {
-      touchStartX = e.changedTouches[0].screenX;
-    });
-
+    swipeZone.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; });
     swipeZone.addEventListener('touchend', e => {
       touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
+      if (touchStartX - touchEndX > 40) changeImage(1);
+      if (touchEndX - touchStartX > 40) changeImage(-1);
     });
 
-    function handleSwipe() {
-      const threshold = 40; // 40px 이상 밀어야 넘어감 (너무 민감하지 않게)
-      if (touchStartX - touchEndX > threshold) {
-        changeImage(1); // 왼쪽으로 밀면 다음 사진
-      }
-      if (touchEndX - touchStartX > threshold) {
-        changeImage(-1); // 오른쪽으로 밀면 이전 사진
-      }
-    }
+    // 시작 시 전체 렌더링
+    window.onload = function() { renderGrid(); }
   </script>
 </body>
 </html>
