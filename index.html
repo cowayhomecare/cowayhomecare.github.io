@@ -2,80 +2,17 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <!-- 스마트폰 어플처럼 보이게 하는 필수 마법 주문 -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>코웨이 홈케어 영업 무기</title>
   <style>
-    /* 전체 배경 및 폰트 세팅 */
-    body {
-      background-color: #f4f7fa;
-      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
-    /* 로그인 하얀색 카드 디자인 */
-    .login-box {
-      background: white;
-      padding: 40px 25px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 86, 179, 0.1);
-      width: 80%;
-      max-width: 350px;
-      text-align: center;
-    }
-    /* 코웨이 느낌의 파란색 로고 텍스트 */
-    .logo {
-      font-size: 26px;
-      font-weight: 900;
-      color: #0b63ce;
-      letter-spacing: -1px;
-      margin-bottom: 5px;
-    }
-    .sub-text {
-      font-size: 14px;
-      color: #666;
-      margin-bottom: 35px;
-      font-weight: 600;
-    }
-    /* 사번 입력칸 디자인 */
-    input {
-      width: 100%;
-      padding: 16px;
-      border: 2px solid #e4e7ec;
-      border-radius: 14px;
-      font-size: 16px;
-      font-weight: bold;
-      box-sizing: border-box;
-      margin-bottom: 20px;
-      outline: none;
-      transition: 0.3s;
-    }
-    /* 입력칸 누를 때 파란색 테두리 효과 */
-    input:focus {
-      border-color: #0b63ce;
-      box-shadow: 0 0 0 4px rgba(11, 99, 206, 0.1);
-    }
-    /* 로그인 버튼 디자인 */
-    button {
-      width: 100%;
-      padding: 16px;
-      background-color: #0b63ce;
-      color: white;
-      border: none;
-      border-radius: 14px;
-      font-size: 18px;
-      font-weight: 800;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-    /* 버튼 눌렀을 때 쫀득하게 들어가는 애니메이션 */
-    button:active {
-      transform: scale(0.96);
-      background-color: #084c9e;
-    }
+    body { background-color: #f4f7fa; font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+    .login-box { background: white; padding: 40px 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 86, 179, 0.1); width: 80%; max-width: 350px; text-align: center; }
+    .logo { font-size: 26px; font-weight: 900; color: #005bb5; letter-spacing: -1px; margin-bottom: 5px; }
+    .sub-text { font-size: 14px; color: #666; margin-bottom: 35px; font-weight: 600; }
+    input { width: 100%; padding: 16px; border: 2px solid #e4e7ec; border-radius: 14px; font-size: 16px; font-weight: bold; box-sizing: border-box; margin-bottom: 20px; outline: none; transition: 0.3s; text-align: center; }
+    input:focus { border-color: #005bb5; }
+    button { width: 100%; padding: 16px; background-color: #005bb5; color: white; border: none; border-radius: 14px; font-size: 18px; font-weight: 800; cursor: pointer; transition: 0.2s; }
+    button:active { transform: scale(0.96); background-color: #004488; }
   </style>
 </head>
 <body>
@@ -83,31 +20,19 @@
   <div class="login-box">
     <div class="logo">COWAY HOMECARE</div>
     <div class="sub-text">지국 닥터 전용 세일즈 웨폰</div>
-    
-    <!-- 숫자 키패드가 자동으로 뜨게 하는 inputmode 설정 -->
     <input type="number" id="empId" placeholder="사번을 입력하세요" inputmode="numeric">
-    
     <button onclick="attemptLogin()">접속하기</button>
   </div>
 
   <script>
-    // 로그인 버튼을 눌렀을 때 실행되는 기능
     function attemptLogin() {
       const empId = document.getElementById('empId').value;
-      
-      // 사번을 입력하지 않았을 때 경고창
-      if(empId.length < 5) {
-        alert("정확한 코웨이 사번을 입력해 주세요.");
-        return;
+      // 형님 요청: 1자리 이상 치면 무조건 통과!
+      if(empId.length >= 1) {
+        window.location.href = "main.html";
+      } else {
+        alert("사번을 1자리 이상 입력해 주세요!");
       }
-      
-      // ★ 형님! 추후 여기에 [구글 시트 몰래 출석부 전송] 및 [사번 검증] 코드가 들어갑니다! ★
-      
-      // 지금은 일단 통과 메시지만 띄웁니다.
-      alert(empId + " 닥터님 확인되었습니다. 메인 화면으로 이동합니다!");
-      
-      // 추후 계산기/갤러리가 있는 메인 화면(main.html)으로 넘어가는 명령어
-       window.location.href = "main.html";
     }
   </script>
 
