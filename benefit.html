@@ -4,33 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>이달의 혜택</title>
+  <link rel="icon" href="logo.png" type="image/png">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,600,1,0" />
   <style>
     body { background-color: #f2f4f6; font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif; margin: 0; padding-bottom: 40px; display: flex; justify-content: center; }
     .app-container { width: 100%; max-width: 480px; background-color: #f2f4f6; min-height: 100vh; box-shadow: 0 0 20px rgba(0,0,0,0.05); }
-    
     .header { display: flex; align-items: center; justify-content: center; padding: 24px 20px; position: relative; background: #ffffff; }
     .back-btn { font-size: 24px; text-decoration: none; color: #333; position: absolute; left: 16px; font-weight: bold; padding: 10px; }
     .page-title-logo { height: 26px; object-fit: contain; }
-
     .tab-container { display: flex; background: #ffffff; padding: 0 20px 16px 20px; border-bottom-left-radius: 24px; border-bottom-right-radius: 24px; box-shadow: 0 4px 16px rgba(0,0,0,0.02); margin-bottom: 20px; }
     .tab-btn { flex: 1; text-align: center; padding: 14px 0; font-size: 15px; font-weight: 700; color: #8b95a1; cursor: pointer; border-bottom: 3px solid transparent; transition: 0.2s; }
     .tab-btn.active { color: #191f28; font-weight: 800; border-bottom: 3px solid #3182f6; }
-
     .content-section { padding: 0 20px; display: none; }
     .content-section.active { display: block; }
-
     .card-item { background: #ffffff; border-radius: 20px; padding: 20px; margin-bottom: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
     .badge-promo { display: inline-block; padding: 4px 8px; background: #fff0eb; color: #f76707; font-size: 11px; font-weight: 800; border-radius: 6px; margin-bottom: 8px; }
     .card-name { font-size: 16px; font-weight: 800; color: #191f28; }
     .card-sub { font-size: 12px; color: #8b95a1; font-weight: 600; margin-top: 2px; }
-    
     .discount-table { width: 100%; border-collapse: collapse; margin: 12px 0; background: #f9fafb; border-radius: 12px; overflow: hidden; }
     .discount-table th, .discount-table td { padding: 10px 12px; font-size: 12px; text-align: center; }
     .discount-table th { background: #f1f3f5; color: #4e5968; font-weight: 700; }
     .discount-table td { color: #191f28; font-weight: 800; border-top: 1px solid #f1f3f5; }
     .highlight-red { color: #f04452; }
-
     .btn-row { display: flex; gap: 6px; margin-top: 14px; }
     .action-btn { flex: 1; padding: 10px 4px; border-radius: 10px; border: none; font-size: 12px; font-weight: 800; cursor: pointer; text-align: center; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 2px; }
     .btn-call { background: #e8f3ff; color: #1b64da; }
@@ -52,9 +47,23 @@
       <div class="tab-btn" onclick="switchTab('promo')">🎁 프로모션</div>
     </div>
 
-    <!-- 💳 제휴카드 9종 전체 리스트 -->
     <div id="credit-section" class="content-section active">
       
+      <!-- 💎 맨 상단: 9종 전체 혜택 한 번에 쏘는 스마트 공유 박스 -->
+      <div style="background: #e8f3ff; border-radius: 20px; padding: 16px; margin-bottom: 16px; border: 1px dashed #3182f6;">
+        <div style="font-size: 13px; font-weight: 800; color: #1b64da; margin-bottom: 8px; text-align: center;">
+          📢 고객 전달용 전체 카드 혜택 요약 모음
+        </div>
+        <div class="btn-row" style="margin-top:0;">
+          <a href="sms:?body=[코웨이 주요 제휴카드 할인 혜택 요약 안내]%0A%0A1. 신한카드: 최대 2.4만~3만원 할인 (1833-6013)%0A2. 현대카드: 최대 2.5만~3만원 할인 (02-2655-5003)%0A3. 우리카드: 최대 2.4만~3만원 할인 (1800-0859)%0A4. 국민카드: 최대 2.6만~3만원 할인 (1644-8388)%0A5. 삼성카드: 최대 2.2만~2.6만원 할인 (1588-7540)%0A6. 농협카드: 최대 2.0만~4.0만원 할인 (1644-2866)%0A7. 롯데카드: 최대 1.3만~2.5만원 할인 (1577-5208)%0A8. IBK카드: 최대 1.3만~2.3만원 할인 (1566-0088)%0A9. 하나카드: 최대 1.3만~2.5만원 할인 (1588-1771)%0A%0A* 전월 실적 조건 충족 시 적용" class="action-btn btn-sms" style="padding:12px;">
+            📱 9종 전체혜택 문자전송
+          </a>
+          <button onclick="copyText('[코웨이 주요 제휴카드 할인 혜택 요약 안내]\n\n1. 신한카드: 최대 2.4만~3만원 할인 (1833-6013)\n2. 현대카드: 최대 2.5만~3만원 할인 (02-2655-5003)\n3. 우리카드: 최대 2.4만~3만원 할인 (1800-0859)\n4. 국민카드: 최대 2.6만~3만원 할인 (1644-8388)\n5. 삼성카드: 최대 2.2만~2.6만원 할인 (1588-7540)\n6. 농협카드: 최대 2.0만~4.0만원 할인 (1644-2866)\n7. 롯데카드: 최대 1.3만~2.5만원 할인 (1577-5208)\n8. IBK카드: 최대 1.3만~2.3만원 할인 (1566-0088)\n9. 하나카드: 최대 1.3만~2.5만원 할인 (1588-1771)\n\n* 전월 실적 조건 충족 시 적용')" class="action-btn btn-copy" style="padding:12px;">
+            📋 전체 복사 (카톡용)
+          </button>
+        </div>
+      </div>
+
       <!-- 1. 신한카드 -->
       <div class="card-item">
         <span class="badge-promo">🔥 60개월간 최대 1.1만원 추가 할인 (신규)</span>
@@ -151,7 +160,7 @@
         </div>
       </div>
 
-      <!-- 7. 롯데카드 (추가됨) -->
+      <!-- 7. 롯데카드 -->
       <div class="card-item">
         <div class="card-name">코웨이 X LOCA 롯데카드</div>
         <div class="card-sub">연회비 2만원 | 신청 1577-5208</div>
@@ -166,7 +175,7 @@
         </div>
       </div>
 
-      <!-- 8. IBK기업은행카드 (추가됨) -->
+      <!-- 8. IBK기업은행카드 -->
       <div class="card-item">
         <div class="card-name">코웨이 IBK카드</div>
         <div class="card-sub">연회비 1.2만원~1.5만원 | 신청 1566-0088</div>
@@ -181,7 +190,7 @@
         </div>
       </div>
 
-      <!-- 9. 하나카드 (추가됨) -->
+      <!-- 9. 하나카드 -->
       <div class="card-item">
         <div class="card-name">마이 코웨이 하나카드</div>
         <div class="card-sub">연회비 2.5만원 | 신청 1588-1771</div>
@@ -198,7 +207,6 @@
 
     </div>
 
-    <!-- 🎁 프로모션 탭 -->
     <div id="promo-section" class="content-section">
       <div style="background:white; padding:24px; border-radius:20px; text-align:center; color:#8b95a1; font-size:14px; font-weight:700;">
         🎁 이달의 전제품 프로모션 라인업 업데이트 중입니다.
@@ -221,7 +229,6 @@
       }
     }
 
-    // 💎 카톡 공유용 텍스트 클립보드 복사 함수
     function copyText(text) {
       navigator.clipboard.writeText(text).then(() => {
         alert("카톡 전송용 안내문구가 복사되었습니다!\n카톡 대화창에 붙여넣기 하세요.");
