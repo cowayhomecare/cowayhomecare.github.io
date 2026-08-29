@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>맞춤 견적 계산기 (실전 1.0)</title>
+  <title>맞춤 견적 계산기 (완전체 1.0)</title>
   
   <link rel="icon" href="img/icon/logo.png" type="image/png">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,600,1,0" />
@@ -16,7 +16,7 @@
     .back-btn { font-size: 24px; text-decoration: none; color: #333; position: absolute; left: 0; font-weight: bold; padding: 10px; }
     .page-title-logo { height: 26px; object-fit: contain; }
 
-    /* 💎 5칸 탭 완벽 복구 */
+    /* 5칸 탭 */
     .cat-container { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; margin-bottom: 16px; }
     .cat-btn { background: white; border-radius: 14px; padding: 10px 2px; text-align: center; cursor: pointer; border: 2px solid transparent; box-shadow: 0 2px 6px rgba(0,0,0,0.02); transition: 0.2s; }
     .cat-btn.active { border-color: #3182f6; background: #e8f3ff; }
@@ -27,14 +27,16 @@
     .card { background: #ffffff; padding: 20px; border-radius: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.02); margin-bottom: 16px; }
     .card-title { font-size: 15px; font-weight: 800; color: #191f28; margin-bottom: 16px; display: flex; align-items: center; gap: 6px; }
     
-    /* 프사 썸네일 & 작아진 스와치 */
+    /* 💎 프사 썸네일 & 작아진 스와치 복구! */
     .product-header { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 16px; }
     .thumb-area { width: 64px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
-    .thumb-img-box { width: 64px; height: 64px; border-radius: 14px; border: 1px solid #e4e7ec; overflow: hidden; cursor: pointer; background: #f9fafb; display: flex; justify-content: center; align-items: center; position: relative; }
+    .thumb-img-box { width: 64px; height: 64px; border-radius: 14px; border: 1px solid #e4e7ec; overflow: hidden; cursor: pointer; background: #f9fafb; display: flex; justify-content: center; align-items: center; position: relative; box-shadow: 0 2px 6px rgba(0,0,0,0.03); }
     .thumb-img-box img { width: 100%; height: 100%; object-fit: cover; }
+    .zoom-icon { position: absolute; bottom: 2px; right: 2px; background: rgba(0,0,0,0.5); color: white; border-radius: 50%; font-size: 14px; padding: 2px; pointer-events: none; }
+    
     .swatch-container { display: flex; gap: 4px; justify-content: center; flex-wrap: wrap; }
     .color-swatch { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.1); cursor: pointer; transition: 0.2s; }
-    .color-swatch.active { border: 2px solid #3182f6; transform: scale(1.2); }
+    .color-swatch.active { border: 2px solid #3182f6; transform: scale(1.2); box-shadow: 0 2px 4px rgba(49, 130, 246, 0.3); }
 
     /* 폼 레이아웃 */
     .input-row { display: flex; gap: 8px; margin-bottom: 14px; }
@@ -58,7 +60,7 @@
     .cart-item-price { font-size: 14px; font-weight: 800; color: #3182f6; }
     .cart-del-btn { background: none; border: none; color: #f04452; padding: 4px; cursor: pointer; display: flex; align-items: center; margin-left: 8px; }
 
-    /* 결과 카드 & 영수증 상세버튼 완벽 복구! */
+    /* 결과 카드 & 영수증 버튼 */
     .result-card { background: #191f28; color: white; border-radius: 20px; padding: 22px; text-align: center; box-shadow: 0 8px 20px rgba(0,0,0,0.15); margin-top: 10px; }
     .original-price { font-size: 13px; color: #8b95a1; text-decoration: line-through; font-weight: 600; margin-bottom: 2px; }
     .final-price-title { font-size: 12px; color: #abb8c6; font-weight: 700; margin-bottom: 2px; }
@@ -67,7 +69,7 @@
     .discount-tag { display: inline-flex; align-items: center; gap: 4px; margin-top: 10px; background: #f04452; color: white; padding: 6px 12px; border-radius: 10px; font-size: 12px; font-weight: 800; }
     .detail-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px; margin-top: 14px; background: rgba(255,255,255,0.15); color: #ffffff; padding: 10px 18px; border-radius: 12px; font-size: 13px; font-weight: 800; border: none; cursor: pointer; width: 100%; }
 
-    /* 영수증 모달 */
+    /* 💎 영수증 및 사진 팝업 모달 복구! */
     .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 9998; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; }
     .receipt-modal { background: white; width: 100%; max-width: 380px; border-radius: 24px; padding: 24px; color: #191f28; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
     .receipt-header { text-align: center; border-bottom: 2px dashed #e4e7ec; padding-bottom: 14px; margin-bottom: 14px; }
@@ -77,16 +79,20 @@
     .receipt-row { display: flex; justify-content: space-between; font-size: 13.5px; font-weight: 700; margin-bottom: 10px; color: #4e5968; }
     .receipt-row.total { border-top: 2px solid #191f28; padding-top: 14px; margin-top: 14px; font-size: 18px; font-weight: 900; color: #191f28; }
     .close-modal-btn { width: 100%; padding: 14px; background: #191f28; color: white; border: none; border-radius: 14px; font-size: 14px; font-weight: 800; cursor: pointer; margin-top: 20px; }
+
+    .img-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 9999; justify-content: center; align-items: center; flex-direction: column; padding: 20px; box-sizing: border-box; }
+    .img-modal-content { width: 100%; max-width: 400px; background: white; border-radius: 20px; overflow: hidden; position: relative; }
+    .img-modal-img { width: 100%; height: auto; display: block; }
+    .img-modal-close { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.6); color: white; border: none; border-radius: 50%; width: 32px; height: 32px; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
   </style>
 </head>
 <body>
   <div class="app-container">
     <div class="header">
       <a href="main.html" class="back-btn">←</a>
-      <a href="main.html"><img src="img/icon/logo.png" alt="COWAY" class="page-title-logo"></a>
+      <a href="main.html"><img src="img/icon/logo.png" alt="COWAY" class="page-title-logo" onerror="this.outerHTML='<div style=\'font-size:20px;font-weight:900;color:#005bb5;\'>COWAY</div>'"></a>
     </div>
 
-    <!-- 💎 5칸 탭 복구! -->
     <div class="cat-container">
       <div class="cat-btn active"><span>🛏️</span><div>매트리스</div></div>
       <div class="cat-btn"><span>🌬️</span><div>청정기</div></div>
@@ -101,15 +107,17 @@
       
       <div class="product-header">
         <div class="thumb-area" id="thumbArea">
-          <div class="thumb-img-box"><img id="productThumb" src="img/calc/berexbed/mattress/pr04.png" onerror="this.src='https://via.placeholder.com/150?text=준비중'"></div>
+          <div class="thumb-img-box" onclick="openImgModal()">
+            <img id="productThumb" src="" onerror="this.src='https://via.placeholder.com/150?text=준비중'">
+            <span class="material-symbols-rounded zoom-icon">zoom_in</span>
+          </div>
           <div class="swatch-container" id="swatchContainer"></div>
         </div>
 
         <div class="input-group" style="margin-bottom:0;">
           <label>제품 모델</label>
-          <select id="modelOpt" onchange="updateLivePrice()">
+          <select id="modelOpt" onchange="changeModel()">
             <option value="하이브리드4">하이브리드4 (매트리스)</option>
-            <!-- 💎 프레임 선택창 복구! -->
             <option value="코지프레임">코지프레임 (프레임)</option>
           </select>
         </div>
@@ -118,7 +126,7 @@
       <div class="input-row">
         <div class="input-group">
           <label>사이즈</label>
-          <select id="sizeOpt" onchange="updateLivePrice()">
+          <select id="sizeOpt" onchange="changeSize()">
             <option value="LK">LK 사이즈</option>
             <option value="Q">Q 사이즈</option>
           </select>
@@ -196,21 +204,20 @@
       </div>
     </div>
 
-    <!-- 3. 결과 카드 & 상세 내역 버튼 복구! -->
+    <!-- 3. 결과 카드 -->
     <div class="result-card">
       <div class="original-price" id="originalPrice">총 렌탈약정가 월 0원</div>
       <div class="final-price-title">고객님 최종 월 납입금</div>
       <div class="final-price" id="finalPrice">0 <span>원</span></div>
       <div class="discount-tag" id="discountTag" style="display:none;"></div>
       
-      <!-- 💎 버튼 복구! -->
       <button class="detail-btn" onclick="openReceiptModal()">
         <span class="material-symbols-rounded">receipt_long</span> 맞춤 견적 상세 내역 보기
       </button>
     </div>
   </div>
 
-  <!-- 💎 영수증 팝업 복구! -->
+  <!-- 영수증 모달 -->
   <div class="modal-overlay" id="receiptModal">
     <div class="receipt-modal">
       <div class="receipt-header">
@@ -235,8 +242,34 @@
     </div>
   </div>
 
+  <!-- 이미지 확대 모달 -->
+  <div class="img-modal" id="imgModal" onclick="closeImgModal()">
+    <div class="img-modal-content" onclick="event.stopPropagation()">
+      <button class="img-modal-close" onclick="closeImgModal()">✕</button>
+      <img id="modalImg" class="img-modal-img" src="">
+    </div>
+  </div>
+
   <script>
-    // 💎 DB (하이브리드4 진짜 데이터 + 코지프레임 임시 데이터 추가)
+    // 💎 1. 이미지 연동 데이터 복구!
+    const imageData = {
+      "코지프레임": {
+        folder: "img/calc/berexbed/frame/",
+        sizes: {
+          "LK": { colors: [{ code: "iv", hex: "#f3ede3", img: "lktm13_iv.png" }, { code: "gr", hex: "#9e9e9e", img: "lktm13_gr.png" }, { code: "bg", hex: "#d7ccc8", img: "lktm13_bg.png" }] },
+          "Q": { colors: [{ code: "iv", hex: "#f3ede3", img: "qtm13_iv.png" }, { code: "gr", hex: "#9e9e9e", img: "qtm13_gr.png" }, { code: "bg", hex: "#d7ccc8", img: "qtm13_bg.png" }] }
+        }
+      },
+      "하이브리드4": {
+        folder: "img/calc/berexbed/mattress/",
+        sizes: {
+          "LK": { colors: [{ code: "none", hex: "#ffffff", img: "pr04.png" }] },
+          "Q": { colors: [{ code: "none", hex: "#ffffff", img: "pr04.png" }] }
+        }
+      }
+    };
+
+    // 💎 2. 요금 연동 데이터 
     const productDB = {
       "하이브리드4": {
         "LK": {
@@ -245,7 +278,7 @@
           "베이직케어": { "5년": {"신규": 58900, "재렌탈": 53000}, "7년": {"신규": 49900, "재렌탈": 44900}, "9년": {"신규": 43900, "재렌탈": 39500} },
           "서비스프리": { "5년": {"신규": 56900, "재렌탈": 51200}, "7년": {"신규": 47900, "재렌탈": 43100}, "9년": {"신규": 41900, "재렌탈": 37700} }
         },
-        "Q": { // 테스트용 임시 Q사이즈
+        "Q": { 
           "토탈케어": { "5년": {"신규": 53900, "재렌탈": 47500}, "7년": {"신규": 44900, "재렌탈": 39400}, "9년": {"신규": 38900, "재렌탈": 34000} },
           "스페셜체인지": { "5년": {"신규": 51900, "재렌탈": 45700}, "7년": {"신규": 42900, "재렌탈": 37600}, "9년": {"신규": 36900, "재렌탈": 32200} },
           "베이직케어": { "5년": {"신규": 48900, "재렌탈": 43000}, "7년": {"신규": 39900, "재렌탈": 34900}, "9년": {"신규": 33900, "재렌탈": 29500} },
@@ -265,7 +298,76 @@
     };
 
     let cart = [];
+    let currentModel = "";
+    let currentSize = "";
+    let currentColor = "";
 
+    // 💎 3. 이미지 변경 로직 복구
+    function init() { changeModel(); }
+
+    function changeModel() {
+      currentModel = document.getElementById("modelOpt").value;
+      changeSize(); // 모델 바뀌면 사이즈랑 사진도 같이 리셋
+    }
+
+    function changeSize() {
+      currentSize = document.getElementById("sizeOpt").value;
+      const modelImgData = imageData[currentModel];
+
+      if (!modelImgData || !modelImgData.sizes[currentSize]) {
+        document.getElementById("thumbArea").style.display = "none";
+      } else {
+        document.getElementById("thumbArea").style.display = "flex";
+        const colors = modelImgData.sizes[currentSize].colors;
+        currentColor = colors[0].code; 
+        renderSwatches(colors);
+        updateImage();
+      }
+      // 💎 사이즈 바뀔 때마다 요금도 같이 리셋!
+      updateLivePrice();
+    }
+
+    function renderSwatches(colors) {
+      const container = document.getElementById("swatchContainer");
+      container.innerHTML = "";
+      if (colors.length <= 1) return; 
+
+      colors.forEach(c => {
+        const div = document.createElement("div");
+        div.className = "color-swatch";
+        div.style.backgroundColor = c.hex;
+        if (c.code === currentColor) div.classList.add("active");
+        
+        div.onclick = () => {
+          currentColor = c.code;
+          renderSwatches(colors);
+          updateImage();
+        };
+        container.appendChild(div);
+      });
+    }
+
+    function updateImage() {
+      const colors = imageData[currentModel].sizes[currentSize].colors;
+      const colorInfo = colors.find(c => c.code === currentColor);
+      const imgPath = imageData[currentModel].folder + colorInfo.img;
+      
+      document.getElementById("productThumb").src = imgPath;
+      document.getElementById("modalImg").src = imgPath;
+    }
+
+    // 💎 4. 돋보기 팝업 복구
+    function openImgModal() { document.getElementById("imgModal").style.display = "flex"; }
+    function closeImgModal() { document.getElementById("imgModal").style.display = "none"; }
+    
+    // 영수증 팝업
+    function openReceiptModal() { 
+      if(cart.length === 0) return alert("장바구니가 비어있습니다.");
+      document.getElementById("receiptModal").style.display = "flex"; 
+    }
+    function closeReceiptModal() { document.getElementById("receiptModal").style.display = "none"; }
+
+    // 요금 로직
     function updateLivePrice() {
       const model = document.getElementById("modelOpt").value;
       const size = document.getElementById("sizeOpt").value;
@@ -358,7 +460,6 @@
         tagBox.style.display = "none";
       }
 
-      // 영수증 모달 데이터 업데이트
       document.getElementById('recBaseTotal').innerText = `월 ${totalBase.toLocaleString()}원`;
       document.getElementById('recPromoTotal').innerText = `-${totalPromoDiscount.toLocaleString()}원`;
       document.getElementById('recCardTotal').innerText = `-${cardDiscount.toLocaleString()}원`;
@@ -371,14 +472,7 @@
       });
     }
 
-    // 영수증 모달 컨트롤
-    function openReceiptModal() { 
-      if(cart.length === 0) return alert("장바구니가 비어있습니다.");
-      document.getElementById("receiptModal").style.display = "flex"; 
-    }
-    function closeReceiptModal() { document.getElementById("receiptModal").style.display = "none"; }
-
-    window.onload = updateLivePrice;
+    window.onload = init;
   </script>
 </body>
 </html>
