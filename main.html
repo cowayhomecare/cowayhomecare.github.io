@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>COWAY 영업 지원 시스템</title>
+  <title>COWAY 홈케어 시스템</title>
   <style>
     /* 전체 배경 및 모바일 중앙 정렬 세팅 */
     body { 
@@ -12,23 +12,34 @@
       margin: 0; 
       padding-bottom: 40px; 
       display: flex; 
-      justify-content: center; /* PC에서 가운데 정렬 */
+      justify-content: center; 
     }
     
-    /* 실제 앱 화면 영역 (PC에서도 폰처럼 보이게) */
+    /* 실제 앱 화면 영역 */
     .app-container {
       width: 100%;
-      max-width: 480px; /* 모바일 앱 가로 사이즈 고정 */
+      max-width: 480px; 
       background-color: #f2f4f6;
       min-height: 100vh;
-      box-shadow: 0 0 20px rgba(0,0,0,0.05); /* PC에서 볼 때 폰 테두리처럼 은은한 그림자 */
+      box-shadow: 0 0 20px rgba(0,0,0,0.05); 
     }
     
-    /* 상단 헤더 */
-    .header { background: #ffffff; padding: 40px 24px 30px 24px; border-bottom-left-radius: 28px; border-bottom-right-radius: 28px; box-shadow: 0 4px 16px rgba(0,0,0,0.03); margin-bottom: 24px; }
-    .header-logo { height: 28px; object-fit: contain; cursor: pointer; margin-bottom: 16px; display: block; }
-    .header-greeting { font-size: 24px; font-weight: 800; color: #191f28; line-height: 1.4; letter-spacing: -0.5px; }
-    .header-highlight { color: #005bb5; } /* 코웨이 딥 블루 포인트 */
+    /* 💎 상단 헤더 (가운데 정렬 & 슬림하게 변경) */
+    .header { 
+      background: #ffffff; 
+      padding: 24px 20px; 
+      border-bottom-left-radius: 24px; 
+      border-bottom-right-radius: 24px; 
+      box-shadow: 0 4px 16px rgba(0,0,0,0.03); 
+      margin-bottom: 24px; 
+      text-align: center; /* 로고 가운데 정렬 */
+    }
+    .header-logo { 
+      height: 32px; 
+      object-fit: contain; 
+      cursor: pointer; 
+      display: inline-block; /* 가운데 정렬을 위한 필수 설정 */
+    }
 
     /* 2x3 메뉴 그리드 */
     .menu-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; padding: 0 20px; }
@@ -37,7 +48,7 @@
     .menu-card { background: #ffffff; border-radius: 24px; padding: 24px 16px; display: flex; flex-direction: column; align-items: center; text-align: center; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.02); transition: transform 0.15s ease, box-shadow 0.15s ease; }
     .menu-card:active { transform: scale(0.95); box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
 
-    /* 💎 핵심: 아이콘 파스텔 배경 (토스 스타일) */
+    /* 아이콘 파스텔 배경 */
     .icon-wrap { width: 56px; height: 56px; border-radius: 20px; display: flex; justify-content: center; align-items: center; font-size: 28px; margin-bottom: 16px; }
     .icon-wrap.blue { background-color: #e5f0fa; }   /* 견적 */
     .icon-wrap.green { background-color: #e6f6ec; }  /* 갤러리 */
@@ -52,14 +63,14 @@
 </head>
 <body>
   <div class="app-container">
-    <!-- 상단 로고 누르면 메인으로 새로고침 -->
+    <!-- 상단 로고 (가운데 정렬) -->
     <div class="header">
       <a href="main.html">
-        <img src="logo.png" alt="COWAY" class="header-logo" onerror="this.outerHTML='<div style=\'font-size:24px;font-weight:900;color:#005bb5;margin-bottom:16px;\'>COWAY</div>'">
+        <img src="logo.png" alt="COWAY" class="header-logo" onerror="this.outerHTML='<div style=\'font-size:24px;font-weight:900;color:#005bb5;\'>COWAY</div>'">
       </a>
-      <div class="header-greeting">오늘도 파이팅입니다!<br><span class="header-highlight">전문가님 🚀</span></div>
     </div>
 
+    <!-- 메뉴 리스트 -->
     <div class="menu-container">
       <a href="calc.html" class="menu-card">
         <div class="icon-wrap blue">📑</div>
