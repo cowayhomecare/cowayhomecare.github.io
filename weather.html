@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>우리동네 안심 케어 리포트</title>
+  <style>
+    /* 전체 배경 및 폰트 */
+    body {
+      background-color: #f7f9fa; 
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      padding-bottom: 40px;
+    }
+
+    /* 상단 로고 배너 */
+    .header-banner {
+      background-color: #ffffff;
+      padding: 20px 20px 24px 20px;
+      text-align: center;
+      border-bottom-left-radius: 30px;
+      border-bottom-right-radius: 30px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.03);
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .header-banner img {
+      height: 32px;
+      object-fit: contain;
+    }
+    .back-btn {
+      position: absolute;
+      left: 20px;
+      top: 25px;
+      font-size: 20px;
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+
+    /* 컨텐츠 래퍼 */
+    .content-wrapper {
+      padding: 0 20px;
+    }
+
+    /* 위치 표시 카드 */
+    .location-card {
+      background-color: #005bb5;
+      color: white;
+      border-radius: 20px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 12px rgba(0, 91, 181, 0.2);
+    }
+    .location-icon { font-size: 20px; margin-right: 8px; }
+    .location-text { font-size: 16px; font-weight: 800; }
+
+    /* 팩트 폭격 카드 공통 */
+    .fact-card {
+      background-color: #ffffff;
+      border-radius: 24px;
+      padding: 24px;
+      margin-bottom: 16px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.02);
+    }
+    .card-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: #333;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+    }
+    .card-title span { margin-right: 8px; font-size: 22px; }
+
+    /* 미세먼지 비교 영역 */
+    .dust-compare {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .dust-box {
+      flex: 1;
+      border-radius: 16px;
+      padding: 16px 12px;
+      text-align: center;
+      border: 1px solid #eee;
+    }
+    .dust-box.korea { background-color: #f0fdf4; border-color: #bbf7d0; }
+    .dust-box.who { background-color: #fef2f2; border-color: #fecaca; }
+    
+    .box-title { font-size: 12px; font-weight: 700; color: #666; margin-bottom: 8px; }
+    .box-status { font-size: 20px; font-weight: 900; margin-bottom: 4px; }
+    .korea .box-status { color: #16a34a; }
+    .who .box-status { color: #dc2626; }
+    .box-value { font-size: 11px; color: #888; }
+
+    /* 경고 메시지 박스 */
+    .warning-box {
+      background-color: #fff5f5;
+      border-radius: 12px;
+      padding: 12px 16px;
+      border-left: 4px solid #ef4444;
+    }
+    .warning-text {
+      font-size: 13px;
+      font-weight: 700;
+      color: #b91c1c;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* 습도 영역 */
+    .humidity-value {
+      font-size: 36px;
+      font-weight: 900;
+      color: #0ea5e9;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .humidity-warning {
+      background-color: #eff6ff;
+      border-radius: 12px;
+      padding: 12px 16px;
+      border-left: 4px solid #3b82f6;
+    }
+    .humidity-warning p {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1d4ed8;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* 액션 버튼 */
+    .action-btn {
+      width: 100%;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 16px;
+      padding: 16px;
+      font-size: 15px;
+      font-weight: 800;
+      margin-top: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .action-btn:active { background-color: #555; }
+  </style>
+</head>
+<body>
+
+  <!-- 상단 배너 (뒤로가기 + 로고) -->
+  <div class="header-banner">
+    <a href="main.html" class="back-btn">←</a>
+    <img src="logo.png" alt="COWAY" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+    <div style="display:none; font-size:22px; font-weight:900; color:#005bb5;">COWAY</div>
+  </div>
+
+  <div class="content-wrapper">
+    
+    <!-- 1. 실시간 위치 카드 -->
+    <div class="location-card" id="locationCard" onclick="getLocation()">
+      <span class="location-icon">📍</span>
+      <span class="location-text" id="locationText">현재 위치 불러오는 중... (터치)</span>
+    </div>
+
+    <!-- 2. 미세먼지 팩폭 카드 -->
+    <div class="fact-card">
+      <div class="card-title"><span>😷</span>초미세먼지 팩트 체크</div>
+      
+      <div class="dust-compare">
+        <!-- 한국 기준 -->
+        <div class="dust-box korea">
+          <div class="box-title">국내 환경부 기준</div>
+          <div class="box-status">보통 🟢</div>
+          <div class="box-value">22 ㎍/㎥</div>
+        </div>
+        <!-- WHO 기준 -->
+        <div class="dust-box who">
+          <div class="box-title">WHO 국제 기준</div>
+          <div class="box-status">나쁨 🔴</div>
+          <div class="box-value">22 ㎍/㎥</div>
+        </div>
+      </div>
+
+      <div class="warning-box">
+        <p class="warning-text">
+          ⚠️ 고객님, 네이버 날씨 보고 환기하셨죠?<br>
+          우리나라 기준으론 '보통'이지만, 선진국 WHO 기준으로는 현재 환기 불가 수준입니다.<br>
+          이 먼지가 다 매트리스로 가라앉습니다.
+        </p>
+      </div>
+    </div>
+
+    <!-- 3. 습도 경고 카드 -->
+    <div class="fact-card">
+      <div class="card-title"><span>💧</span>실내 습도 경고</div>
+      <div class="humidity-value">현재 74%</div>
+      
+      <div class="humidity-warning">
+        <p>
+          ⚠️ 비상! 집먼지진드기 번식 위험 구간!<br>
+          습도 60% 이상 시 진드기 번식률이 평소의 5배로 폭증합니다. 매트리스 딥 클리닝이 시급합니다.
+        </p>
+      </div>
+    </div>
+
+    <button class="action-btn" onclick="getLocation()">실시간 데이터 업데이트</button>
+
+  </div>
+
+  <script>
+    // GPS 위치 가져오는 함수
+    function getLocation() {
+      const locText = document.getElementById("locationText");
+      locText.innerText = "위치 탐색 중...";
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          function(position) {
+            // 실제 구현 시엔 위경도->주소 변환이 필요합니다.
+            // 시뮬레이션 연출용
+            locText.innerText = "해운대구 실시간 케어 리포트"; 
+          }, 
+          function(error) {
+            locText.innerText = "위치 접근 허용이 필요합니다";
+          }
+        );
+      } else {
+        locText.innerText = "GPS를 지원하지 않는 기기입니다";
+      }
+    }
+
+    // 화면 열리자마자 바로 위치 권한 묻기
+    window.onload = function() {
+      getLocation();
+    }
+  </script>
+
+</body>
+</html>
