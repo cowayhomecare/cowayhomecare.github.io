@@ -5,22 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>COWAY 영업 지원 시스템</title>
   <style>
-    body { background-color: #f4f7f9; font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif; margin: 0; padding: 0; box-sizing: border-box; }
+    body { background-color: #f4f7f9; font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif; margin: 0; padding-bottom: 40px; }
     
-    /* 로그인 화면 */
-    #loginScreen { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: linear-gradient(135deg, #00A8E1, #005bb5); padding: 20px; }
-    .login-box { background: white; padding: 40px 20px; border-radius: 24px; width: 100%; max-width: 320px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-    .login-logo { font-size: 32px; font-weight: 900; color: #005bb5; margin-bottom: 8px; letter-spacing: -1px; }
-    .login-desc { font-size: 14px; color: #666; margin-bottom: 30px; }
-    .login-input { width: 90%; padding: 16px; border: 2px solid #e1e8ed; border-radius: 12px; font-size: 16px; margin-bottom: 16px; text-align: center; transition: border-color 0.3s; box-sizing: border-box; }
-    .login-input:focus { outline: none; border-color: #00A8E1; }
-    .login-btn { width: 90%; padding: 16px; background-color: #005bb5; color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; }
-
-    /* 메인 화면 */
-    #mainScreen { display: none; padding-bottom: 40px; }
-    
-    /* 상단 헤더 */
-    .header { background: linear-gradient(to right, #00A8E1, #005bb5); padding: 30px 20px 40px 20px; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; color: white; margin-bottom: -20px; box-shadow: 0 4px 15px rgba(0, 91, 181, 0.2); }
+    /* 상단 헤더 (원래 쓰시던 깔끔한 디자인) */
+    .header { background-color: #005bb5; padding: 30px 20px 40px 20px; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; color: white; margin-bottom: -20px; box-shadow: 0 4px 15px rgba(0, 91, 181, 0.2); }
     .header-logo { font-size: 24px; font-weight: 900; letter-spacing: -1px; margin-bottom: 10px; }
     .header-greeting { font-size: 18px; font-weight: 300; }
     .header-greeting span { font-weight: 700; }
@@ -30,114 +18,72 @@
     
     /* 메뉴 카드 스타일 */
     .menu-card { background: white; border-radius: 20px; padding: 20px; display: flex; align-items: center; text-decoration: none; color: inherit; box-shadow: 0 4px 12px rgba(0,0,0,0.03); transition: transform 0.2s; }
-    .menu-card:active { transform: scale(0.98); }
+    .menu-card:active { transform: scale(0.98); background-color: #fafafa; }
     
-    .menu-icon-wrap { width: 50px; height: 50px; border-radius: 16px; background-color: #f0f7ff; display: flex; justify-content: center; align-items: center; font-size: 24px; margin-right: 16px; flex-shrink: 0; }
+    .menu-icon-wrap { width: 48px; height: 48px; border-radius: 14px; background-color: #f4f8ff; display: flex; justify-content: center; align-items: center; font-size: 22px; margin-right: 16px; flex-shrink: 0; }
     
     .menu-text-wrap { flex-grow: 1; }
     .menu-title { font-size: 16px; font-weight: 800; color: #333; margin-bottom: 4px; }
     .menu-sub { font-size: 12px; color: #888; font-weight: 500; }
     
     .menu-arrow { color: #ccc; font-size: 20px; font-weight: bold; }
-
   </style>
 </head>
 <body>
 
-  <!-- 로그인 화면 -->
-  <div id="loginScreen">
-    <div class="login-box">
-      <div class="login-logo">COWAY</div>
-      <div class="login-desc">영업 지원 및 고객 케어 시스템</div>
-      <!-- 숫자 1개만 쳐도 통과되게 스크립트 수정 완료 -->
-      <input type="number" id="empNumber" class="login-input" placeholder="사원번호 입력 (숫자 1개 이상)">
-      <button class="login-btn" onclick="checkLogin()">접속하기</button>
-    </div>
+  <div class="header">
+    <div class="header-logo">COWAY</div>
+    <div class="header-greeting">오늘도 파이팅입니다! <span>전문가님</span></div>
   </div>
 
-  <!-- 메인 화면 -->
-  <div id="mainScreen">
-    <div class="header">
-      <div class="header-logo">COWAY</div>
-      <div class="header-greeting">오늘도 파이팅입니다! <span>전문가님</span></div>
-    </div>
+  <div class="menu-container">
+    
+    <a href="#" class="menu-card">
+      <div class="menu-icon-wrap">🎁</div>
+      <div class="menu-text-wrap">
+        <div class="menu-title">이달의 프로모션 혜택</div>
+        <div class="menu-sub">8월 고객 맞춤 사은품 & 할인 총정리</div>
+      </div>
+      <div class="menu-arrow">›</div>
+    </a>
 
-    <div class="menu-container">
-      
-      <!-- 1. 이달의 혜택 (기존 🎁 유지) -->
-      <a href="#" class="menu-card">
-        <div class="menu-icon-wrap">🎁</div>
-        <div class="menu-text-wrap">
-          <div class="menu-title">이달의 프로모션 혜택</div>
-          <div class="menu-sub">8월 고객 맞춤 사은품 & 할인 총정리</div>
-        </div>
-        <div class="menu-arrow">›</div>
-      </a>
+    <a href="weather.html" class="menu-card">
+      <div class="menu-icon-wrap">🌬️</div>
+      <div class="menu-text-wrap">
+        <div class="menu-title">우리동네 안심 케어 리포트</div>
+        <div class="menu-sub">실시간 미세먼지 & 습도 팩트 체크</div>
+      </div>
+      <div class="menu-arrow">›</div>
+    </a>
 
-      <!-- 2. 공기질 팩폭 뷰어 (연동 완료) -->
-      <a href="weather.html" class="menu-card">
-        <div class="menu-icon-wrap">🌬️</div>
-        <div class="menu-text-wrap">
-          <div class="menu-title">우리동네 안심 케어 리포트</div>
-          <div class="menu-sub">실시간 미세먼지 & 습도 팩트 체크</div>
-        </div>
-        <div class="menu-arrow">›</div>
-      </a>
+    <a href="gallery.html" class="menu-card">
+      <div class="menu-icon-wrap">🖼️</div>
+      <div class="menu-text-wrap">
+        <div class="menu-title">갤러리</div>
+        <div class="menu-sub">프리미엄 설치 & 케어 실사</div>
+      </div>
+      <div class="menu-arrow">›</div>
+    </a>
 
-      <!-- 3. 시공 갤러리 (이름 변경, 고급진 액자 아이콘 🖼️) -->
-      <a href="gallery.html" class="menu-card">
-        <div class="menu-icon-wrap">🖼️</div>
-        <div class="menu-text-wrap">
-          <div class="menu-title">갤러리</div>
-          <div class="menu-sub">프리미엄 설치 & 케어 실사</div>
-        </div>
-        <div class="menu-arrow">›</div>
-      </a>
+    <a href="#" class="menu-card">
+      <div class="menu-icon-wrap">💧</div>
+      <div class="menu-text-wrap">
+        <div class="menu-title">코웨이 베스트셀러</div>
+        <div class="menu-sub">인기 모델 라인업 및 상세 스펙</div>
+      </div>
+      <div class="menu-arrow">›</div>
+    </a>
 
-      <!-- 4. 제품 베스트셀러 (정수기 물방울 감성 💧) -->
-      <a href="#" class="menu-card">
-        <div class="menu-icon-wrap">💧</div>
-        <div class="menu-text-wrap">
-          <div class="menu-title">코웨이 베스트셀러</div>
-          <div class="menu-sub">인기 모델 라인업 및 상세 스펙</div>
-        </div>
-        <div class="menu-arrow">›</div>
-      </a>
+    <a href="calc.html" class="menu-card">
+      <div class="menu-icon-wrap">📑</div>
+      <div class="menu-text-wrap">
+        <div class="menu-title">맞춤 견적 계산기</div>
+        <div class="menu-sub">고객 맞춤형 렌탈료 즉시 산출</div>
+      </div>
+      <div class="menu-arrow">›</div>
+    </a>
 
-      <!-- 5. 맞춤 견적 (계산기 대신 스마트한 리포트 느낌 📑) -->
-      <a href="#" class="menu-card">
-        <div class="menu-icon-wrap">📑</div>
-        <div class="menu-text-wrap">
-          <div class="menu-title">맞춤 견적 계산기</div>
-          <div class="menu-sub">고객 맞춤형 렌탈료 즉시 산출</div>
-        </div>
-        <div class="menu-arrow">›</div>
-      </a>
-
-      <!-- 6. 제휴카드 (돈 나가는 느낌 말고 프리미엄 카드 느낌 💳) -->
-      <a href="#" class="menu-card">
-        <div class="menu-icon-wrap">💳</div>
-        <div class="menu-text-wrap">
-          <div class="menu-title">제휴카드 할인 꿀팁</div>
-          <div class="menu-sub">최대 청구할인 혜택 매뉴얼</div>
-        </div>
-        <div class="menu-arrow">›</div>
-      </a>
-
-    </div>
   </div>
 
-  <script>
-    function checkLogin() {
-      const pw = document.getElementById("empNumber").value;
-      // 형님 요청: 1자리 이상 치면 묻지도 따지지도 않고 바로 통과!
-      if(pw.length >= 1) {
-        document.getElementById("loginScreen").style.display = "none";
-        document.getElementById("mainScreen").style.display = "block";
-      } else {
-        alert("숫자를 1개라도 입력해주세요! ㅋㅋㅋ");
-      }
-    }
-  </script>
 </body>
 </html>
