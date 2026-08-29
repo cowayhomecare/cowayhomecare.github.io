@@ -3,86 +3,133 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>코웨이 홈케어 갤러리</title>
+  <title>현장 시공 갤러리</title>
   <style>
-    body { background-color: #f4f7fa; font-family: -apple-system, BlinkMacSystemFont, sans-serif; margin: 0; padding-bottom: 80px; }
-    .header { background: #0b63ce; color: white; padding: 20px; text-align: center; font-size: 20px; font-weight: 900; }
+    body { background-color: #f7f9fa; font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif; margin: 0; padding: 0; box-sizing: border-box; }
     
-    /* 상단 스와이프 필터 버튼 */
-    .filter-bar { display: flex; gap: 8px; padding: 15px; overflow-x: auto; background: white; white-space: nowrap; box-shadow: 0 2px 5px rgba(0,0,0,0.03); }
-    .filter-btn { padding: 8px 16px; border-radius: 20px; border: 1.5px solid #e4e7ec; background: #fff; font-size: 14px; font-weight: 700; color: #666; cursor: pointer; }
-    .filter-btn.active { background: #0b63ce; color: white; border-color: #0b63ce; }
-    .filter-bar::-webkit-scrollbar { display: none; }
+    /* 상단 배너 (메인과 완벽한 일체감) */
+    .header-banner { background-color: #ffffff; padding: 20px 20px 24px 20px; text-align: center; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; box-shadow: 0 4px 24px rgba(0, 0, 0, 0.03); margin-bottom: 20px; position: sticky; top: 0; z-index: 10; }
+    .header-banner img { height: 32px; object-fit: contain; }
+    .back-btn { position: absolute; left: 20px; top: 25px; font-size: 20px; text-decoration: none; color: #333; font-weight: bold; }
+    .page-title { font-size: 16px; font-weight: 800; color: #333; margin-top: 10px; }
 
-    /* 갤러리 2열 그리드 (글자판 아예 없애고 사진만 꽉 채움) */
-    .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 15px; }
-    .photo-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-    .photo-card img { width: 100%; height: 180px; object-fit: cover; display: block; }
+    /* 갤러리 그리드 (바둑판 배열) */
+    .gallery-container { padding: 0 16px 40px 16px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .gallery-item { width: 100%; aspect-ratio: 1 / 1; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); cursor: pointer; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.2s; }
+    .gallery-item img:active { transform: scale(0.95); }
 
-    /* 하단 메뉴바 */
-    .bottom-nav { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 15px 0; box-shadow: 0 -5px 15px rgba(0,0,0,0.05); border-top-left-radius: 15px; border-top-right-radius: 15px;}
-    .nav-item { text-align: center; color: #adb5bd; font-size: 13px; font-weight: 800; text-decoration: none; }
-    .nav-item.active { color: #0b63ce; }
+    /* 팝업 모달 (라이트박스) */
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.95); z-index: 999; flex-direction: column; justify-content: center; align-items: center; }
+    
+    /* 팝업 안의 이미지 (더블탭 줌 기능 포함) */
+    .modal-img-container { width: 100%; height: 80%; display: flex; justify-content: center; align-items: center; overflow: hidden; position: relative; }
+    .modal-img { max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.3s ease; cursor: zoom-in; }
+    .modal-img.zoomed { transform: scale(2.5); cursor: zoom-out; }
+
+    /* 모달 컨트롤 버튼들 */
+    .close-btn { position: absolute; top: 20px; right: 20px; color: white; font-size: 36px; font-weight: bold; cursor: pointer; z-index: 1001; }
+    .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); color: white; font-size: 40px; font-weight: bold; cursor: pointer; padding: 20px; z-index: 1001; background: rgba(0,0,0,0.3); border-radius: 50%; width: 30px; height: 30px; display: flex; justify-content: center; align-items: center; }
+    .prev-btn { left: 10px; }
+    .next-btn { right: 10px; }
+    
+    /* 하단 사진 카운터 */
+    .counter { color: white; font-size: 16px; font-weight: 500; position: absolute; bottom: 30px; letter-spacing: 2px; }
   </style>
 </head>
 <body>
 
-  <!-- 상단 간판 누르면 홈으로 이동 -->
-  <a href="main.html" style="text-decoration: none;">
-    <div class="header">현장 시공 갤러리</div>
-  </a>
-
-  <!-- 분류 탭 버튼 -->
-  <div class="filter-bar">
-    <button class="filter-btn active" onclick="filterPhotos('all')">전체보기</button>
-    <button class="filter-btn" onclick="filterPhotos('pade')">🛠️ 파운데이션</button>
-    <button class="filter-btn" onclick="filterPhotos('saje')">✨ 사제헤드 호환</button>
-    <button class="filter-btn" onclick="filterPhotos('etep')">⚙️ 이텝(E-TEP)</button>
+  <!-- 상단 배너 -->
+  <div class="header-banner">
+    <a href="main.html" class="back-btn">←</a>
+    <img src="logo.png" alt="COWAY" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+    <div style="display:none; font-size:22px; font-weight:900; color:#005bb5;">COWAY</div>
+    <div class="page-title">현장 시공 갤러리</div>
   </div>
 
-  <!-- 사진 목록 (오직 사진만 깔끔하게 출력) -->
-  <div class="gallery-grid" id="galleryContainer">
+  <!-- 갤러리 바둑판 영역 -->
+  <div class="gallery-container" id="galleryGrid">
+    <!-- 자바스크립트로 사진들이 여기에 꽂힙니다 -->
+  </div>
+
+  <!-- 팝업 모달 영역 -->
+  <div class="modal" id="imageModal">
+    <span class="close-btn" onclick="closeModal()">×</span>
+    <div class="nav-btn prev-btn" onclick="changeImage(-1)">‹</div>
     
-    <!-- 파운데이션 사진 6장 -->
-    <div class="photo-card" data-category="pade"><img src="pade1.jpg"></div>
-    <div class="photo-card" data-category="pade"><img src="pade2.jpg"></div>
-    <div class="photo-card" data-category="pade"><img src="pade3.jpg"></div>
-    <div class="photo-card" data-category="pade"><img src="pade4.jpg"></div>
-    <div class="photo-card" data-category="pade"><img src="pade5.jpg"></div>
-    <div class="photo-card" data-category="pade"><img src="pade6.jpg"></div>
-
-    <!-- 사제헤드 사진 5장 -->
-    <div class="photo-card" data-category="saje"><img src="saje1.jpg"></div>
-    <div class="photo-card" data-category="saje"><img src="saje2.jpg"></div>
-    <div class="photo-card" data-category="saje"><img src="saje3.jpg"></div>
-    <div class="photo-card" data-category="saje"><img src="saje4.jpg"></div>
-    <div class="photo-card" data-category="saje"><img src="saje5.jpg"></div>
-
-  </div>
-
-  <!-- 하단 고정 메뉴바 -->
-  <div class="bottom-nav">
-    <a href="main.html" class="nav-item">홈(메인)</a>
-    <a href="calc.html" class="nav-item">계산기</a>
-    <a href="gallery.html" class="nav-item active">갤러리</a>
-    <a href="#" class="nav-item">프로모션</a>
+    <div class="modal-img-container">
+      <!-- 더블 클릭(터치) 시 확대되도록 ondblclick 이벤트 추가 -->
+      <img src="" class="modal-img" id="modalImg" ondblclick="toggleZoom()">
+    </div>
+    
+    <div class="nav-btn next-btn" onclick="changeImage(1)">›</div>
+    <div class="counter" id="imgCounter">1 / 1</div>
   </div>
 
   <script>
-    function filterPhotos(category) {
-      let buttons = document.querySelectorAll('.filter-btn');
-      buttons.forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
+    // 형님이 나중에 현장 사진 찍으시면 여기에 주소만 갈아끼우면 됩니다.
+    // 지금은 테스트용 가짜 사진들(picsum)을 6장 넣어뒀습니다.
+    const imageList = [
+      "https://picsum.photos/600/800?random=1",
+      "https://picsum.photos/600/800?random=2",
+      "https://picsum.photos/600/800?random=3",
+      "https://picsum.photos/600/800?random=4",
+      "https://picsum.photos/600/800?random=5",
+      "https://picsum.photos/600/800?random=6"
+    ];
 
-      let cards = document.querySelectorAll('.photo-card');
-      cards.forEach(card => {
-        if (category === 'all' || card.getAttribute('data-category') === category) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
-        }
+    let currentIndex = 0;
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("modalImg");
+    const counter = document.getElementById("imgCounter");
+
+    // 1. 화면 켜지자마자 바둑판으로 사진 뿌리기
+    window.onload = function() {
+      const grid = document.getElementById("galleryGrid");
+      imageList.forEach((src, index) => {
+        const item = document.createElement("div");
+        item.className = "gallery-item";
+        item.onclick = () => openModal(index);
+        item.innerHTML = `<img src="${src}" alt="시공사진 ${index + 1}">`;
+        grid.appendChild(item);
       });
     }
+
+    // 2. 사진 눌렀을 때 팝업 열기
+    function openModal(index) {
+      currentIndex = index;
+      updateModal();
+      modal.style.display = "flex";
+    }
+
+    // 3. 팝업 닫기
+    function closeModal() {
+      modal.style.display = "none";
+      modalImg.classList.remove("zoomed"); // 닫을 때 확대된 거 원상복구
+    }
+
+    // 4. 좌우 이동 (다음/이전 사진)
+    function changeImage(step) {
+      currentIndex += step;
+      // 끝에 도달하면 처음/마지막으로 자연스럽게 순환
+      if (currentIndex >= imageList.length) currentIndex = 0;
+      if (currentIndex < 0) currentIndex = imageList.length - 1;
+      
+      modalImg.classList.remove("zoomed"); // 사진 넘어갈 때 줌 풀기
+      updateModal();
+    }
+
+    // 5. 모달 안의 사진과 카운터 숫자 갱신
+    function updateModal() {
+      modalImg.src = imageList[currentIndex];
+      counter.innerText = `${currentIndex + 1} / ${imageList.length}`;
+    }
+
+    // 6. 꿀기능: 사진 더블클릭(터치) 시 2.5배 확대/축소
+    function toggleZoom() {
+      modalImg.classList.toggle("zoomed");
+    }
   </script>
+
 </body>
 </html>
