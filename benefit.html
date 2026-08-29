@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>이달의 혜택</title>
+  
+  <!-- 구글 머티리얼 아이콘 폰트 -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,600,1,0" />
+
+  <style>
+    /* 공통 앱 스타일 */
+    body { background-color: #f2f4f6; font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif; margin: 0; padding-bottom: 40px; display: flex; justify-content: center; }
+    .app-container { width: 100%; max-width: 480px; background-color: #f2f4f6; min-height: 100vh; box-shadow: 0 0 20px rgba(0,0,0,0.05); }
+    
+    /* 헤더 (로고 홈버튼 통일) */
+    .header { display: flex; align-items: center; justify-content: center; padding: 24px 20px; position: relative; background: #ffffff; }
+    .back-btn { font-size: 24px; text-decoration: none; color: #333; position: absolute; left: 16px; font-weight: bold; padding: 10px; }
+    .page-title-logo { height: 26px; object-fit: contain; }
+
+    /* 💎 상단 탭 버튼 UI */
+    .tab-container { display: flex; background: #ffffff; padding: 0 20px 16px 20px; border-bottom-left-radius: 24px; border-bottom-right-radius: 24px; box-shadow: 0 4px 16px rgba(0,0,0,0.02); margin-bottom: 24px; }
+    .tab-btn { flex: 1; text-align: center; padding: 14px 0; font-size: 16px; font-weight: 700; color: #8b95a1; cursor: pointer; border-bottom: 3px solid transparent; transition: 0.2s; }
+    .tab-btn.active { color: #191f28; font-weight: 800; border-bottom: 3px solid #3182f6; }
+
+    /* 컨텐츠 영역 */
+    .content-section { padding: 0 20px; display: none; animation: fadeIn 0.3s ease; }
+    .content-section.active { display: block; }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* 🎁 프로모션 카드 스타일 */
+    .promo-card { background: #ffffff; border-radius: 20px; padding: 24px; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); position: relative; overflow: hidden; }
+    .promo-badge { display: inline-block; padding: 6px 10px; background: #ffe4e6; color: #e11d48; font-size: 11px; font-weight: 800; border-radius: 8px; margin-bottom: 12px; }
+    .promo-badge.blue { background: #e0f2fe; color: #0284c7; }
+    .promo-title { font-size: 18px; font-weight: 800; color: #191f28; margin-bottom: 8px; line-height: 1.4; }
+    .promo-desc { font-size: 13px; color: #6b7280; font-weight: 500; line-height: 1.5; }
+    .promo-icon { position: absolute; right: -10px; bottom: -10px; font-size: 80px; color: rgba(0,0,0,0.03); transform: rotate(-15deg); }
+
+    /* 💳 제휴카드 리스트 스타일 */
+    .credit-card-item { background: #ffffff; border-radius: 20px; padding: 20px; margin-bottom: 12px; display: flex; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
+    .card-img-placeholder { width: 44px; height: 64px; background: #f1f3f5; border-radius: 6px; display: flex; justify-content: center; align-items: center; margin-right: 16px; border: 1px solid #e9ecef; }
+    .card-info { flex: 1; }
+    .card-name { font-size: 15px; font-weight: 800; color: #191f28; margin-bottom: 4px; }
+    .card-condition { font-size: 12px; color: #8b95a1; font-weight: 600; }
+    .card-discount { font-size: 16px; font-weight: 800; color: #3182f6; text-align: right; }
+    .card-discount span { font-size: 12px; color: #8b95a1; font-weight: 600; display: block; margin-top: 2px; }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- 헤더 -->
+    <div class="header">
+      <a href="main.html" class="back-btn">←</a>
+      <a href="main.html">
+        <img src="logo.png" alt="COWAY" class="page-title-logo" onerror="this.outerHTML='<div style=\'font-size:20px;font-weight:900;color:#005bb5;\'>COWAY</div>'">
+      </a>
+    </div>
+
+    <!-- 탭 버튼 -->
+    <div class="tab-container">
+      <div class="tab-btn active" onclick="switchTab('promo')">🎁 프로모션</div>
+      <div class="tab-btn" onclick="switchTab('credit')">💳 제휴카드</div>
+    </div>
+
+    <!-- 탭 1: 프로모션 컨텐츠 -->
+    <div id="promo-section" class="content-section active">
+      
+      <!-- 프로모션 카드 1 -->
+      <div class="promo-card">
+        <span class="material-symbols-rounded promo-icon">celebration</span>
+        <div class="promo-badge">BEREX 페스타</div>
+        <div class="promo-title">매트리스 & 안마의자<br>렌탈료 최대 6개월 면제</div>
+        <div class="promo-desc">약정 기간별 할인율 차등 적용<br>타사 보상판매 추가 혜택 가능</div>
+      </div>
+
+      <!-- 프로모션 카드 2 -->
+      <div class="promo-card">
+        <span class="material-symbols-rounded promo-icon">water_drop</span>
+        <div class="promo-badge blue">신제품 출시 특가</div>
+        <div class="promo-title">아이콘 정수기 2<br>월 납입금 10% 즉시 할인</div>
+        <div class="promo-desc">신규 고객 한정 사은품 추가 증정<br>(재고 소진 시 조기 종료)</div>
+      </div>
+
+    </div>
+
+    <!-- 탭 2: 제휴카드 컨텐츠 -->
+    <div id="credit-section" class="content-section">
+      
+      <div class="credit-card-item">
+        <div class="card-img-placeholder">
+          <span class="material-symbols-rounded" style="color:#ffc107;">credit_card</span>
+        </div>
+        <div class="card-info">
+          <div class="card-name">코웨이 KB국민카드</div>
+          <div class="card-condition">전월 실적 30만원 이상</div>
+        </div>
+        <div class="card-discount">
+          15,000원<span>청구 할인</span>
+        </div>
+      </div>
+
+      <div class="credit-card-item">
+        <div class="card-img-placeholder">
+          <span class="material-symbols-rounded" style="color:#ed1c24;">credit_card</span>
+        </div>
+        <div class="card-info">
+          <div class="card-name">코웨이 롯데카드</div>
+          <div class="card-condition">전월 실적 30만원 이상</div>
+        </div>
+        <div class="card-discount">
+          13,000원<span>청구 할인</span>
+        </div>
+      </div>
+
+      <div class="credit-card-item">
+        <div class="card-img-placeholder">
+          <span class="material-symbols-rounded" style="color:#0054a6;">credit_card</span>
+        </div>
+        <div class="card-info">
+          <div class="card-name">코웨이 삼성카드</div>
+          <div class="card-condition">전월 실적 30만원 이상</div>
+        </div>
+        <div class="card-discount">
+          13,000원<span>청구 할인</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    // 탭 전환 자바스크립트 마법
+    function switchTab(tabName) {
+      // 1. 모든 버튼과 섹션 초기화
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active'));
+
+      // 2. 선택한 탭 활성화
+      if(tabName === 'promo') {
+        document.querySelectorAll('.tab-btn')[0].classList.add('active');
+        document.getElementById('promo-section').classList.add('active');
+      } else {
+        document.querySelectorAll('.tab-btn')[1].classList.add('active');
+        document.getElementById('credit-section').classList.add('active');
+      }
+    }
+  </script>
+</body>
+</html>
