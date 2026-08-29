@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>맞춤 견적 계산기</title>
   
-  <!-- 💎 로고 경로 완벽 수정 -->
   <link rel="icon" href="img/icon/logo.png" type="image/png">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,600,1,0" />
 
@@ -17,31 +16,52 @@
     .back-btn { font-size: 24px; text-decoration: none; color: #333; position: absolute; left: 0; font-weight: bold; padding: 10px; }
     .page-title-logo { height: 26px; object-fit: contain; }
 
+    .cat-container { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; margin-bottom: 16px; }
+    .cat-btn { background: white; border-radius: 14px; padding: 10px 2px; text-align: center; cursor: pointer; border: 2px solid transparent; box-shadow: 0 2px 6px rgba(0,0,0,0.02); transition: 0.2s; }
+    .cat-btn.active { border-color: #3182f6; background: #e8f3ff; }
+    .cat-btn span { font-size: 20px; display: block; margin-bottom: 2px; }
+    .cat-btn div { font-size: 10.5px; font-weight: 800; color: #4e5968; letter-spacing: -0.5px; }
+    .cat-btn.active div { color: #1b64da; }
+
     .card { background: #ffffff; padding: 20px; border-radius: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.02); margin-bottom: 16px; }
     .card-title { font-size: 15px; font-weight: 800; color: #191f28; margin-bottom: 16px; display: flex; align-items: center; gap: 6px; }
     
-    /* 💎 썸네일 & 색상 스와치 레이아웃 */
-    .product-header { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px dashed #e4e7ec; }
-    
-    .thumb-area { width: 70px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
-    .thumb-img-box { width: 64px; height: 64px; border-radius: 16px; border: 1px solid #e4e7ec; overflow: hidden; cursor: pointer; background: #f9fafb; display: flex; justify-content: center; align-items: center; position: relative; box-shadow: 0 2px 6px rgba(0,0,0,0.03); }
+    /* 💎 프사 썸네일 & 작아진 스와치 레이아웃 */
+    .product-header { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 16px; }
+    .thumb-area { width: 64px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .thumb-img-box { width: 64px; height: 64px; border-radius: 14px; border: 1px solid #e4e7ec; overflow: hidden; cursor: pointer; background: #f9fafb; display: flex; justify-content: center; align-items: center; position: relative; box-shadow: 0 2px 6px rgba(0,0,0,0.03); }
     .thumb-img-box img { width: 100%; height: 100%; object-fit: cover; }
     .zoom-icon { position: absolute; bottom: 2px; right: 2px; background: rgba(0,0,0,0.5); color: white; border-radius: 50%; font-size: 14px; padding: 2px; pointer-events: none; }
     
-    .swatch-container { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
-    .color-swatch { width: 20px; height: 20px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.1); transition: 0.2s; }
-    .color-swatch.active { border-color: #3182f6; transform: scale(1.1); box-shadow: 0 2px 6px rgba(49, 130, 246, 0.4); }
+    .swatch-container { display: flex; gap: 4px; justify-content: center; flex-wrap: wrap; }
+    .color-swatch { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.1); cursor: pointer; transition: 0.2s; }
+    .color-swatch.active { border: 2px solid #3182f6; transform: scale(1.2); box-shadow: 0 2px 4px rgba(49, 130, 246, 0.3); }
 
-    .product-info { flex: 1; }
-    .input-group { margin-bottom: 14px; }
+    .input-group { margin-bottom: 14px; flex: 1; }
     .input-group label { display: block; font-size: 11.5px; color: #8b95a1; margin-bottom: 4px; font-weight: 700; }
-    select { width: 100%; padding: 12px 14px; border: 1px solid #e4e7ec; background-color: #f9fafb; border-radius: 12px; font-size: 14px; font-weight: 700; color: #191f28; box-sizing: border-box; outline: none; transition: 0.2s; appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b95a1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 14px center; background-size: 14px; }
+    select { width: 100%; padding: 12px 14px; border: 1px solid #e4e7ec; background-color: #f9fafb; border-radius: 12px; font-size: 14px; font-weight: 700; color: #191f28; box-sizing: border-box; outline: none; appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b95a1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 14px center; background-size: 14px; }
     
-    .add-cart-btn { width: 100%; padding: 14px; background: #e8f3ff; color: #1b64da; border: 1px dashed #3182f6; border-radius: 14px; font-size: 14px; font-weight: 800; cursor: pointer; transition: 0.2s; margin-top: 6px; display: flex; justify-content: center; align-items: center; gap: 6px; }
-    
-    /* 💎 팝업 모달 */
-    .img-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 9999; justify-content: center; align-items: center; flex-direction: column; }
-    .img-modal-content { width: 90%; max-width: 400px; background: white; border-radius: 20px; overflow: hidden; position: relative; }
+    .add-cart-btn { width: 100%; padding: 14px; background: #e8f3ff; color: #1b64da; border: 1px dashed #3182f6; border-radius: 14px; font-size: 14px; font-weight: 800; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 6px; }
+
+    /* 장바구니 리스트 */
+    .cart-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+    .cart-item { background: #f8fafc; border: 1px solid #e4e7ec; padding: 12px 14px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; }
+    .cart-item-info { flex: 1; }
+    .cart-item-title { font-size: 13.5px; font-weight: 800; color: #191f28; }
+    .cart-item-sub { font-size: 11px; color: #8b95a1; margin-top: 2px; }
+    .cart-item-price { font-size: 14px; font-weight: 800; color: #3182f6; }
+    .cart-del-btn { background: none; border: none; color: #f04452; padding: 4px; cursor: pointer; display: flex; align-items: center; margin-left: 8px; }
+
+    /* 결과 카드 */
+    .result-card { background: #191f28; color: white; border-radius: 20px; padding: 22px; text-align: center; box-shadow: 0 8px 20px rgba(0,0,0,0.15); margin-top: 10px; }
+    .original-price { font-size: 13px; color: #8b95a1; text-decoration: line-through; font-weight: 600; margin-bottom: 2px; }
+    .final-price-title { font-size: 12px; color: #abb8c6; font-weight: 700; margin-bottom: 2px; }
+    .final-price { font-size: 34px; font-weight: 900; color: #3182f6; letter-spacing: -1px; }
+    .final-price span { font-size: 18px; color: #ffffff; }
+
+    /* 이미지 팝업 모달 */
+    .img-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 9999; justify-content: center; align-items: center; flex-direction: column; padding: 20px; box-sizing: border-box; }
+    .img-modal-content { width: 100%; max-width: 400px; background: white; border-radius: 20px; overflow: hidden; position: relative; }
     .img-modal-img { width: 100%; height: auto; display: block; }
     .img-modal-close { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.6); color: white; border: none; border-radius: 50%; width: 32px; height: 32px; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
   </style>
@@ -50,182 +70,223 @@
   <div class="app-container">
     <div class="header">
       <a href="main.html" class="back-btn">←</a>
-      <!-- 💎 로고 경로 완벽 수정 -->
       <a href="main.html">
         <img src="img/icon/logo.png" alt="COWAY" class="page-title-logo" onerror="this.outerHTML='<div style=\'font-size:20px;font-weight:900;color:#005bb5;\'>COWAY</div>'">
       </a>
     </div>
 
+    <!-- 탭 -->
+    <div class="cat-container">
+      <div class="cat-btn active"><span>🛏️</span><div>매트리스</div></div>
+      <div class="cat-btn"><span>🌬️</span><div>청정기</div></div>
+      <div class="cat-btn"><span>💆</span><div>안마의자</div></div>
+    </div>
+
+    <!-- 1. 제품 선택 영역 -->
     <div class="card">
       <div class="card-title">
-        <span class="material-symbols-rounded" style="color: #3182f6;">bed</span>
-        비렉스 프레임 견적
+        <span class="material-symbols-rounded" style="color: #3182f6;">add_shopping_cart</span>
+        렌탈 제품 담기
       </div>
       
-      <!-- 💎 프사 썸네일 & 정보 영역 -->
+      <!-- 💎 썸네일 & 모델 선택창이 나란히 배치됨 -->
       <div class="product-header">
-        <div class="thumb-area">
+        <div class="thumb-area" id="thumbArea">
           <div class="thumb-img-box" onclick="openImgModal()">
-            <img id="productThumb" src="" onerror="this.src='https://via.placeholder.com/150?text=No+Img'">
+            <img id="productThumb" src="" onerror="this.src='https://via.placeholder.com/150?text=이미지+준비중'">
             <span class="material-symbols-rounded zoom-icon">zoom_in</span>
           </div>
-          <!-- 색상 동그라미가 표시될 곳 -->
           <div class="swatch-container" id="swatchContainer"></div>
         </div>
 
-        <div class="product-info">
-          <div class="input-group" style="margin-bottom:0;">
-            <label>프레임 모델</label>
-            <select id="modelOpt" onchange="changeModel()">
-              <option value="루나프레임">루나프레임</option>
-              <option value="코지프레임">코지프레임</option>
-              <option value="컴포트프레임">컴포트프레임</option>
-            </select>
-          </div>
+        <div class="input-group" style="margin-bottom:0;">
+          <label>제품 모델</label>
+          <select id="modelOpt" onchange="changeModel()">
+            <option value="하이브리드4">하이브리드4 (매트리스)</option>
+            <option value="코지프레임">코지프레임 (프레임)</option>
+          </select>
         </div>
       </div>
 
       <div class="input-group">
         <label>사이즈</label>
-        <select id="sizeOpt" onchange="changeSize()"></select>
+        <select id="sizeOpt" onchange="changeSize()">
+          <option value="LK">LK 사이즈</option>
+          <option value="Q">Q 사이즈</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label>고객 구분</label>
+        <select id="userTypeOpt"><option value="신규">신규 렌탈</option><option value="재렌탈">재렌탈</option></select>
       </div>
 
       <button class="add-cart-btn" onclick="addToCart()">
-        <span class="material-symbols-rounded" style="font-size:20px;">add_shopping_cart</span> 견적함에 담기
+        <span class="material-symbols-rounded" style="font-size:20px;">check_circle</span> 견적함에 담기
       </button>
+    </div>
+
+    <!-- 2. 장바구니 영역 -->
+    <div class="card">
+      <div class="card-title">
+        <span class="material-symbols-rounded" style="color: #0ca678;">shopping_bag</span>
+        내 견적함 (<span id="cartCount">0</span>개)
+      </div>
+      <div class="cart-list" id="cartList">
+        <div style="font-size:12px; color:#8b95a1; text-align:center; padding:10px;">제품을 선택해 담아주세요.</div>
+      </div>
+    </div>
+
+    <!-- 3. 결과 카드 -->
+    <div class="result-card">
+      <div class="original-price" id="originalPrice">총 렌탈약정가 월 0원</div>
+      <div class="final-price-title">고객님 최종 월 납입금</div>
+      <div class="final-price" id="finalPrice">0 <span>원</span></div>
     </div>
   </div>
 
-  <!-- 💎 이미지 확대 팝업 -->
-  <div class="img-modal" id="imgModal" onclick="closeImgModal(event)">
+  <!-- 이미지 팝업 -->
+  <div class="img-modal" id="imgModal" onclick="closeImgModal()">
     <div class="img-modal-content" onclick="event.stopPropagation()">
-      <button class="img-modal-close" onclick="closeImgModal(event)">✕</button>
+      <button class="img-modal-close" onclick="closeImgModal()">✕</button>
       <img id="modalImg" class="img-modal-img" src="">
     </div>
   </div>
 
   <script>
-    // 💎 팀장님이 정리하신 파일명/사이즈/색상 규칙 데이터베이스!
-    const frameData = {
-      "루나프레임": {
-        folder: "img/calc/berexbed/frame/",
-        sizes: {
-          "LK": { 
-            colors: [ { name: "아이보리", code: "iv", colorHex: "#f5f5dc", img: "lktm14_iv.jpg" } ],
-            defaultColor: "iv" 
-          }
-        }
-      },
+    // 💎 이미지 연동 데이터 (사진이 없는 모델은 알아서 방어함)
+    const imageData = {
       "코지프레임": {
         folder: "img/calc/berexbed/frame/",
         sizes: {
           "LK": { 
             colors: [
-              { name: "아이보리", code: "iv", colorHex: "#f3ede3", img: "lktm13_iv.jpg" },
-              { name: "그레이", code: "gr", colorHex: "#9e9e9e", img: "lktm13_gr.jpg" },
-              { name: "베이지", code: "bg", colorHex: "#d7ccc8", img: "lktm13_bg.jpg" }
-            ],
-            defaultColor: "iv" 
+              { code: "iv", hex: "#f3ede3", img: "lktm13_iv.jpg" },
+              { code: "gr", hex: "#9e9e9e", img: "lktm13_gr.jpg" },
+              { code: "bg", hex: "#d7ccc8", img: "lktm13_bg.jpg" }
+            ]
           }
         }
       },
-      "컴포트프레임": {
-        folder: "img/calc/berexbed/frame/",
+      "하이브리드4": {
+        folder: "img/calc/berexbed/mattress/",
         sizes: {
-          "SS": { 
-            colors: [ { name: "베이지", code: "bg", colorHex: "#d7ccc8", img: "sscb01_bg.jpg" } ],
-            defaultColor: "bg" 
-          },
-          "Q": { 
-            colors: [ { name: "베이지", code: "bg", colorHex: "#d7ccc8", img: "qkcb01_bg.jpg" } ], // Q/K는 qkcb01 공통 이미지 사용
-            defaultColor: "bg" 
-          },
-          "K": { 
-            colors: [ { name: "베이지", code: "bg", colorHex: "#d7ccc8", img: "qkcb01_bg.jpg" } ],
-            defaultColor: "bg" 
-          }
+          "LK": { colors: [{ code: "none", hex: "#ffffff", img: "pr04.jpg" }] },
+          "Q": { colors: [{ code: "none", hex: "#ffffff", img: "pr04.jpg" }] }
         }
       }
     };
 
+    let cart = [];
     let currentModel = "";
     let currentSize = "";
     let currentColor = "";
-    let currentImgPath = "";
 
-    function init() {
-      changeModel(); // 초기 세팅
-    }
+    function init() { changeModel(); }
 
-    // 1. 모델 변경 시 -> 사이즈 옵션 업데이트
     function changeModel() {
       currentModel = document.getElementById("modelOpt").value;
-      const sizeSelect = document.getElementById("sizeOpt");
-      sizeSelect.innerHTML = ""; // 기존 사이즈 초기화
-
-      const availableSizes = Object.keys(frameData[currentModel].sizes);
-      
-      availableSizes.forEach(size => {
-        const option = document.createElement("option");
-        option.value = size;
-        option.text = size + " 사이즈";
-        sizeSelect.appendChild(option);
-      });
-
-      changeSize(); // 사이즈가 바뀌었으니 색상도 재세팅
+      changeSize();
     }
 
-    // 2. 사이즈 변경 시 -> 색상 동그라미 스와치 업데이트
     function changeSize() {
       currentSize = document.getElementById("sizeOpt").value;
-      const sizeData = frameData[currentModel].sizes[currentSize];
+      const modelImgData = imageData[currentModel];
+
+      // 💎 데이터에 사진이 없으면 썸네일 박스를 아예 숨겨서 에러 방지!
+      if (!modelImgData || !modelImgData.sizes[currentSize]) {
+        document.getElementById("thumbArea").style.display = "none";
+        return;
+      }
       
-      currentColor = sizeData.defaultColor; // 기본 색상으로 세팅
-      renderSwatches(sizeData.colors);
+      document.getElementById("thumbArea").style.display = "flex";
+      const colors = modelImgData.sizes[currentSize].colors;
+      currentColor = colors[0].code; // 첫번째 색상 기본 선택
+      
+      renderSwatches(colors);
       updateImage();
     }
 
-    // 3. 색상 스와치(동그라미) 그리기
     function renderSwatches(colors) {
       const container = document.getElementById("swatchContainer");
       container.innerHTML = "";
-
-      // 색상이 1개뿐이면 굳이 동그라미를 안 보여줘도 깔끔함
-      if (colors.length <= 1) return;
+      if (colors.length <= 1) return; // 색상이 1개면 동그라미 안 그림
 
       colors.forEach(c => {
         const div = document.createElement("div");
         div.className = "color-swatch";
-        div.style.backgroundColor = c.colorHex;
+        div.style.backgroundColor = c.hex;
         if (c.code === currentColor) div.classList.add("active");
         
         div.onclick = () => {
           currentColor = c.code;
-          renderSwatches(colors); // active 효과 재랜더링
-          updateImage(); // 사진 변경
+          renderSwatches(colors);
+          updateImage();
         };
         container.appendChild(div);
       });
     }
 
-    // 4. 사진 업데이트
     function updateImage() {
-      const folder = frameData[currentModel].folder;
-      const sizeData = frameData[currentModel].sizes[currentSize];
-      const colorInfo = sizeData.colors.find(c => c.code === currentColor);
+      const colors = imageData[currentModel].sizes[currentSize].colors;
+      const colorInfo = colors.find(c => c.code === currentColor);
+      const imgPath = imageData[currentModel].folder + colorInfo.img;
       
-      currentImgPath = folder + colorInfo.img; // 예: img/calc/berexbed/frame/lktm13_iv.jpg
-      
-      document.getElementById("productThumb").src = currentImgPath;
-      document.getElementById("modalImg").src = currentImgPath;
+      document.getElementById("productThumb").src = imgPath;
+      document.getElementById("modalImg").src = imgPath;
     }
 
-    // 팝업 컨트롤
-    function openImgModal() {
-      document.getElementById("imgModal").style.display = "flex";
+    function openImgModal() { document.getElementById("imgModal").style.display = "flex"; }
+    function closeImgModal() { document.getElementById("imgModal").style.display = "none"; }
+
+    // --- 장바구니 로직 (임시 렌탈료) ---
+    function addToCart() {
+      const uType = document.getElementById('userTypeOpt').value;
+      const model = document.getElementById('modelOpt').value;
+      
+      // 월요일에 요금표 오기 전까지 쓰는 임시 가격
+      const basePrice = (model === '코지프레임') ? 25000 : 45000;
+      
+      cart.push({ id: Date.now(), uType, model, basePrice });
+      updateCartUI();
     }
-    function closeImgModal(e) {
-      document.getElementById("imgModal").style.display = "none";
+
+    function removeFromCart(id) {
+      cart = cart.filter(item => item.id !== id);
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      document.getElementById('cartCount').innerText = cart.length;
+      const listDiv = document.getElementById('cartList');
+      
+      if (cart.length === 0) {
+        listDiv.innerHTML = '<div style="font-size:12px; color:#8b95a1; text-align:center; padding:10px;">제품을 선택해 담아주세요.</div>';
+        document.getElementById('originalPrice').innerText = `총 렌탈약정가 월 0원`;
+        document.getElementById('finalPrice').innerHTML = `0 <span>원</span>`;
+        return;
+      }
+
+      listDiv.innerHTML = '';
+      let totalBase = 0;
+      cart.forEach((item) => {
+        totalBase += item.basePrice;
+        listDiv.innerHTML += `
+          <div class="cart-item">
+            <div class="cart-item-info">
+              <div class="cart-item-title">${item.model}</div>
+              <div class="cart-item-sub">[${item.uType}]</div>
+            </div>
+            <div class="cart-item-price">${item.basePrice.toLocaleString()}원</div>
+            <button class="cart-del-btn" onclick="removeFromCart(${item.id})">
+              <span class="material-symbols-rounded" style="font-size:18px;">close</span>
+            </button>
+          </div>
+        `;
+      });
+      
+      document.getElementById('originalPrice').innerText = `총 렌탈약정가 월 ${totalBase.toLocaleString()}원`;
+      document.getElementById('finalPrice').innerHTML = `${totalBase.toLocaleString()} <span>원</span>`;
     }
 
     window.onload = init;
