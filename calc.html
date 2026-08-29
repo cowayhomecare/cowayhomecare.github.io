@@ -29,36 +29,33 @@
     .input-group { margin-bottom: 14px; }
     .input-group label { display: block; font-size: 11.5px; color: #8b95a1; margin-bottom: 4px; font-weight: 700; }
     select { width: 100%; padding: 12px 14px; border: 1px solid #e4e7ec; background-color: #f9fafb; border-radius: 12px; font-size: 14px; font-weight: 700; color: #191f28; box-sizing: border-box; outline: none; transition: 0.2s; appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b95a1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 14px center; background-size: 14px; }
+    select:focus { border-color: #3182f6; background-color: #ffffff; }
 
     .calc-btn { width: 100%; padding: 16px; background: #3182f6; color: white; border: none; border-radius: 14px; font-size: 15px; font-weight: 800; cursor: pointer; transition: 0.2s; margin-top: 6px; }
     .calc-btn:active { background: #1b64da; transform: scale(0.98); }
     
-    /* 영수증 결과 카드 */
     .result-card { background: #191f28; color: white; border-radius: 20px; padding: 22px; text-align: center; box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
     .result-badge { display: inline-block; background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 20px; font-size: 11px; color: #90c2ff; font-weight: 700; margin-bottom: 8px; }
     .original-price { font-size: 13px; color: #8b95a1; text-decoration: line-through; font-weight: 600; margin-bottom: 2px; }
     .final-price-title { font-size: 12px; color: #abb8c6; font-weight: 700; margin-bottom: 2px; }
     .final-price { font-size: 32px; font-weight: 900; color: #3182f6; letter-spacing: -1px; }
     .final-price span { font-size: 18px; color: #ffffff; }
-    
-    /* 💎 고객 전달용 상세 내역 보기 버튼 */
+    .discount-tag { display: inline-flex; align-items: center; gap: 4px; margin-top: 10px; background: #f04452; color: white; padding: 6px 12px; border-radius: 10px; font-size: 12px; font-weight: 800; }
+
+    /* 💎 세부 내역 보기 버튼 수정 */
     .detail-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px; margin-top: 14px; background: rgba(255,255,255,0.15); color: #ffffff; padding: 10px 18px; border-radius: 12px; font-size: 13px; font-weight: 800; border: none; cursor: pointer; transition: 0.2s; width: 100%; }
     .detail-btn:active { background: rgba(255,255,255,0.25); }
 
-    /* 💎 영수증 팝업 모달 스타일 */
+    /* 팝업 모달 */
     .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 9999; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; }
     .receipt-modal { background: white; width: 100%; max-width: 380px; border-radius: 24px; padding: 28px 24px; color: #191f28; box-shadow: 0 10px 30px rgba(0,0,0,0.3); position: relative; animation: popUp 0.3s ease; }
-    
     @keyframes popUp { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-
     .receipt-header { text-align: center; border-bottom: 2px dashed #e4e7ec; padding-bottom: 16px; margin-bottom: 16px; }
     .receipt-title { font-size: 18px; font-weight: 900; color: #005bb5; }
     .receipt-sub { font-size: 12px; color: #8b95a1; margin-top: 4px; font-weight: 600; }
-
     .receipt-row { display: flex; justify-content: space-between; font-size: 13.5px; font-weight: 700; margin-bottom: 10px; color: #4e5968; }
     .receipt-row.minus { color: #f04452; }
     .receipt-row.total { border-top: 2px solid #191f28; padding-top: 14px; margin-top: 14px; font-size: 18px; font-weight: 900; color: #191f28; }
-
     .close-modal-btn { width: 100%; padding: 14px; background: #191f28; color: white; border: none; border-radius: 14px; font-size: 14px; font-weight: 800; cursor: pointer; margin-top: 20px; }
   </style>
 </head>
@@ -72,28 +69,12 @@
       </a>
     </div>
 
-    <!-- 5칸 카테고리 탭 -->
     <div class="cat-container">
-      <div class="cat-btn active" onclick="selectCat(this)">
-        <span>🛏️</span>
-        <div>매트리스</div>
-      </div>
-      <div class="cat-btn" onclick="selectCat(this, '공기청정기 준비중')">
-        <span>🌬️</span>
-        <div>청정기</div>
-      </div>
-      <div class="cat-btn" onclick="selectCat(this, '안마의자 준비중')">
-        <span>💆</span>
-        <div>안마의자</div>
-      </div>
-      <div class="cat-btn" onclick="selectCat(this, '임시 카테고리')">
-        <span>⚙️</span>
-        <div>임시</div>
-      </div>
-      <div class="cat-btn" onclick="selectCat(this, 'ETC 카테고리')">
-        <span>📦</span>
-        <div>ETC</div>
-      </div>
+      <div class="cat-btn active" onclick="selectCat(this)"><span>🛏️</span><div>매트리스</div></div>
+      <div class="cat-btn" onclick="selectCat(this, '공기청정기 준비중')"><span>🌬️</span><div>청정기</div></div>
+      <div class="cat-btn" onclick="selectCat(this, '안마의자 준비중')"><span>💆</span><div>안마의자</div></div>
+      <div class="cat-btn" onclick="selectCat(this, '임시 카테고리')"><span>⚙️</span><div>임시</div></div>
+      <div class="cat-btn" onclick="selectCat(this, 'ETC 카테고리')"><span>📦</span><div>ETC</div></div>
     </div>
 
     <div class="card" id="calculatorCard">
@@ -102,7 +83,6 @@
         매트리스 렌탈 옵션 산출
       </div>
       
-      <!-- 1. 고객 구분 -->
       <div class="input-group">
         <label>고객 구분</label>
         <select id="userTypeOpt" onchange="calculateRealPrice()">
@@ -111,7 +91,6 @@
         </select>
       </div>
 
-      <!-- 2. 매트리스 모델 -->
       <div class="input-group">
         <label>매트리스 모델</label>
         <select id="modelOpt" onchange="calculateRealPrice()">
@@ -122,7 +101,6 @@
         </select>
       </div>
 
-      <!-- 3. 사이즈 -->
       <div class="input-group">
         <label>사이즈</label>
         <select id="sizeOpt" onchange="calculateRealPrice()">
@@ -133,7 +111,6 @@
         </select>
       </div>
 
-      <!-- 4. 약정 기간 -->
       <div class="input-group">
         <label>의무 약정 기간</label>
         <select id="periodOpt" onchange="calculateRealPrice()">
@@ -143,7 +120,6 @@
         </select>
       </div>
 
-      <!-- 5. 관리 방식 -->
       <div class="input-group">
         <label>케어 서비스 방문 방식</label>
         <select id="careOpt" onchange="calculateRealPrice()">
@@ -154,24 +130,25 @@
         </select>
       </div>
 
-      <!-- 6. 프로모션 -->
+      <!-- 💎 프로모션 추가 (5%, 10%, 15% 반영) -->
       <div class="input-group">
-        <label>🎁 프로모션 할인 선택</label>
+        <label>🎁 프로모션 / 다기기 할인 (1대 시뮬레이션용)</label>
         <select id="promoOpt" onchange="calculateRealPrice()">
-          <option value="0" selected>적용 없음 (기본 정상가)</option>
-          <option value="0.1">🎁 이달의 신제품 프로모션 (10% 할인)</option>
-          <option value="3000">🎁 타사 보상판매 추가 할인 (-3,000원)</option>
+          <option value="0" selected>적용 없음 (단품 정상가)</option>
+          <option value="0.05">🤝 기존 고객 결합 할인 (5% 할인)</option>
+          <option value="0.10">📦 2대 이상 동시구매 (10% 할인)</option>
+          <option value="0.15">🎁 패키지 프로모션 (15% 할인)</option>
         </select>
       </div>
 
-      <!-- 7. 제휴카드 할인 -->
+      <!-- 💎 제휴카드 '미적용'을 기본으로 설정 -->
       <div class="input-group" style="margin-top:18px;">
         <label>💳 제휴카드 청구 할인 선택</label>
         <select id="cardDiscount" onchange="calculateRealPrice()">
-          <option value="0">미적용 (기본 렌탈료)</option>
+          <option value="0" selected>미적용 (0원)</option>
           <option value="13000">전월 30만원 실적 (-13,000원)</option>
           <option value="17000">전월 70/80만원 실적 (-17,000원)</option>
-          <option value="24000" selected>🔥 신규카드 최고혜택 (-24,000원)</option>
+          <option value="24000">🔥 신규카드 최고혜택 (-24,000원)</option>
           <option value="30000">🔥 신규카드 최대혜택 (-30,000원)</option>
         </select>
       </div>
@@ -181,52 +158,53 @@
 
     <!-- 결과 하이라이트 카드 -->
     <div class="result-card">
-      <div class="result-badge" id="resultModelBadge">하이브리드4 (LK) 9년 토탈케어 [신규]</div>
-      <div class="original-price" id="originalPrice">렌탈약정가 월 43,100원</div>
+      <div class="result-badge" id="resultModelBadge">-</div>
+      <div class="original-price" id="originalPrice">렌탈약정가 월 -원</div>
       <div class="final-price-title">고객님 최종 월 납입금</div>
-      <div class="final-price" id="finalPrice">19,100 <span>원</span></div>
+      <div class="final-price" id="finalPrice">0 <span>원</span></div>
+      <div class="discount-tag" id="discountTag" style="display:none;"></div>
       
-      <!-- 💎 클릭 시 세부 내역 영수증 팝업 오픈 -->
+      <!-- 💎 버튼 문구 수정 완료 -->
       <button class="detail-btn" onclick="openReceiptModal()">
         <span class="material-symbols-rounded">receipt_long</span>
-        고객 안내용 세부 영수증 보기
+        맞춤 견적 상세 내역 보기
       </button>
     </div>
 
   </div>
 
-  <!-- 💎 팝업 영수증 모달 -->
+  <!-- 팝업 영수증 모달 -->
   <div class="modal-overlay" id="receiptModal">
     <div class="receipt-modal">
       <div class="receipt-header">
-        <div class="receipt-title">COWAY 견적 리포트</div>
-        <div class="receipt-sub" id="recDate">2026.08.29 견적 산출 기준</div>
+        <div class="receipt-title">COWAY 맞춤 견적 리포트</div>
+        <div class="receipt-sub" id="recDate">실시간 견적 산출 완료</div>
       </div>
 
       <div class="receipt-row">
         <span>선택 제품</span>
-        <span id="recModel" style="color:#191f28;">하이브리드4 (LK)</span>
+        <span id="recModel" style="color:#191f28;">-</span>
       </div>
       <div class="receipt-row">
         <span>약정 / 서비스</span>
-        <span id="recOption">9년 / 토탈케어</span>
+        <span id="recOption">-</span>
       </div>
       <div class="receipt-row" style="margin-top:12px; border-top:1px solid #f1f3f5; padding-top:10px;">
         <span>기본 렌탈약정가</span>
-        <span id="recBasePrice">월 43,100원</span>
+        <span id="recBasePrice">월 0원</span>
       </div>
       <div class="receipt-row minus">
-        <span>🎁 프로모션 할인</span>
+        <span>🎁 프로모션/결합 할인</span>
         <span id="recPromoDiscount">-0원</span>
       </div>
       <div class="receipt-row minus">
         <span>💳 제휴카드 할인</span>
-        <span id="recCardDiscount">-24,000원</span>
+        <span id="recCardDiscount">-0원</span>
       </div>
 
       <div class="receipt-row total">
         <span>최종 월 납입금</span>
-        <span id="recFinalPrice" style="color:#005bb5;">월 19,100원</span>
+        <span id="recFinalPrice" style="color:#005bb5;">월 0원</span>
       </div>
 
       <button class="close-modal-btn" onclick="closeReceiptModal()">확인 (닫기)</button>
@@ -267,7 +245,7 @@
     function selectCat(element, msg) {
       document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
       element.classList.add('active');
-      if(msg) alert(`${msg} 입니다.\n월요일 전체 요금표 업데이트 예정!`);
+      if(msg) alert(`${msg} 입니다.\n월요일 다기기 장바구니 기능 업데이트 예정!`);
     }
 
     function calculateRealPrice() {
@@ -290,18 +268,26 @@
         let finalPrice = basePrice - promoDiscount - cardDiscount;
         if(finalPrice < 0) finalPrice = 0;
 
-        // 글로벌 변수에 저장 (팝업 모달용)
+        const totalSavings = promoDiscount + cardDiscount;
+
         curData = { model, size, period, care, uType, basePrice, promoDiscount, cardDiscount, finalPrice };
 
         document.getElementById('resultModelBadge').innerText = `${model} (${size}) ${period} ${care} [${uType}]`;
         document.getElementById('originalPrice').innerText = `렌탈약정가 월 ${basePrice.toLocaleString()}원`;
         document.getElementById('finalPrice').innerHTML = `${finalPrice.toLocaleString()} <span>원</span>`;
+        
+        const tagBox = document.getElementById('discountTag');
+        if(totalSavings > 0) {
+          tagBox.style.display = "inline-flex";
+          tagBox.innerHTML = `<span class="material-symbols-rounded" style="font-size:16px;">verified</span> 월 ${totalSavings.toLocaleString()}원 할인 혜택 적용!`;
+        } else {
+          tagBox.style.display = "none";
+        }
       } catch(e) {
-        document.getElementById('finalPrice').innerHTML = `요금 계산 중...`;
+        document.getElementById('finalPrice').innerHTML = `계산 중...`;
       }
     }
 
-    // 💎 영수증 모달 오픈
     function openReceiptModal() {
       document.getElementById('recModel').innerText = `${curData.model} (${curData.size})`;
       document.getElementById('recOption').innerText = `${curData.period} / ${curData.care} [${curData.uType}]`;
