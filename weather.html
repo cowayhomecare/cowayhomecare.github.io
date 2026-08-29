@@ -32,15 +32,15 @@
     .who .box-status { color: #dc2626; }
     .box-value { font-size: 11px; color: #888; }
 
-    /* 경고 박스 */
-    .warning-box { background-color: #fff5f5; border-radius: 12px; padding: 12px 16px; border-left: 4px solid #ef4444; }
-    .warning-text { font-size: 13px; font-weight: 700; color: #b91c1c; line-height: 1.5; margin: 0; }
+    /* 동적 경고 박스 (상태에 따라 색상/문구 변경) */
+    .dynamic-warning-box { border-radius: 12px; padding: 16px; border-left: 4px solid #ccc; background-color: #f9f9f9; }
+    .dynamic-warning-text { font-size: 13.5px; font-weight: 700; line-height: 1.5; margin: 0; color: #333; }
 
     /* 습도 영역 */
     .humidity-value { font-size: 36px; font-weight: 900; color: #0ea5e9; text-align: center; margin-bottom: 12px; }
-    .humidity-warning { background-color: #eff6ff; border-radius: 12px; padding: 12px 16px; border-left: 4px solid #3b82f6; }
-    .humidity-warning p { font-size: 13px; font-weight: 700; color: #1d4ed8; line-height: 1.5; margin: 0; }
-    .official-link { display: block; text-align: center; margin-top: 24px; font-size: 12px; font-weight: 600; color: #888; text-decoration: underline; text-underline-offset: 4px; }
+
+    /* 네이버 다이렉트 버튼 */
+    .naver-btn { display: block; width: 100%; background-color: #03c75a; color: white; text-align: center; text-decoration: none; padding: 16px; border-radius: 16px; font-size: 15px; font-weight: 800; margin-top: 24px; box-shadow: 0 4px 12px rgba(3, 199, 90, 0.2); }
   </style>
 </head>
 <body>
@@ -52,7 +52,7 @@
   </div>
 
   <div class="content-wrapper">
-    <div class="location-card" id="locationCard" onclick="getLocation()">
+    <div class="location-card" id="locationCard">
       <span class="location-icon">📍</span>
       <span class="location-text" id="locationText">위치 탐색 중...</span>
     </div>
@@ -71,77 +71,87 @@
           <div class="box-value pm-value">-- ㎍/㎥</div>
         </div>
       </div>
-      <div class="warning-box">
-        <p class="warning-text">⚠️ 고객님, 네이버 날씨 보고 환기하셨죠?<br>우리나라 기준으론 '보통'이지만, 선진국 WHO 기준으로는 환기 불가 수준입니다.<br>이 먼지가 다 매트리스로 가라앉습니다.</p>
+      <!-- 미세미세 동적 멘트 영역 -->
+      <div class="dynamic-warning-box" id="dustWarningBox">
+        <p class="dynamic-warning-text" id="dustWarningText">데이터를 분석하고 있습니다...</p>
       </div>
     </div>
 
     <div class="fact-card">
       <div class="card-title"><span>💧</span>실내 습도 경고</div>
       <div class="humidity-value" id="humidityText">현재 --%</div>
-      <div class="humidity-warning">
-        <p>⚠️ 비상! 집먼지진드기 번식 위험 구간!<br>습도 60% 이상 시 진드기 번식률이 평소의 5배로 폭증합니다. 매트리스 딥 클리닝이 시급합니다.</p>
+      <!-- 습도 동적 멘트 영역 -->
+      <div class="dynamic-warning-box" id="humWarningBox">
+        <p class="dynamic-warning-text" id="humWarningText">데이터를 분석하고 있습니다...</p>
       </div>
     </div>
 
-    <a href="https://www.airkorea.or.kr" target="_blank" class="official-link">자세히 보기 (환경부 에어코리아 실시간 데이터)</a>
+    <!-- 네이버 날씨 연동 버튼 -->
+    <a href="#" target="_blank" class="naver-btn" id="naverLink">네이버 날씨 공식 데이터 확인하기</a>
   </div>
 
   <script>
-    // 형님이 캐오신 API 무기고
     const KAKAO_KEY = "07adc21fce7961141670d19411cdeebd";
     const WEATHER_KEY = "35847ad064da378714ab9a787830e7f2";
     const AIR_KEY = "yQjFNB%2FZCz9Sy3dysD19JBOTgQSCT%2Fb3algDDmoHWeXsnz43EEkXV7ncbbOnZoko7lYKQbwYBrokiL3NezX4vQ%3D%3D";
+    let currentGuName = "김해시";
 
-    // 1. 앱 켜자마자 GPS 위치 가져오기
+    // 1. 형님이 찾아오신 0.1초 쾌속 로딩 옵션 장착 완료!
+    const geoOptions = {
+      enableHighAccuracy: false, // 배터리 아끼고 빠르게
+      timeout: 5000,             // 5초 넘으면 포기하고 김해시로 폴백
+      maximumAge: 60000          // 1분 내 캐시 사용
+    };
+
     function getLocation() {
-      document.getElementById("locationText").innerText = "위치 탐색 및 데이터 분석 중...";
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (position) => { fetchAllData(position.coords.latitude, position.coords.longitude); },
-          (error) => { fetchAllData(35.2285, 128.8894); } // 위치 거부 시 '김해시' 좌표로 강제 실행
+          (error) => { fetchAllData(35.2285, 128.8894); }, // 거부하거나 실패 시 김해시 좌표
+          geoOptions
         );
       } else {
         fetchAllData(35.2285, 128.8894);
       }
     }
 
-    // 2. 3대장 API 융단폭격 함수
     async function fetchAllData(lat, lon) {
       try {
-        // [작전 1] 카카오: 좌표를 동네 이름으로 번역
+        // [카카오 위치 번역]
         const regionRes = await fetch(`https://dapi.kakao.com/v2/local/geo/coord2regioncode.json?x=${lon}&y=${lat}`, {
           headers: { 'Authorization': `KakaoAK ${KAKAO_KEY}` }
         });
         const regionData = await regionRes.json();
-        let guName = "김해시";
         if(regionData.documents && regionData.documents.length > 0) {
-          guName = regionData.documents[0].region_2depth_name; // 구/시 단위 추출
+          currentGuName = regionData.documents[0].region_2depth_name; 
         }
-        document.getElementById('locationText').innerText = `${guName} 실시간 케어 리포트`;
+        document.getElementById('locationText').innerText = `${currentGuName} 실시간 케어 리포트`;
+        
+        // 네이버 링크 다이렉트 세팅
+        document.getElementById('naverLink').href = `https://search.naver.com/search.naver?query=${encodeURIComponent(currentGuName + ' 미세먼지')}`;
 
-        // [작전 2] 오픈웨더: 실시간 습도 추출
+        // [습도 추출]
         const weatherRes = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_KEY}`);
         const weatherData = await weatherRes.json();
-        document.getElementById('humidityText').innerText = `현재 ${weatherData.main.humidity}%`;
+        const humidity = weatherData.main.humidity;
+        document.getElementById('humidityText').innerText = `현재 ${humidity}%`;
+        updateHumidityUI(humidity);
 
-        // [작전 3] 에어코리아 미세먼지 추출 (정부 API -> 실패 시 오픈웨더 API로 자동 대체되는 무적 방어코드)
+        // [미세먼지 추출]
         let pm25 = 0;
         try {
-          // 카카오 좌표변환 (WGS84 -> TM)
           const tmRes = await fetch(`https://dapi.kakao.com/v2/local/geo/transcoord.json?x=${lon}&y=${lat}&input_coord=WGS84&output_coord=TM`, { headers: { 'Authorization': `KakaoAK ${KAKAO_KEY}` }});
           const tmData = await tmRes.json();
-          // 에어코리아 인근 측정소 찾기
           const stationRes = await fetch(`https://apis.data.go.kr/B552584/MsrstnInfoInqireSvc/getNearbyMsrstnList?tmX=${tmData.documents[0].x}&tmY=${tmData.documents[0].y}&returnType=json&serviceKey=${AIR_KEY}`);
           const stationData = await stationRes.json();
           const stationName = stationData.response.body.items[0].stationName;
-          // 에어코리아 미세먼지 수치 요청
+          
           const dustRes = await fetch(`https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?stationName=${encodeURIComponent(stationName)}&dataTerm=DAILY&pageNo=1&numOfRows=1&returnType=json&ver=1.0&serviceKey=${AIR_KEY}`);
           const dustData = await dustRes.json();
           pm25 = dustData.response.body.items[0].pm25Value;
-          if(!pm25 || pm25 === '-') throw new Error("Data empty"); // 데이터 없으면 예외처리로 던짐
+          if(!pm25 || pm25 === '-') throw new Error("데이터 없음"); 
         } catch(e) {
-          // 정부 서버 뻗었을 때 1초 만에 오픈웨더 위성 데이터로 가로채기 (고객은 모름)
+          // 정부 API 뻗으면 오픈웨더 백업으로 자동 전환
           const backupRes = await fetch(`https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${WEATHER_KEY}`);
           const backupData = await backupRes.json();
           pm25 = backupData.list[0].components.pm2_5;
@@ -150,31 +160,56 @@
         updateDustUI(Math.round(pm25));
 
       } catch (error) {
-        document.getElementById('locationText').innerText = `김해시 실시간 케어 리포트 (데이터 연결중)`;
+        document.getElementById('locationText').innerText = `데이터 연결 실패 (새로고침 요망)`;
       }
     }
 
-    // 3. 한국 기준 vs WHO 기준 팩트 폭격 UI 업데이트
+    // 미세미세 감성 팩폭 멘트 UI 업데이트 로직
     function updateDustUI(pm25) {
       document.querySelectorAll('.pm-value').forEach(el => el.innerText = `${pm25} ㎍/㎥`);
 
-      // 한국 기준 (15이하 좋음, 35이하 보통, 75이하 나쁨)
-      let korStatus = "보통 🟢"; let korColor = "#16a34a";
-      if(pm25 <= 15) { korStatus = "좋음 🔵"; korColor = "#2563eb"; }
-      else if(pm25 <= 35) { korStatus = "보통 🟢"; korColor = "#16a34a"; }
-      else { korStatus = "나쁨 🔴"; korColor = "#dc2626"; }
-      
       const korBox = document.getElementById('korStatus');
-      korBox.innerText = korStatus; korBox.style.color = korColor;
-
-      // WHO 국제 기준 (5이하 좋음, 15이하 보통, 초과시 무조건 나쁨) - 공포 마케팅 핵심
-      let whoStatus = "나쁨 🔴"; let whoColor = "#dc2626";
-      if(pm25 <= 5) { whoStatus = "좋음 🔵"; whoColor = "#2563eb"; }
-      else if(pm25 <= 15) { whoStatus = "보통 🟢"; whoColor = "#16a34a"; }
-      else { whoStatus = "나쁨 🔴"; whoColor = "#dc2626"; }
-
+      if(pm25 <= 15) { korBox.innerText = "좋음 🔵"; korBox.style.color = "#2563eb"; }
+      else if(pm25 <= 35) { korBox.innerText = "보통 🟢"; korBox.style.color = "#16a34a"; }
+      else { korBox.innerText = "나쁨 🔴"; korBox.style.color = "#dc2626"; }
+      
       const whoBox = document.getElementById('whoStatus');
-      whoBox.innerText = whoStatus; whoBox.style.color = whoColor;
+      const warningBox = document.getElementById('dustWarningBox');
+      const warningText = document.getElementById('dustWarningText');
+
+      if(pm25 <= 15) { 
+        whoBox.innerText = "좋음 🔵"; whoBox.style.color = "#2563eb"; 
+        // 공기 좋을 때 (스마일)
+        warningBox.style.backgroundColor = "#f0fdf4";
+        warningBox.style.borderLeftColor = "#16a34a";
+        warningText.style.color = "#166534";
+        warningText.innerHTML = "😊 현재 공기질은 양호합니다! 환기하셔도 좋습니다.<br>(단, 매트리스 속 묵은 먼지는 코웨이 딥 케어가 필수입니다.)";
+      } else { 
+        whoBox.innerText = "나쁨 🔴"; whoBox.style.color = "#dc2626"; 
+        // 공기 나쁠 때 (방독면 팩폭)
+        warningBox.style.backgroundColor = "#fff5f5";
+        warningBox.style.borderLeftColor = "#ef4444";
+        warningText.style.color = "#b91c1c";
+        warningText.innerHTML = "😡 비상! WHO 기준 환기 절대 불가 수준입니다.<br>이 초미세먼지가 다 매트리스로 가라앉습니다. 실내 공기청정기 가동이 시급합니다.";
+      }
+    }
+
+    // 습도 팩폭 멘트 UI 업데이트 로직
+    function updateHumidityUI(humidity) {
+      const warningBox = document.getElementById('humWarningBox');
+      const warningText = document.getElementById('humWarningText');
+
+      if(humidity < 60) {
+        warningBox.style.backgroundColor = "#f0fdf4";
+        warningBox.style.borderLeftColor = "#16a34a";
+        warningText.style.color = "#166534";
+        warningText.innerHTML = "💧 현재 실내 습도는 쾌적한 수준입니다.<br>뽀송뽀송한 매트리스 컨디션을 유지하세요!";
+      } else {
+        warningBox.style.backgroundColor = "#eff6ff";
+        warningBox.style.borderLeftColor = "#3b82f6";
+        warningText.style.color = "#1d4ed8";
+        warningText.innerHTML = "🦠 비상! 집먼지진드기 번식 위험 구간!<br>습도 60% 이상 시 진드기 번식률이 평소의 5배로 폭증합니다. 매트리스 딥 클리닝이 시급합니다.";
+      }
     }
 
     window.onload = function() { getLocation(); }
