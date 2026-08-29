@@ -16,6 +16,7 @@
     .back-btn { font-size: 24px; text-decoration: none; color: #333; position: absolute; left: 0; font-weight: bold; padding: 10px; }
     .page-title-logo { height: 26px; object-fit: contain; }
 
+    /* 💎 5칸 탭 완벽 복구 */
     .cat-container { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; margin-bottom: 16px; }
     .cat-btn { background: white; border-radius: 14px; padding: 10px 2px; text-align: center; cursor: pointer; border: 2px solid transparent; box-shadow: 0 2px 6px rgba(0,0,0,0.02); transition: 0.2s; }
     .cat-btn.active { border-color: #3182f6; background: #e8f3ff; }
@@ -26,17 +27,16 @@
     .card { background: #ffffff; padding: 20px; border-radius: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.02); margin-bottom: 16px; }
     .card-title { font-size: 15px; font-weight: 800; color: #191f28; margin-bottom: 16px; display: flex; align-items: center; gap: 6px; }
     
-    /* 프사 썸네일 */
+    /* 프사 썸네일 & 작아진 스와치 */
     .product-header { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 16px; }
     .thumb-area { width: 64px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
     .thumb-img-box { width: 64px; height: 64px; border-radius: 14px; border: 1px solid #e4e7ec; overflow: hidden; cursor: pointer; background: #f9fafb; display: flex; justify-content: center; align-items: center; position: relative; }
     .thumb-img-box img { width: 100%; height: 100%; object-fit: cover; }
-    
     .swatch-container { display: flex; gap: 4px; justify-content: center; flex-wrap: wrap; }
     .color-swatch { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.1); cursor: pointer; transition: 0.2s; }
     .color-swatch.active { border: 2px solid #3182f6; transform: scale(1.2); }
 
-    /* 입력폼 (새로 추가된 옵션들) */
+    /* 폼 레이아웃 */
     .input-row { display: flex; gap: 8px; margin-bottom: 14px; }
     .input-group { flex: 1; }
     .input-group label { display: block; font-size: 11.5px; color: #8b95a1; margin-bottom: 4px; font-weight: 700; }
@@ -58,13 +58,25 @@
     .cart-item-price { font-size: 14px; font-weight: 800; color: #3182f6; }
     .cart-del-btn { background: none; border: none; color: #f04452; padding: 4px; cursor: pointer; display: flex; align-items: center; margin-left: 8px; }
 
-    /* 결과 카드 */
+    /* 결과 카드 & 영수증 상세버튼 완벽 복구! */
     .result-card { background: #191f28; color: white; border-radius: 20px; padding: 22px; text-align: center; box-shadow: 0 8px 20px rgba(0,0,0,0.15); margin-top: 10px; }
     .original-price { font-size: 13px; color: #8b95a1; text-decoration: line-through; font-weight: 600; margin-bottom: 2px; }
     .final-price-title { font-size: 12px; color: #abb8c6; font-weight: 700; margin-bottom: 2px; }
     .final-price { font-size: 34px; font-weight: 900; color: #3182f6; letter-spacing: -1px; }
     .final-price span { font-size: 18px; color: #ffffff; }
     .discount-tag { display: inline-flex; align-items: center; gap: 4px; margin-top: 10px; background: #f04452; color: white; padding: 6px 12px; border-radius: 10px; font-size: 12px; font-weight: 800; }
+    .detail-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px; margin-top: 14px; background: rgba(255,255,255,0.15); color: #ffffff; padding: 10px 18px; border-radius: 12px; font-size: 13px; font-weight: 800; border: none; cursor: pointer; width: 100%; }
+
+    /* 영수증 모달 */
+    .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 9998; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; }
+    .receipt-modal { background: white; width: 100%; max-width: 380px; border-radius: 24px; padding: 24px; color: #191f28; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+    .receipt-header { text-align: center; border-bottom: 2px dashed #e4e7ec; padding-bottom: 14px; margin-bottom: 14px; }
+    .receipt-title { font-size: 18px; font-weight: 900; color: #005bb5; }
+    .rec-item-list { max-height: 120px; overflow-y: auto; margin-bottom: 14px; }
+    .rec-item-row { display: flex; justify-content: space-between; font-size: 12px; color: #4e5968; margin-bottom: 6px; font-weight: 600; }
+    .receipt-row { display: flex; justify-content: space-between; font-size: 13.5px; font-weight: 700; margin-bottom: 10px; color: #4e5968; }
+    .receipt-row.total { border-top: 2px solid #191f28; padding-top: 14px; margin-top: 14px; font-size: 18px; font-weight: 900; color: #191f28; }
+    .close-modal-btn { width: 100%; padding: 14px; background: #191f28; color: white; border: none; border-radius: 14px; font-size: 14px; font-weight: 800; cursor: pointer; margin-top: 20px; }
   </style>
 </head>
 <body>
@@ -74,10 +86,13 @@
       <a href="main.html"><img src="img/icon/logo.png" alt="COWAY" class="page-title-logo"></a>
     </div>
 
+    <!-- 💎 5칸 탭 복구! -->
     <div class="cat-container">
       <div class="cat-btn active"><span>🛏️</span><div>매트리스</div></div>
       <div class="cat-btn"><span>🌬️</span><div>청정기</div></div>
       <div class="cat-btn"><span>💆</span><div>안마의자</div></div>
+      <div class="cat-btn"><span>⚙️</span><div>임시</div></div>
+      <div class="cat-btn"><span>📦</span><div>ETC</div></div>
     </div>
 
     <!-- 1. 제품 선택 영역 -->
@@ -93,8 +108,9 @@
         <div class="input-group" style="margin-bottom:0;">
           <label>제품 모델</label>
           <select id="modelOpt" onchange="updateLivePrice()">
-            <!-- 코지프레임은 DB가 없어서 뺐습니다. 하이브리드4만 테스트! -->
             <option value="하이브리드4">하이브리드4 (매트리스)</option>
+            <!-- 💎 프레임 선택창 복구! -->
+            <option value="코지프레임">코지프레임 (프레임)</option>
           </select>
         </div>
       </div>
@@ -104,6 +120,7 @@
           <label>사이즈</label>
           <select id="sizeOpt" onchange="updateLivePrice()">
             <option value="LK">LK 사이즈</option>
+            <option value="Q">Q 사이즈</option>
           </select>
         </div>
         <div class="input-group">
@@ -135,7 +152,7 @@
         </div>
       </div>
 
-      <!-- 💎 실시간 금액 표시기 (옵션 바꿀 때마다 알아서 바뀜) -->
+      <!-- 실시간 금액 표시기 -->
       <div class="live-price-box">
         <span>선택하신 옵션의 월 렌탈료</span>
         <b id="livePriceDisplay">0원</b>
@@ -179,47 +196,76 @@
       </div>
     </div>
 
-    <!-- 3. 결과 카드 -->
+    <!-- 3. 결과 카드 & 상세 내역 버튼 복구! -->
     <div class="result-card">
       <div class="original-price" id="originalPrice">총 렌탈약정가 월 0원</div>
       <div class="final-price-title">고객님 최종 월 납입금</div>
       <div class="final-price" id="finalPrice">0 <span>원</span></div>
       <div class="discount-tag" id="discountTag" style="display:none;"></div>
+      
+      <!-- 💎 버튼 복구! -->
+      <button class="detail-btn" onclick="openReceiptModal()">
+        <span class="material-symbols-rounded">receipt_long</span> 맞춤 견적 상세 내역 보기
+      </button>
+    </div>
+  </div>
+
+  <!-- 💎 영수증 팝업 복구! -->
+  <div class="modal-overlay" id="receiptModal">
+    <div class="receipt-modal">
+      <div class="receipt-header">
+        <div class="receipt-title">COWAY 다기기 맞춤 견적</div>
+      </div>
+      <div class="receipt-row" style="margin-bottom:4px;"><span>담긴 제품 목록</span></div>
+      <div class="rec-item-list" id="recItemList"></div>
+      
+      <div class="receipt-row" style="margin-top:12px; border-top:1px solid #f1f3f5; padding-top:10px;">
+        <span>총 렌탈약정가 합계</span><span id="recBaseTotal">월 0원</span>
+      </div>
+      <div class="receipt-row" style="color:#f04452;">
+        <span>🎁 프로모션 할인</span><span id="recPromoTotal">-0원</span>
+      </div>
+      <div class="receipt-row" style="color:#f04452;">
+        <span>💳 제휴카드 할인</span><span id="recCardTotal">-0원</span>
+      </div>
+      <div class="receipt-row total">
+        <span>최종 월 납입금</span><span id="recFinalTotal" style="color:#005bb5;">월 0원</span>
+      </div>
+      <button class="close-modal-btn" onclick="closeReceiptModal()">확인 완료</button>
     </div>
   </div>
 
   <script>
-    // 💎 [영업기밀] 하이브리드4 LK 9월 인상가 완벽 DB 연동!
+    // 💎 DB (하이브리드4 진짜 데이터 + 코지프레임 임시 데이터 추가)
     const productDB = {
       "하이브리드4": {
         "LK": {
-          "토탈케어": {
-            "5년": { "신규": 63900, "재렌탈": 57500 },
-            "7년": { "신규": 54900, "재렌탈": 49400 },
-            "9년": { "신규": 48900, "재렌탈": 44000 }
-          },
-          "스페셜체인지": {
-            "5년": { "신규": 61900, "재렌탈": 55700 },
-            "7년": { "신규": 52900, "재렌탈": 47600 },
-            "9년": { "신규": 46900, "재렌탈": 42200 }
-          },
-          "베이직케어": {
-            "5년": { "신규": 58900, "재렌탈": 53000 },
-            "7년": { "신규": 49900, "재렌탈": 44900 },
-            "9년": { "신규": 43900, "재렌탈": 39500 }
-          },
-          "서비스프리": {
-            "5년": { "신규": 56900, "재렌탈": 51200 },
-            "7년": { "신규": 47900, "재렌탈": 43100 },
-            "9년": { "신규": 41900, "재렌탈": 37700 }
-          }
+          "토탈케어": { "5년": {"신규": 63900, "재렌탈": 57500}, "7년": {"신규": 54900, "재렌탈": 49400}, "9년": {"신규": 48900, "재렌탈": 44000} },
+          "스페셜체인지": { "5년": {"신규": 61900, "재렌탈": 55700}, "7년": {"신규": 52900, "재렌탈": 47600}, "9년": {"신규": 46900, "재렌탈": 42200} },
+          "베이직케어": { "5년": {"신규": 58900, "재렌탈": 53000}, "7년": {"신규": 49900, "재렌탈": 44900}, "9년": {"신규": 43900, "재렌탈": 39500} },
+          "서비스프리": { "5년": {"신규": 56900, "재렌탈": 51200}, "7년": {"신규": 47900, "재렌탈": 43100}, "9년": {"신규": 41900, "재렌탈": 37700} }
+        },
+        "Q": { // 테스트용 임시 Q사이즈
+          "토탈케어": { "5년": {"신규": 53900, "재렌탈": 47500}, "7년": {"신규": 44900, "재렌탈": 39400}, "9년": {"신규": 38900, "재렌탈": 34000} },
+          "스페셜체인지": { "5년": {"신규": 51900, "재렌탈": 45700}, "7년": {"신규": 42900, "재렌탈": 37600}, "9년": {"신규": 36900, "재렌탈": 32200} },
+          "베이직케어": { "5년": {"신규": 48900, "재렌탈": 43000}, "7년": {"신규": 39900, "재렌탈": 34900}, "9년": {"신규": 33900, "재렌탈": 29500} },
+          "서비스프리": { "5년": {"신규": 46900, "재렌탈": 41200}, "7년": {"신규": 37900, "재렌탈": 33100}, "9년": {"신규": 31900, "재렌탈": 27700} }
         }
+      },
+      "코지프레임": {
+        "LK": { "토탈케어": {"5년": {"신규": 35000, "재렌탈": 30000}, "7년": {"신규": 25000, "재렌탈": 20000}, "9년": {"신규": 20000, "재렌탈": 15000}},
+                "스페셜체인지": {"5년": {"신규": 35000, "재렌탈": 30000}, "7년": {"신규": 25000, "재렌탈": 20000}, "9년": {"신규": 20000, "재렌탈": 15000}},
+                "베이직케어": {"5년": {"신규": 35000, "재렌탈": 30000}, "7년": {"신규": 25000, "재렌탈": 20000}, "9년": {"신규": 20000, "재렌탈": 15000}},
+                "서비스프리": {"5년": {"신규": 35000, "재렌탈": 30000}, "7년": {"신규": 25000, "재렌탈": 20000}, "9년": {"신규": 20000, "재렌탈": 15000}} },
+        "Q": { "토탈케어": {"5년": {"신규": 25000, "재렌탈": 20000}, "7년": {"신규": 15000, "재렌탈": 10000}, "9년": {"신규": 10000, "재렌탈": 5000}},
+               "스페셜체인지": {"5년": {"신규": 25000, "재렌탈": 20000}, "7년": {"신규": 15000, "재렌탈": 10000}, "9년": {"신규": 10000, "재렌탈": 5000}},
+               "베이직케어": {"5년": {"신규": 25000, "재렌탈": 20000}, "7년": {"신규": 15000, "재렌탈": 10000}, "9년": {"신규": 10000, "재렌탈": 5000}},
+               "서비스프리": {"5년": {"신규": 25000, "재렌탈": 20000}, "7년": {"신규": 15000, "재렌탈": 10000}, "9년": {"신규": 10000, "재렌탈": 5000}} }
       }
     };
 
     let cart = [];
 
-    // 옵션 변경될 때마다 화면에 실시간 가격 표시
     function updateLivePrice() {
       const model = document.getElementById("modelOpt").value;
       const size = document.getElementById("sizeOpt").value;
@@ -228,15 +274,14 @@
       const uType = document.getElementById("userTypeOpt").value;
 
       try {
-        // DB에서 정확한 요금 쏙 뽑아오기
         const price = productDB[model][size][care][term][uType];
+        if (price === undefined) throw new Error("Price not found");
         document.getElementById("livePriceDisplay").innerText = price.toLocaleString() + "원";
       } catch (e) {
-        document.getElementById("livePriceDisplay").innerText = "옵션 오류";
+        document.getElementById("livePriceDisplay").innerText = "해당 조합 없음";
       }
     }
 
-    // 장바구니 담기
     function addToCart() {
       const model = document.getElementById("modelOpt").value;
       const size = document.getElementById("sizeOpt").value;
@@ -247,8 +292,9 @@
       let basePrice = 0;
       try {
         basePrice = productDB[model][size][care][term][uType];
+        if (basePrice === undefined) throw new Error("Price not found");
       } catch (e) {
-        return alert("요금 데이터를 불러올 수 없습니다.");
+        return alert("선택하신 옵션의 요금 데이터가 없습니다.");
       }
       
       const title = `${model} (${size})`;
@@ -311,9 +357,27 @@
       } else {
         tagBox.style.display = "none";
       }
+
+      // 영수증 모달 데이터 업데이트
+      document.getElementById('recBaseTotal').innerText = `월 ${totalBase.toLocaleString()}원`;
+      document.getElementById('recPromoTotal').innerText = `-${totalPromoDiscount.toLocaleString()}원`;
+      document.getElementById('recCardTotal').innerText = `-${cardDiscount.toLocaleString()}원`;
+      document.getElementById('recFinalTotal').innerText = `월 ${finalPrice.toLocaleString()}원`;
+
+      const recList = document.getElementById('recItemList');
+      recList.innerHTML = '';
+      cart.forEach(item => {
+        recList.innerHTML += `<div class="rec-item-row"><span>- ${item.title}</span><b style="color:#191f28;">${item.basePrice.toLocaleString()}원</b></div>`;
+      });
     }
 
-    // 처음 켰을 때 실시간 금액 표시 세팅
+    // 영수증 모달 컨트롤
+    function openReceiptModal() { 
+      if(cart.length === 0) return alert("장바구니가 비어있습니다.");
+      document.getElementById("receiptModal").style.display = "flex"; 
+    }
+    function closeReceiptModal() { document.getElementById("receiptModal").style.display = "none"; }
+
     window.onload = updateLivePrice;
   </script>
 </body>
