@@ -5,53 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>맞춤 견적 계산기</title>
   
+  <link rel="icon" href="logo.png" type="image/png">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,600,1,0" />
 
   <style>
     body { background-color: #f2f4f6; font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif; margin: 0; padding-bottom: 40px; display: flex; justify-content: center; }
-    .app-container { width: 100%; max-width: 480px; background-color: #f2f4f6; min-height: 100vh; box-shadow: 0 0 20px rgba(0,0,0,0.05); padding: 0 20px; box-sizing: border-box; }
+    .app-container { width: 100%; max-width: 480px; background-color: #f2f4f6; min-height: 100vh; box-shadow: 0 0 20px rgba(0,0,0,0.05); padding: 0 16px; box-sizing: border-box; }
     
-    /* 헤더 */
-    .header { display: flex; align-items: center; justify-content: center; padding: 24px 0; margin-bottom: 10px; position: relative; }
+    /* 헤더 로고 홈버튼 */
+    .header { display: flex; align-items: center; justify-content: center; padding: 20px 0; margin-bottom: 8px; position: relative; }
     .back-btn { font-size: 24px; text-decoration: none; color: #333; position: absolute; left: 0; font-weight: bold; padding: 10px; }
     .page-title-logo { height: 26px; object-fit: contain; }
 
-    /* 💎 카테고리 선택 탭 (정수기, 청정기, 매트리스, 안마의자) */
-    .cat-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 16px; }
-    .cat-btn { background: white; border-radius: 16px; padding: 12px 4px; text-align: center; cursor: pointer; border: 2px solid transparent; box-shadow: 0 2px 8px rgba(0,0,0,0.02); transition: 0.2s; }
+    /* 💎 5칸 카테고리 탭 (매트리스 -> 공기청정기 -> 안마의자 -> 임시 -> ETC) */
+    .cat-container { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; margin-bottom: 16px; }
+    .cat-btn { background: white; border-radius: 14px; padding: 10px 2px; text-align: center; cursor: pointer; border: 2px solid transparent; box-shadow: 0 2px 6px rgba(0,0,0,0.02); transition: 0.2s; }
     .cat-btn.active { border-color: #3182f6; background: #e8f3ff; }
-    .cat-btn span { font-size: 22px; display: block; margin-bottom: 4px; }
-    .cat-btn div { font-size: 11px; font-weight: 800; color: #4e5968; }
+    .cat-btn span { font-size: 20px; display: block; margin-bottom: 2px; }
+    .cat-btn div { font-size: 10.5px; font-weight: 800; color: #4e5968; letter-spacing: -0.5px; }
     .cat-btn.active div { color: #1b64da; }
 
     /* 카드 스타일 */
-    .card { background: #ffffff; padding: 24px; border-radius: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.02); margin-bottom: 16px; }
-    .card-title { font-size: 16px; font-weight: 800; color: #191f28; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+    .card { background: #ffffff; padding: 20px; border-radius: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.02); margin-bottom: 16px; }
+    .card-title { font-size: 15px; font-weight: 800; color: #191f28; margin-bottom: 16px; display: flex; align-items: center; gap: 6px; }
     
     /* 입력 폼 */
-    .input-group { margin-bottom: 16px; }
-    .input-group label { display: block; font-size: 12px; color: #8b95a1; margin-bottom: 6px; font-weight: 700; }
-    select, input { width: 100%; padding: 14px 16px; border: 1px solid #e4e7ec; background-color: #f9fafb; border-radius: 14px; font-size: 15px; font-weight: 700; color: #191f28; box-sizing: border-box; outline: none; transition: 0.2s; appearance: none; }
-    select { background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b95a1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 16px center; background-size: 16px; }
-    select:focus, input:focus { border-color: #3182f6; background-color: #ffffff; }
+    .input-group { margin-bottom: 14px; }
+    .input-group label { display: block; font-size: 11.5px; color: #8b95a1; margin-bottom: 4px; font-weight: 700; }
+    select { width: 100%; padding: 12px 14px; border: 1px solid #e4e7ec; background-color: #f9fafb; border-radius: 12px; font-size: 14px; font-weight: 700; color: #191f28; box-sizing: border-box; outline: none; transition: 0.2s; appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b95a1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 14px center; background-size: 14px; }
+    select:focus { border-color: #3182f6; background-color: #ffffff; }
 
-    .calc-btn { width: 100%; padding: 18px; background: #3182f6; color: white; border: none; border-radius: 16px; font-size: 16px; font-weight: 800; cursor: pointer; transition: 0.2s; margin-top: 8px; }
+    .calc-btn { width: 100%; padding: 16px; background: #3182f6; color: white; border: none; border-radius: 14px; font-size: 15px; font-weight: 800; cursor: pointer; transition: 0.2s; margin-top: 6px; }
     .calc-btn:active { background: #1b64da; transform: scale(0.98); }
     
-    /* 💎 극강의 임팩트 영수증 결과 박스 */
-    .result-card { background: #191f28; color: white; border-radius: 24px; padding: 24px; text-align: center; box-shadow: 0 8px 20px rgba(0,0,0,0.15); margin-top: 16px; position: relative; overflow: hidden; }
-    .result-badge { display: inline-block; background: rgba(255,255,255,0.1); padding: 4px 12px; border-radius: 20px; font-size: 12px; color: #90c2ff; font-weight: 700; margin-bottom: 12px; }
-    .original-price { font-size: 14px; color: #8b95a1; text-decoration: line-through; font-weight: 600; margin-bottom: 4px; }
-    .final-price-title { font-size: 13px; color: #abb8c6; font-weight: 700; margin-bottom: 4px; }
-    .final-price { font-size: 34px; font-weight: 900; color: #3182f6; letter-spacing: -1px; }
-    .final-price span { font-size: 20px; color: #ffffff; }
-    .discount-tag { display: inline-flex; align-items: center; gap: 4px; margin-top: 12px; background: #f04452; color: white; padding: 6px 14px; border-radius: 12px; font-size: 13px; font-weight: 800; }
+    /* 💎 영수증 하이라이트 결과 카드 */
+    .result-card { background: #191f28; color: white; border-radius: 20px; padding: 22px; text-align: center; box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+    .result-badge { display: inline-block; background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 20px; font-size: 11px; color: #90c2ff; font-weight: 700; margin-bottom: 8px; }
+    .original-price { font-size: 13px; color: #8b95a1; text-decoration: line-through; font-weight: 600; margin-bottom: 2px; }
+    .final-price-title { font-size: 12px; color: #abb8c6; font-weight: 700; margin-bottom: 2px; }
+    .final-price { font-size: 32px; font-weight: 900; color: #3182f6; letter-spacing: -1px; }
+    .final-price span { font-size: 18px; color: #ffffff; }
+    .discount-tag { display: inline-flex; align-items: center; gap: 4px; margin-top: 10px; background: #f04452; color: white; padding: 6px 12px; border-radius: 10px; font-size: 12px; font-weight: 800; }
   </style>
 </head>
 <body>
   <div class="app-container">
     
-    <!-- 헤더 -->
     <div class="header">
       <a href="main.html" class="back-btn">←</a>
       <a href="main.html">
@@ -59,91 +58,109 @@
       </a>
     </div>
 
-    <!-- 카테고리 선택 탭 -->
+    <!-- 5칸 카테고리 탭 -->
     <div class="cat-container">
       <div class="cat-btn active" onclick="selectCat(this)">
         <span>🛏️</span>
         <div>매트리스</div>
       </div>
-      <div class="cat-btn" onclick="selectCat(this)">
-        <span>💧</span>
-        <div>정수기</div>
-      </div>
-      <div class="cat-btn" onclick="selectCat(this)">
+      <div class="cat-btn" onclick="selectCat(this, '공기청정기 준비중')">
         <span>🌬️</span>
-        <div>공기청정기</div>
+        <div>청정기</div>
       </div>
-      <div class="cat-btn" onclick="selectCat(this)">
+      <div class="cat-btn" onclick="selectCat(this, '안마의자 준비중')">
         <span>💆</span>
         <div>안마의자</div>
       </div>
+      <div class="cat-btn" onclick="selectCat(this, '임시 카테고리')">
+        <span>⚙️</span>
+        <div>임시</div>
+      </div>
+      <div class="cat-btn" onclick="selectCat(this, 'ETC 카테고리')">
+        <span>📦</span>
+        <div>ETC</div>
+      </div>
     </div>
 
-    <div class="card">
+    <div class="card" id="calculatorCard">
       <div class="card-title">
         <span class="material-symbols-rounded" style="color: #3182f6;">tune</span>
-        제품 및 약정 옵션
+        매트리스 렌탈 옵션 산출 (실제 가격데이터)
       </div>
       
-      <!-- 모델 선택 -->
+      <!-- 1. 고객 구분 -->
       <div class="input-group">
-        <label>모델 선택</label>
-        <select id="modelOpt">
-          <option value="BEREX 모디 매트리스">BEREX 모디 매트리스</option>
-          <option value="BEREX 볼륨 매트리스">BEREX 볼륨 매트리스</option>
-          <option value="BEREX 스마트 매트리스">BEREX 스마트 매트리스 S7</option>
+        <label>고객 구분</label>
+        <select id="userTypeOpt" onchange="calculateRealPrice()">
+          <option value="신규">신규 렌탈 (약정할인가)</option>
+          <option value="재렌탈">재렌탈 (우대할인가)</option>
         </select>
       </div>
 
-      <!-- 규격/사이즈 -->
+      <!-- 2. 매트리스 모델 -->
       <div class="input-group">
-        <label>사이즈 / 용량</label>
-        <select id="sizeOpt">
-          <option value="35000">슈퍼싱글 (SS)</option>
-          <option value="40000" selected>퀸 (Q)</option>
-          <option value="45000">킹 (K)</option>
-          <option value="50000">라지킹 (LK)</option>
+        <label>매트리스 모델</label>
+        <select id="modelOpt" onchange="calculateRealPrice()">
+          <option value="루네어">루네어 (SE03)</option>
+          <option value="하이브리드4">하이브리드4 (PRO04)</option>
+          <option value="시그니처컴포트">시그니처 컴포트 (SP01SC)</option>
+          <option value="스마트S8">스마트 매트리스 (S8+)</option>
         </select>
       </div>
 
-      <!-- 케어 서비스 -->
+      <!-- 3. 사이즈 -->
       <div class="input-group">
-        <label>케어 서비스 방문 주기</label>
-        <select id="careOpt">
-          <option value="0">서비스프리 (자가관리)</option>
-          <option value="4000" selected>베이직 케어 (4개월)</option>
-          <option value="7000">스페셜 체인지 (4개월)</option>
+        <label>사이즈</label>
+        <select id="sizeOpt" onchange="calculateRealPrice()">
+          <option value="SS">슈퍼싱글 (SS)</option>
+          <option value="Q" selected>퀸 (Q)</option>
+          <option value="K">킹 (K)</option>
+          <option value="LK">라지킹 (LK)</option>
         </select>
       </div>
 
-      <!-- 약정 기간 -->
+      <!-- 4. 약정 기간 -->
       <div class="input-group">
         <label>의무 약정 기간</label>
-        <select id="periodOpt">
-          <option value="0">5년 약정 (기본)</option>
-          <option value="-4000">7년 약정 (약정할인)</option>
+        <select id="periodOpt" onchange="calculateRealPrice()">
+          <option value="5년" selected>5년 약정</option>
+          <option value="7년">7년 약정</option>
+          <option value="9년">9년 약정</option>
         </select>
       </div>
 
-      <!-- 제휴 카드 -->
-      <div class="input-group" style="margin-top:20px;">
-        <label>💳 제휴카드 청구 할인</label>
-        <select id="cardDiscount">
+      <!-- 5. 관리 방식 -->
+      <div class="input-group">
+        <label>케어 서비스 방문 방식</label>
+        <select id="careOpt" onchange="calculateRealPrice()">
+          <option value="토탈케어" selected>토탈케어</option>
+          <option value="스페셜체인지">스페셜체인지</option>
+          <option value="베이직케어">베이직케어</option>
+          <option value="서비스프리">서비스프리 (자가관리)</option>
+        </select>
+      </div>
+
+      <!-- 6. 제휴카드 할인 -->
+      <div class="input-group" style="margin-top:18px;">
+        <label>💳 제휴카드 청구 할인 선택</label>
+        <select id="cardDiscount" onchange="calculateRealPrice()">
           <option value="0">미적용 (기본 렌탈료)</option>
           <option value="13000">전월 30만원 실적 (-13,000원)</option>
+          <option value="17000">전월 70/80만원 실적 (-17,000원)</option>
           <option value="24000" selected>🔥 신규카드 최고혜택 (-24,000원)</option>
+          <option value="30000">🔥 신규카드 최대혜택 (-30,000원)</option>
         </select>
       </div>
 
-      <button class="calc-btn" onclick="calculateSmartPrice()">월 견적 산출하기</button>
+      <button class="calc-btn" onclick="calculateRealPrice()">월 렌탈료 산출하기</button>
     </div>
 
-    <!-- 💎 파격적인 납입금 강조 영수증 카드 -->
+    <!-- 결과 하이라이트 카드 -->
     <div class="result-card">
-      <div class="result-badge">실시간 견적 산출 결과</div>
-      <div class="original-price" id="originalPrice">정가 월 44,000원</div>
+      <div class="result-badge" id="resultModelBadge">루네어 (Q) 5년 약정 토탈케어</div>
+      <div class="original-price" id="originalPrice">정가 월 40,900원</div>
       <div class="final-price-title">고객님 최종 월 납입금</div>
-      <div class="final-price" id="finalPrice">20,000 <span>원</span></div>
+      <div class="final-price" id="finalPrice">16,900 <span>원</span></div>
       <div class="discount-tag" id="discountTag">
         <span class="material-symbols-rounded" style="font-size:16px;">verified</span>
         월 24,000원 절감 혜택 적용!
@@ -153,30 +170,140 @@
   </div>
 
   <script>
-    function selectCat(element) {
+    // 💎 엑셀 표에서 직접 추출한 매트리스 8종 실데이터 (단위: 원)
+    const mattressData = {
+      "루네어": {
+        "SS": {
+          "5년": { "토탈케어": [35900, 32300], "스페셜체인지": [33900, 30500], "베이직케어": [31900, 28700], "서비스프리": [29900, 26900] },
+          "7년": { "토탈케어": [28900, 26000], "스페셜체인지": [26900, 24200], "베이직케어": [24900, 22400], "서비스프리": [22900, 20600] },
+          "9년": { "토탈케어": [24900, 22400], "스페셜체인지": [22900, 20600], "베이직케어": [20900, 18800], "서비스프리": [18900, 17000] }
+        },
+        "Q": {
+          "5년": { "토탈케어": [40900, 36800], "스페셜체인지": [38900, 35000], "베이직케어": [36900, 33200], "서비스프리": [34900, 31400] },
+          "7년": { "토탈케어": [32900, 29600], "스페셜체인지": [30900, 27800], "베이직케어": [28900, 26000], "서비스프리": [26900, 24200] },
+          "9년": { "토탈케어": [28900, 26000], "스페셜체인지": [26900, 24200], "베이직케어": [24900, 22400], "서비스프리": [22900, 20600] }
+        },
+        "K": {
+          "5년": { "토탈케어": [45900, 41300], "스페셜체인지": [43900, 39500], "베이직케어": [41900, 37700], "서비스프리": [39900, 35900] },
+          "7년": { "토탈케어": [36900, 33200], "스페셜체인지": [34900, 31400], "베이직케어": [32900, 29600], "서비스프리": [30900, 27800] },
+          "9년": { "토탈케어": [32900, 29600], "스페셜체인지": [30900, 27800], "베이직케어": [28900, 26000], "서비스프리": [26900, 24200] }
+        },
+        "LK": {
+          "5년": { "토탈케어": [53900, 48500], "스페셜체인지": [51900, 46700], "베이직케어": [49900, 44900], "서비스프리": [47900, 43100] },
+          "7년": { "토탈케어": [41900, 37700], "스페셜체인지": [39900, 35900], "베이직케어": [37900, 34100], "서비스프리": [35900, 32300] },
+          "9년": { "토탈케어": [37900, 34100], "스페셜체인지": [35900, 32300], "베이직케어": [33900, 30500], "서비스프리": [31900, 28700] }
+        }
+      },
+      "하이브리드4": {
+        "SS": {
+          "5년": { "토탈케어": [39500, 35500], "스페셜체인지": [37700, 33900], "베이직케어": [35000, 31500], "서비스프리": [33200, 29900] },
+          "7년": { "토탈케어": [32300, 29000], "스페셜체인지": [30500, 27400], "베이직케어": [27800, 25000], "서비스프리": [26000, 23400] },
+          "9년": { "토탈케어": [27800, 25000], "스페셜체인지": [26000, 23400], "베이직케어": [23300, 20900], "서비스프리": [21500, 19300] }
+        },
+        "Q": {
+          "5년": { "토탈케어": [42200, 38000], "스페셜체인지": [40400, 36300], "베이직케어": [37700, 33900], "서비스프리": [35900, 32300] },
+          "7년": { "토탈케어": [35000, 31500], "스페셜체인지": [33200, 29900], "베이직케어": [30500, 27400], "서비스프리": [28700, 25800] },
+          "9년": { "토탈케어": [30500, 27400], "스페셜체인지": [28700, 25800], "베이직케어": [26000, 23400], "서비스프리": [24200, 21700] }
+        },
+        "K": {
+          "5년": { "토탈케어": [48500, 43600], "스페셜체인지": [46700, 42000], "베이직케어": [44000, 39600], "서비스프리": [42200, 38000] },
+          "7년": { "토탈케어": [41300, 37100], "스페셜체인지": [39500, 35500], "베이직케어": [36800, 33100], "서비스프리": [35000, 31500] },
+          "9년": { "토탈케어": [36800, 33100], "스페셜체인지": [35000, 31500], "베이직케어": [32300, 29000], "서비스프리": [30500, 27400] }
+        },
+        "LK": {
+          "5년": { "토탈케어": [56600, 50900], "스페셜체인지": [54800, 49300], "베이직케어": [52100, 46800], "서비스프리": [50300, 45200] },
+          "7년": { "토탈케어": [48500, 43600], "스페셜체인지": [46700, 42000], "베이직케어": [44000, 39600], "서비스프리": [42200, 38000] },
+          "9년": { "토탈케어": [43100, 38700], "스페셜체인지": [41300, 37100], "베이직케어": [38600, 34700], "서비스프리": [36800, 33100] }
+        }
+      },
+      "시그니처컴포트": {
+        "SS": {
+          "5년": { "토탈케어": [60200, 54100], "스페셜체인지": [58400, 52500], "베이직케어": [54800, 49300], "서비스프리": [53000, 47700] },
+          "7년": { "토탈케어": [51200, 46000], "스페셜체인지": [49400, 44400], "베이직케어": [45800, 41200], "서비스프리": [44000, 39600] },
+          "9년": { "토탈케어": [45800, 41200], "스페셜체인지": [44000, 39600], "베이직케어": [40400, 36300], "서비스프리": [38600, 34700] }
+        },
+        "Q": {
+          "5년": { "토탈케어": [66500, 59800], "스페셜체인지": [64700, 58200], "베이직케어": [61100, 55000], "서비스프리": [59300, 53300] },
+          "7년": { "토탈케어": [57500, 51700], "스페셜체인지": [55700, 50100], "베이직케어": [52100, 46800], "서비스프리": [50300, 45200] },
+          "9년": { "토탈케어": [52100, 46800], "스페셜체인지": [50300, 45200], "베이직케어": [46700, 42000], "서비스프리": [44900, 40400] }
+        },
+        "K": {
+          "5년": { "토탈케어": [72800, 65500], "스페셜체인지": [71000, 63900], "베이직케어": [67400, 60600], "서비스프리": [65600, 59000] },
+          "7년": { "토탈케어": [63800, 57400], "스페셜체인지": [62000, 55800], "베이직케어": [58400, 52500], "서비스프리": [56600, 50900] },
+          "9년": { "토탈케어": [58400, 52500], "스페셜체인지": [56600, 50900], "베이직케어": [53000, 47700], "서비스프리": [51200, 46000] }
+        },
+        "LK": {
+          "5년": { "토탈케어": [80000, 72000], "스페셜체인지": [78200, 70300], "베이직케어": [74600, 67100], "서비스프리": [72800, 65500] },
+          "7년": { "토탈케어": [71000, 63900], "스페셜체인지": [69200, 62200], "베이직케어": [65600, 59000], "서비스프리": [63800, 57400] },
+          "9년": { "토탈케어": [65600, 59000], "스페셜체인지": [63800, 57400], "베이직케어": [60200, 54100], "서비스프리": [58400, 52500] }
+        }
+      },
+      "스마트S8": {
+        "SS": {
+          "5년": { "토탈케어": [97900, 88100], "스페셜체인지": [95900, 86300], "베이직케어": [93900, 84500], "서비스프리": [91900, 82700] },
+          "7년": { "토탈케어": [76900, 69200], "스페셜체인지": [74900, 67400], "베이직케어": [72900, 65600], "서비스프리": [70900, 63800] },
+          "9년": { "토탈케어": [69200, 62200], "스페셜체인지": [67400, 60600], "베이직케어": [65600, 59000], "서비스프리": [63800, 57400] }
+        },
+        "Q": {
+          "5년": { "토탈케어": [126900, 114200], "스페셜체인지": [124900, 112400], "베이직케어": [122900, 110600], "서비스프리": [120900, 108800] },
+          "7년": { "토탈케어": [98900, 89000], "스페셜체인지": [96900, 87200], "베이직케어": [94900, 85400], "서비스프리": [92900, 83600] },
+          "9년": { "토탈케어": [89000, 80100], "스페셜체인지": [87200, 78400], "베이직케어": [85400, 76800], "서비스프리": [83600, 75200] }
+        },
+        "K": {
+          "5년": { "토탈케어": [134900, 121400], "스페셜체인지": [132900, 119600], "베이직케어": [130900, 117800], "서비스프리": [128900, 116000] },
+          "7년": { "토탈케어": [104900, 94400], "스페셜체인지": [102900, 92600], "베이직케어": [100900, 90800], "서비스프리": [98900, 89000] },
+          "9년": { "토탈케어": [94400, 84900], "스페셜체인지": [92600, 83300], "베이직케어": [90800, 81700], "서비스프리": [89000, 80100] }
+        },
+        "LK": {
+          "5년": { "토탈케어": [148900, 134000], "스페셜체인지": [146900, 132200], "베이직케어": [144900, 130400], "서비스프리": [142900, 128600] },
+          "7년": { "토탈케어": [115900, 104300], "스페셜체인지": [113900, 102500], "베이직케어": [111900, 100700], "서비스프리": [109900, 98900] },
+          "9년": { "토탈케어": [104300, 93800], "스페셜체인지": [102500, 92200], "베이직케어": [100700, 90600], "서비스프리": [98900, 89000] }
+        }
+      }
+    };
+
+    function selectCat(element, msg) {
       document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
       element.classList.add('active');
+      if(msg) alert(`${msg} 입니다.\n월요일 전체 요금표 업데이트 예정!`);
     }
 
-    function calculateSmartPrice() {
-      let basePrice = parseInt(document.getElementById('sizeOpt').value);
-      let carePrice = parseInt(document.getElementById('careOpt').value);
-      let periodDiscount = parseInt(document.getElementById('periodOpt').value);
-      let cardDiscount = parseInt(document.getElementById('cardDiscount').value);
+    function calculateRealPrice() {
+      const uType = document.getElementById('userTypeOpt').value; // 신규 or 재렌탈
+      const model = document.getElementById('modelOpt').value;
+      const size = document.getElementById('sizeOpt').value;
+      const period = document.getElementById('periodOpt').value;
+      const care = document.getElementById('careOpt').value;
+      const cardDiscount = parseInt(document.getElementById('cardDiscount').value);
 
-      let orig = basePrice + carePrice;
-      let final = orig + periodDiscount - cardDiscount;
-      if (final < 0) final = 0;
+      try {
+        // 데이터 조회
+        const priceArray = mattressData[model][size][period][care];
+        const basePrice = (uType === '신규') ? priceArray[0] : priceArray[1];
+        
+        let finalPrice = basePrice - cardDiscount;
+        if(finalPrice < 0) finalPrice = 0;
 
-      let totalDiscount = orig - final;
+        const totalSavings = cardDiscount;
 
-      document.getElementById('originalPrice').innerText = `정가 월 ${orig.toLocaleString()}원`;
-      document.getElementById('finalPrice').innerHTML = `${final.toLocaleString()} <span>원</span>`;
-      document.getElementById('discountTag').innerHTML = `<span class="material-symbols-rounded" style="font-size:16px;">verified</span> 월 ${totalDiscount.toLocaleString()}원 절감 혜택 적용!`;
+        // 화면 업데이트
+        document.getElementById('resultModelBadge').innerText = `${model} (${size}) ${period} ${care} [${uType}]`;
+        document.getElementById('originalPrice').innerText = `렌탈약정가 월 ${basePrice.toLocaleString()}원`;
+        document.getElementById('finalPrice').innerHTML = `${finalPrice.toLocaleString()} <span>원</span>`;
+        
+        const tagBox = document.getElementById('discountTag');
+        if(cardDiscount > 0) {
+          tagBox.style.display = "inline-flex";
+          tagBox.innerHTML = `<span class="material-symbols-rounded" style="font-size:16px;">verified</span> 제휴카드 월 ${totalSavings.toLocaleString()}원 할인 적용!`;
+        } else {
+          tagBox.style.display = "none";
+        }
+      } catch(e) {
+        document.getElementById('finalPrice').innerHTML = `요금 계산 중...`;
+      }
     }
 
-    // 처음 켜질 때 한번 자동 계산
-    window.onload = function() { calculateSmartPrice(); }
+    window.onload = function() { calculateRealPrice(); }
   </script>
 </body>
 </html>
