@@ -2,139 +2,162 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>갤러리</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>COWAY 홈케어 시스템</title>
+  
+  <!-- 💎 촌스러운 이모지 대신, 구글의 세련된 앱 전용 아이콘을 불러옵니다 -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,600,1,0" />
+  
   <style>
-    body { background-color: #f7f9fa; font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif; margin: 0; padding: 0; box-sizing: border-box; }
+    /* 전체 배경 및 모바일 중앙 정렬 세팅 */
+    body { 
+      background-color: #f2f4f6; 
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif; 
+      margin: 0; 
+      padding-bottom: 40px; 
+      display: flex; 
+      justify-content: center; 
+    }
     
-    /* 상단 배너 (메인과 완벽한 일체감) */
-    .header-banner { background-color: #ffffff; padding: 20px 20px 24px 20px; text-align: center; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; box-shadow: 0 4px 24px rgba(0, 0, 0, 0.03); margin-bottom: 20px; position: sticky; top: 0; z-index: 10; }
-    .header-banner img { height: 32px; object-fit: contain; }
-    .back-btn { position: absolute; left: 20px; top: 25px; font-size: 20px; text-decoration: none; color: #333; font-weight: bold; }
-    .page-title { font-size: 16px; font-weight: 800; color: #333; margin-top: 10px; }
-
-    /* 갤러리 그리드 (바둑판 배열) */
-    .gallery-container { padding: 0 16px 40px 16px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .gallery-item { width: 100%; aspect-ratio: 1 / 1; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); cursor: pointer; }
-    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.2s; }
-    .gallery-item img:active { transform: scale(0.95); }
-
-    /* 팝업 모달 (라이트박스) */
-    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.95); z-index: 999; flex-direction: column; justify-content: center; align-items: center; }
+    /* 실제 앱 화면 영역 */
+    .app-container {
+      width: 100%;
+      max-width: 480px; 
+      background-color: #f2f4f6;
+      min-height: 100vh;
+      box-shadow: 0 0 20px rgba(0,0,0,0.05); 
+    }
     
-    /* 팝업 안의 이미지 (더블탭 줌 기능 포함) */
-    .modal-img-container { width: 100%; height: 80%; display: flex; justify-content: center; align-items: center; overflow: hidden; position: relative; }
-    .modal-img { max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.3s ease; cursor: zoom-in; }
-    .modal-img.zoomed { transform: scale(2.5); cursor: zoom-out; }
+    /* 상단 헤더 (가운데 정렬) */
+    .header { 
+      background: #ffffff; 
+      padding: 24px 20px; 
+      border-bottom-left-radius: 24px; 
+      border-bottom-right-radius: 24px; 
+      box-shadow: 0 2px 10px rgba(0,0,0,0.02); 
+      margin-bottom: 24px; 
+      text-align: center; 
+    }
+    .header-logo { 
+      height: 32px; 
+      object-fit: contain; 
+      cursor: pointer; 
+      display: inline-block; 
+    }
 
-    /* 모달 컨트롤 버튼들 (반투명하게, 확대 시 숨김 클래스 추가) */
-    .close-btn { position: absolute; top: 20px; right: 20px; color: white; font-size: 36px; font-weight: bold; cursor: pointer; z-index: 1001; }
-    .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); color: rgba(255, 255, 255, 0.4); font-size: 50px; font-weight: 300; cursor: pointer; padding: 20px; z-index: 1001; text-shadow: 0 2px 10px rgba(0,0,0,0.3); -webkit-tap-highlight-color: transparent; transition: opacity 0.2s; }
-    .nav-btn:active { color: white; }
-    .nav-btn.hidden { opacity: 0; pointer-events: none; } /* 확대 시 싹 사라지는 마법의 클래스 */
-    .prev-btn { left: 5px; }
-    .next-btn { right: 5px; }
+    /* 💎 2x3 메뉴 그리드 */
+    .menu-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; padding: 0 20px; }
+
+    /* 💎 메뉴 카드 디자인 (토스 스타일: 좌측 정렬) */
+    .menu-card { 
+      background: #ffffff; 
+      border-radius: 24px; 
+      padding: 20px 16px; 
+      display: flex; 
+      flex-direction: column; 
+      align-items: flex-start; /* 좌측 정렬이 핵심 포인트! */
+      text-align: left; 
+      text-decoration: none; 
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02); 
+      transition: transform 0.1s ease, box-shadow 0.1s ease; 
+    }
+    .menu-card:active { transform: scale(0.96); box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
+
+    /* 고급스러운 아이콘 래퍼 */
+    .icon-wrap { 
+      width: 44px; 
+      height: 44px; 
+      border-radius: 14px; 
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      margin-bottom: 16px; 
+    }
     
-    /* 하단 사진 카운터 */
-    .counter { color: white; font-size: 16px; font-weight: 500; position: absolute; bottom: 30px; letter-spacing: 2px; }
+    /* 아이콘 내부 이미지(폰트) 설정 */
+    .icon-wrap span { font-size: 26px; }
+
+    /* 메뉴별 컬러셋 (배경은 연하게, 아이콘은 진하게) */
+    .color-blue { background-color: #e8f3ff; color: #1b64da; }
+    .color-purple { background-color: #f4f0ff; color: #7048e8; }
+    .color-green { background-color: #e6f9ec; color: #0ca678; }
+    .color-red { background-color: #fff0eb; color: #f76707; }
+    .color-gray { background-color: #f1f3f5; color: #adb5bd; }
+
+    /* 텍스트 스타일 */
+    .menu-title { font-size: 16px; font-weight: 800; color: #191f28; margin-bottom: 4px; letter-spacing: -0.3px; }
+    .menu-sub { font-size: 12px; color: #8b95a1; font-weight: 600; }
   </style>
 </head>
 <body>
-
-  <!-- 상단 배너 -->
-  <div class="header-banner">
-    <a href="main.html" class="back-btn">←</a>
-    <img src="logo.png" alt="COWAY" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-    <div style="display:none; font-size:22px; font-weight:900; color:#005bb5;">COWAY</div>
-    <div class="page-title">갤러리</div>
-  </div>
-
-  <!-- 갤러리 바둑판 영역 -->
-  <div class="gallery-container" id="galleryGrid">
-    <!-- 자바스크립트로 사진들이 여기에 꽂힙니다 -->
-  </div>
-
-  <!-- 팝업 모달 영역 -->
-  <div class="modal" id="imageModal">
-    <span class="close-btn" onclick="closeModal()">×</span>
-    <div class="nav-btn prev-btn" onclick="changeImage(-1)">‹</div>
+  <div class="app-container">
     
-    <div class="modal-img-container">
-      <!-- 더블 클릭(터치) 시 확대되도록 ondblclick 이벤트 추가 -->
-      <img src="" class="modal-img" id="modalImg" ondblclick="toggleZoom()">
+    <!-- 상단 로고 -->
+    <div class="header">
+      <a href="main.html">
+        <!-- 로고 이미지 에러 시 텍스트로 대체 -->
+        <img src="logo.png" alt="COWAY" class="header-logo" onerror="this.outerHTML='<div style=\'font-size:24px;font-weight:900;color:#005bb5;\'>COWAY</div>'">
+      </a>
     </div>
-    
-    <div class="nav-btn next-btn" onclick="changeImage(1)">›</div>
-    <div class="counter" id="imgCounter">1 / 1</div>
+
+    <!-- 메뉴 리스트 -->
+    <div class="menu-container">
+      
+      <!-- 1. 견적 -->
+      <a href="calc.html" class="menu-card">
+        <div class="icon-wrap color-blue">
+          <span class="material-symbols-rounded">calculate</span>
+        </div>
+        <div class="menu-title">맞춤 견적</div>
+        <div class="menu-sub">렌탈료 즉시 산출</div>
+      </a>
+
+      <!-- 2. 날씨 -->
+      <a href="weather.html" class="menu-card">
+        <div class="icon-wrap color-purple">
+          <span class="material-symbols-rounded">air</span>
+        </div>
+        <div class="menu-title">안심 리포트</div>
+        <div class="menu-sub">미세먼지 & 습도</div>
+      </a>
+
+      <!-- 3. 갤러리 -->
+      <a href="gallery.html" class="menu-card">
+        <div class="icon-wrap color-green">
+          <span class="material-symbols-rounded">photo_library</span>
+        </div>
+        <div class="menu-title">시공 갤러리</div>
+        <div class="menu-sub">프리미엄 실사</div>
+      </a>
+
+      <!-- 4. 혜택 통합 (카드 + 프로모션) -->
+      <a href="#" class="menu-card">
+        <div class="icon-wrap color-red">
+          <span class="material-symbols-rounded">redeem</span>
+        </div>
+        <div class="menu-title">이달의 혜택</div>
+        <div class="menu-sub">할인 및 프로모션</div>
+      </a>
+
+      <!-- 5. 준비중 -->
+      <a href="#" class="menu-card" style="opacity: 0.7;">
+        <div class="icon-wrap color-gray">
+          <span class="material-symbols-rounded">hourglass_empty</span>
+        </div>
+        <div class="menu-title">서비스 준비중</div>
+        <div class="menu-sub">업데이트 예정</div>
+      </a>
+
+      <!-- 6. 준비중 -->
+      <a href="#" class="menu-card" style="opacity: 0.7;">
+        <div class="icon-wrap color-gray">
+          <span class="material-symbols-rounded">more_horiz</span>
+        </div>
+        <div class="menu-title">고객 관리</div>
+        <div class="menu-sub">업데이트 예정</div>
+      </a>
+
+    </div>
   </div>
-
-  <script>
-    // 형님이 나중에 현장 사진 찍으시면 여기에 주소만 갈아끼우면 됩니다.
-    // 지금은 테스트용 가짜 사진들(picsum)을 6장 넣어뒀습니다.
-const imageList = [
-      "pade1.jpg", "pade2.jpg", "pade3.jpg", "pade4.jpg", "pade5.jpg", "pade6.jpg",
-      "saje1.jpg", "saje2.jpg", "saje3.jpg", "saje4.jpg", "saje5.jpg"
-    ];
-
-    let currentIndex = 0;
-    const modal = document.getElementById("imageModal");
-    const modalImg = document.getElementById("modalImg");
-    const counter = document.getElementById("imgCounter");
-
-    // 1. 화면 켜지자마자 바둑판으로 사진 뿌리기
-    window.onload = function() {
-      const grid = document.getElementById("galleryGrid");
-      imageList.forEach((src, index) => {
-        const item = document.createElement("div");
-        item.className = "gallery-item";
-        item.onclick = () => openModal(index);
-        item.innerHTML = `<img src="${src}" alt="시공사진 ${index + 1}">`;
-        grid.appendChild(item);
-      });
-    }
-
-    // 2. 사진 눌렀을 때 팝업 열기
-    function openModal(index) {
-      currentIndex = index;
-      updateModal();
-      modal.style.display = "flex";
-    }
-
-    // 3. 팝업 닫을 땐 화살표 다시 살림
-    function closeModal() {
-      modal.style.display = "none";
-      modalImg.classList.remove("zoomed"); 
-      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('hidden'));
-    }
-
-    // 4. 좌우 이동할 때도 화살표 다시 살림
-    function changeImage(step) {
-      currentIndex += step;
-      if (currentIndex >= imageList.length) currentIndex = 0;
-      if (currentIndex < 0) currentIndex = imageList.length - 1;
-      
-      modalImg.classList.remove("zoomed"); 
-      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('hidden'));
-      updateModal();
-    }
-
-    // 5. 모달 안의 사진과 카운터 숫자 갱신
-    function updateModal() {
-      modalImg.src = imageList[currentIndex];
-      counter.innerText = `${currentIndex + 1} / ${imageList.length}`;
-    }
-
-    // 6. 꿀기능: 사진 확대 시 화살표 싹 숨기기!
-    function toggleZoom() {
-      modalImg.classList.toggle("zoomed");
-      
-      // zoomed 클래스가 있으면 hidden 클래스를 붙여서 화살표를 숨김
-      const isZoomed = modalImg.classList.contains("zoomed");
-      document.querySelectorAll('.nav-btn').forEach(btn => {
-        if(isZoomed) btn.classList.add('hidden');
-        else btn.classList.remove('hidden');
-      });
-    }  </script>
-
 </body>
 </html>
