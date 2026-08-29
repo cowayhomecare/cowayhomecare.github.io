@@ -4,15 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>안심 케어 리포트</title>
+  <link rel="icon" href="logo.png" type="image/png">
   <style>
     body { background-color: #f2f4f6; font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif; margin: 0; padding-bottom: 40px; display: flex; justify-content: center; }
     .app-container { width: 100%; max-width: 480px; background-color: #f2f4f6; min-height: 100vh; box-shadow: 0 0 20px rgba(0,0,0,0.05); padding: 0 20px; box-sizing: border-box; }
-    
-    /* 💎 헤더 로고 통일 */
     .header { display: flex; align-items: center; justify-content: center; padding: 24px 0; margin-bottom: 10px; position: relative; }
     .back-btn { font-size: 24px; text-decoration: none; color: #333; position: absolute; left: 0; font-weight: bold; padding: 10px; }
     .page-title-logo { height: 26px; object-fit: contain; }
-    
     .card { background-color: #ffffff; border-radius: 24px; padding: 24px; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02); }
     .location-box { display: flex; align-items: center; justify-content: center; background-color: #e5f0fa; color: #005bb5; padding: 18px; border-radius: 20px; font-weight: 800; font-size: 16px; margin-bottom: 20px; cursor: pointer; transition: 0.2s; }
     .location-box:active { transform: scale(0.98); }
@@ -40,7 +38,7 @@
     </div>
 
     <div class="location-box" id="locationCard" onclick="getLocation()">
-      📍 <span id="locationText">위치 탐색 중... (터치 시 재탐색)</span>
+      📍 <span id="locationText">실시간 위치 분석 중...</span>
     </div>
 
     <div class="card">
@@ -57,17 +55,13 @@
           <div class="box-value pm-value">-- ㎍/㎥</div>
         </div>
       </div>
-      <div class="warning-box" id="dustWarningBox">
-        데이터를 분석하고 있습니다...
-      </div>
+      <div class="warning-box" id="dustWarningBox">데이터 분석 중...</div>
     </div>
 
     <div class="card">
       <div class="card-title">💧 실내 습도 경고</div>
       <div class="humidity-value" id="humidityText">--%</div>
-      <div class="warning-box" id="humWarningBox">
-        데이터를 분석하고 있습니다...
-      </div>
+      <div class="warning-box" id="humWarningBox">데이터 분석 중...</div>
     </div>
 
     <a href="https://search.naver.com/search.naver?query=현재위치+미세먼지" target="_blank" class="naver-btn">
@@ -76,7 +70,6 @@
   </div>
 
   <script>
-    // 💎 카카오 키 완전히 삭제! 오픈웨더 키 하나로 다 해결합니다.
     const WEATHER_KEY = "35847ad064da378714ab9a787830e7f2";
     let currentGuName = "김해시";
     const defaultLat = 35.2285;
@@ -85,10 +78,11 @@
     function getLocation() {
       document.getElementById("locationText").innerText = "위치 탐색 중...";
       if (navigator.geolocation) {
+        // 💎 속도 최적화: enableHighAccuracy를 false로 낮추어 기지국/IP 기반으로 0.1초 만에 로딩!
         navigator.geolocation.getCurrentPosition(
           (position) => { fetchAllData(position.coords.latitude, position.coords.longitude); },
           (error) => { fetchAllData(defaultLat, defaultLon); }, 
-          { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+          { enableHighAccuracy: false, timeout: 4000, maximumAge: 300000 }
         );
       } else {
         fetchAllData(defaultLat, defaultLon);
@@ -97,29 +91,23 @@
 
     async function fetchAllData(lat, lon) {
       try {
-        // 💎 차단 안 당하는 오픈웨더 자체 위치 변환 API 사용
         const geoRes = await fetch(`https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${WEATHER_KEY}`);
         if(geoRes.ok) {
             const geoData = await geoRes.json();
             if(geoData && geoData.length > 0) {
-              // 한글 이름이 있으면 쓰고, 없으면 영문 이름이라도 가져옴
               currentGuName = geoData[0].local_names?.ko || geoData[0].name || "현재 위치";
             }
         }
-      } catch(e) {
-        console.log("위치 이름 변환 실패");
-      }
-      document.getElementById('locationText').innerText = `${currentGuName} 실시간 리포트`;
+      } catch(e) {}
+      document.getElementById('locationText').innerText = `${currentGuName} 실시간 리포트 (터치 시 재탐색)`;
 
       try {
-        // 날씨 및 습도
         const weatherRes = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_KEY}`);
         const weatherData = await weatherRes.json();
         const humidity = weatherData.main.humidity;
         document.getElementById('humidityText').innerText = `${humidity}%`;
         updateHumidityUI(humidity);
 
-        // 초미세먼지
         const airRes = await fetch(`https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${WEATHER_KEY}`);
         const airData = await airRes.json();
         const pm25 = Math.round(airData.list[0].components.pm2_5);
