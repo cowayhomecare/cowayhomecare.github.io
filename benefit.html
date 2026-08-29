@@ -4,53 +4,45 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>이달의 혜택</title>
-  
-  <!-- 구글 머티리얼 아이콘 폰트 -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,600,1,0" />
-
   <style>
-    /* 공통 앱 스타일 */
     body { background-color: #f2f4f6; font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif; margin: 0; padding-bottom: 40px; display: flex; justify-content: center; }
     .app-container { width: 100%; max-width: 480px; background-color: #f2f4f6; min-height: 100vh; box-shadow: 0 0 20px rgba(0,0,0,0.05); }
     
-    /* 헤더 (로고 홈버튼 통일) */
     .header { display: flex; align-items: center; justify-content: center; padding: 24px 20px; position: relative; background: #ffffff; }
     .back-btn { font-size: 24px; text-decoration: none; color: #333; position: absolute; left: 16px; font-weight: bold; padding: 10px; }
     .page-title-logo { height: 26px; object-fit: contain; }
 
-    /* 💎 상단 탭 버튼 UI */
-    .tab-container { display: flex; background: #ffffff; padding: 0 20px 16px 20px; border-bottom-left-radius: 24px; border-bottom-right-radius: 24px; box-shadow: 0 4px 16px rgba(0,0,0,0.02); margin-bottom: 24px; }
-    .tab-btn { flex: 1; text-align: center; padding: 14px 0; font-size: 16px; font-weight: 700; color: #8b95a1; cursor: pointer; border-bottom: 3px solid transparent; transition: 0.2s; }
+    .tab-container { display: flex; background: #ffffff; padding: 0 20px 16px 20px; border-bottom-left-radius: 24px; border-bottom-right-radius: 24px; box-shadow: 0 4px 16px rgba(0,0,0,0.02); margin-bottom: 20px; }
+    .tab-btn { flex: 1; text-align: center; padding: 14px 0; font-size: 15px; font-weight: 700; color: #8b95a1; cursor: pointer; border-bottom: 3px solid transparent; transition: 0.2s; }
     .tab-btn.active { color: #191f28; font-weight: 800; border-bottom: 3px solid #3182f6; }
 
-    /* 컨텐츠 영역 */
-    .content-section { padding: 0 20px; display: none; animation: fadeIn 0.3s ease; }
+    .content-section { padding: 0 20px; display: none; }
     .content-section.active { display: block; }
 
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    /* 카드 리스트 스타일 */
+    .card-item { background: #ffffff; border-radius: 20px; padding: 20px; margin-bottom: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.02); position: relative; }
+    .badge-promo { display: inline-block; padding: 4px 8px; background: #fff0eb; color: #f76707; font-size: 11px; font-weight: 800; border-radius: 6px; margin-bottom: 8px; }
+    .card-header-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+    .card-name { font-size: 16px; font-weight: 800; color: #191f28; }
+    .card-sub { font-size: 12px; color: #8b95a1; font-weight: 600; margin-top: 2px; }
+    
+    /* 할인 금액 테이블 */
+    .discount-table { width: 100%; border-collapse: collapse; margin: 12px 0; background: #f9fafb; border-radius: 12px; overflow: hidden; }
+    .discount-table th, .discount-table td { padding: 10px 12px; font-size: 12px; text-align: center; }
+    .discount-table th { background: #f1f3f5; color: #4e5968; font-weight: 700; }
+    .discount-table td { color: #191f28; font-weight: 800; border-top: 1px solid #f1f3f5; }
+    .highlight-red { color: #f04452; }
 
-    /* 🎁 프로모션 카드 스타일 */
-    .promo-card { background: #ffffff; border-radius: 20px; padding: 24px; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); position: relative; overflow: hidden; }
-    .promo-badge { display: inline-block; padding: 6px 10px; background: #ffe4e6; color: #e11d48; font-size: 11px; font-weight: 800; border-radius: 8px; margin-bottom: 12px; }
-    .promo-badge.blue { background: #e0f2fe; color: #0284c7; }
-    .promo-title { font-size: 18px; font-weight: 800; color: #191f28; margin-bottom: 8px; line-height: 1.4; }
-    .promo-desc { font-size: 13px; color: #6b7280; font-weight: 500; line-height: 1.5; }
-    .promo-icon { position: absolute; right: -10px; bottom: -10px; font-size: 80px; color: rgba(0,0,0,0.03); transform: rotate(-15deg); }
-
-    /* 💳 제휴카드 리스트 스타일 */
-    .credit-card-item { background: #ffffff; border-radius: 20px; padding: 20px; margin-bottom: 12px; display: flex; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
-    .card-img-placeholder { width: 44px; height: 64px; background: #f1f3f5; border-radius: 6px; display: flex; justify-content: center; align-items: center; margin-right: 16px; border: 1px solid #e9ecef; }
-    .card-info { flex: 1; }
-    .card-name { font-size: 15px; font-weight: 800; color: #191f28; margin-bottom: 4px; }
-    .card-condition { font-size: 12px; color: #8b95a1; font-weight: 600; }
-    .card-discount { font-size: 16px; font-weight: 800; color: #3182f6; text-align: right; }
-    .card-discount span { font-size: 12px; color: #8b95a1; font-weight: 600; display: block; margin-top: 2px; }
+    /* 버튼 그룹 */
+    .btn-row { display: flex; gap: 8px; margin-top: 14px; }
+    .action-btn { flex: 1; padding: 12px; border-radius: 12px; border: none; font-size: 13px; font-weight: 800; cursor: pointer; text-align: center; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 4px; }
+    .btn-call { background: #e8f3ff; color: #1b64da; }
+    .btn-apply { background: #3182f6; color: white; }
   </style>
 </head>
 <body>
   <div class="app-container">
-    
-    <!-- 헤더 -->
     <div class="header">
       <a href="main.html" class="back-btn">←</a>
       <a href="main.html">
@@ -58,93 +50,156 @@
       </a>
     </div>
 
-    <!-- 탭 버튼 -->
     <div class="tab-container">
-      <div class="tab-btn active" onclick="switchTab('promo')">🎁 프로모션</div>
-      <div class="tab-btn" onclick="switchTab('credit')">💳 제휴카드</div>
+      <div class="tab-btn active" onclick="switchTab('credit')">💳 제휴카드 (9종)</div>
+      <div class="tab-btn" onclick="switchTab('promo')">🎁 프로모션</div>
     </div>
 
-    <!-- 탭 1: 프로모션 컨텐츠 -->
-    <div id="promo-section" class="content-section active">
+    <!-- 💳 제휴카드 탭 -->
+    <div id="credit-section" class="content-section active">
       
-      <!-- 프로모션 카드 1 -->
-      <div class="promo-card">
-        <span class="material-symbols-rounded promo-icon">celebration</span>
-        <div class="promo-badge">BEREX 페스타</div>
-        <div class="promo-title">매트리스 & 안마의자<br>렌탈료 최대 6개월 면제</div>
-        <div class="promo-desc">약정 기간별 할인율 차등 적용<br>타사 보상판매 추가 혜택 가능</div>
+      <!-- 1. 신한카드 (신규 프로모션) -->
+      <div class="card-item">
+        <span class="badge-promo">🔥 60개월간 최대 1.1만원 추가 할인 (신규)</span>
+        <div class="card-header-row">
+          <div>
+            <div class="card-name">코웨이 신한카드</div>
+            <div class="card-sub">연회비 2.7만원~3만원</div>
+          </div>
+        </div>
+        <table class="discount-table">
+          <tr><th>전월 실적</th><th>기본 할인</th><th>추가 혜택</th><th>최종 월 할인</th></tr>
+          <tr><td>30만원 이상</td><td>13,000원</td><td>+11,000원</td><td class="highlight-red">24,000원</td></tr>
+          <tr><td>70만원 이상</td><td>17,000원</td><td>+7,000원</td><td class="highlight-red">24,000원</td></tr>
+          <tr><td>150만원 이상</td><td>30,000원</td><td>-</td><td class="highlight-red">30,000원</td></tr>
+        </table>
+        <div class="btn-row">
+          <a href="tel:1833-6013" class="action-btn btn-call">📞 신청 문의</a>
+          <a href="https://shcard.io/coway" target="_blank" class="action-btn btn-apply">🔗 온라인 신청</a>
+        </div>
       </div>
 
-      <!-- 프로모션 카드 2 -->
-      <div class="promo-card">
-        <span class="material-symbols-rounded promo-icon">water_drop</span>
-        <div class="promo-badge blue">신제품 출시 특가</div>
-        <div class="promo-title">아이콘 정수기 2<br>월 납입금 10% 즉시 할인</div>
-        <div class="promo-desc">신규 고객 한정 사은품 추가 증정<br>(재고 소진 시 조기 종료)</div>
+      <!-- 2. 현대카드 M Edition3 -->
+      <div class="card-item">
+        <span class="badge-promo">🔥 36개월간 월 1만원 추가 할인 (신규)</span>
+        <div class="card-header-row">
+          <div>
+            <div class="card-name">코웨이 현대카드 M Edition3</div>
+            <div class="card-sub">연회비 3만원 (코스트코 결제 가능)</div>
+          </div>
+        </div>
+        <table class="discount-table">
+          <tr><th>전월 실적</th><th>기본 할인</th><th>추가 혜택</th><th>최종 월 할인</th></tr>
+          <tr><td>50만원 이상</td><td>15,000원</td><td>+10,000원</td><td class="highlight-red">25,000원</td></tr>
+          <tr><td>100만원 이상</td><td>20,000원</td><td>+10,000원</td><td class="highlight-red">30,000원</td></tr>
+        </table>
+        <div class="btn-row">
+          <a href="tel:02-2655-5003" class="action-btn btn-call">📞 ARS 신청</a>
+        </div>
+      </div>
+
+      <!-- 3. 우리카드 ICON -->
+      <div class="card-item">
+        <span class="badge-promo">🔥 60개월간 최대 1.1만원 추가 할인 (신규)</span>
+        <div class="card-header-row">
+          <div>
+            <div class="card-name">코웨이 ICON 우리카드</div>
+            <div class="card-sub">연회비 2.5만원</div>
+          </div>
+        </div>
+        <table class="discount-table">
+          <tr><th>전월 실적</th><th>기본 할인</th><th>추가 혜택</th><th>최종 월 할인</th></tr>
+          <tr><td>30만원 이상</td><td>13,000원</td><td>+11,000원</td><td class="highlight-red">24,000원</td></tr>
+          <tr><td>80만원 이상</td><td>17,000원</td><td>+7,000원</td><td class="highlight-red">24,000원</td></tr>
+          <tr><td>150만원 이상</td><td>23,000원</td><td>+7,000원</td><td class="highlight-red">30,000원</td></tr>
+        </table>
+        <div class="btn-row">
+          <a href="tel:1800-0859" class="action-btn btn-call">📞 신청 문의</a>
+        </div>
+      </div>
+
+      <!-- 4. KB국민 코웨이 II 카드 -->
+      <div class="card-item">
+        <span class="badge-promo">🔥 36개월간 최대 1.1만원 추가 할인</span>
+        <div class="card-header-row">
+          <div>
+            <div class="card-name">KB국민 코웨이Ⅱ 카드</div>
+            <div class="card-sub">연회비 3만원</div>
+          </div>
+        </div>
+        <table class="discount-table">
+          <tr><th>전월 실적</th><th>기본 할인</th><th>추가 혜택</th><th>최종 월 할인</th></tr>
+          <tr><td>40만원 이상</td><td>15,000원</td><td>+11,000원</td><td class="highlight-red">26,000원</td></tr>
+          <tr><td>80만원 이상</td><td>20,000원</td><td>+10,000원</td><td class="highlight-red">30,000원</td></tr>
+        </table>
+        <div class="btn-row">
+          <a href="tel:1644-8388" class="action-btn btn-call">📞 신청 문의</a>
+        </div>
+      </div>
+
+      <!-- 5. 삼성카드 -->
+      <div class="card-item">
+        <span class="badge-promo">🔥 60개월간 월 최대 1.5만원 추가 할인</span>
+        <div class="card-header-row">
+          <div>
+            <div class="card-name">코웨이 삼성카드</div>
+            <div class="card-sub">연회비 1.5만원 (생활요금 추가할인)</div>
+          </div>
+        </div>
+        <table class="discount-table">
+          <tr><th>전월 실적</th><th>기본 할인</th><th>추가 혜택</th><th>최종 월 할인</th></tr>
+          <tr><td>30만원 이상</td><td>7,000원</td><td>+15,000원</td><td class="highlight-red">22,000원</td></tr>
+          <tr><td>70만원 이상</td><td>10,000원</td><td>+14,000원</td><td class="highlight-red">24,000원</td></tr>
+          <tr><td>120만원 이상</td><td>13,000원</td><td>+13,000원</td><td class="highlight-red">26,000원</td></tr>
+        </table>
+        <div class="btn-row">
+          <a href="tel:1588-7540" class="action-btn btn-call">📞 신청 문의</a>
+        </div>
+      </div>
+
+      <!-- 6. NH농협카드 -->
+      <div class="card-item">
+        <span class="badge-promo">🎁 60개월간 1만원 추가 캐시백</span>
+        <div class="card-header-row">
+          <div>
+            <div class="card-name">코웨이 NH올원카드</div>
+            <div class="card-sub">연회비 1만원~1.2만원</div>
+          </div>
+        </div>
+        <table class="discount-table">
+          <tr><th>전월 실적</th><th>기본 할인</th><th>추가 캐시백</th><th>최종 월 할인</th></tr>
+          <tr><td>30만원 이상</td><td>10,000원</td><td>+10,000원</td><td class="highlight-red">20,000원</td></tr>
+          <tr><td>100만원 이상</td><td>15,000원</td><td>+10,000원</td><td class="highlight-red">25,000원</td></tr>
+          <tr><td>200만원 이상</td><td>30,000원</td><td>+10,000원</td><td class="highlight-red">40,000원</td></tr>
+        </table>
+        <div class="btn-row">
+          <a href="tel:1644-2866" class="action-btn btn-call">📞 신청 문의</a>
+          <a href="https://go.nhcard.com/Gsci/Mo" target="_blank" class="action-btn btn-apply">🔗 온라인 신청</a>
+        </div>
       </div>
 
     </div>
 
-    <!-- 탭 2: 제휴카드 컨텐츠 -->
-    <div id="credit-section" class="content-section">
-      
-      <div class="credit-card-item">
-        <div class="card-img-placeholder">
-          <span class="material-symbols-rounded" style="color:#ffc107;">credit_card</span>
-        </div>
-        <div class="card-info">
-          <div class="card-name">코웨이 KB국민카드</div>
-          <div class="card-condition">전월 실적 30만원 이상</div>
-        </div>
-        <div class="card-discount">
-          15,000원<span>청구 할인</span>
-        </div>
+    <!-- 🎁 프로모션 탭 -->
+    <div id="promo-section" class="content-section">
+      <div style="background:white; padding:24px; border-radius:20px; text-align:center; color:#8b95a1; font-size:14px; font-weight:700;">
+        🎁 이달의 전제품 프로모션 라인업 업데이트 중입니다.
       </div>
-
-      <div class="credit-card-item">
-        <div class="card-img-placeholder">
-          <span class="material-symbols-rounded" style="color:#ed1c24;">credit_card</span>
-        </div>
-        <div class="card-info">
-          <div class="card-name">코웨이 롯데카드</div>
-          <div class="card-condition">전월 실적 30만원 이상</div>
-        </div>
-        <div class="card-discount">
-          13,000원<span>청구 할인</span>
-        </div>
-      </div>
-
-      <div class="credit-card-item">
-        <div class="card-img-placeholder">
-          <span class="material-symbols-rounded" style="color:#0054a6;">credit_card</span>
-        </div>
-        <div class="card-info">
-          <div class="card-name">코웨이 삼성카드</div>
-          <div class="card-condition">전월 실적 30만원 이상</div>
-        </div>
-        <div class="card-discount">
-          13,000원<span>청구 할인</span>
-        </div>
-      </div>
-
     </div>
 
   </div>
 
   <script>
-    // 탭 전환 자바스크립트 마법
     function switchTab(tabName) {
-      // 1. 모든 버튼과 섹션 초기화
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
       document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active'));
 
-      // 2. 선택한 탭 활성화
-      if(tabName === 'promo') {
+      if(tabName === 'credit') {
         document.querySelectorAll('.tab-btn')[0].classList.add('active');
-        document.getElementById('promo-section').classList.add('active');
+        document.getElementById('credit-section').classList.add('active');
       } else {
         document.querySelectorAll('.tab-btn')[1].classList.add('active');
-        document.getElementById('credit-section').classList.add('active');
+        document.getElementById('promo-section').classList.add('active');
       }
     }
   </script>
