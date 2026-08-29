@@ -27,7 +27,8 @@
     .discount-table td { color: #191f28; font-weight: 800; border-top: 1px solid #f1f3f5; }
     .highlight-red { color: #f04452; }
     .btn-row { display: flex; gap: 6px; margin-top: 14px; }
-    .action-btn { flex: 1; padding: 10px 4px; border-radius: 10px; border: none; font-size: 12px; font-weight: 800; cursor: pointer; text-align: center; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 2px; }
+    .action-btn { flex: 1; padding: 10px 4px; border-radius: 10px; border: none; font-size: 12px; font-weight: 800; cursor: pointer; text-align: center; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 2px; transition: 0.2s; }
+    .action-btn:active { transform: scale(0.96); }
     .btn-call { background: #e8f3ff; color: #1b64da; }
     .btn-sms { background: #e6f9ec; color: #0ca678; }
     .btn-copy { background: #f1f3f5; color: #4e5968; }
@@ -55,12 +56,8 @@
           📢 고객 전달용 전체 카드 혜택 요약 모음
         </div>
         <div class="btn-row" style="margin-top:0;">
-          <a href="sms:?body=[코웨이 주요 제휴카드 할인 혜택 요약 안내]%0A%0A1. 신한카드: 최대 2.4만~3만원 할인 (1833-6013)%0A2. 현대카드: 최대 2.5만~3만원 할인 (02-2655-5003)%0A3. 우리카드: 최대 2.4만~3만원 할인 (1800-0859)%0A4. 국민카드: 최대 2.6만~3만원 할인 (1644-8388)%0A5. 삼성카드: 최대 2.2만~2.6만원 할인 (1588-7540)%0A6. 농협카드: 최대 2.0만~4.0만원 할인 (1644-2866)%0A7. 롯데카드: 최대 1.3만~2.5만원 할인 (1577-5208)%0A8. IBK카드: 최대 1.3만~2.3만원 할인 (1566-0088)%0A9. 하나카드: 최대 1.3만~2.5만원 할인 (1588-1771)%0A%0A* 전월 실적 조건 충족 시 적용" class="action-btn btn-sms" style="padding:12px;">
-            📱 9종 전체혜택 문자전송
-          </a>
-          <button onclick="copyText('[코웨이 주요 제휴카드 할인 혜택 요약 안내]\n\n1. 신한카드: 최대 2.4만~3만원 할인 (1833-6013)\n2. 현대카드: 최대 2.5만~3만원 할인 (02-2655-5003)\n3. 우리카드: 최대 2.4만~3만원 할인 (1800-0859)\n4. 국민카드: 최대 2.6만~3만원 할인 (1644-8388)\n5. 삼성카드: 최대 2.2만~2.6만원 할인 (1588-7540)\n6. 농협카드: 최대 2.0만~4.0만원 할인 (1644-2866)\n7. 롯데카드: 최대 1.3만~2.5만원 할인 (1577-5208)\n8. IBK카드: 최대 1.3만~2.3만원 할인 (1566-0088)\n9. 하나카드: 최대 1.3만~2.5만원 할인 (1588-1771)\n\n* 전월 실적 조건 충족 시 적용')" class="action-btn btn-copy" style="padding:12px;">
-            📋 전체 복사 (카톡용)
-          </button>
+          <button onclick="sendSMS('all')" class="action-btn btn-sms" style="padding:12px;">📱 9종 전체 문자전송</button>
+          <button onclick="copyVVIPText('all')" class="action-btn btn-copy" style="padding:12px;">📋 전체 복사 (카톡용)</button>
         </div>
       </div>
 
@@ -71,12 +68,12 @@
         <div class="card-sub">연회비 2.7만원~3만원 | 신청 1833-6013</div>
         <table class="discount-table">
           <tr><th>전월 실적</th><th>30만원↑</th><th>70만원↑</th><th>150만원↑</th></tr>
-          <tr><td>최종 월 할인</td><td class="highlight-red">24,000원</td><td class="highlight-red">24,000원</td><td class="highlight-red">30,000원</td></tr>
+          <tr><td>최종 할인</td><td class="highlight-red">24,000원</td><td class="highlight-red">24,000원</td><td class="highlight-red">30,000원</td></tr>
         </table>
         <div class="btn-row">
           <a href="tel:1833-6013" class="action-btn btn-call">📞 전화</a>
-          <a href="sms:?body=[코웨이 제휴카드 안내]%0A- 카드명: 코웨이 신한카드%0A- 혜택: 전월실적 충족 시 월 최대 24,000원~30,000원 청구할인%0A- 신청문의: 1833-6013%0A- 온라인신청: https://shcard.io/coway" class="action-btn btn-sms">📱 문자공유</a>
-          <button onclick="copyText('[코웨이 제휴카드 안내]\n- 카드명: 코웨이 신한카드\n- 혜택: 전월실적 충족 시 월 최대 24,000원~30,000원 청구할인\n- 신청문의: 1833-6013\n- 온라인신청: https://shcard.io/coway')" class="action-btn btn-copy">📋 복사</button>
+          <button onclick="sendSMS('shinhan')" class="action-btn btn-sms">📱 문자공유</button>
+          <button onclick="copyVVIPText('shinhan')" class="action-btn btn-copy">📋 복사</button>
         </div>
       </div>
 
@@ -87,12 +84,12 @@
         <div class="card-sub">연회비 3만원 | ARS 신청 02-2655-5003</div>
         <table class="discount-table">
           <tr><th>전월 실적</th><th>50만원↑</th><th>100만원↑</th></tr>
-          <tr><td>최종 월 할인</td><td class="highlight-red">25,000원</td><td class="highlight-red">30,000원</td></tr>
+          <tr><td>최종 할인</td><td class="highlight-red">25,000원</td><td class="highlight-red">30,000원</td></tr>
         </table>
         <div class="btn-row">
           <a href="tel:02-2655-5003" class="action-btn btn-call">📞 전화</a>
-          <a href="sms:?body=[코웨이 제휴카드 안내]%0A- 카드명: 코웨이 현대카드 M Edition3%0A- 혜택: 전월실적 충족 시 월 최대 25,000원~30,000원 청구할인%0A- ARS신청: 02-2655-5003" class="action-btn btn-sms">📱 문자공유</a>
-          <button onclick="copyText('[코웨이 제휴카드 안내]\n- 카드명: 코웨이 현대카드 M Edition3\n- 혜택: 전월실적 충족 시 월 최대 25,000원~30,000원 청구할인\n- ARS신청: 02-2655-5003')" class="action-btn btn-copy">📋 복사</button>
+          <button onclick="sendSMS('hyundai')" class="action-btn btn-sms">📱 문자공유</button>
+          <button onclick="copyVVIPText('hyundai')" class="action-btn btn-copy">📋 복사</button>
         </div>
       </div>
 
@@ -103,12 +100,12 @@
         <div class="card-sub">연회비 2.5만원 | 신청 1800-0859</div>
         <table class="discount-table">
           <tr><th>전월 실적</th><th>30만원↑</th><th>80만원↑</th><th>150만원↑</th></tr>
-          <tr><td>최종 월 할인</td><td class="highlight-red">24,000원</td><td class="highlight-red">24,000원</td><td class="highlight-red">30,000원</td></tr>
+          <tr><td>최종 할인</td><td class="highlight-red">24,000원</td><td class="highlight-red">24,000원</td><td class="highlight-red">30,000원</td></tr>
         </table>
         <div class="btn-row">
           <a href="tel:1800-0859" class="action-btn btn-call">📞 전화</a>
-          <a href="sms:?body=[코웨이 제휴카드 안내]%0A- 카드명: 코웨이 ICON 우리카드%0A- 혜택: 전월실적 충족 시 월 최대 24,000원~30,000원 청구할인%0A- 신청문의: 1800-0859" class="action-btn btn-sms">📱 문자공유</a>
-          <button onclick="copyText('[코웨이 제휴카드 안내]\n- 카드명: 코웨이 ICON 우리카드\n- 혜택: 전월실적 충족 시 월 최대 24,000원~30,000원 청구할인\n- 신청문의: 1800-0859')" class="action-btn btn-copy">📋 복사</button>
+          <button onclick="sendSMS('woori')" class="action-btn btn-sms">📱 문자공유</button>
+          <button onclick="copyVVIPText('woori')" class="action-btn btn-copy">📋 복사</button>
         </div>
       </div>
 
@@ -119,12 +116,12 @@
         <div class="card-sub">연회비 3만원 | 신청 1644-8388</div>
         <table class="discount-table">
           <tr><th>전월 실적</th><th>40만원↑</th><th>80만원↑</th></tr>
-          <tr><td>최종 월 할인</td><td class="highlight-red">26,000원</td><td class="highlight-red">30,000원</td></tr>
+          <tr><td>최종 할인</td><td class="highlight-red">26,000원</td><td class="highlight-red">30,000원</td></tr>
         </table>
         <div class="btn-row">
           <a href="tel:1644-8388" class="action-btn btn-call">📞 전화</a>
-          <a href="sms:?body=[코웨이 제휴카드 안내]%0A- 카드명: KB국민 코웨이Ⅱ 카드%0A- 혜택: 전월실적 충족 시 월 최대 26,000원~30,000원 청구할인%0A- 신청문의: 1644-8388" class="action-btn btn-sms">📱 문자공유</a>
-          <button onclick="copyText('[코웨이 제휴카드 안내]\n- 카드명: KB국민 코웨이Ⅱ 카드\n- 혜택: 전월실적 충족 시 월 최대 26,000원~30,000원 청구할인\n- 신청문의: 1644-8388')" class="action-btn btn-copy">📋 복사</button>
+          <button onclick="sendSMS('kb')" class="action-btn btn-sms">📱 문자공유</button>
+          <button onclick="copyVVIPText('kb')" class="action-btn btn-copy">📋 복사</button>
         </div>
       </div>
 
@@ -135,12 +132,12 @@
         <div class="card-sub">연회비 1.5만원 | 신청 1588-7540</div>
         <table class="discount-table">
           <tr><th>전월 실적</th><th>30만원↑</th><th>70만원↑</th><th>120만원↑</th></tr>
-          <tr><td>최종 월 할인</td><td class="highlight-red">22,000원</td><td class="highlight-red">24,000원</td><td class="highlight-red">26,000원</td></tr>
+          <tr><td>최종 할인</td><td class="highlight-red">22,000원</td><td class="highlight-red">24,000원</td><td class="highlight-red">26,000원</td></tr>
         </table>
         <div class="btn-row">
           <a href="tel:1588-7540" class="action-btn btn-call">📞 전화</a>
-          <a href="sms:?body=[코웨이 제휴카드 안내]%0A- 카드명: 코웨이 삼성카드%0A- 혜택: 전월실적 충족 시 월 최대 22,000원~26,000원 청구할인%0A- 신청문의: 1588-7540" class="action-btn btn-sms">📱 문자공유</a>
-          <button onclick="copyText('[코웨이 제휴카드 안내]\n- 카드명: 코웨이 삼성카드\n- 혜택: 전월실적 충족 시 월 최대 22,000원~26,000원 청구할인\n- 신청문의: 1588-7540')" class="action-btn btn-copy">📋 복사</button>
+          <button onclick="sendSMS('samsung')" class="action-btn btn-sms">📱 문자공유</button>
+          <button onclick="copyVVIPText('samsung')" class="action-btn btn-copy">📋 복사</button>
         </div>
       </div>
 
@@ -151,12 +148,12 @@
         <div class="card-sub">연회비 1만원~1.2만원 | 신청 1644-2866</div>
         <table class="discount-table">
           <tr><th>전월 실적</th><th>30만원↑</th><th>100만원↑</th><th>200만원↑</th></tr>
-          <tr><td>최종 월 할인</td><td class="highlight-red">20,000원</td><td class="highlight-red">25,000원</td><td class="highlight-red">40,000원</td></tr>
+          <tr><td>최종 할인</td><td class="highlight-red">20,000원</td><td class="highlight-red">25,000원</td><td class="highlight-red">40,000원</td></tr>
         </table>
         <div class="btn-row">
           <a href="tel:1644-2866" class="action-btn btn-call">📞 전화</a>
-          <a href="sms:?body=[코웨이 제휴카드 안내]%0A- 카드명: 코웨이 NH올원카드%0A- 혜택: 전월실적 충족 시 월 최대 20,000원~40,000원 청구할인%0A- 신청문의: 1644-2866%0A- 온라인신청: https://go.nhcard.com/Gsci/Mo" class="action-btn btn-sms">📱 문자공유</a>
-          <button onclick="copyText('[코웨이 제휴카드 안내]\n- 카드명: 코웨이 NH올원카드\n- 혜택: 전월실적 충족 시 월 최대 20,000원~40,000원 청구할인\n- 신청문의: 1644-2866\n- 온라인신청: https://go.nhcard.com/Gsci/Mo')" class="action-btn btn-copy">📋 복사</button>
+          <button onclick="sendSMS('nh')" class="action-btn btn-sms">📱 문자공유</button>
+          <button onclick="copyVVIPText('nh')" class="action-btn btn-copy">📋 복사</button>
         </div>
       </div>
 
@@ -170,8 +167,8 @@
         </table>
         <div class="btn-row">
           <a href="tel:1577-5208" class="action-btn btn-call">📞 전화</a>
-          <a href="sms:?body=[코웨이 제휴카드 안내]%0A- 카드명: 코웨이 X LOCA 롯데카드%0A- 혜택: 전월실적 충족 시 월 최대 13,000원~25,000원 청구할인%0A- 신청문의: 1577-5208" class="action-btn btn-sms">📱 문자공유</a>
-          <button onclick="copyText('[코웨이 제휴카드 안내]\n- 카드명: 코웨이 X LOCA 롯데카드\n- 혜택: 전월실적 충족 시 월 최대 13,000원~25,000원 청구할인\n- 신청문의: 1577-5208')" class="action-btn btn-copy">📋 복사</button>
+          <button onclick="sendSMS('lotte')" class="action-btn btn-sms">📱 문자공유</button>
+          <button onclick="copyVVIPText('lotte')" class="action-btn btn-copy">📋 복사</button>
         </div>
       </div>
 
@@ -185,8 +182,8 @@
         </table>
         <div class="btn-row">
           <a href="tel:1566-0088" class="action-btn btn-call">📞 전화</a>
-          <a href="sms:?body=[코웨이 제휴카드 안내]%0A- 카드명: 코웨이 IBK카드%0A- 혜택: 전월실적 충족 시 월 최대 13,000원~23,000원 청구할인%0A- 신청문의: 1566-0088" class="action-btn btn-sms">📱 문자공유</a>
-          <button onclick="copyText('[코웨이 제휴카드 안내]\n- 카드명: 코웨이 IBK카드\n- 혜택: 전월실적 충족 시 월 최대 13,000원~23,000원 청구할인\n- 신청문의: 1566-0088')" class="action-btn btn-copy">📋 복사</button>
+          <button onclick="sendSMS('ibk')" class="action-btn btn-sms">📱 문자공유</button>
+          <button onclick="copyVVIPText('ibk')" class="action-btn btn-copy">📋 복사</button>
         </div>
       </div>
 
@@ -200,16 +197,17 @@
         </table>
         <div class="btn-row">
           <a href="tel:1588-1771" class="action-btn btn-call">📞 전화</a>
-          <a href="sms:?body=[코웨이 제휴카드 안내]%0A- 카드명: 마이 코웨이 하나카드%0A- 혜택: 전월실적 충족 시 월 최대 13,000원~25,000원 청구할인%0A- 신청문의: 1588-1771" class="action-btn btn-sms">📱 문자공유</a>
-          <button onclick="copyText('[코웨이 제휴카드 안내]\n- 카드명: 마이 코웨이 하나카드\n- 혜택: 전월실적 충족 시 월 최대 13,000원~25,000원 청구할인\n- 신청문의: 1588-1771')" class="action-btn btn-copy">📋 복사</button>
+          <button onclick="sendSMS('hana')" class="action-btn btn-sms">📱 문자공유</button>
+          <button onclick="copyVVIPText('hana')" class="action-btn btn-copy">📋 복사</button>
         </div>
       </div>
 
     </div>
 
+    <!-- 🎁 프로모션 탭 -->
     <div id="promo-section" class="content-section">
       <div style="background:white; padding:24px; border-radius:20px; text-align:center; color:#8b95a1; font-size:14px; font-weight:700;">
-        🎁 이달의 전제품 프로모션 라인업 업데이트 중입니다.
+        🎁 이달의 전제품 프로모션 라인업을<br>월요일에 업데이트할 예정입니다.
       </div>
     </div>
 
@@ -229,9 +227,39 @@
       }
     }
 
-    function copyText(text) {
+    // 💎 VVIP 공유용 고품격 텍스트 데이터베이스
+    const vvipTexts = {
+      "all": `[COWAY VVIP 맞춤 혜택 리포트]\n고객님, 안내해 드린 코웨이 제휴카드 특별 할인 혜택을 요약해 드립니다.\n\n■ 1. 코웨이 신한 (가장 추천🔥)\n- 혜택: 월 최대 3만원 할인\n- 📞 1833-6013\n\n■ 2. 코웨이 현대 M Edition3\n- 혜택: 월 최대 3만원 할인\n- 📞 02-2655-5003\n\n■ 3. 코웨이 ICON 우리\n- 혜택: 월 최대 3만원 할인\n- 📞 1800-0859\n\n■ 4. KB국민 코웨이Ⅱ\n- 혜택: 월 최대 3만원 할인\n- 📞 1644-8388\n\n■ 5. 코웨이 삼성\n- 혜택: 월 최대 2.6만원 할인\n- 📞 1588-7540\n\n■ 6. 코웨이 NH올원\n- 혜택: 월 최대 4만원 캐시백/할인\n- 📞 1644-2866\n\n■ 7. 코웨이 X LOCA 롯데\n- 혜택: 월 최대 2.5만원 할인\n- 📞 1577-5208\n\n■ 8. 코웨이 IBK\n- 혜택: 월 최대 2.3만원 할인\n- 📞 1566-0088\n\n■ 9. 마이 코웨이 하나\n- 혜택: 월 최대 2.5만원 할인\n- 📞 1588-1771\n\n* 혜택은 전월 실적 조건 충족 시 적용됩니다. 궁금하신 점은 편하게 연락 주십시오!`,
+      
+      "shinhan": `[COWAY VVIP 맞춤 혜택 리포트]\n고객님, 안내해 드린 [코웨이 신한카드] 특별 혜택입니다.\n\n■ 코웨이 신한카드 (신규 프로모션🔥)\n- 혜택: 60개월간 월 최대 30,000원 추가 청구할인!\n\n[실적별 상세 할인액]\n· 30만 원 이상 ➡️ 월 24,000원 할인\n· 70만 원 이상 ➡️ 월 24,000원 할인\n· 150만 원 이상 ➡️ 월 30,000원 할인\n\n- 📞 신청 전용 ARS: 1833-6013\n- 🔗 간편 신청: https://shcard.io/coway\n\n* 신규 발급 및 전월 실적 충족 시 적용됩니다. 편하게 문의해 주십시오!`,
+
+      "hyundai": `[COWAY VVIP 맞춤 혜택 리포트]\n고객님, 안내해 드린 [코웨이 현대카드] 특별 혜택입니다.\n\n■ 코웨이 현대카드 M Edition3 (신규 프로모션🔥)\n- 혜택: 36개월간 월 최대 30,000원 추가 청구할인!\n\n[실적별 상세 할인액]\n· 50만 원 이상 ➡️ 월 25,000원 할인\n· 100만 원 이상 ➡️ 월 30,000원 할인\n\n- 📞 신청 전용 ARS: 02-2655-5003\n\n* 신규 발급 및 전월 실적 충족 시 적용됩니다. 편하게 문의해 주십시오!`,
+
+      "woori": `[COWAY VVIP 맞춤 혜택 리포트]\n고객님, 안내해 드린 [우리카드] 특별 혜택입니다.\n\n■ 코웨이 ICON 우리카드 (신규 프로모션🔥)\n- 혜택: 60개월간 월 최대 30,000원 추가 청구할인!\n\n[실적별 상세 할인액]\n· 30만 원 이상 ➡️ 월 24,000원 할인\n· 80만 원 이상 ➡️ 월 24,000원 할인\n· 150만 원 이상 ➡️ 월 30,000원 할인\n\n- 📞 신청 전용 ARS: 1800-0859\n\n* 신규 발급 및 전월 실적 충족 시 적용됩니다. 편하게 문의해 주십시오!`,
+
+      "kb": `[COWAY VVIP 맞춤 혜택 리포트]\n고객님, 안내해 드린 [국민카드] 특별 혜택입니다.\n\n■ KB국민 코웨이Ⅱ 카드 (신규 프로모션🔥)\n- 혜택: 36개월간 월 최대 30,000원 추가 청구할인!\n\n[실적별 상세 할인액]\n· 40만 원 이상 ➡️ 월 26,000원 할인\n· 80만 원 이상 ➡️ 월 30,000원 할인\n\n- 📞 신청 전용 ARS: 1644-8388\n\n* 신규 발급 및 전월 실적 충족 시 적용됩니다. 편하게 문의해 주십시오!`,
+
+      "samsung": `[COWAY VVIP 맞춤 혜택 리포트]\n고객님, 안내해 드린 [삼성카드] 특별 혜택입니다.\n\n■ 코웨이 삼성카드 (신규 프로모션🔥)\n- 혜택: 60개월간 월 최대 26,000원 추가 청구할인!\n\n[실적별 상세 할인액]\n· 30만 원 이상 ➡️ 월 22,000원 할인\n· 70만 원 이상 ➡️ 월 24,000원 할인\n· 120만 원 이상 ➡️ 월 26,000원 할인\n\n- 📞 신청 전용 ARS: 1588-7540\n\n* 신규 발급 및 전월 실적 충족 시 적용됩니다. 편하게 문의해 주십시오!`,
+
+      "nh": `[COWAY VVIP 맞춤 혜택 리포트]\n고객님, 안내해 드린 [농협카드] 특별 혜택입니다.\n\n■ 코웨이 NH올원카드 (신규 프로모션🎁)\n- 혜택: 60개월간 추가 캐시백 포함 월 최대 40,000원 혜택!\n\n[실적별 상세 할인액]\n· 30만 원 이상 ➡️ 월 20,000원 혜택\n· 100만 원 이상 ➡️ 월 25,000원 혜택\n· 200만 원 이상 ➡️ 월 40,000원 혜택\n\n- 📞 신청 전용 ARS: 1644-2866\n- 🔗 온라인 간편 신청: https://go.nhcard.com/Gsci/Mo\n\n* 신규 발급 및 전월 실적 충족 시 적용됩니다. 편하게 문의해 주십시오!`,
+
+      "lotte": `[COWAY VVIP 맞춤 혜택 리포트]\n고객님, 안내해 드린 [롯데카드] 혜택입니다.\n\n■ 코웨이 X LOCA 롯데카드\n- 혜택: 월 최대 25,000원 청구할인!\n\n[실적별 상세 할인액]\n· 30만 원 이상 ➡️ 월 13,000원 할인\n· 70만 원 이상 ➡️ 월 16,000원 할인\n· 150만 원 이상 ➡️ 월 25,000원 할인\n\n- 📞 신청 전용 ARS: 1577-5208\n\n* 전월 실적 조건 충족 시 적용됩니다. 편하게 문의해 주십시오!`,
+
+      "ibk": `[COWAY VVIP 맞춤 혜택 리포트]\n고객님, 안내해 드린 [기업은행카드] 혜택입니다.\n\n■ 코웨이 IBK카드\n- 혜택: 월 최대 23,000원 청구할인!\n\n[실적별 상세 할인액]\n· 30만 원 이상 ➡️ 월 13,000원 할인\n· 70만 원 이상 ➡️ 월 17,000원 할인\n· 120만 원 이상 ➡️ 월 23,000원 할인\n\n- 📞 신청 전용 ARS: 1566-0088\n\n* 전월 실적 조건 충족 시 적용됩니다. 편하게 문의해 주십시오!`,
+
+      "hana": `[COWAY VVIP 맞춤 혜택 리포트]\n고객님, 안내해 드린 [하나카드] 혜택입니다.\n\n■ 마이 코웨이 하나카드\n- 혜택: 월 최대 25,000원 청구할인!\n\n[실적별 상세 할인액]\n· 30만 원 이상 ➡️ 월 13,000원 할인\n· 80만 원 이상 ➡️ 월 18,000원 할인\n· 150만 원 이상 ➡️ 월 25,000원 할인\n\n- 📞 신청 전용 ARS: 1588-1771\n\n* 전월 실적 조건 충족 시 적용됩니다. 편하게 문의해 주십시오!`
+    };
+
+    function sendSMS(cardKey) {
+      const text = vvipTexts[cardKey];
+      // 문자로 안전하게 넘기기 위해 인코딩 처리
+      window.location.href = `sms:?body=${encodeURIComponent(text)}`;
+    }
+
+    function copyVVIPText(cardKey) {
+      const text = vvipTexts[cardKey];
       navigator.clipboard.writeText(text).then(() => {
-        alert("카톡 전송용 안내문구가 복사되었습니다!\n카톡 대화창에 붙여넣기 하세요.");
+        alert("VVIP 맞춤 혜택 리포트가 복사되었습니다!\n카톡 대화창에 바로 붙여넣기 하십시오.");
       }).catch(err => {
         alert("복사 실패: 수동으로 내용을 확인해 주세요.");
       });
