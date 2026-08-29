@@ -3,110 +3,130 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>코웨이 홈케어 메인</title>
+  <title>맞춤 견적 계산기</title>
+  
+  <!-- 구글 머티리얼 아이콘 폰트 -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,600,1,0" />
+
   <style>
-    body { background-color: #f4f7fa; font-family: -apple-system, BlinkMacSystemFont, sans-serif; margin: 0; padding-bottom: 80px; }
-    .header { background: #0b63ce; color: white; padding: 20px; text-align: center; font-size: 20px; font-weight: 900; }
-    .card { background: white; margin: 15px; padding: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-    .card-title { font-size: 18px; font-weight: 800; color: #0b63ce; margin-bottom: 15px; border-bottom: 2px solid #f4f7fa; padding-bottom: 10px;}
+    /* 공통 앱 스타일 */
+    body { background-color: #f2f4f6; font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif; margin: 0; padding-bottom: 40px; display: flex; justify-content: center; }
+    .app-container { width: 100%; max-width: 480px; background-color: #f2f4f6; min-height: 100vh; box-shadow: 0 0 20px rgba(0,0,0,0.05); padding: 0 20px; box-sizing: border-box; }
     
-    .input-group { margin-bottom: 12px; }
-    .input-group label { display: block; font-size: 13px; color: #555; margin-bottom: 5px; font-weight: 700; }
-    select, input { width: 100%; padding: 12px; border: 1.5px solid #e4e7ec; border-radius: 8px; font-size: 15px; font-weight: bold; }
-    select:focus, input:focus { border-color: #0b63ce; outline: none; }
+    /* 헤더 (로고 홈버튼 통일) */
+    .header { display: flex; align-items: center; justify-content: center; padding: 24px 0; margin-bottom: 10px; position: relative; }
+    .back-btn { font-size: 24px; text-decoration: none; color: #333; position: absolute; left: 0; font-weight: bold; padding: 10px; }
+    .page-title-logo { height: 26px; object-fit: contain; }
+
+    /* 계산기 카드 (토스 스타일) */
+    .card { background: #ffffff; padding: 24px; border-radius: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.02); margin-bottom: 20px; }
+    .card-title { font-size: 18px; font-weight: 800; color: #191f28; margin-bottom: 24px; display: flex; align-items: center; gap: 8px; }
     
-    .calc-btn { width: 100%; padding: 15px; background: #0b63ce; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 800; cursor: pointer; margin-top: 10px; }
-    .calc-btn:active { background: #084c9e; }
+    /* 입력 폼 스타일 */
+    .input-group { margin-bottom: 20px; }
+    .input-group label { display: block; font-size: 13px; color: #4e5968; margin-bottom: 8px; font-weight: 700; }
     
-    .result-box { margin-top: 15px; padding: 15px; background: #eff6ff; border-radius: 8px; text-align: center; border: 1.5px solid #0b63ce; }
-    .result-text { font-size: 14px; color: #0b63ce; font-weight: bold; margin-bottom: 5px; }
-    .result-price { font-size: 26px; font-weight: 900; color: #e53935; }
+    select, input { width: 100%; padding: 16px; border: 1px solid #e4e7ec; background-color: #f9fafb; border-radius: 16px; font-size: 15px; font-weight: 700; color: #333; box-sizing: border-box; outline: none; transition: 0.2s; appearance: none; }
+    select { background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b95a1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 16px center; background-size: 16px; }
+    select:focus, input:focus { border-color: #3182f6; background-color: #ffffff; box-shadow: 0 0 0 3px rgba(49,130,246,0.1); }
     
-    .bottom-nav { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 15px 0; box-shadow: 0 -5px 15px rgba(0,0,0,0.05); border-top-left-radius: 15px; border-top-right-radius: 15px;}
-    .nav-item { text-align: center; color: #adb5bd; font-size: 13px; font-weight: 800; }
-    .nav-item.active { color: #0b63ce; }
+    /* 계산 버튼 */
+    .calc-btn { width: 100%; padding: 18px; background: #3182f6; color: white; border: none; border-radius: 16px; font-size: 16px; font-weight: 800; cursor: pointer; transition: 0.2s; margin-top: 10px; }
+    .calc-btn:active { background: #1b64da; transform: scale(0.98); }
+    
+    /* 결과 박스 */
+    .result-box { margin-top: 24px; padding: 24px; background: #f2f8ff; border-radius: 16px; text-align: center; }
+    .result-text { font-size: 14px; color: #3182f6; font-weight: 700; margin-bottom: 8px; }
+    .result-price { font-size: 28px; font-weight: 900; color: #191f28; }
+    .result-price span { color: #f04452; } /* 할인 적용 시 강조 컬러 */
   </style>
 </head>
 <body>
-
-  <div class="header">COWAY 세일즈 웨폰</div>
-
-  <div class="card">
-    <div class="card-title">🛏️ BEREX 모디 매트리스 계산기</div>
+  <div class="app-container">
     
-    <!-- 옵션 선택기 (형님이 올려준 캡처 기반) -->
-    <div class="input-group">
-      <label>고객 유형 (렌탈구분)</label>
-      <select id="typeOpt">
-        <option value="0">신규 렌탈</option>
-        <option value="-5000">재렌탈 (할인적용)</option>
-      </select>
+    <!-- 💎 헤더 로고 통일 -->
+    <div class="header">
+      <a href="main.html" class="back-btn">←</a>
+      <a href="main.html">
+        <img src="logo.png" alt="COWAY" class="page-title-logo" onerror="this.outerHTML='<div style=\'font-size:20px;font-weight:900;color:#005bb5;\'>COWAY</div>'">
+      </a>
     </div>
 
-    <div class="input-group">
-      <label>사이즈 선택</label>
-      <select id="sizeOpt">
-        <option value="30000">슈퍼싱글 (SS)</option>
-        <option value="35000">퀸 (Q)</option>
-        <option value="40000">킹 (K)</option>
-        <option value="45000">라지킹 (LK)</option>
-      </select>
+    <div class="card">
+      <div class="card-title">
+        <span class="material-symbols-rounded" style="color: #3182f6;">bed</span>
+        BEREX 모디 매트리스 견적
+      </div>
+      
+      <!-- 💎 입력 폼 (디자인만 싹 고침) -->
+      <div class="input-group">
+        <label>고객 유형 (렌탈구분)</label>
+        <select id="typeOpt">
+          <option value="0">신규 렌탈</option>
+          <option value="-5000">재렌탈 (할인적용)</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label>사이즈 선택</label>
+        <select id="sizeOpt">
+          <option value="30000">슈퍼싱글 (SS)</option>
+          <option value="35000">퀸 (Q)</option>
+          <option value="40000">킹 (K)</option>
+          <option value="45000">라지킹 (LK)</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label>관리유형 (케어 서비스)</label>
+        <select id="careOpt">
+          <option value="0">서비스프리 (자가관리)</option>
+          <option value="4000">베이직케어</option>
+          <option value="7000">스페셜체인지</option>
+          <option value="12000">토탈케어</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label>의무사용기간</label>
+        <select id="periodOpt">
+          <option value="0">5년 약정</option>
+          <option value="-3000">7년 약정 (할인)</option>
+          <option value="-6000">9년 약정 (할인)</option>
+        </select>
+      </div>
+
+      <div class="input-group" style="margin-top:24px;">
+        <label>제휴카드 할인 (선택)</label>
+        <input type="number" id="cardDiscount" placeholder="할인 금액 입력 (예: 15000)" inputmode="numeric">
+      </div>
+
+      <button class="calc-btn" onclick="calculateSmartPrice()">월 렌탈료 산출하기</button>
+
+      <!-- 결과창 -->
+      <div class="result-box">
+        <div class="result-text">고객님 최종 월 납입금</div>
+        <div class="result-price" id="finalPrice">0<span>원</span></div>
+      </div>
     </div>
 
-    <div class="input-group">
-      <label>관리유형 (케어 서비스)</label>
-      <select id="careOpt">
-        <option value="0">서비스프리 (자가관리)</option>
-        <option value="4000">베이직케어</option>
-        <option value="7000">스페셜체인지</option>
-        <option value="12000">토탈케어</option>
-      </select>
-    </div>
-
-    <div class="input-group">
-      <label>의무사용기간</label>
-      <select id="periodOpt">
-        <option value="0">5년 약정</option>
-        <option value="-3000">7년 약정 (할인)</option>
-        <option value="-6000">9년 약정 (할인)</option>
-      </select>
-    </div>
-
-    <div class="input-group" style="margin-top:20px;">
-      <label>💳 제휴카드 할인 (원)</label>
-      <input type="number" id="cardDiscount" placeholder="예: 15000 (숫자만 입력)" inputmode="numeric">
-    </div>
-
-    <button class="calc-btn" onclick="calculateSmartPrice()">최종 월 렌탈료 계산</button>
-
-    <!-- 결과창 -->
-    <div class="result-box">
-      <div class="result-text">고객님 최종 월 납입금</div>
-      <div class="result-price" id="finalPrice">0원</div>
-    </div>
   </div>
 
-
   <script>
-    // 스마트 계산기 두뇌 (수석 프로그래머의 가짜 금액 로직)
+    // 💎 자바스크립트는 월요일에 표 주시면 그때 모델별로 완벽하게 짤 예정입니다.
+    // 지금은 임시 로직입니다.
     function calculateSmartPrice() {
-      // 1. 선택한 옵션들의 가짜 금액(value)을 숫자로 가져옴
       let typePrice = parseInt(document.getElementById('typeOpt').value);
       let sizePrice = parseInt(document.getElementById('sizeOpt').value);
       let carePrice = parseInt(document.getElementById('careOpt').value);
       let periodPrice = parseInt(document.getElementById('periodOpt').value);
       
-      // 2. 수동 입력한 카드 할인 (입력 안하면 0원)
       let card = parseInt(document.getElementById('cardDiscount').value) || 0;
 
-      // 3. 코웨이 기적의 계산법: 사이즈 원가 + 케어 비용 + 약정 할인 + 재렌탈 할인 - 카드할인
       let final = sizePrice + carePrice + periodPrice + typePrice - card;
-      
-      // 혹시 마이너스 나오면 0원으로
       if (final < 0) final = 0;
 
-      // 4. 화면에 콤마 찍어서 빨간 글씨로 쾅!
-      document.getElementById('finalPrice').innerText = final.toLocaleString() + "원";
+      document.getElementById('finalPrice').innerHTML = final.toLocaleString() + "<span>원</span>";
     }
   </script>
 </body>
