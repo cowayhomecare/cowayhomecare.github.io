@@ -5,46 +5,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>맞춤 견적 계산기</title>
   
-  <!-- 구글 머티리얼 아이콘 폰트 -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,600,1,0" />
 
   <style>
-    /* 공통 앱 스타일 */
     body { background-color: #f2f4f6; font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif; margin: 0; padding-bottom: 40px; display: flex; justify-content: center; }
     .app-container { width: 100%; max-width: 480px; background-color: #f2f4f6; min-height: 100vh; box-shadow: 0 0 20px rgba(0,0,0,0.05); padding: 0 20px; box-sizing: border-box; }
     
-    /* 헤더 (로고 홈버튼 통일) */
+    /* 헤더 */
     .header { display: flex; align-items: center; justify-content: center; padding: 24px 0; margin-bottom: 10px; position: relative; }
     .back-btn { font-size: 24px; text-decoration: none; color: #333; position: absolute; left: 0; font-weight: bold; padding: 10px; }
     .page-title-logo { height: 26px; object-fit: contain; }
 
-    /* 계산기 카드 (토스 스타일) */
-    .card { background: #ffffff; padding: 24px; border-radius: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.02); margin-bottom: 20px; }
-    .card-title { font-size: 18px; font-weight: 800; color: #191f28; margin-bottom: 24px; display: flex; align-items: center; gap: 8px; }
+    /* 💎 카테고리 선택 탭 (정수기, 청정기, 매트리스, 안마의자) */
+    .cat-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 16px; }
+    .cat-btn { background: white; border-radius: 16px; padding: 12px 4px; text-align: center; cursor: pointer; border: 2px solid transparent; box-shadow: 0 2px 8px rgba(0,0,0,0.02); transition: 0.2s; }
+    .cat-btn.active { border-color: #3182f6; background: #e8f3ff; }
+    .cat-btn span { font-size: 22px; display: block; margin-bottom: 4px; }
+    .cat-btn div { font-size: 11px; font-weight: 800; color: #4e5968; }
+    .cat-btn.active div { color: #1b64da; }
+
+    /* 카드 스타일 */
+    .card { background: #ffffff; padding: 24px; border-radius: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.02); margin-bottom: 16px; }
+    .card-title { font-size: 16px; font-weight: 800; color: #191f28; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
     
-    /* 입력 폼 스타일 */
-    .input-group { margin-bottom: 20px; }
-    .input-group label { display: block; font-size: 13px; color: #4e5968; margin-bottom: 8px; font-weight: 700; }
-    
-    select, input { width: 100%; padding: 16px; border: 1px solid #e4e7ec; background-color: #f9fafb; border-radius: 16px; font-size: 15px; font-weight: 700; color: #333; box-sizing: border-box; outline: none; transition: 0.2s; appearance: none; }
+    /* 입력 폼 */
+    .input-group { margin-bottom: 16px; }
+    .input-group label { display: block; font-size: 12px; color: #8b95a1; margin-bottom: 6px; font-weight: 700; }
+    select, input { width: 100%; padding: 14px 16px; border: 1px solid #e4e7ec; background-color: #f9fafb; border-radius: 14px; font-size: 15px; font-weight: 700; color: #191f28; box-sizing: border-box; outline: none; transition: 0.2s; appearance: none; }
     select { background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b95a1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 16px center; background-size: 16px; }
-    select:focus, input:focus { border-color: #3182f6; background-color: #ffffff; box-shadow: 0 0 0 3px rgba(49,130,246,0.1); }
-    
-    /* 계산 버튼 */
-    .calc-btn { width: 100%; padding: 18px; background: #3182f6; color: white; border: none; border-radius: 16px; font-size: 16px; font-weight: 800; cursor: pointer; transition: 0.2s; margin-top: 10px; }
+    select:focus, input:focus { border-color: #3182f6; background-color: #ffffff; }
+
+    .calc-btn { width: 100%; padding: 18px; background: #3182f6; color: white; border: none; border-radius: 16px; font-size: 16px; font-weight: 800; cursor: pointer; transition: 0.2s; margin-top: 8px; }
     .calc-btn:active { background: #1b64da; transform: scale(0.98); }
     
-    /* 결과 박스 */
-    .result-box { margin-top: 24px; padding: 24px; background: #f2f8ff; border-radius: 16px; text-align: center; }
-    .result-text { font-size: 14px; color: #3182f6; font-weight: 700; margin-bottom: 8px; }
-    .result-price { font-size: 28px; font-weight: 900; color: #191f28; }
-    .result-price span { color: #f04452; } /* 할인 적용 시 강조 컬러 */
+    /* 💎 극강의 임팩트 영수증 결과 박스 */
+    .result-card { background: #191f28; color: white; border-radius: 24px; padding: 24px; text-align: center; box-shadow: 0 8px 20px rgba(0,0,0,0.15); margin-top: 16px; position: relative; overflow: hidden; }
+    .result-badge { display: inline-block; background: rgba(255,255,255,0.1); padding: 4px 12px; border-radius: 20px; font-size: 12px; color: #90c2ff; font-weight: 700; margin-bottom: 12px; }
+    .original-price { font-size: 14px; color: #8b95a1; text-decoration: line-through; font-weight: 600; margin-bottom: 4px; }
+    .final-price-title { font-size: 13px; color: #abb8c6; font-weight: 700; margin-bottom: 4px; }
+    .final-price { font-size: 34px; font-weight: 900; color: #3182f6; letter-spacing: -1px; }
+    .final-price span { font-size: 20px; color: #ffffff; }
+    .discount-tag { display: inline-flex; align-items: center; gap: 4px; margin-top: 12px; background: #f04452; color: white; padding: 6px 14px; border-radius: 12px; font-size: 13px; font-weight: 800; }
   </style>
 </head>
 <body>
   <div class="app-container">
     
-    <!-- 💎 헤더 로고 통일 -->
+    <!-- 헤더 -->
     <div class="header">
       <a href="main.html" class="back-btn">←</a>
       <a href="main.html">
@@ -52,82 +59,124 @@
       </a>
     </div>
 
+    <!-- 카테고리 선택 탭 -->
+    <div class="cat-container">
+      <div class="cat-btn active" onclick="selectCat(this)">
+        <span>🛏️</span>
+        <div>매트리스</div>
+      </div>
+      <div class="cat-btn" onclick="selectCat(this)">
+        <span>💧</span>
+        <div>정수기</div>
+      </div>
+      <div class="cat-btn" onclick="selectCat(this)">
+        <span>🌬️</span>
+        <div>공기청정기</div>
+      </div>
+      <div class="cat-btn" onclick="selectCat(this)">
+        <span>💆</span>
+        <div>안마의자</div>
+      </div>
+    </div>
+
     <div class="card">
       <div class="card-title">
-        <span class="material-symbols-rounded" style="color: #3182f6;">bed</span>
-        BEREX 모디 매트리스 견적
+        <span class="material-symbols-rounded" style="color: #3182f6;">tune</span>
+        제품 및 약정 옵션
       </div>
       
-      <!-- 💎 입력 폼 (디자인만 싹 고침) -->
+      <!-- 모델 선택 -->
       <div class="input-group">
-        <label>고객 유형 (렌탈구분)</label>
-        <select id="typeOpt">
-          <option value="0">신규 렌탈</option>
-          <option value="-5000">재렌탈 (할인적용)</option>
+        <label>모델 선택</label>
+        <select id="modelOpt">
+          <option value="BEREX 모디 매트리스">BEREX 모디 매트리스</option>
+          <option value="BEREX 볼륨 매트리스">BEREX 볼륨 매트리스</option>
+          <option value="BEREX 스마트 매트리스">BEREX 스마트 매트리스 S7</option>
         </select>
       </div>
 
+      <!-- 규격/사이즈 -->
       <div class="input-group">
-        <label>사이즈 선택</label>
+        <label>사이즈 / 용량</label>
         <select id="sizeOpt">
-          <option value="30000">슈퍼싱글 (SS)</option>
-          <option value="35000">퀸 (Q)</option>
-          <option value="40000">킹 (K)</option>
-          <option value="45000">라지킹 (LK)</option>
+          <option value="35000">슈퍼싱글 (SS)</option>
+          <option value="40000" selected>퀸 (Q)</option>
+          <option value="45000">킹 (K)</option>
+          <option value="50000">라지킹 (LK)</option>
         </select>
       </div>
 
+      <!-- 케어 서비스 -->
       <div class="input-group">
-        <label>관리유형 (케어 서비스)</label>
+        <label>케어 서비스 방문 주기</label>
         <select id="careOpt">
           <option value="0">서비스프리 (자가관리)</option>
-          <option value="4000">베이직케어</option>
-          <option value="7000">스페셜체인지</option>
-          <option value="12000">토탈케어</option>
+          <option value="4000" selected>베이직 케어 (4개월)</option>
+          <option value="7000">스페셜 체인지 (4개월)</option>
         </select>
       </div>
 
+      <!-- 약정 기간 -->
       <div class="input-group">
-        <label>의무사용기간</label>
+        <label>의무 약정 기간</label>
         <select id="periodOpt">
-          <option value="0">5년 약정</option>
-          <option value="-3000">7년 약정 (할인)</option>
-          <option value="-6000">9년 약정 (할인)</option>
+          <option value="0">5년 약정 (기본)</option>
+          <option value="-4000">7년 약정 (약정할인)</option>
         </select>
       </div>
 
-      <div class="input-group" style="margin-top:24px;">
-        <label>제휴카드 할인 (선택)</label>
-        <input type="number" id="cardDiscount" placeholder="할인 금액 입력 (예: 15000)" inputmode="numeric">
+      <!-- 제휴 카드 -->
+      <div class="input-group" style="margin-top:20px;">
+        <label>💳 제휴카드 청구 할인</label>
+        <select id="cardDiscount">
+          <option value="0">미적용 (기본 렌탈료)</option>
+          <option value="13000">전월 30만원 실적 (-13,000원)</option>
+          <option value="24000" selected>🔥 신규카드 최고혜택 (-24,000원)</option>
+        </select>
       </div>
 
-      <button class="calc-btn" onclick="calculateSmartPrice()">월 렌탈료 산출하기</button>
+      <button class="calc-btn" onclick="calculateSmartPrice()">월 견적 산출하기</button>
+    </div>
 
-      <!-- 결과창 -->
-      <div class="result-box">
-        <div class="result-text">고객님 최종 월 납입금</div>
-        <div class="result-price" id="finalPrice">0<span>원</span></div>
+    <!-- 💎 파격적인 납입금 강조 영수증 카드 -->
+    <div class="result-card">
+      <div class="result-badge">실시간 견적 산출 결과</div>
+      <div class="original-price" id="originalPrice">정가 월 44,000원</div>
+      <div class="final-price-title">고객님 최종 월 납입금</div>
+      <div class="final-price" id="finalPrice">20,000 <span>원</span></div>
+      <div class="discount-tag" id="discountTag">
+        <span class="material-symbols-rounded" style="font-size:16px;">verified</span>
+        월 24,000원 절감 혜택 적용!
       </div>
     </div>
 
   </div>
 
   <script>
-    // 💎 자바스크립트는 월요일에 표 주시면 그때 모델별로 완벽하게 짤 예정입니다.
-    // 지금은 임시 로직입니다.
-    function calculateSmartPrice() {
-      let typePrice = parseInt(document.getElementById('typeOpt').value);
-      let sizePrice = parseInt(document.getElementById('sizeOpt').value);
-      let carePrice = parseInt(document.getElementById('careOpt').value);
-      let periodPrice = parseInt(document.getElementById('periodOpt').value);
-      
-      let card = parseInt(document.getElementById('cardDiscount').value) || 0;
+    function selectCat(element) {
+      document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+      element.classList.add('active');
+    }
 
-      let final = sizePrice + carePrice + periodPrice + typePrice - card;
+    function calculateSmartPrice() {
+      let basePrice = parseInt(document.getElementById('sizeOpt').value);
+      let carePrice = parseInt(document.getElementById('careOpt').value);
+      let periodDiscount = parseInt(document.getElementById('periodOpt').value);
+      let cardDiscount = parseInt(document.getElementById('cardDiscount').value);
+
+      let orig = basePrice + carePrice;
+      let final = orig + periodDiscount - cardDiscount;
       if (final < 0) final = 0;
 
-      document.getElementById('finalPrice').innerHTML = final.toLocaleString() + "<span>원</span>";
+      let totalDiscount = orig - final;
+
+      document.getElementById('originalPrice').innerText = `정가 월 ${orig.toLocaleString()}원`;
+      document.getElementById('finalPrice').innerHTML = `${final.toLocaleString()} <span>원</span>`;
+      document.getElementById('discountTag').innerHTML = `<span class="material-symbols-rounded" style="font-size:16px;">verified</span> 월 ${totalDiscount.toLocaleString()}원 절감 혜택 적용!`;
     }
+
+    // 처음 켜질 때 한번 자동 계산
+    window.onload = function() { calculateSmartPrice(); }
   </script>
 </body>
 </html>
