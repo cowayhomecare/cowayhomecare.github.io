@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>COWAY 견적 계산기 (실전 6.0 - 4탭 개편 및 메인 UI 동기화)</title>
+  <title>COWAY 견적 계산기 (실전 6.1 최종 완성)</title>
   <link rel="icon" href="img/icon/logo.png" type="image/png">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,600,1,0" />
 
@@ -15,7 +15,6 @@
     .back-btn { font-size: 24px; text-decoration: none; color: #333; position: absolute; left: 0; font-weight: bold; padding: 10px; }
     .page-title-logo { height: 26px; object-fit: contain; }
 
-    /* 💎 메인 화면(main.html) 스타일을 적용한 프리미엄 4탭 UI */
     .cat-container { display: flex; gap: 8px; margin-bottom: 16px; justify-content: space-between; }
     .cat-btn { flex: 1; background: white; border-radius: 16px; padding: 12px 4px; text-align: center; cursor: pointer; border: 2px solid transparent; box-shadow: 0 2px 6px rgba(0,0,0,0.02); transition: 0.2s; display: flex; flex-direction: column; align-items: center; }
     .cat-btn.active { border-color: #3182f6; box-shadow: 0 4px 12px rgba(49, 130, 246, 0.1); }
@@ -99,9 +98,12 @@
 </head>
 <body>
   <div class="app-container">
+    <!-- 💎 헤더: 로고 버튼으로 원상복구 -->
     <div class="header">
       <a href="main.html" class="back-btn">←</a>
-      <div style='font-size:20px;font-weight:900;color:#005bb5;'>COWAY 견적기</div>
+      <a href="main.html">
+        <img src="img/icon/logo.png" alt="COWAY" class="page-title-logo" onerror="this.outerHTML='<div style=\'font-size:20px;font-weight:900;color:#005bb5;\'>COWAY</div>'">
+      </a>
     </div>
 
     <!-- 1. 메인 UI 동기화된 프리미엄 4탭 -->
