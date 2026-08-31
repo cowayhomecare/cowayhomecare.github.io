@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>COWAY 견적 계산기 (실전 7.1 신규/재렌탈 추가)</title>
+  <title>COWAY 견적 계산기 (실전 8.0 믹스결합 완벽반영)</title>
   <link rel="icon" href="img/icon/logo.png" type="image/png">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,600,1,0" />
 
@@ -40,7 +40,7 @@
     .zoom-icon { position: absolute; bottom: 2px; right: 2px; background: rgba(0,0,0,0.5); color: white; border-radius: 50%; font-size: 14px; padding: 2px; pointer-events: none; }
 
     .input-row { display: flex; gap: 8px; margin-bottom: 14px; }
-    .input-group { flex: 1; }
+    .input-group { flex: 1; display:flex; flex-direction:column; justify-content:flex-end;}
     .input-group label { display: block; font-size: 11.5px; color: #8b95a1; margin-bottom: 4px; font-weight: 700; }
     select { width: 100%; padding: 12px 14px; border: 1px solid #e4e7ec; background-color: #f9fafb; border-radius: 12px; font-size: 13.5px; font-weight: 700; color: #191f28; box-sizing: border-box; outline: none; appearance: none; }
     
@@ -79,23 +79,24 @@
     .final-price { font-size: 26px; font-weight: 900; color: #3182f6; letter-spacing: -1px; }
     .detail-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px; margin-top: 14px; background: rgba(255,255,255,0.15); color: #ffffff; padding: 10px 18px; border-radius: 12px; font-size: 13px; font-weight: 800; border: none; cursor: pointer; width: 100%; transition:0.2s;}
 
-    /* 영수증 모달 UI */
+    /* 모달 UI */
     .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 9998; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; }
     .receipt-modal { background: white; width: 100%; max-width: 380px; border-radius: 24px; padding: 24px; color: #191f28; }
     .receipt-header { text-align: center; border-bottom: 2px dashed #e4e7ec; padding-bottom: 14px; margin-bottom: 14px; }
     .receipt-title { font-size: 18px; font-weight: 900; color: #005bb5; }
-    
     .rec-item-row { display: flex; justify-content: space-between; font-size: 13px; color: #4e5968; margin-bottom: 6px; font-weight: 700; }
     .receipt-sum-row { display: flex; justify-content: space-between; font-size: 13.5px; font-weight: 700; margin-bottom: 8px; color: #4e5968; }
     .receipt-sum-row.discount { color: #f04452; }
     .receipt-sum-row.sub-discount { color: #f04452; font-size: 12px; font-weight: 600; padding-left: 12px; margin-bottom: 4px; }
     .receipt-sum-row.total { border-top: 2px solid #191f28; padding-top: 14px; margin-top: 10px; font-size: 18px; font-weight: 900; color: #1b64da; }
     .close-modal-btn { width: 100%; padding: 14px; background: #191f28; color: white; border: none; border-radius: 14px; font-size: 14px; font-weight: 800; margin-top: 20px; cursor:pointer;}
-    
     .img-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 9999; justify-content: center; align-items: center; flex-direction: column; padding: 20px; box-sizing: border-box; }
     .img-modal-content { width: 100%; max-width: 400px; background: white; border-radius: 20px; overflow: hidden; position: relative; }
     .img-modal-img { width: 100%; height: auto; display: block; }
     .img-modal-close { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.6); color: white; border: none; border-radius: 50%; width: 32px; height: 32px; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+
+    /* 동그라미 색상 칩 스타일 */
+    .color-swatch { width: 34px; height: 34px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: 0.2s;}
   </style>
 </head>
 <body>
@@ -127,7 +128,7 @@
       </div>
     </div>
 
-    <!-- 제품 및 옵션 선택 -->
+    <!-- 제품 옵션 선택 -->
     <div class="card">
       <div class="card-title"><span class="material-symbols-rounded" style="color: #3182f6;">add_shopping_cart</span>제품 옵션 선택</div>
       
@@ -151,6 +152,20 @@
         </div>
       </div>
 
+      <!-- 💎 신규/재렌탈 UI 위로 끌어올림 -->
+      <div class="input-row">
+        <div class="input-group">
+          <label>렌탈 구분 (신규/재렌탈)</label>
+          <select id="rentalTypeOpt" onchange="updateLivePrice()"></select>
+        </div>
+      </div>
+      
+      <!-- 💎 동그라미 색상 UI (데이터에 컬러가 있을 때만 뜸) -->
+      <div class="input-row" id="colorRow" style="display:none; flex-direction:column; gap:6px; margin-bottom:14px;">
+        <label style="font-size: 11.5px; color: #8b95a1; font-weight: 700;">색상 선택 <span id="selectedColorName" style="color:#1b64da; font-weight:800;"></span></label>
+        <div id="colorContainer" style="display:flex; gap:12px; align-items:center;"></div>
+      </div>
+
       <div class="input-row">
         <div class="input-group">
           <label>관리 방식 (케어)</label>
@@ -162,30 +177,21 @@
         </div>
       </div>
       
-      <!-- 💎 신규 렌탈 구분 메뉴 추가 -->
-      <div class="input-row">
-        <div class="input-group">
-          <label>렌탈 구분 (신규/재렌탈)</label>
-          <select id="rentalTypeOpt" onchange="updateLivePrice()"></select>
-        </div>
-      </div>
-      
       <div class="receipt-box" id="priceDisplayBox"></div>
 
       <button class="add-cart-btn" onclick="addToCart()">견적함에 담기</button>
     </div>
 
-    <!-- 장바구니 & 글로벌 프로모션 -->
+    <!-- 장바구니 & 믹스 결합 프로모션 -->
     <div class="card">
       <div class="card-title">
         <span class="material-symbols-rounded" style="color: #0ca678;">shopping_bag</span>
         내 견적함 (<span id="cartCount">0</span>개)
       </div>
 
-      <!-- 단품 결합할인 스위치 -->
       <div class="toggle-switch" id="combineSwitchBox">
         <div class="toggle-label">
-          <span style="display:flex; align-items:center; gap:4px;"><span class="material-symbols-rounded" style="color:#0ca678; font-size:18px;">link</span>단품 5% 결합할인</span>
+          <span style="display:flex; align-items:center; gap:4px;"><span class="material-symbols-rounded" style="color:#0ca678; font-size:18px;">link</span>단품 결합할인 (신규5% / 재렌탈3%)</span>
           <span class="toggle-desc">기존 코웨이 사용 고객 한정</span>
         </div>
         <label class="switch">
@@ -194,11 +200,10 @@
         </label>
       </div>
 
-      <!-- 다기기 프로모션 스위치 -->
       <div id="multiPromoBox" style="display:none; flex-direction:column; gap:10px; padding-bottom:14px; border-bottom:1px solid #e4e7ec; margin-bottom:14px;">
         <div class="toggle-switch" style="margin-bottom:0; box-shadow:none; border-color:#3182f6;">
           <div class="toggle-label">
-            <span>🤝 10% 동시구매 적용</span>
+            <span>🤝 동시구매 적용 (신규10% / 재렌탈6%)</span>
             <span class="toggle-desc">페스타 등 다른 프로모션과 중복 불가</span>
           </div>
           <label class="switch">
@@ -209,8 +214,8 @@
 
         <div class="toggle-switch" style="margin-bottom:0; box-shadow:none; border-color:#7048e8;">
           <div class="toggle-label">
-            <span>👑 15% 패키지 적용</span>
-            <span class="toggle-desc">대수별 추가 반값 (페스타 무시)</span>
+            <span>👑 15% 패키지 적용 (신규 2개 이상)</span>
+            <span class="toggle-desc">신규: 15%+반값 / 재렌탈: 3% 결합으로 자동 분리</span>
           </div>
           <label class="switch">
             <input type="checkbox" id="chkPromo15" onchange="togglePromo('15')">
@@ -236,24 +241,20 @@
 
   <!-- 상세 영수증 모달 -->
   <div class="modal-overlay" id="receiptModal">
+    <!-- 모달 내용은 기존과 동일 -->
     <div class="receipt-modal">
       <div class="receipt-header">
         <div class="receipt-title">COWAY 스마트 견적서</div>
         <div style="font-size:11px; color:#8b95a1; margin-top:4px;">(2026년 프로모션 100% 반영)</div>
       </div>
-      
       <div id="recItemList" style="max-height: 200px; overflow-y: auto; margin-bottom: 14px; border-bottom:1px solid #e4e7ec; padding-bottom:10px;"></div>
-      
       <div class="receipt-sum-row">
         <span>기본 렌탈료 합계</span><span id="recSumBase">0원</span>
       </div>
-      
       <div id="recDiscountDetails"></div>
-
       <div class="receipt-sum-row total">
         <span>최종 월 납입금 (1개월 차)</span><span id="recSumFinal">0원</span>
       </div>
-
       <button class="close-modal-btn" onclick="closeReceiptModal()">확인 완료</button>
     </div>
   </div>
@@ -266,12 +267,13 @@
     </div>
   </div>
 
-  <!-- 창고 데이터 연결 -->
+  <!-- 💎 외부 데이터 연결 -->
   <script src="data.js"></script>
 
   <script>
     let currentTab = "bed";
     let cart = [];
+    let selectedColor = ""; // 선택된 색상 저장 변수
     
     function switchTab(tab, element) {
       currentTab = tab;
@@ -296,10 +298,49 @@
          document.getElementById("modalImg").src = modelData.img;
       }
 
+      // 💎 색상 동그라미 UI 처리
+      if(modelData && modelData.colors) {
+        document.getElementById("colorRow").style.display = "flex";
+        const container = document.getElementById("colorContainer");
+        container.innerHTML = "";
+        modelData.colors.forEach((c, idx) => {
+            let circle = document.createElement("div");
+            circle.className = "color-swatch";
+            circle.style.backgroundColor = c.hex;
+            circle.style.borderColor = "#e4e7ec";
+            // 흰색/밝은계열이면 체크표시를 어둡게
+            circle.style.color = (c.hex === "#ffffff" || c.hex === "#f9fafb" || c.hex === "#f5f5dc") ? "#333" : "#fff";
+            circle.onclick = () => { selectColor(idx); };
+            container.appendChild(circle);
+        });
+        selectColor(0); // 기본 첫 번째 색상 선택
+      } else {
+        document.getElementById("colorRow").style.display = "none";
+        selectedColor = "";
+      }
+
       const sizeSelect = document.getElementById("sizeOpt");
       sizeSelect.innerHTML = "";
       Object.keys(modelData.sizes).forEach(s => sizeSelect.innerHTML += `<option value="${s}">${s}</option>`);
       updateCares();
+    }
+
+    function selectColor(index) {
+        const modelData = rawDB[currentTab][document.getElementById("modelOpt").value];
+        const colors = modelData.colors;
+        selectedColor = colors[index].name;
+        document.getElementById("selectedColorName").innerText = `- ${selectedColor}`;
+        
+        const container = document.getElementById("colorContainer");
+        Array.from(container.children).forEach((el, idx) => {
+            if(idx === index) {
+                el.style.borderColor = "#3182f6";
+                el.innerHTML = `<span class="material-symbols-rounded" style="font-size:18px;">check</span>`;
+            } else {
+                el.style.borderColor = "#e4e7ec";
+                el.innerHTML = "";
+            }
+        });
     }
 
     function updateCares() {
@@ -322,12 +363,9 @@
       const termSelect = document.getElementById("termOpt");
       termSelect.innerHTML = "";
       Object.keys(termData).forEach(t => termSelect.innerHTML += `<option value="${t}">${t}</option>`);
-      
-      // 💎 약정 기간이 세팅되면 이제 신규/재렌탈을 선택할 수 있게 넘김
       updateRentalTypes();
     }
 
-    // 💎 신규/재렌탈 목록 세팅 함수 추가
     function updateRentalTypes() {
       const model = document.getElementById("modelOpt").value;
       const size = document.getElementById("sizeOpt").value;
@@ -337,7 +375,6 @@
 
       const typeSelect = document.getElementById("rentalTypeOpt");
       typeSelect.innerHTML = "";
-      // 창고(data.js)에 있는 키값(신규, 재렌탈)을 뽑아서 드롭다운을 채워줌
       Object.keys(typeData).forEach(t => typeSelect.innerHTML += `<option value="${t}">${t}</option>`);
       
       updateLivePrice();
@@ -350,7 +387,6 @@
       const term = document.getElementById("termOpt").value;
       const rType = document.getElementById("rentalTypeOpt").value;
       
-      // 💎 창고에서 '신규'인지 '재렌탈'인지 한 뎁스 더 들어가서 가격을 꺼내옴
       const data = rawDB[currentTab][model].sizes[size][care][term][rType];
       const box = document.getElementById("priceDisplayBox");
       const actualPromoPrice = data.promo;
@@ -374,6 +410,7 @@
       
       document.getElementById("dispFinal").dataset.promo = actualPromoPrice;
       document.getElementById("dispFinal").dataset.term = term;
+      document.getElementById("dispFinal").dataset.rtype = rType;
     }
 
     function addToCart() {
@@ -381,14 +418,14 @@
       const size = document.getElementById("sizeOpt").value;
       const care = document.getElementById("careOpt").value;
       const term = document.getElementById("dispFinal").dataset.term;
-      const rType = document.getElementById("rentalTypeOpt").value;
+      const rType = document.getElementById("dispFinal").dataset.rtype;
       const promoPrice = parseInt(document.getElementById("dispFinal").dataset.promo);
       const isFestaEligible = (currentTab === "bed" || currentTab === "healing"); 
 
-      const title = `${model} ${size}`;
+      // 💎 색상이 선택되어 있다면 이름 뒤에 붙여줌
+      const title = selectedColor ? `${model} ${size} [${selectedColor}]` : `${model} ${size}`;
 
-      // 💎 장바구니에 담을 때 [신규] 인지 [재렌탈] 인지 확실하게 찍어줌
-      cart.push({ id: Date.now(), title, sub: `[${rType}] [${care}] ${term}`, promoPrice, isFestaEligible, term });
+      cart.push({ id: Date.now(), title, rType, sub: `[${rType}] [${care}] ${term}`, promoPrice, isFestaEligible, term });
       renderCart();
     }
 
@@ -397,6 +434,7 @@
       renderCart();
     }
 
+    // 스위치 상호 배제 로직
     function togglePromo(type) {
         if(type === '10' && document.getElementById("chkPromo10").checked) {
             document.getElementById("chkPromo15").checked = false;
@@ -406,18 +444,34 @@
         renderCart();
     }
 
+    // 💎 믹스 결합 완벽 구현 엔진!
     function renderCart() {
       document.getElementById("cartCount").innerText = cart.length;
       const list = document.getElementById("cartList");
       list.innerHTML = "";
 
-      const isMulti = cart.length >= 2;
-      const isSingle = cart.length === 1;
-      const cartSize = cart.length;
+      let countNew = 0;
+      let countRe = 0;
+      cart.forEach(item => {
+          if(item.rType === "신규") countNew++;
+          if(item.rType === "재렌탈") countRe++;
+      });
+      
+      const totalItems = cart.length;
+      const isMulti = totalItems >= 2;
+      const isSingle = totalItems === 1;
 
-      const applyCombine = document.getElementById("chkCombine").checked; 
-      const use10 = document.getElementById("chkPromo10").checked;
-      const use15 = document.getElementById("chkPromo15").checked;
+      let applyCombine = document.getElementById("chkCombine").checked; 
+      let use10 = document.getElementById("chkPromo10").checked;
+      let use15 = document.getElementById("chkPromo15").checked;
+
+      // 💎 신규 2개가 안 되는데 15% 패키지 스위치를 켰다면? 자동으로 10% 스위치로 튕겨버림!
+      if (use15 && countNew < 2) {
+          document.getElementById("chkPromo15").checked = false;
+          if (isMulti) document.getElementById("chkPromo10").checked = true;
+          use15 = false;
+          use10 = true;
+      }
 
       document.getElementById("combineSwitchBox").style.display = isSingle ? "flex" : "none";
       document.getElementById("multiPromoBox").style.display = isMulti ? "flex" : "none";
@@ -434,53 +488,82 @@
         item.pkgDiscount = 0;
         item.festaDiscount = 0;
 
-        if(use15 && isMulti) {
-          let disc15 = Math.floor((P * 0.15) / 10) * 10; 
-          let price15 = P - disc15;
-          let halfPrice = Math.floor((price15 / 2) / 10) * 10; 
-          
-          item.pkgDiscount = disc15; 
-          
-          let halfMonths = 0;
-          if(cartSize === 3) halfMonths = 3;
-          if(cartSize === 4) halfMonths = 4;
-          if(cartSize >= 5) halfMonths = 5;
+        if (item.rType === "신규") {
+            if (use15 && isMulti && countNew >= 2) {
+                // 신규는 15% 패키지 적용!
+                let disc15 = Math.floor((P * 0.15) / 10) * 10; 
+                let price15 = P - disc15;
+                let halfPrice = Math.floor((price15 / 2) / 10) * 10; 
+                
+                item.pkgDiscount = disc15; 
+                
+                let halfMonths = 0;
+                if(countNew === 3) halfMonths = 3;
+                if(countNew === 4) halfMonths = 4;
+                if(countNew >= 5) halfMonths = 5;
 
-          if(halfMonths > 0) {
-            timeline.push({ start: 1, end: halfMonths, price: halfPrice, tag: `👑 15% 패키지+반값` });
-            timeline.push({ start: halfMonths + 1, end: termMonths, price: price15, tag: `👑 15% 패키지` });
-          } else {
-            timeline.push({ start: 1, end: termMonths, price: price15, tag: `👑 15% 패키지` });
-          }
-        } else {
-          let discRatio = 0;
-          let tagStr = `기본 렌탈료`;
-          
-          if (isMulti && use10) { 
-             discRatio = 0.10; 
-             tagStr = `🤝 다기기 10%`;
-          } else if (isSingle && applyCombine) {
-             discRatio = 0.05;
-             tagStr = `🔗 결합할인 5%`;
-          }
+                if(halfMonths > 0) {
+                  timeline.push({ start: 1, end: halfMonths, price: halfPrice, tag: `👑 15% 패키지+반값` });
+                  timeline.push({ start: halfMonths + 1, end: termMonths, price: price15, tag: `👑 15% 패키지` });
+                } else {
+                  timeline.push({ start: 1, end: termMonths, price: price15, tag: `👑 15% 패키지` });
+                }
+            } else {
+                // 15% 조건 미달이거나, 10% 동시구매일 때
+                let discRatio = 0;
+                let tagStr = `기본 렌탈료`;
+                
+                if (isMulti && use10) { 
+                   discRatio = 0.10; 
+                   tagStr = `🤝 신규 동구 10%`;
+                } else if (isSingle && applyCombine) {
+                   discRatio = 0.05;
+                   tagStr = `🔗 신규 결합 5%`;
+                }
 
-          let discAmount = Math.floor((P * discRatio) / 10) * 10;
-          let finalBasePrice = P - discAmount;
-          item.pkgDiscount = discAmount; 
+                let discAmount = Math.floor((P * discRatio) / 10) * 10;
+                let finalBasePrice = P - discAmount;
+                item.pkgDiscount = discAmount; 
 
-          if(item.isFestaEligible && !isSingle && use10) {
-            let festaMonths = 0;
-            if(item.term === "5년") festaMonths = 5;
-            if(item.term === "7년") festaMonths = 10;
-            if(item.term === "9년") festaMonths = 15;
+                // 💎 페스타 1만원 할인은 패키지 중복 불가 조건 반영
+                if(item.isFestaEligible && !isSingle && use10) {
+                  let festaMonths = 0;
+                  if(item.term === "5년") festaMonths = 5;
+                  if(item.term === "7년") festaMonths = 10;
+                  if(item.term === "9년") festaMonths = 15;
 
-            item.festaDiscount = finalBasePrice - 10000;
+                  item.festaDiscount = finalBasePrice - 10000;
 
-            timeline.push({ start: 1, end: festaMonths, price: 10000, tag: `🎉 BEREX 페스타 (중복X)` });
-            timeline.push({ start: festaMonths + 1, end: termMonths, price: finalBasePrice, tag: tagStr });
-          } else {
+                  timeline.push({ start: 1, end: festaMonths, price: 10000, tag: `🎉 BEREX 페스타 (1만할인)` });
+                  timeline.push({ start: festaMonths + 1, end: termMonths, price: finalBasePrice, tag: tagStr });
+                } else {
+                  timeline.push({ start: 1, end: termMonths, price: finalBasePrice, tag: tagStr });
+                }
+            }
+        } 
+        else if (item.rType === "재렌탈") {
+            // 💎 재렌탈은 15% 패키지에 묶여도 깍두기 처리되어 3% 단품결합 할인만 적용됨!
+            let discRatio = 0;
+            let tagStr = `기본 재렌탈료`;
+            
+            if (isMulti) { 
+                if (use15) {
+                    discRatio = 0.03;
+                    tagStr = `🔗 재렌탈 결합 3% (패키지제외)`;
+                } else if (use10) {
+                    discRatio = 0.06;
+                    tagStr = `🤝 재렌탈 동구 6%`;
+                }
+            } else if (isSingle && applyCombine) {
+                discRatio = 0.03;
+                tagStr = `🔗 재렌탈 결합 3%`;
+            }
+
+            let discAmount = Math.floor((P * discRatio) / 10) * 10;
+            let finalBasePrice = P - discAmount;
+            item.pkgDiscount = discAmount; 
+            
             timeline.push({ start: 1, end: termMonths, price: finalBasePrice, tag: tagStr });
-          }
         }
 
         sumFirstMonth += timeline[0].price;
@@ -529,12 +612,11 @@
         totalFestaDiscount += item.festaDiscount;
         
         let currentFirstMonthPrice = item.currentTimeline[0].price; 
-        let shortTitle = item.title.split('(')[0].trim();
-
+        
         recList.innerHTML += `
           <div class="rec-item-row">
             <div>
-              <div style="color:#191f28; margin-bottom:2px;">- ${shortTitle}</div>
+              <div style="color:#191f28; margin-bottom:2px;">- ${item.title}</div>
               <div style="font-size:11px; font-weight:500; color:#8b95a1;">${item.sub}</div>
             </div>
             <div style="color:#191f28;">${currentFirstMonthPrice.toLocaleString()}원</div>
