@@ -486,7 +486,7 @@ Object.assign(rawDB.bed, {
     }
   },
   "스마트 S6+": {
-    "img": "img/calc/berexbed/mattress/as04.png",
+    "img": "img/calc/berexbed/mattress/as04_bg.png",
     "sizes": {
       "LK (CMLK-AS04)": {
         "토탈케어": {
@@ -555,7 +555,7 @@ Object.assign(rawDB.bed, {
     }
   },
   "스마트 S8+": {
-    "img": "img/calc/berexbed/mattress/as05.png",
+    "img": "img/calc/berexbed/mattress/as05_bg.png",
     "sizes": {
       "LK (CMLK-AS05)": {
         "토탈케어": {
