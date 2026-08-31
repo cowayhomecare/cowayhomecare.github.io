@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>COWAY 견적 계산기 (실전 6.0 찐최종 풀버전)</title>
+  <title>COWAY 견적 계산기 (실전 7.0 데이터 분리 완료)</title>
   <link rel="icon" href="img/icon/logo.png" type="image/png">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,600,1,0" />
 
@@ -15,7 +15,7 @@
     .back-btn { font-size: 24px; text-decoration: none; color: #333; position: absolute; left: 0; font-weight: bold; padding: 10px; }
     .page-title-logo { height: 26px; object-fit: contain; }
 
-    /* 💎 메인 화면 스타일을 적용한 프리미엄 4탭 UI */
+    /* 프리미엄 4탭 UI */
     .cat-container { display: flex; gap: 8px; margin-bottom: 16px; justify-content: space-between; }
     .cat-btn { flex: 1; background: white; border-radius: 16px; padding: 12px 4px; text-align: center; cursor: pointer; border: 2px solid transparent; box-shadow: 0 2px 6px rgba(0,0,0,0.02); transition: 0.2s; display: flex; flex-direction: column; align-items: center; }
     .cat-btn.active { border-color: #3182f6; box-shadow: 0 4px 12px rgba(49, 130, 246, 0.1); }
@@ -52,7 +52,7 @@
     .add-cart-btn { width: 100%; padding: 14px; background: #3182f6; color: #ffffff; border: none; border-radius: 14px; font-size: 15px; font-weight: 800; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 6px; box-shadow: 0 4px 10px rgba(49, 130, 246, 0.2); transition: 0.2s; }
     .add-cart-btn:active { transform: scale(0.98); }
 
-    /* 💎 우측 슬라이딩 스위치 UI */
+    /* 슬라이딩 스위치 UI */
     .toggle-switch { display: flex; align-items: center; justify-content: space-between; background: #ffffff; padding: 14px; border-radius: 12px; margin-bottom: 10px; border: 1px solid #e4e7ec; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
     .toggle-label { font-size: 13.5px; font-weight: 800; color: #191f28; display:flex; flex-direction: column; gap:2px; }
     .toggle-desc { font-size: 10px; color: #8b95a1; font-weight: 600; }
@@ -107,7 +107,7 @@
       </a>
     </div>
 
-    <!-- 1. 메인 UI 동기화된 프리미엄 4탭 -->
+    <!-- 프리미엄 4탭 -->
     <div class="cat-container">
       <div class="cat-btn active" onclick="switchTab('bed', this)">
         <div class="icon-wrap color-blue"><span class="material-symbols-rounded">bed</span></div>
@@ -127,7 +127,7 @@
       </div>
     </div>
 
-    <!-- 2. 제품 및 옵션 선택 (2단계로 분리!) -->
+    <!-- 제품 및 옵션 선택 -->
     <div class="card">
       <div class="card-title"><span class="material-symbols-rounded" style="color: #3182f6;">add_shopping_cart</span>제품 옵션 선택</div>
       
@@ -140,12 +140,10 @@
         </div>
 
         <div style="flex:1; display:flex; flex-direction:column; gap:8px;">
-          <!-- 1단계: 메인 제품 -->
           <div class="input-group" style="margin-bottom:0;">
             <label>제품 카테고리</label>
             <select id="modelOpt" onchange="updateSizes()"></select>
           </div>
-          <!-- 2단계: 사이즈/기능 -->
           <div class="input-group" style="margin-bottom:0;">
             <label>세부 모델 (사이즈/기능)</label>
             <select id="sizeOpt" onchange="updateCares()"></select>
@@ -166,19 +164,17 @@
       
       <div class="receipt-box" id="priceDisplayBox"></div>
 
-      <button class="add-cart-btn" onclick="addToCart()">
-        견적함에 담기
-      </button>
+      <button class="add-cart-btn" onclick="addToCart()">견적함에 담기</button>
     </div>
 
-    <!-- 3. 장바구니 & 글로벌 프로모션 -->
+    <!-- 장바구니 & 글로벌 프로모션 -->
     <div class="card">
       <div class="card-title">
         <span class="material-symbols-rounded" style="color: #0ca678;">shopping_bag</span>
         내 견적함 (<span id="cartCount">0</span>개)
       </div>
 
-      <!-- 단품 결합할인 제어 스위치 -->
+      <!-- 단품 결합할인 스위치 -->
       <div class="toggle-switch" id="combineSwitchBox">
         <div class="toggle-label">
           <span style="display:flex; align-items:center; gap:4px;"><span class="material-symbols-rounded" style="color:#0ca678; font-size:18px;">link</span>단품 5% 결합할인</span>
@@ -190,7 +186,7 @@
         </label>
       </div>
 
-      <!-- 다기기 프로모션 스위치 (슬라이딩 토글) -->
+      <!-- 다기기 프로모션 스위치 -->
       <div id="multiPromoBox" style="display:none; flex-direction:column; gap:10px; padding-bottom:14px; border-bottom:1px solid #e4e7ec; margin-bottom:14px;">
         <div class="toggle-switch" style="margin-bottom:0; box-shadow:none; border-color:#3182f6;">
           <div class="toggle-label">
@@ -218,7 +214,7 @@
       <div class="cart-list" id="cartList"></div>
     </div>
 
-    <!-- 4. 결과 요약 -->
+    <!-- 결과 요약 -->
     <div class="result-card">
       <div class="final-price-title">최초 1개월 차 고객 납입금</div>
       <div class="final-price" id="finalPriceFirst">0 원</div>
@@ -262,10 +258,10 @@
     </div>
   </div>
 
-  <script>
-    // 💎 전 제품 기본가 +1000원(자동이체 보정) 완벽 세팅된 마스터 DB
-    const rawDB = {"bed":{"하이브리드4":{"img":"img/calc/berexbed/mattress/pr04.png","sizes":{"Q (CMQ-PR04_V2)":{"토탈케어":{"5년":{"catalog":111900,"promo":100900},"7년":{"catalog":90900,"promo":79900},"9년":{"catalog":83900,"promo":72900}},"스페셜체인지":{"5년":{"catalog":109900,"promo":98900},"7년":{"catalog":88900,"promo":77900},"9년":{"catalog":81900,"promo":70900}},"베이직케어":{"5년":{"catalog":108900,"promo":97900},"7년":{"catalog":87900,"promo":76900},"9년":{"catalog":80900,"promo":69900}},"서비스프리":{"5년":{"catalog":106900,"promo":95900},"7년":{"catalog":85900,"promo":74900},"9년":{"catalog":78900,"promo":67900}}}}},"루네어":{"img":"img/calc/berexbed/mattress/se03.png","sizes":{"LK (CMLK-SE03H/M)":{"토탈케어":{"5년":{"catalog":64900,"promo":63900},"7년":{"catalog":55900,"promo":54900},"9년":{"catalog":49900,"promo":48900}},"스페셜체인지":{"5년":{"catalog":62900,"promo":61900},"7년":{"catalog":53900,"promo":52900},"9년":{"catalog":47900,"promo":46900}},"베이직케어":{"5년":{"catalog":59900,"promo":58900},"7년":{"catalog":50900,"promo":49900},"9년":{"catalog":44900,"promo":43900}},"서비스프리":{"5년":{"catalog":57900,"promo":56900},"7년":{"catalog":48900,"promo":47900},"9년":{"catalog":42900,"promo":41900}}}}},"시그니처 파이어쉴드 컴포트":{"img":"img/calc/berexbed/mattress/sp02.png","sizes":{"Q (CMQ-SP02SC)":{"토탈케어":{"5년":{"catalog":81900,"promo":80900},"7년":{"catalog":71900,"promo":70900},"9년":{"catalog":65900,"promo":64900}},"스페셜체인지":{"5년":{"catalog":79900,"promo":78900},"7년":{"catalog":69900,"promo":68900},"9년":{"catalog":63900,"promo":62900}},"베이직케어":{"5년":{"catalog":75900,"promo":74900},"7년":{"catalog":65900,"promo":64900},"9년":{"catalog":59900,"promo":58900}},"서비스프리":{"5년":{"catalog":73900,"promo":72900},"7년":{"catalog":63900,"promo":62900},"9년":{"catalog":57900,"promo":56900}}}}}},"healing":{"비렉스 안마의자":{"img":"img/icon/logo.png","sizes":{"마인 (MC-B03)":{"토탈케어":{"5년":{"catalog":62900,"promo":51200}}}}}},"air":{"노블 공기청정기2":{"img":"img/calc/air/ap1623.png","sizes":{"일반 (AP-1623M)":{"방문관리":{"3년":{"catalog":43400,"promo":34110},"5년":{"catalog":41400,"promo":32310}}}}}},"life":{"아이콘 정수기 3":{"img":"img/calc/water/cp7220.png","sizes":{"냉온정 (CHP-7220N)":{"방문관리":{"3년":{"catalog":43900,"promo":38900},"6년":{"catalog":40900,"promo":35900}},"자가관리":{"3년":{"catalog":40900,"promo":35900},"6년":{"catalog":37900,"promo":32900},"7년":{"catalog":33900,"promo":28900}}},"냉정 (CP-7220N)":{"방문관리":{"3년":{"catalog":41900,"promo":36900},"6년":{"catalog":38900,"promo":33900}},"자가관리":{"3년":{"catalog":40900,"promo":35900},"6년":{"catalog":37900,"promo":32900},"7년":{"catalog":33900,"promo":28900}}}}},"벽걸이 에어컨":{"img":"img/icon/logo.png","sizes":{"6평 (ACAH-061AAS)":{"토탈케어":{"5년":{"catalog":33900,"promo":29600}}}}}}};
+  <!-- 💎 핵심 포인트: 여기서 data.js를 불러옵니다! -->
+  <script src="data.js"></script>
 
+  <script>
     let currentTab = "bed";
     let cart = [];
     
@@ -488,7 +484,6 @@
       updateReceiptModal(sumFirstMonth);
     }
 
-    // 💎 영수증 상세 내역 분리
     function updateReceiptModal(totalFirstMonthPrice) {
       const recList = document.getElementById("recItemList");
       recList.innerHTML = "";
@@ -504,11 +499,12 @@
         totalFestaDiscount += item.festaDiscount;
         
         let currentFirstMonthPrice = item.currentTimeline[0].price; 
-        
+        let shortTitle = item.title.split('(')[0].trim();
+
         recList.innerHTML += `
           <div class="rec-item-row">
             <div>
-              <div style="color:#191f28; margin-bottom:2px;">- ${item.title}</div>
+              <div style="color:#191f28; margin-bottom:2px;">- ${shortTitle}</div>
               <div style="font-size:11px; font-weight:500; color:#8b95a1;">${item.sub}</div>
             </div>
             <div style="color:#191f28;">${currentFirstMonthPrice.toLocaleString()}원</div>
