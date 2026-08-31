@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>COWAY 견적 계산기 (실전 8.0 믹스결합 완벽반영)</title>
+  <title>COWAY 견적 계산기 (실전 9.0 통합 완성본)</title>
   <link rel="icon" href="img/icon/logo.png" type="image/png">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,600,1,0" />
 
@@ -135,7 +135,7 @@
       <div class="product-header">
         <div class="thumb-area" id="thumbArea">
           <div class="thumb-img-box" onclick="openImgModal()">
-            <img id="productThumb" src="img/icon/logo.png" onerror="this.src='logo.png'">
+            <img id="productThumb" src="img/icon/logo.png" onerror="this.src='img/icon/logo.png'">
             <span class="material-symbols-rounded zoom-icon">zoom_in</span>
           </div>
         </div>
@@ -152,7 +152,6 @@
         </div>
       </div>
 
-      <!-- 💎 신규/재렌탈 UI 위로 끌어올림 -->
       <div class="input-row">
         <div class="input-group">
           <label>렌탈 구분 (신규/재렌탈)</label>
@@ -160,7 +159,6 @@
         </div>
       </div>
       
-      <!-- 💎 동그라미 색상 UI (데이터에 컬러가 있을 때만 뜸) -->
       <div class="input-row" id="colorRow" style="display:none; flex-direction:column; gap:6px; margin-bottom:14px;">
         <label style="font-size: 11.5px; color: #8b95a1; font-weight: 700;">색상 선택 <span id="selectedColorName" style="color:#1b64da; font-weight:800;"></span></label>
         <div id="colorContainer" style="display:flex; gap:12px; align-items:center;"></div>
@@ -241,7 +239,6 @@
 
   <!-- 상세 영수증 모달 -->
   <div class="modal-overlay" id="receiptModal">
-    <!-- 모달 내용은 기존과 동일 -->
     <div class="receipt-modal">
       <div class="receipt-header">
         <div class="receipt-title">COWAY 스마트 견적서</div>
@@ -273,7 +270,9 @@
   <script>
     let currentTab = "bed";
     let cart = [];
-    let selectedColor = ""; // 선택된 색상 저장 변수
+    let selectedColorName = ""; 
+    let selectedColorCode = ""; 
+    let currentSizePrefix = "";
     
     function switchTab(tab, element) {
       currentTab = tab;
@@ -293,11 +292,10 @@
       const model = document.getElementById("modelOpt").value;
       const modelData = rawDB[currentTab][model];
       
-      if(modelData && modelData.img) {
-         document.getElementById("productThumb").src = modelData.img;
-         document.getElementById("modalImg").src = modelData.img;
-      }
-
+      const sizeSelect = document.getElementById("sizeOpt");
+      sizeSelect.innerHTML = "";
+      Object.keys(modelData.sizes).forEach(s => sizeSelect.innerHTML += `<option value="${s}">${s}</option>`);
+      
       // 💎 색상 동그라미 UI 처리
       if(modelData && modelData.colors) {
         document.getElementById("colorRow").style.display = "flex";
@@ -308,28 +306,26 @@
             circle.className = "color-swatch";
             circle.style.backgroundColor = c.hex;
             circle.style.borderColor = "#e4e7ec";
-            // 흰색/밝은계열이면 체크표시를 어둡게
-            circle.style.color = (c.hex === "#ffffff" || c.hex === "#f9fafb" || c.hex === "#f5f5dc") ? "#333" : "#fff";
+            circle.style.color = (c.hex === "#ffffff" || c.hex === "#f9fafb" || c.hex === "#f5f5dc" || c.hex === "#f5f5f5") ? "#333" : "#fff";
             circle.onclick = () => { selectColor(idx); };
             container.appendChild(circle);
         });
-        selectColor(0); // 기본 첫 번째 색상 선택
+        selectColor(0); 
       } else {
         document.getElementById("colorRow").style.display = "none";
-        selectedColor = "";
+        selectedColorName = "";
+        selectedColorCode = "";
       }
 
-      const sizeSelect = document.getElementById("sizeOpt");
-      sizeSelect.innerHTML = "";
-      Object.keys(modelData.sizes).forEach(s => sizeSelect.innerHTML += `<option value="${s}">${s}</option>`);
       updateCares();
     }
 
     function selectColor(index) {
         const modelData = rawDB[currentTab][document.getElementById("modelOpt").value];
         const colors = modelData.colors;
-        selectedColor = colors[index].name;
-        document.getElementById("selectedColorName").innerText = `- ${selectedColor}`;
+        selectedColorName = colors[index].name;
+        selectedColorCode = colors[index].img_code; // 색상 영문 코드 가져오기
+        document.getElementById("selectedColorName").innerText = `- ${selectedColorName}`;
         
         const container = document.getElementById("colorContainer");
         Array.from(container.children).forEach((el, idx) => {
@@ -341,16 +337,45 @@
                 el.innerHTML = "";
             }
         });
+        updateDynamicImage(); // 색상 누를때마다 사진 업데이트
+    }
+
+    // 💎 파일명 자동 조합 엔진 (사이즈 + 색상)
+    function updateDynamicImage() {
+        const model = document.getElementById("modelOpt").value;
+        const size = document.getElementById("sizeOpt").value;
+        const modelData = rawDB[currentTab][model];
+        const sizeData = modelData.sizes[size];
+
+        let finalImgPath = modelData.img; // 기본 사진
+
+        // 만약 사이즈에 img_prefix(예: lktm14, qsb01)가 있고, 색상 코드(예: iv)가 있다면?
+        if (sizeData.img_prefix && selectedColorCode) {
+            finalImgPath = `img/calc/berexbed/frame/${sizeData.img_prefix}_${selectedColorCode}.png`;
+        } else if (sizeData.img_prefix) {
+            // 색상 코드가 없는 모델이라면 (단일)
+            finalImgPath = `img/calc/berexbed/frame/${sizeData.img_prefix}.png`;
+        }
+
+        document.getElementById("productThumb").src = finalImgPath;
+        document.getElementById("modalImg").src = finalImgPath;
     }
 
     function updateCares() {
       const model = document.getElementById("modelOpt").value;
       const size = document.getElementById("sizeOpt").value;
       const sizeData = rawDB[currentTab][model].sizes[size];
+      
+      updateDynamicImage(); // 사이즈 바뀔 때마다 사진 업데이트
 
       const careSelect = document.getElementById("careOpt");
       careSelect.innerHTML = "";
-      Object.keys(sizeData).forEach(c => careSelect.innerHTML += `<option value="${c}">${c}</option>`);
+      // 데이터 정리 중 img_prefix 등 시스템 값이 섞일 수 있으므로 객체만 필터링
+      Object.keys(sizeData).forEach(c => {
+          if(typeof sizeData[c] === 'object') {
+              careSelect.innerHTML += `<option value="${c}">${c}</option>`;
+          }
+      });
       updateTerms();
     }
 
@@ -422,8 +447,7 @@
       const promoPrice = parseInt(document.getElementById("dispFinal").dataset.promo);
       const isFestaEligible = (currentTab === "bed" || currentTab === "healing"); 
 
-      // 💎 색상이 선택되어 있다면 이름 뒤에 붙여줌
-      const title = selectedColor ? `${model} ${size} [${selectedColor}]` : `${model} ${size}`;
+      const title = selectedColorName ? `${model} ${size} [${selectedColorName}]` : `${model} ${size}`;
 
       cart.push({ id: Date.now(), title, rType, sub: `[${rType}] [${care}] ${term}`, promoPrice, isFestaEligible, term });
       renderCart();
@@ -434,7 +458,6 @@
       renderCart();
     }
 
-    // 스위치 상호 배제 로직
     function togglePromo(type) {
         if(type === '10' && document.getElementById("chkPromo10").checked) {
             document.getElementById("chkPromo15").checked = false;
@@ -444,7 +467,6 @@
         renderCart();
     }
 
-    // 💎 믹스 결합 완벽 구현 엔진!
     function renderCart() {
       document.getElementById("cartCount").innerText = cart.length;
       const list = document.getElementById("cartList");
@@ -465,7 +487,6 @@
       let use10 = document.getElementById("chkPromo10").checked;
       let use15 = document.getElementById("chkPromo15").checked;
 
-      // 💎 신규 2개가 안 되는데 15% 패키지 스위치를 켰다면? 자동으로 10% 스위치로 튕겨버림!
       if (use15 && countNew < 2) {
           document.getElementById("chkPromo15").checked = false;
           if (isMulti) document.getElementById("chkPromo10").checked = true;
@@ -490,11 +511,9 @@
 
         if (item.rType === "신규") {
             if (use15 && isMulti && countNew >= 2) {
-                // 신규는 15% 패키지 적용!
                 let disc15 = Math.floor((P * 0.15) / 10) * 10; 
                 let price15 = P - disc15;
                 let halfPrice = Math.floor((price15 / 2) / 10) * 10; 
-                
                 item.pkgDiscount = disc15; 
                 
                 let halfMonths = 0;
@@ -509,10 +528,8 @@
                   timeline.push({ start: 1, end: termMonths, price: price15, tag: `👑 15% 패키지` });
                 }
             } else {
-                // 15% 조건 미달이거나, 10% 동시구매일 때
                 let discRatio = 0;
                 let tagStr = `기본 렌탈료`;
-                
                 if (isMulti && use10) { 
                    discRatio = 0.10; 
                    tagStr = `🤝 신규 동구 10%`;
@@ -525,7 +542,6 @@
                 let finalBasePrice = P - discAmount;
                 item.pkgDiscount = discAmount; 
 
-                // 💎 페스타 1만원 할인은 패키지 중복 불가 조건 반영
                 if(item.isFestaEligible && !isSingle && use10) {
                   let festaMonths = 0;
                   if(item.term === "5년") festaMonths = 5;
@@ -533,7 +549,6 @@
                   if(item.term === "9년") festaMonths = 15;
 
                   item.festaDiscount = finalBasePrice - 10000;
-
                   timeline.push({ start: 1, end: festaMonths, price: 10000, tag: `🎉 BEREX 페스타 (1만할인)` });
                   timeline.push({ start: festaMonths + 1, end: termMonths, price: finalBasePrice, tag: tagStr });
                 } else {
@@ -542,10 +557,8 @@
             }
         } 
         else if (item.rType === "재렌탈") {
-            // 💎 재렌탈은 15% 패키지에 묶여도 깍두기 처리되어 3% 단품결합 할인만 적용됨!
             let discRatio = 0;
             let tagStr = `기본 재렌탈료`;
-            
             if (isMulti) { 
                 if (use15) {
                     discRatio = 0.03;
@@ -562,7 +575,6 @@
             let discAmount = Math.floor((P * discRatio) / 10) * 10;
             let finalBasePrice = P - discAmount;
             item.pkgDiscount = discAmount; 
-            
             timeline.push({ start: 1, end: termMonths, price: finalBasePrice, tag: tagStr });
         }
 
@@ -593,7 +605,6 @@
 
       document.getElementById("finalPriceFirst").innerText = sumFirstMonth.toLocaleString() + " 원";
       document.getElementById("finalPriceRegular").innerText = sumRegularMonth.toLocaleString() + " 원";
-      
       updateReceiptModal(sumFirstMonth);
     }
 
@@ -610,7 +621,6 @@
         sumBase += item.basePrice;
         totalPkgDiscount += item.pkgDiscount;
         totalFestaDiscount += item.festaDiscount;
-        
         let currentFirstMonthPrice = item.currentTimeline[0].price; 
         
         recList.innerHTML += `
@@ -628,12 +638,8 @@
       document.getElementById("recSumBase").innerText = `월 ${sumBase.toLocaleString()}원`;
 
       let discountHtml = `<div class="receipt-sum-row discount" style="margin-bottom:4px;"><span>🎁 총 프로모션 할인</span><span>-${totalDiscount.toLocaleString()}원</span></div>`;
-      if(totalPkgDiscount > 0) {
-         discountHtml += `<div class="receipt-sum-row sub-discount"><span>└ 다기기/패키지 결합 할인</span><span>-${totalPkgDiscount.toLocaleString()}원</span></div>`;
-      }
-      if(totalFestaDiscount > 0) {
-         discountHtml += `<div class="receipt-sum-row sub-discount"><span>└ 페스타/반값 특별 할인</span><span>-${totalFestaDiscount.toLocaleString()}원</span></div>`;
-      }
+      if(totalPkgDiscount > 0) discountHtml += `<div class="receipt-sum-row sub-discount"><span>└ 다기기/패키지 결합 할인</span><span>-${totalPkgDiscount.toLocaleString()}원</span></div>`;
+      if(totalFestaDiscount > 0) discountHtml += `<div class="receipt-sum-row sub-discount"><span>└ 페스타/반값 특별 할인</span><span>-${totalFestaDiscount.toLocaleString()}원</span></div>`;
       
       document.getElementById("recDiscountDetails").innerHTML = discountHtml;
       document.getElementById("recSumFinal").innerText = `월 ${totalFirstMonthPrice.toLocaleString()}원`;
