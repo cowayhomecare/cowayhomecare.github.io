@@ -98,11 +98,13 @@
       <div style='font-size:20px;font-weight:900;color:#005bb5;'>COWAY 견적기</div>
     </div>
 
-    <!-- 1. 카테고리 탭 -->
+    <!-- 1. 카테고리 탭 (힐링, 시즌 추가) -->
     <div class="cat-container">
       <div class="cat-btn active" onclick="switchTab('bed')"><span>🛏️</span><div>매트/프레임</div></div>
-      <div class="cat-btn" onclick="switchTab('water')"><span>💧</span><div>정수기</div></div>
       <div class="cat-btn" onclick="switchTab('air')"><span>🌬️</span><div>공기청정기</div></div>
+      <div class="cat-btn" onclick="switchTab('healing')"><span>💆</span><div>힐링상품</div></div>
+      <div class="cat-btn" onclick="switchTab('season')"><span>❄️</span><div>시즌상품</div></div>
+      <div class="cat-btn" onclick="switchTab('etc')"><span>💧</span><div>ETC(정수기)</div></div>
     </div>
 
     <!-- 2. 제품 및 옵션 선택 (2단계로 분리!) -->
@@ -120,12 +122,12 @@
         <div style="flex:1; display:flex; flex-direction:column; gap:8px;">
           <!-- 1단계: 메인 제품 -->
           <div class="input-group" style="margin-bottom:0;">
-            <label>제품 모델</label>
+            <label>제품 카테고리</label>
             <select id="modelOpt" onchange="updateSizes()"></select>
           </div>
           <!-- 2단계: 사이즈/기능 -->
           <div class="input-group" style="margin-bottom:0;">
-            <label>세부 사양 (사이즈/기능)</label>
+            <label>세부 모델 (사이즈/기능)</label>
             <select id="sizeOpt" onchange="updateCares()"></select>
           </div>
         </div>
@@ -149,7 +151,7 @@
       </button>
     </div>
 
-    <!-- 3. 장바구니 & 글로벌 프로모션 (우측 스위치 통일) -->
+    <!-- 3. 장바구니 & 글로벌 프로모션 -->
     <div class="card">
       <div class="card-title">
         <span class="material-symbols-rounded" style="color: #0ca678;">shopping_bag</span>
@@ -168,12 +170,12 @@
         </label>
       </div>
 
-      <!-- 다기기 프로모션 스위치 -->
-      <div id="multiPromoBox" style="display:none;">
-        <div class="toggle-switch">
+      <!-- 다기기 프로모션 스위치 (슬라이딩 토글로 변경!) -->
+      <div id="multiPromoBox" style="display:none; flex-direction:column; gap:10px; padding-bottom:14px; border-bottom:1px solid #e4e7ec; margin-bottom:14px;">
+        <div class="toggle-switch" style="margin-bottom:0; box-shadow:none; border-color:#3182f6;">
           <div class="toggle-label">
-            <span>🤝 동시구매 10% 적용</span>
-            <span class="toggle-desc">페스타 적용 기간은 중복 불가</span>
+            <span>🤝 10% 동시구매 적용</span>
+            <span class="toggle-desc">페스타 1만원 중복 O</span>
           </div>
           <label class="switch">
             <input type="checkbox" id="chkPromo10" checked onchange="togglePromo('10')">
@@ -181,10 +183,10 @@
           </label>
         </div>
 
-        <div class="toggle-switch">
+        <div class="toggle-switch" style="margin-bottom:0; box-shadow:none; border-color:#7048e8;">
           <div class="toggle-label">
             <span>👑 15% 패키지 적용</span>
-            <span class="toggle-desc">대수별 추가 반값 혜택 (페스타 무시)</span>
+            <span class="toggle-desc">대수별 추가 반값 (페스타 중복 X)</span>
           </div>
           <label class="switch">
             <input type="checkbox" id="chkPromo15" onchange="togglePromo('15')">
@@ -218,6 +220,7 @@
       
       <div id="recItemList" style="max-height: 200px; overflow-y: auto; margin-bottom: 14px; border-bottom:1px solid #e4e7ec; padding-bottom:10px;"></div>
       
+      <!-- 💎 쪼개진 할인 내역 영역 -->
       <div class="receipt-sum-row">
         <span>기본 렌탈료 합계</span><span id="recSumBase">0원</span>
       </div>
@@ -241,47 +244,36 @@
   </div>
 
   <script>
-    // 💎 2단계 구조로 개편된 DB (제품명 -> 사이즈/종류 -> 케어 -> 약정)
-    const rawDB = {
-      "bed": {
-        "하이브리드4": { img: "img/calc/berexbed/mattress/pr04.png", 
+    // 💎 2단계 구조 + 매트리스 8종 5/7/9년 (스마트 제외) 완벽 DB 탑재
+    const rawDB = {"bed":{"루네어":{"img":"img/calc/berexbed/mattress/se03.png","sizes":{"라지킹(LK) (CMLK-SE03H/M)":{"토탈케어":{"5년":{"catalog":63900,"promo":63900},"7년":{"catalog":54900,"promo":54900},"9년":{"catalog":48900,"promo":48900}},"스페셜체인지":{"5년":{"catalog":61900,"promo":61900},"7년":{"catalog":52900,"promo":52900},"9년":{"catalog":46900,"promo":46900}},"베이직케어":{"5년":{"catalog":58900,"promo":58900},"7년":{"catalog":49900,"promo":49900},"9년":{"catalog":43900,"promo":43900}},"서비스프리":{"5년":{"catalog":56900,"promo":56900},"7년":{"catalog":47900,"promo":47900},"9년":{"catalog":41900,"promo":41900}}},"킹(K) (CMK-SE03H/M)":{"토탈케어":{"5년":{"catalog":54900,"promo":54900},"7년":{"catalog":46900,"promo":46900},"9년":{"catalog":41900,"promo":41900}},"스페셜체인지":{"5년":{"catalog":52900,"promo":52900},"7년":{"catalog":44900,"promo":44900},"9년":{"catalog":39900,"promo":39900}},"베이직케어":{"5년":{"catalog":49900,"promo":49900},"7년":{"catalog":41900,"promo":41900},"9년":{"catalog":36900,"promo":36900}},"서비스프리":{"5년":{"catalog":47900,"promo":47900},"7년":{"catalog":39900,"promo":39900},"9년":{"catalog":34900,"promo":34900}}},"퀸(Q) (CMQ-SE03H/M)":{"토탈케어":{"5년":{"catalog":47900,"promo":47900},"7년":{"catalog":39900,"promo":39900},"9년":{"catalog":34900,"promo":34900}},"스페셜체인지":{"5년":{"catalog":45900,"promo":45900},"7년":{"catalog":37900,"promo":37900},"9년":{"catalog":32900,"promo":32900}},"베이직케어":{"5년":{"catalog":42900,"promo":42900},"7년":{"catalog":34900,"promo":34900},"9년":{"catalog":29900,"promo":29900}},"서비스프리":{"5년":{"catalog":40900,"promo":40900},"7년":{"catalog":32900,"promo":32900},"9년":{"catalog":27900,"promo":27900}}},"슈퍼싱글(SS) (CMSS-SE03H/M)":{"토탈케어":{"5년":{"catalog":44900,"promo":44900},"7년":{"catalog":36900,"promo":36900},"9년":{"catalog":31900,"promo":31900}},"스페셜체인지":{"5년":{"catalog":42900,"promo":42900},"7년":{"catalog":34900,"promo":34900},"9년":{"catalog":29900,"promo":29900}},"베이직케어":{"5년":{"catalog":39900,"promo":39900},"7년":{"catalog":31900,"promo":31900},"9년":{"catalog":26900,"promo":26900}},"서비스프리":{"5년":{"catalog":37900,"promo":37900},"7년":{"catalog":29900,"promo":29900},"9년":{"catalog":24900,"promo":24900}}}}},"시그니처":{"img":"img/calc/berexbed/mattress/sp01.png","sizes":{"그레이트킹(GK) (CMGK-SP01SC)":{"토탈케어":{"5년":{"catalog":101900,"promo":101900},"7년":{"catalog":91900,"promo":91900},"9년":{"catalog":85900,"promo":85900}},"스페셜체인지":{"5년":{"catalog":99900,"promo":99900},"7년":{"catalog":89900,"promo":89900},"9년":{"catalog":83900,"promo":83900}},"베이직케어":{"5년":{"catalog":95900,"promo":95900},"7년":{"catalog":85900,"promo":85900},"9년":{"catalog":79900,"promo":79900}},"서비스프리":{"5년":{"catalog":93900,"promo":93900},"7년":{"catalog":83900,"promo":83900},"9년":{"catalog":77900,"promo":77900}}},"라지킹(LK) (CMLK-SP01SC)":{"토탈케어":{"5년":{"catalog":91900,"promo":91900},"7년":{"catalog":81900,"promo":81900},"9년":{"catalog":75900,"promo":75900}},"스페셜체인지":{"5년":{"catalog":89900,"promo":89900},"7년":{"catalog":79900,"promo":79900},"9년":{"catalog":73900,"promo":73900}},"베이직케어":{"5년":{"catalog":85900,"promo":85900},"7년":{"catalog":75900,"promo":75900},"9년":{"catalog":69900,"promo":69900}},"서비스프리":{"5년":{"catalog":83900,"promo":83900},"7년":{"catalog":73900,"promo":73900},"9년":{"catalog":67900,"promo":67900}}},"킹(K) (CMK-SP01SC)":{"토탈케어":{"5년":{"catalog":83900,"promo":83900},"7년":{"catalog":73900,"promo":73900},"9년":{"catalog":67900,"promo":67900}},"스페셜체인지":{"5년":{"catalog":81900,"promo":81900},"7년":{"catalog":71900,"promo":71900},"9년":{"catalog":65900,"promo":65900}},"베이직케어":{"5년":{"catalog":77900,"promo":77900},"7년":{"catalog":67900,"promo":67900},"9년":{"catalog":61900,"promo":61900}},"서비스프리":{"5년":{"catalog":75900,"promo":75900},"7년":{"catalog":65900,"promo":65900},"9년":{"catalog":59900,"promo":59900}}},"퀸(Q) (CMQ-SP01SC)":{"토탈케어":{"5년":{"catalog":76900,"promo":76900},"7년":{"catalog":66900,"promo":66900},"9년":{"catalog":60900,"promo":60900}},"스페셜체인지":{"5년":{"catalog":74900,"promo":74900},"7년":{"catalog":64900,"promo":64900},"9년":{"catalog":58900,"promo":58900}},"베이직케어":{"5년":{"catalog":70900,"promo":70900},"7년":{"catalog":60900,"promo":60900},"9년":{"catalog":54900,"promo":54900}},"서비스프리":{"5년":{"catalog":68900,"promo":68900},"7년":{"catalog":58900,"promo":58900},"9년":{"catalog":52900,"promo":52900}}},"슈퍼싱글(SS) (CMSS-SP01SC)":{"토탈케어":{"5년":{"catalog":69900,"promo":69900},"7년":{"catalog":59900,"promo":59900},"9년":{"catalog":53900,"promo":53900}},"스페셜체인지":{"5년":{"catalog":67900,"promo":67900},"7년":{"catalog":57900,"promo":57900},"9년":{"catalog":51900,"promo":51900}},"베이직케어":{"5년":{"catalog":63900,"promo":63900},"7년":{"catalog":53900,"promo":53900},"9년":{"catalog":47900,"promo":47900}},"서비스프리":{"5년":{"catalog":61900,"promo":61900},"7년":{"catalog":51900,"promo":51900},"9년":{"catalog":45900,"promo":45900}}}}},"시그니처 난연":{"img":"img/calc/berexbed/mattress/sp01s.png","sizes":{"그레이트킹(GK) (CMGK-SP01S)":{"베이직케어":{"5년":{"catalog":91900,"promo":91900},"7년":{"catalog":81900,"promo":81900},"9년":{"catalog":75900,"promo":75900}},"서비스프리":{"5년":{"catalog":89900,"promo":89900},"7년":{"catalog":79900,"promo":79900},"9년":{"catalog":73900,"promo":73900}}},"라지킹(LK) (CMLK-SP01S)":{"베이직케어":{"5년":{"catalog":81900,"promo":81900},"7년":{"catalog":71900,"promo":71900},"9년":{"catalog":65900,"promo":65900}},"서비스프리":{"5년":{"catalog":79900,"promo":79900},"7년":{"catalog":69900,"promo":69900},"9년":{"catalog":63900,"promo":63900}}},"킹(K) (CMK-SP01S)":{"베이직케어":{"5년":{"catalog":73900,"promo":73900},"7년":{"catalog":63900,"promo":63900},"9년":{"catalog":57900,"promo":57900}},"서비스프리":{"5년":{"catalog":71900,"promo":71900},"7년":{"catalog":61900,"promo":61900},"9년":{"catalog":55900,"promo":55900}}},"퀸(Q) (CMQ-SP01S)":{"베이직케어":{"5년":{"catalog":66900,"promo":66900},"7년":{"catalog":56900,"promo":56900},"9년":{"catalog":50900,"promo":50900}},"서비스프리":{"5년":{"catalog":64900,"promo":64900},"7년":{"catalog":54900,"promo":54900},"9년":{"catalog":48900,"promo":48900}}},"슈퍼싱글(SS) (CMSS-SP01S)":{"베이직케어":{"5년":{"catalog":59900,"promo":59900},"7년":{"catalog":49900,"promo":49900},"9년":{"catalog":43900,"promo":43900}},"서비스프리":{"5년":{"catalog":57900,"promo":57900},"7년":{"catalog":47900,"promo":47900},"9년":{"catalog":41900,"promo":41900}}}}},"시그니처 컴포트":{"img":"img/calc/berexbed/mattress/sp02.png","sizes":{"그레이트킹(GK) (CMGK-SP02SC)":{"토탈케어":{"5년":{"catalog":105900,"promo":105900},"7년":{"catalog":95900,"promo":95900},"9년":{"catalog":89900,"promo":89900}},"스페셜체인지":{"5년":{"catalog":103900,"promo":103900},"7년":{"catalog":93900,"promo":93900},"9년":{"catalog":87900,"promo":87900}},"베이직케어":{"5년":{"catalog":99900,"promo":99900},"7년":{"catalog":89900,"promo":89900},"9년":{"catalog":83900,"promo":83900}},"서비스프리":{"5년":{"catalog":97900,"promo":97900},"7년":{"catalog":87900,"promo":87900},"9년":{"catalog":81900,"promo":81900}}},"라지킹(LK) (CMLK-SP02SC)":{"토탈케어":{"5년":{"catalog":95900,"promo":95900},"7년":{"catalog":85900,"promo":85900},"9년":{"catalog":79900,"promo":79900}},"스페셜체인지":{"5년":{"catalog":93900,"promo":93900},"7년":{"catalog":83900,"promo":83900},"9년":{"catalog":77900,"promo":77900}},"베이직케어":{"5년":{"catalog":89900,"promo":89900},"7년":{"catalog":79900,"promo":79900},"9년":{"catalog":73900,"promo":73900}},"서비스프리":{"5년":{"catalog":87900,"promo":87900},"7년":{"catalog":77900,"promo":77900},"9년":{"catalog":71900,"promo":71900}}},"킹(K) (CMK-SP02SC)":{"토탈케어":{"5년":{"catalog":87900,"promo":87900},"7년":{"catalog":77900,"promo":77900},"9년":{"catalog":71900,"promo":71900}},"스페셜체인지":{"5년":{"catalog":85900,"promo":85900},"7년":{"catalog":75900,"promo":75900},"9년":{"catalog":69900,"promo":69900}},"베이직케어":{"5년":{"catalog":81900,"promo":81900},"7년":{"catalog":71900,"promo":71900},"9년":{"catalog":65900,"promo":65900}},"서비스프리":{"5년":{"catalog":79900,"promo":79900},"7년":{"catalog":69900,"promo":69900},"9년":{"catalog":63900,"promo":63900}}},"퀸(Q) (CMQ-SP02SC)":{"토탈케어":{"5년":{"catalog":80900,"promo":80900},"7년":{"catalog":70900,"promo":70900},"9년":{"catalog":64900,"promo":64900}},"스페셜체인지":{"5년":{"catalog":78900,"promo":78900},"7년":{"catalog":68900,"promo":68900},"9년":{"catalog":62900,"promo":62900}},"베이직케어":{"5년":{"catalog":74900,"promo":74900},"7년":{"catalog":64900,"promo":64900},"9년":{"catalog":58900,"promo":58900}},"서비스프리":{"5년":{"catalog":72900,"promo":72900},"7년":{"catalog":62900,"promo":62900},"9년":{"catalog":56900,"promo":56900}}},"슈퍼싱글(SS) (CMSS-SP02SC)":{"토탈케어":{"5년":{"catalog":73900,"promo":73900},"7년":{"catalog":63900,"promo":63900},"9년":{"catalog":57900,"promo":57900}},"스페셜체인지":{"5년":{"catalog":71900,"promo":71900},"7년":{"catalog":61900,"promo":61900},"9년":{"catalog":55900,"promo":55900}},"베이직케어":{"5년":{"catalog":67900,"promo":67900},"7년":{"catalog":57900,"promo":57900},"9년":{"catalog":51900,"promo":51900}},"서비스프리":{"5년":{"catalog":65900,"promo":65900},"7년":{"catalog":55900,"promo":55900},"9년":{"catalog":49900,"promo":49900}}}}},"시그니처 난연 컴포트":{"img":"img/calc/berexbed/mattress/sp02s.png","sizes":{"그레이트킹(GK) (CMGK-SP02S)":{"베이직케어":{"5년":{"catalog":95900,"promo":95900},"7년":{"catalog":85900,"promo":85900},"9년":{"catalog":79900,"promo":79900}},"서비스프리":{"5년":{"catalog":93900,"promo":93900},"7년":{"catalog":83900,"promo":83900},"9년":{"catalog":77900,"promo":77900}}},"라지킹(LK) (CMLK-SP02S)":{"베이직케어":{"5년":{"catalog":85900,"promo":85900},"7년":{"catalog":75900,"promo":75900},"9년":{"catalog":69900,"promo":69900}},"서비스프리":{"5년":{"catalog":83900,"promo":83900},"7년":{"catalog":73900,"promo":73900},"9년":{"catalog":67900,"promo":67900}}},"킹(K) (CMK-SP02S)":{"베이직케어":{"5년":{"catalog":77900,"promo":77900},"7년":{"catalog":67900,"promo":67900},"9년":{"catalog":61900,"promo":61900}},"서비스프리":{"5년":{"catalog":75900,"promo":75900},"7년":{"catalog":65900,"promo":65900},"9년":{"catalog":59900,"promo":59900}}},"퀸(Q) (CMQ-SP02S)":{"베이직케어":{"5년":{"catalog":70900,"promo":70900},"7년":{"catalog":60900,"promo":60900},"9년":{"catalog":54900,"promo":54900}},"서비스프리":{"5년":{"catalog":68900,"promo":68900},"7년":{"catalog":58900,"promo":58900},"9년":{"catalog":52900,"promo":52900}}},"슈퍼싱글(SS) (CMSS-SP02S)":{"베이직케어":{"5년":{"catalog":63900,"promo":63900},"7년":{"catalog":53900,"promo":53900},"9년":{"catalog":47900,"promo":47900}},"서비스프리":{"5년":{"catalog":61900,"promo":61900},"7년":{"catalog":51900,"promo":51900},"9년":{"catalog":45900,"promo":45900}}}}},"스마트 S8+":{"img":"img/calc/berexbed/mattress/as05.png","sizes":{"라지킹(LK) (CMLK-AS05)":{"토탈케어":{"5년":{"catalog":161900,"promo":151900},"7년":{"catalog":128900,"promo":118900}},"스페셜체인지":{"5년":{"catalog":159900,"promo":149900},"7년":{"catalog":126900,"promo":116900}},"베이직케어":{"5년":{"catalog":157900,"promo":147900},"7년":{"catalog":124900,"promo":114900}},"서비스프리":{"5년":{"catalog":155900,"promo":145900},"7년":{"catalog":122900,"promo":112900}}},"킹(K) (CMK-AS05)":{"토탈케어":{"5년":{"catalog":147900,"promo":137900},"7년":{"catalog":117900,"promo":107900}},"스페셜체인지":{"5년":{"catalog":145900,"promo":135900},"7년":{"catalog":115900,"promo":105900}},"베이직케어":{"5년":{"catalog":143900,"promo":133900},"7년":{"catalog":113900,"promo":103900}},"서비스프리":{"5년":{"catalog":141900,"promo":131900},"7년":{"catalog":111900,"promo":101900}}},"퀸(Q) (CMQ-AS05)":{"토탈케어":{"5년":{"catalog":139900,"promo":129900},"7년":{"catalog":111900,"promo":101900}},"스페셜체인지":{"5년":{"catalog":137900,"promo":127900},"7년":{"catalog":109900,"promo":99900}},"베이직케어":{"5년":{"catalog":135900,"promo":125900},"7년":{"catalog":107900,"promo":97900}},"서비스프리":{"5년":{"catalog":133900,"promo":123900},"7년":{"catalog":105900,"promo":95900}}},"슈퍼싱글(SS) (CMSS-AS05)":{"토탈케어":{"5년":{"catalog":110900,"promo":100900},"7년":{"catalog":89900,"promo":79900}},"스페셜체인지":{"5년":{"catalog":108900,"promo":98900},"7년":{"catalog":87900,"promo":77900}},"베이직케어":{"5년":{"catalog":106900,"promo":96900},"7년":{"catalog":85900,"promo":75900}},"서비스프리":{"5년":{"catalog":104900,"promo":94900},"7년":{"catalog":83900,"promo":73900}}}}},"스마트 S6+":{"img":"img/calc/berexbed/mattress/as04.png","sizes":{"라지킹(LK) (CMLK-AS04)":{"토탈케어":{"5년":{"catalog":129900,"promo":119900},"7년":{"catalog":103900,"promo":93900}},"스페셜체인지":{"5년":{"catalog":127900,"promo":117900},"7년":{"catalog":101900,"promo":91900}},"베이직케어":{"5년":{"catalog":126900,"promo":116900},"7년":{"catalog":100900,"promo":90900}},"서비스프리":{"5년":{"catalog":124900,"promo":114900},"7년":{"catalog":98900,"promo":88900}}},"킹(K) (CMK-AS04)":{"토탈케어":{"5년":{"catalog":117900,"promo":107900},"7년":{"catalog":94900,"promo":84900}},"스페셜체인지":{"5년":{"catalog":115900,"promo":105900},"7년":{"catalog":92900,"promo":82900}},"베이직케어":{"5년":{"catalog":114900,"promo":104900},"7년":{"catalog":91900,"promo":81900}},"서비스프리":{"5년":{"catalog":112900,"promo":102900},"7년":{"catalog":89900,"promo":79900}}},"퀸(Q) (CMQ-AS04)":{"토탈케어":{"5년":{"catalog":110900,"promo":100900},"7년":{"catalog":89900,"promo":79900}},"스페셜체인지":{"5년":{"catalog":108900,"promo":98900},"7년":{"catalog":87900,"promo":77900}},"베이직케어":{"5년":{"catalog":107900,"promo":97900},"7년":{"catalog":86900,"promo":76900}},"서비스프리":{"5년":{"catalog":105900,"promo":95900},"7년":{"catalog":84900,"promo":74900}}},"슈퍼싱글(SS) (CMSS-AS04)":{"토탈케어":{"5년":{"catalog":90900,"promo":80900},"7년":{"catalog":74900,"promo":64900}},"스페셜체인지":{"5년":{"catalog":88900,"promo":78900},"7년":{"catalog":72900,"promo":62900}},"베이직케어":{"5년":{"catalog":87900,"promo":77900},"7년":{"catalog":71900,"promo":61900}},"서비스프리":{"5년":{"catalog":85900,"promo":75900},"7년":{"catalog":69900,"promo":59900}}}}},"하이브리드4":{"img":"img/calc/berexbed/mattress/pr04.png","sizes":{"라지킹(LK) (CMLK-PR04)":{"토탈케어":{"5년":{"catalog":129900,"promo":119900},"7년":{"catalog":103900,"promo":93900},"9년":{"catalog":93500,"promo":84500}},"스페셜체인지":{"5년":{"catalog":127900,"promo":117900},"7년":{"catalog":101900,"promo":91900},"9년":{"catalog":91700,"promo":82700}},"베이직케어":{"5년":{"catalog":126900,"promo":116900},"7년":{"catalog":100900,"promo":90900},"9년":{"catalog":90800,"promo":81800}},"서비스프리":{"5년":{"catalog":124900,"promo":114900},"7년":{"catalog":98900,"promo":88900},"9년":{"catalog":89000,"promo":80000}}},"킹(K) (CMK-PR04_V2)":{"토탈케어":{"5년":{"catalog":117900,"promo":107900},"7년":{"catalog":94900,"promo":84900},"9년":{"catalog":85400,"promo":76400}},"스페셜체인지":{"5년":{"catalog":115900,"promo":105900},"7년":{"catalog":92900,"promo":82900},"9년":{"catalog":83600,"promo":74600}},"베이직케어":{"5년":{"catalog":114900,"promo":104900},"7년":{"catalog":91900,"promo":81900},"9년":{"catalog":82700,"promo":73700}},"서비스프리":{"5년":{"catalog":112900,"promo":102900},"7년":{"catalog":89900,"promo":79900},"9년":{"catalog":80900,"promo":71900}}},"퀸(Q) (CMQ-PR04_V2)":{"토탈케어":{"5년":{"catalog":110900,"promo":100900},"7년":{"catalog":89900,"promo":79900},"9년":{"catalog":80900,"promo":71900}},"스페셜체인지":{"5년":{"catalog":108900,"promo":98900},"7년":{"catalog":87900,"promo":77900},"9년":{"catalog":79100,"promo":70100}},"베이직케어":{"5년":{"catalog":107900,"promo":97900},"7년":{"catalog":86900,"promo":76900},"9년":{"catalog":78200,"promo":69200}},"서비스프리":{"5년":{"catalog":105900,"promo":95900},"7년":{"catalog":84900,"promo":74900},"9년":{"catalog":76400,"promo":67400}}},"슈퍼싱글(SS) (CMSS-PR04_V2)":{"토탈케어":{"5년":{"catalog":90900,"promo":80900},"7년":{"catalog":74900,"promo":64900},"9년":{"catalog":67400,"promo":58400}},"스페셜체인지":{"5년":{"catalog":88900,"promo":78900},"7년":{"catalog":72900,"promo":62900},"9년":{"catalog":65600,"promo":56600}},"베이직케어":{"5년":{"catalog":87900,"promo":77900},"7년":{"catalog":71900,"promo":61900},"9년":{"catalog":64700,"promo":55700}},"서비스프리":{"5년":{"catalog":85900,"promo":75900},"7년":{"catalog":69900,"promo":59900},"9년":{"catalog":62900,"promo":53900}}}}}},
+      "air": {
+        "노블 공기청정기2": { img: "img/calc/air/ap1623.png",
             sizes: {
-                "Q (CMQ-PR04_V2)": {
-                    "토탈케어": { "5년": {"catalog": 110900, "promo": 100900}, "7년": {"catalog": 89900, "promo": 79900}, "9년": {"catalog": 82900, "promo": 72900} },
-                    "스페셜체인지": { "5년": {"catalog": 108900, "promo": 98900}, "7년": {"catalog": 87900, "promo": 77900}, "9년": {"catalog": 80900, "promo": 70900} },
-                    "베이직케어": { "5년": {"catalog": 107900, "promo": 97900}, "7년": {"catalog": 86900, "promo": 76900}, "9년": {"catalog": 79900, "promo": 69900} },
-                    "서비스프리": { "5년": {"catalog": 105900, "promo": 95900}, "7년": {"catalog": 84900, "promo": 74900}, "9년": {"catalog": 77900, "promo": 67900} }
-                }
-            }
-        },
-        "루네어": { img: "img/calc/berexbed/mattress/se03.png", 
-            sizes: {
-                "LK (CMLK-SE03H/M)": {
-                    "토탈케어": { "5년": {"catalog": 63900, "promo": 63900}, "7년": {"catalog": 54900, "promo": 54900}, "9년": {"catalog": 48900, "promo": 48900} },
-                    "스페셜체인지": { "5년": {"catalog": 61900, "promo": 61900}, "7년": {"catalog": 52900, "promo": 52900}, "9년": {"catalog": 46900, "promo": 46900} },
-                    "베이직케어": { "5년": {"catalog": 58900, "promo": 58900}, "7년": {"catalog": 49900, "promo": 49900}, "9년": {"catalog": 43900, "promo": 43900} },
-                    "서비스프리": { "5년": {"catalog": 56900, "promo": 56900}, "7년": {"catalog": 47900, "promo": 47900}, "9년": {"catalog": 41900, "promo": 41900} }
-                },
-                "Q (CMQ-SE03H/M)": {
-                    "토탈케어": { "5년": {"catalog": 47900, "promo": 47900}, "7년": {"catalog": 39900, "promo": 39900}, "9년": {"catalog": 34900, "promo": 34900} },
-                    "스페셜체인지": { "5년": {"catalog": 45900, "promo": 45900}, "7년": {"catalog": 37900, "promo": 37900}, "9년": {"catalog": 32900, "promo": 32900} },
-                    "베이직케어": { "5년": {"catalog": 42900, "promo": 42900}, "7년": {"catalog": 34900, "promo": 34900}, "9년": {"catalog": 29900, "promo": 29900} },
-                    "서비스프리": { "5년": {"catalog": 40900, "promo": 40900}, "7년": {"catalog": 32900, "promo": 32900}, "9년": {"catalog": 27900, "promo": 27900} }
-                }
-            }
-        },
-        "시그니처": { img: "img/calc/berexbed/mattress/sp01.png",
-            sizes: {
-                "Q (CMQ-SP01SC)": {
-                    "토탈케어": { "5년": {"catalog": 76900, "promo": 76900}, "7년": {"catalog": 66900, "promo": 66900}, "9년": {"catalog": 60900, "promo": 60900} },
-                    "스페셜체인지": { "5년": {"catalog": 74900, "promo": 74900}, "7년": {"catalog": 64900, "promo": 64900}, "9년": {"catalog": 58900, "promo": 58900} },
-                    "베이직케어": { "5년": {"catalog": 70900, "promo": 70900}, "7년": {"catalog": 60900, "promo": 60900}, "9년": {"catalog": 54900, "promo": 54900} },
-                    "서비스프리": { "5년": {"catalog": 68900, "promo": 68900}, "7년": {"catalog": 58900, "promo": 58900}, "9년": {"catalog": 52900, "promo": 52900} }
+                "일반 (AP-1623M)": {
+                    "방문관리": { "3년": {"catalog": 42400, "promo": 34110}, "5년": {"catalog": 40400, "promo": 32310} }
                 }
             }
         }
       },
-      "water": {
+      "healing": {
+        "비렉스 안마의자": { img: "img/icon/logo.png",
+            sizes: {
+                "마인 (MC-B03)": {
+                    "토탈케어": { "5년": {"catalog": 61900, "promo": 51200} }
+                }
+            }
+        }
+      },
+      "season": {
+        "벽걸이 에어컨": { img: "img/icon/logo.png",
+            sizes: {
+                "6평 (ACAH-061AAS)": {
+                    "토탈케어": { "5년": {"catalog": 32900, "promo": 29600} }
+                }
+            }
+        }
+      },
+      "etc": {
         "아이콘 정수기 3": { img: "img/calc/water/cp7220.png",
             sizes: {
                 "냉온정 (CHP-7220N)": {
@@ -291,15 +283,6 @@
                 "냉정 (CP-7220N)": {
                     "방문관리": { "3년": {"catalog": 40900, "promo": 36900}, "6년": {"catalog": 37900, "promo": 33900} },
                     "자가관리": { "3년": {"catalog": 39900, "promo": 35900}, "6년": {"catalog": 36900, "promo": 32900}, "7년": {"catalog": 32900, "promo": 28900} }
-                }
-            }
-        }
-      },
-      "air": {
-        "노블 공기청정기2": { img: "img/calc/air/ap1623.png",
-            sizes: {
-                "일반 (AP-1623M)": {
-                    "방문관리": { "3년": {"catalog": 42400, "promo": 34110}, "5년": {"catalog": 40400, "promo": 32310} }
                 }
             }
         }
@@ -324,7 +307,7 @@
       updateSizes();
     }
 
-    // 2단계: 사이즈 세팅
+    // 2단계: 사이즈/세부모델 세팅
     function updateSizes() {
       const model = document.getElementById("modelOpt").value;
       const modelData = rawDB[currentTab][model];
@@ -365,6 +348,7 @@
       updateLivePrice();
     }
 
+    // 가격 업데이트
     function updateLivePrice() {
       const model = document.getElementById("modelOpt").value;
       const size = document.getElementById("sizeOpt").value;
@@ -375,7 +359,8 @@
       const box = document.getElementById("priceDisplayBox");
       const actualPromoPrice = data.promo;
 
-      if(currentTab === "bed") {
+      // 💎 매트리스/힐링군(단순 표기) vs 일반가전(상세 할인 표기)
+      if(currentTab === "bed" || currentTab === "healing") {
         let html = `<div class="receipt-row total"><span>카탈로그/기본 렌탈료</span><span id="dispFinal">${actualPromoPrice.toLocaleString()}원</span></div>`;
         if(data.catalog > data.promo) {
           html = `<div class="receipt-row"><span>정상 렌탈료</span><span style="text-decoration:line-through;">${data.catalog.toLocaleString()}원</span></div>` + html;
@@ -402,8 +387,9 @@
       const care = document.getElementById("careOpt").value;
       const term = document.getElementById("dispFinal").dataset.term;
       const promoPrice = parseInt(document.getElementById("dispFinal").dataset.promo);
-      const isFestaEligible = (currentTab === "bed"); 
+      const isFestaEligible = (currentTab === "bed" || currentTab === "healing"); 
 
+      // 모델명과 사이즈를 합쳐서 타이틀로 저장
       const title = `${model} ${size}`;
 
       cart.push({ id: Date.now(), title, sub: `[${care}] ${term}`, promoPrice, isFestaEligible, term });
@@ -415,7 +401,7 @@
       renderCart();
     }
 
-    // 💎 라디오 -> 스위치 로직 연결
+    // 💎 슬라이딩 스위치 연동 (10% 켜면 15% 끄기 등)
     function togglePromo(type) {
         if(type === '10' && document.getElementById("chkPromo10").checked) {
             document.getElementById("chkPromo15").checked = false;
@@ -439,7 +425,7 @@
       const use15 = document.getElementById("chkPromo15").checked;
 
       document.getElementById("combineSwitchBox").style.display = isSingle ? "flex" : "none";
-      document.getElementById("multiPromoBox").style.display = isMulti ? "block" : "none";
+      document.getElementById("multiPromoBox").style.display = isMulti ? "flex" : "none";
 
       let sumFirstMonth = 0;
       let sumRegularMonth = 0;
