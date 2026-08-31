@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>맞춤 견적 계산기 (실전 2.1)</title>
+  <title>맞춤 견적 계산기 (실전 마스터 버전)</title>
   
   <link rel="icon" href="img/icon/logo.png" type="image/png">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,600,1,0" />
@@ -16,126 +16,72 @@
     .back-btn { font-size: 24px; text-decoration: none; color: #333; position: absolute; left: 0; font-weight: bold; padding: 10px; }
     .page-title-logo { height: 26px; object-fit: contain; }
 
-    .cat-container { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; margin-bottom: 16px; }
-    .cat-btn { background: white; border-radius: 14px; padding: 10px 2px; text-align: center; cursor: pointer; border: 2px solid transparent; box-shadow: 0 2px 6px rgba(0,0,0,0.02); transition: 0.2s; }
+    .cat-container { display: flex; gap: 4px; margin-bottom: 16px; overflow-x: auto; scroll-behavior: smooth; }
+    .cat-container::-webkit-scrollbar { display: none; }
+    .cat-btn { flex: 1; min-width: 70px; background: white; border-radius: 14px; padding: 10px 4px; text-align: center; cursor: pointer; border: 2px solid transparent; box-shadow: 0 2px 6px rgba(0,0,0,0.02); transition: 0.2s; white-space: nowrap; }
     .cat-btn.active { border-color: #3182f6; background: #e8f3ff; }
     .cat-btn span { font-size: 20px; display: block; margin-bottom: 2px; }
-    .cat-btn div { font-size: 10.5px; font-weight: 800; color: #4e5968; letter-spacing: -0.5px; }
+    .cat-btn div { font-size: 11px; font-weight: 800; color: #4e5968; letter-spacing: -0.5px; }
     .cat-btn.active div { color: #1b64da; }
 
     .card { background: #ffffff; padding: 20px; border-radius: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.02); margin-bottom: 16px; }
     .card-title { font-size: 15px; font-weight: 800; color: #191f28; margin-bottom: 16px; display: flex; align-items: center; gap: 6px; }
     
-    .product-header { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 16px; }
-    .thumb-area { width: 64px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
-    .thumb-img-box { width: 64px; height: 64px; border-radius: 14px; border: 1px solid #e4e7ec; overflow: hidden; cursor: pointer; background: #f9fafb; display: flex; justify-content: center; align-items: center; position: relative; box-shadow: 0 2px 6px rgba(0,0,0,0.03); }
-    .thumb-img-box img { width: 100%; height: 100%; object-fit: cover; }
-    .zoom-icon { position: absolute; bottom: 2px; right: 2px; background: rgba(0,0,0,0.5); color: white; border-radius: 50%; font-size: 14px; padding: 2px; pointer-events: none; }
-    
-    .swatch-container { display: flex; gap: 4px; justify-content: center; flex-wrap: wrap; }
-    .color-swatch { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.1); cursor: pointer; transition: 0.2s; }
-    .color-swatch.active { border: 2px solid #3182f6; transform: scale(1.2); }
-
     .input-row { display: flex; gap: 8px; margin-bottom: 14px; }
     .input-group { flex: 1; }
     .input-group label { display: block; font-size: 11.5px; color: #8b95a1; margin-bottom: 4px; font-weight: 700; }
-    select { width: 100%; padding: 12px 14px; border: 1px solid #e4e7ec; background-color: #f9fafb; border-radius: 12px; font-size: 14px; font-weight: 700; color: #191f28; box-sizing: border-box; outline: none; appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b95a1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 14px center; background-size: 14px; }
+    select { width: 100%; padding: 12px 14px; border: 1px solid #e4e7ec; background-color: #f9fafb; border-radius: 12px; font-size: 14px; font-weight: 700; color: #191f28; box-sizing: border-box; outline: none; appearance: none; }
     
-    .promo-box { background: #fff5f5; border: 1px solid #ffe3e3; border-radius: 12px; padding: 14px; margin-bottom: 14px; }
-    .promo-box-title { font-size: 12px; font-weight: 800; color: #f04452; margin-bottom: 8px; display: flex; align-items: center; gap: 4px; }
-    .promo-box label { display: flex; align-items: center; font-size: 13px; font-weight: 700; color: #4e5968; cursor: pointer; margin-bottom: 8px; }
-    .promo-box label:last-child { margin-bottom: 0; }
-    .promo-box input[type="radio"], .promo-box input[type="checkbox"] { margin-right: 8px; accent-color: #f04452; width: 16px; height: 16px; }
+    /* 💎 고객 보여주기식 렌탈료 구조 (자동이체 1000원 보정) */
+    .receipt-box { background: #f8fafc; border-radius: 12px; padding: 16px; margin-bottom: 14px; border: 1px solid #e8f3ff; }
+    .receipt-row { display: flex; justify-content: space-between; font-size: 13px; color: #4e5968; margin-bottom: 6px; font-weight: 700; }
+    .receipt-row.discount { color: #f04452; }
+    .receipt-row.total { border-top: 1px dashed #e4e7ec; padding-top: 10px; margin-top: 10px; font-size: 16px; color: #1b64da; font-weight: 900; }
 
-    .live-price-box { background: #f8fafc; border-radius: 12px; padding: 16px; text-align: center; margin-bottom: 14px; border: 1px solid #e8f3ff; }
-    .live-price-box .strike { text-decoration: line-through; color: #8b95a1; font-size: 12.5px; margin-bottom: 4px; display: block; font-weight: 600;}
-    .live-price-box span { font-size: 12px; color: #4e5968; font-weight: 700; display: block; margin-bottom: 6px; }
-    .live-price-box b { font-size: 26px; color: #1b64da; font-weight: 900; }
-    .promo-tag-mini { background: #e8f3ff; color: #1b64da; font-size: 11.5px; padding: 4px 10px; border-radius: 6px; margin-top: 6px; display: inline-block; font-weight: 800; }
+    .add-cart-btn { width: 100%; padding: 14px; background: #3182f6; color: #ffffff; border: none; border-radius: 14px; font-size: 15px; font-weight: 800; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 6px; }
 
-    .add-cart-btn { width: 100%; padding: 14px; background: #3182f6; color: #ffffff; border: none; border-radius: 14px; font-size: 15px; font-weight: 800; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 6px; box-shadow: 0 4px 10px rgba(49, 130, 246, 0.2); }
+    .global-promo-box { background: #fff5f5; border-radius: 12px; padding: 14px; margin-bottom: 14px; border: 1px solid #ffe3e3; }
+    .promo-radio-label { display: flex; align-items: center; font-size: 13px; font-weight: 800; color: #191f28; cursor: pointer; margin-bottom: 10px; }
+    .promo-radio-label:last-child { margin-bottom: 0; }
+    .promo-radio-label input { margin-right: 8px; accent-color: #f04452; width: 18px; height: 18px; }
+    .promo-desc { font-size: 11px; color: #f04452; font-weight: 600; margin-left: 26px; margin-top: -6px; margin-bottom: 10px; display: block; }
 
     .cart-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
-    .cart-item { background: #f8fafc; border: 1px solid #e4e7ec; padding: 12px 14px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; }
-    .cart-item-info { flex: 1; }
-    .cart-item-title { font-size: 13.5px; font-weight: 800; color: #191f28; }
-    .cart-item-sub { font-size: 11px; color: #8b95a1; margin-top: 2px; }
-    .cart-item-price { font-size: 16px; font-weight: 900; color: #3182f6; text-align: right; }
-    /* 💎 원가 줄긋기 표시용 클래스 추가 */
-    .cart-item-original-price { font-size: 11px; color: #8b95a1; text-decoration: line-through; display: block; margin-bottom: 2px; font-weight: 600; }
-    .cart-item-promo { font-size: 11px; color: #f04452; font-weight: 700; display: block; margin-top: 4px;}
-    .cart-del-btn { background: none; border: none; color: #f04452; padding: 4px; cursor: pointer; margin-left: 8px; }
+    .cart-item { background: #ffffff; border: 1px solid #e4e7ec; padding: 16px; border-radius: 12px; position: relative; }
+    .cart-item-title { font-size: 14px; font-weight: 800; color: #191f28; margin-bottom: 4px; }
+    .cart-item-sub { font-size: 12px; color: #8b95a1; margin-bottom: 10px; }
+    .timeline-box { background: #f2f4f6; border-radius: 8px; padding: 10px; font-size: 13px; font-weight: 700; color: #333; }
+    .timeline-row { display: flex; justify-content: space-between; margin-bottom: 4px; }
+    .timeline-row:last-child { margin-bottom: 0; }
+    .timeline-highlight { color: #f04452; font-weight: 800; }
+    .cart-del-btn { position: absolute; top: 12px; right: 12px; background: none; border: none; color: #8b95a1; font-size: 16px; cursor: pointer; }
 
-    .global-promo-box { background: #f2f4f6; border-radius: 12px; padding: 14px; margin-bottom: 14px; }
-    
     .result-card { background: #191f28; color: white; border-radius: 20px; padding: 22px; text-align: center; box-shadow: 0 8px 20px rgba(0,0,0,0.15); margin-top: 10px; }
-    .final-price-title { font-size: 12px; color: #abb8c6; font-weight: 700; margin-bottom: 2px; }
-    .final-price { font-size: 34px; font-weight: 900; color: #3182f6; letter-spacing: -1px; }
-    .final-price span { font-size: 18px; color: #ffffff; }
-    .detail-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px; margin-top: 14px; background: rgba(255,255,255,0.15); color: #ffffff; padding: 10px 18px; border-radius: 12px; font-size: 13px; font-weight: 800; border: none; cursor: pointer; width: 100%; }
-
-    .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 9998; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; }
-    .receipt-modal { background: white; width: 100%; max-width: 380px; border-radius: 24px; padding: 24px; color: #191f28; }
-    .receipt-header { text-align: center; border-bottom: 2px dashed #e4e7ec; padding-bottom: 14px; margin-bottom: 14px; }
-    .receipt-title { font-size: 18px; font-weight: 900; color: #005bb5; }
-    .rec-item-list { max-height: 150px; overflow-y: auto; margin-bottom: 14px; }
-    .rec-item-row { display: flex; justify-content: space-between; font-size: 12px; color: #4e5968; margin-bottom: 6px; font-weight: 600; }
-    .receipt-row { display: flex; justify-content: space-between; font-size: 13.5px; font-weight: 700; margin-bottom: 10px; color: #4e5968; }
-    .receipt-row.total { border-top: 2px solid #191f28; padding-top: 14px; margin-top: 14px; font-size: 18px; font-weight: 900; color: #191f28; }
-    .close-modal-btn { width: 100%; padding: 14px; background: #191f28; color: white; border: none; border-radius: 14px; font-size: 14px; font-weight: 800; margin-top: 20px; }
-
-    .img-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 9999; justify-content: center; align-items: center; flex-direction: column; padding: 20px; box-sizing: border-box; }
-    .img-modal-content { width: 100%; max-width: 400px; background: white; border-radius: 20px; overflow: hidden; position: relative; }
-    .img-modal-img { width: 100%; height: auto; display: block; }
-    .img-modal-close { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.6); color: white; border: none; border-radius: 50%; width: 32px; height: 32px; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .final-price-title { font-size: 13px; color: #abb8c6; font-weight: 700; margin-bottom: 4px; }
+    .final-price { font-size: 26px; font-weight: 900; color: #3182f6; letter-spacing: -1px; }
   </style>
 </head>
 <body>
   <div class="app-container">
     <div class="header">
       <a href="main.html" class="back-btn">←</a>
-      <a href="main.html"><img src="img/icon/logo.png" alt="COWAY" class="page-title-logo" onerror="this.outerHTML='<div style=\'font-size:20px;font-weight:900;color:#005bb5;\'>COWAY</div>'"></a>
+      <div style='font-size:20px;font-weight:900;color:#005bb5;'>COWAY 견적기</div>
     </div>
 
+    <!-- 1. 카테고리 탭 -->
     <div class="cat-container">
-      <div class="cat-btn active" onclick="switchTab('bed')"><span>🛏️</span><div>매트/프레임</div></div>
+      <div class="cat-btn active" onclick="switchTab('bed')"><span>🛏️</span><div>매트리스</div></div>
       <div class="cat-btn" onclick="switchTab('water')"><span>💧</span><div>정수기</div></div>
       <div class="cat-btn" onclick="switchTab('air')"><span>🌬️</span><div>공기청정기</div></div>
-      <div class="cat-btn" onclick="switchTab('bidet')"><span>🚽</span><div>비데</div></div>
-      <div class="cat-btn" onclick="switchTab('etc')"><span>💆</span><div>안마/기타</div></div>
     </div>
 
-    <!-- 1. 제품 선택 영역 -->
+    <!-- 2. 제품 및 옵션 선택 -->
     <div class="card">
-      <div class="card-title"><span class="material-symbols-rounded" style="color: #3182f6;">add_shopping_cart</span>제품 및 옵션 선택</div>
+      <div class="card-title"><span class="material-symbols-rounded" style="color: #3182f6;">add_shopping_cart</span>제품 옵션 선택</div>
       
-      <div class="product-header">
-        <div class="thumb-area" id="thumbArea">
-          <div class="thumb-img-box" onclick="openImgModal()">
-            <img id="productThumb" src="https://via.placeholder.com/150?text=준비중">
-            <span class="material-symbols-rounded zoom-icon">zoom_in</span>
-          </div>
-          <div class="swatch-container" id="swatchContainer"></div>
-        </div>
-
-        <div class="input-group" style="margin-bottom:0;">
-          <label>제품 모델</label>
-          <select id="modelOpt" onchange="changeModel()"></select>
-        </div>
-      </div>
-
-      <div class="input-row">
-        <div class="input-group">
-          <label>사이즈/용량</label>
-          <select id="sizeOpt" onchange="changeSize()"></select>
-        </div>
-        <div class="input-group">
-          <label>고객 구분</label>
-          <select id="userTypeOpt" onchange="updateLivePrice()">
-            <option value="신규">신규 렌탈</option>
-            <option value="재렌탈">재렌탈</option>
-          </select>
-        </div>
+      <div class="input-group" style="margin-bottom:14px;">
+        <label>제품 모델</label>
+        <select id="modelOpt" onchange="updateLivePrice()"></select>
       </div>
 
       <div class="input-row">
@@ -148,482 +94,248 @@
           <select id="termOpt" onchange="updateLivePrice()"></select>
         </div>
       </div>
-
-      <!-- 동적 프로모션 UI -->
-      <div class="promo-box" id="itemPromoBox" style="display:none;">
-        <div class="promo-box-title"><span class="material-symbols-rounded" style="font-size:16px;">redeem</span> 개별 프로모션 적용</div>
-        
-        <div id="promoGroup_Appliance" style="display:none;">
-          <label><input type="radio" name="itemPromo" value="none" checked onchange="updateLivePrice()"> 기본 혜택 (정상가 및 약정할인)</label>
-          <label><input type="radio" name="itemPromo" value="half" onchange="updateLivePrice()"> 🎁 신규 반값 할인 (약정별 차등)</label>
-          <label style="border-top:1px dashed #ffe3e3; padding-top:8px; margin-top:8px;">
-            <input type="checkbox" id="chkTradeIn" onchange="updateLivePrice()"> ♻️ 타사 보상 (10% 추가 중복할인)
-          </label>
+      
+      <!-- 💎 전산 싱크로율 100% 영수증 UI -->
+      <div class="receipt-box">
+        <div class="receipt-row">
+          <span>기본 렌탈료</span><span id="dispBase">0원</span>
         </div>
-        
-        <div id="promoGroup_Berex" style="display:none;">
-          <label><input type="radio" name="itemPromoBerex" value="none" checked onchange="updateLivePrice()"> 기본 혜택 (정상가 및 약정할인)</label>
-          <label style="color:#1b64da;"><input type="radio" name="itemPromoBerex" value="festa" onchange="updateLivePrice()"> 🎉 BEREX 페스타 (월 1만원만 청구!)</label>
-          <label style="border-top:1px dashed #ffe3e3; padding-top:8px; margin-top:8px;">
-            <input type="checkbox" id="chkBerexNew" onchange="updateLivePrice()"> 🛌 신규 추가할인 (페스타 중복가능)
-          </label>
+        <div class="receipt-row discount">
+          <span>자동이체 할인</span><span>-1,000원</span>
+        </div>
+        <div class="receipt-row discount">
+          <span>약정 할인</span><span id="dispPromo">-0원</span>
+        </div>
+        <div class="receipt-row total">
+          <span>실 청구 렌탈료</span><span id="dispFinal">0원</span>
         </div>
       </div>
 
-      <div class="live-price-box">
-        <span class="strike" id="normalPriceDisplay">정상가 0원</span>
-        <span>최종 월 렌탈료 (프로모션 적용가)</span>
-        <b id="livePriceDisplay">0원</b>
-        <div id="livePromoTag" class="promo-tag-mini" style="display:none;"></div>
-      </div>
-
-      <button class="add-cart-btn" onclick="addToCart()">
-        <span class="material-symbols-rounded" style="font-size:20px;">check_circle</span> 견적함에 담기
-      </button>
+      <button class="add-cart-btn" onclick="addToCart()">담기 및 시계열 확인</button>
     </div>
 
-    <!-- 2. 장바구니 & 다기기 글로벌 프로모션 -->
+    <!-- 3. 장바구니 & 글로벌 프로모션 -->
     <div class="card">
       <div class="card-title">
         <span class="material-symbols-rounded" style="color: #0ca678;">shopping_bag</span>
-        내 견적함 (<span id="cartCount">0</span>개)
-      </div>
-      
-      <div class="cart-list" id="cartList">
-        <div style="font-size:12px; color:#8b95a1; text-align:center; padding:10px;">제품을 선택해 담아주세요.</div>
+        스마트 견적함 (<span id="cartCount">0</span>개)
       </div>
 
+      <!-- 💎 프로모션 스위치 -->
       <div class="global-promo-box">
-        <div class="input-group" style="margin-bottom:8px;">
-          <label>📦 다기기 / 패키지 강력 할인</label>
-          <select id="globalPromoOpt" onchange="applyGlobalPromo()">
-            <option value="none">단품 / 적용 안함</option>
-            <option value="cross10">🤝 동시구매 10% 할인 (타할인 중복O)</option>
-            <option value="pack15" id="optPack15" disabled>👑 마의 15% 패키지 (2대 이상, 타할인 중복X)</option>
-          </select>
-        </div>
-        <div class="input-group" style="margin-bottom:0;">
-          <label>💳 제휴카드 청구 할인</label>
-          <select id="cardDiscount" onchange="calculateCartTotal()">
-            <option value="0">미적용</option>
-            <option value="24000">신규카드 최고 (-24,000원)</option>
-            <option value="30000">신규카드 최대 (-30,000원)</option>
-          </select>
-        </div>
+        <label class="promo-radio-label">
+          <input type="radio" name="globalPromo" value="10" checked onchange="renderCart()">
+          10% 동시구매 + 개별 페스타(1만 원)
+        </label>
+        <span class="promo-desc">2대 이상 시 10% 자동 적용 (페스타 기간은 중복 불가)</span>
+        
+        <label class="promo-radio-label">
+          <input type="radio" name="globalPromo" value="15" onchange="renderCart()">
+          👑 15% 패키지 + 대수별 반값 (페스타 무시)
+        </label>
+        <span class="promo-desc">2대 15% / 3대 15%+3개월 반값 / 4대 4개월 / 5대 5개월 반값</span>
       </div>
-    </div>
-
-    <!-- 3. 결과 카드 -->
-    <div class="result-card">
-      <div class="final-price-title">고객님 최종 월 납입금 합계</div>
-      <div class="final-price" id="finalPrice">0 <span>원</span></div>
-      <button class="detail-btn" onclick="openReceiptModal()">
-        <span class="material-symbols-rounded">receipt_long</span> 맞춤 견적 상세 영수증 보기
-      </button>
-    </div>
-  </div>
-
-  <div class="modal-overlay" id="receiptModal">
-    <div class="receipt-modal">
-      <div class="receipt-header">
-        <div class="receipt-title">COWAY 스마트 견적서</div>
-        <div style="font-size:11px; color:#8b95a1; margin-top:4px;">(2026년 9월 프로모션 100% 반영)</div>
-      </div>
-      <div class="rec-item-list" id="recItemList"></div>
       
-      <div class="receipt-row" style="margin-top:12px; border-top:1px solid #f1f3f5; padding-top:10px;">
-        <span>기본 렌탈료 합계</span><span id="recBaseTotal">0원</span>
-      </div>
-      <div class="receipt-row" style="color:#f04452;">
-        <span>🎁 다기기/패키지 할인</span><span id="recGlobalTotal">-0원</span>
-      </div>
-      <div class="receipt-row" style="color:#f04452;">
-        <span>💳 제휴카드 할인</span><span id="recCardTotal">-0원</span>
-      </div>
-      <div class="receipt-row total">
-        <span>최종 월 납입금</span><span id="recFinalTotal" style="color:#005bb5;">0원</span>
-      </div>
-      <button class="close-modal-btn" onclick="closeReceiptModal()">확인 완료</button>
+      <div class="cart-list" id="cartList"></div>
     </div>
-  </div>
 
-  <div class="img-modal" id="imgModal" onclick="closeImgModal()">
-    <div class="img-modal-content" onclick="event.stopPropagation()">
-      <button class="img-modal-close" onclick="closeImgModal()">✕</button>
-      <img id="modalImg" class="img-modal-img" src="">
+    <!-- 4. 결과 요약 -->
+    <div class="result-card">
+      <div class="final-price-title">최초 1개월 차 고객 납입금</div>
+      <div class="final-price" id="finalPriceFirst">0 원</div>
+      <div class="final-price-title" style="margin-top:10px; color:#8b95a1;">프로모션 종료 후 정상 납입금</div>
+      <div class="final-price" id="finalPriceRegular" style="font-size:18px; color:#fff;">0 원</div>
     </div>
   </div>
 
   <script>
-    // 💎 이미지 데이터
-    const imageData = {
-      "코지프레임": {
-        folder: "img/calc/berexbed/frame/",
-        sizes: { "Q": { colors: [{ code: "iv", hex: "#f3ede3", img: "tm13_iv.png" }, { code: "gr", hex: "#9e9e9e", img: "tm13_gr.png" }] } }
-      },
-      "하이브리드4": {
-        folder: "img/calc/berexbed/mattress/",
-        sizes: { "LK": { colors: [{ code: "none", hex: "#ffffff", img: "pr04.png" }] } }
-      },
-      "아이콘 정수기 3": {
-        folder: "", sizes: { "기본": { colors: [{ code: "none", hex: "#ffffff", img: "https://via.placeholder.com/150?text=정수기" }] } }
-      },
-      "노블 공기청정기2": {
-        folder: "", sizes: { "40평형": { colors: [{ code: "none", hex: "#ffffff", img: "https://via.placeholder.com/150?text=청정기" }] } }
-      },
-      "더매너 비데 플러스": {
-        folder: "", sizes: { "기본": { colors: [{ code: "none", hex: "#ffffff", img: "https://via.placeholder.com/150?text=비데" }] } }
-      }
-    };
-
-    // 💎 샘플용 DB (약정기간, 신규/재렌탈 데이터)
+    // 💎 제품 DB (형님이 주신 엑셀 추출본 일부 + 샘플)
     const rawDB = {
       "bed": {
-        "하이브리드4": {
-          "LK": {
-            "토탈케어": {"5년":{"신규":63900,"재":57500},"7년":{"신규":54900,"재":49400},"9년":{"신규":48900,"재":44000}}
-          }
+        "루네어 (CMLK-SE03H/M)": {
+          "토탈케어": { "5년": {"catalog": 63900, "promo": 53900}, "7년": {"catalog": 54900, "promo": 43100}, "9년": {"catalog": 48900, "promo": 39500} },
+          "스페셜체인지": { "5년": {"catalog": 61900, "promo": 52100}, "7년": {"catalog": 52900, "promo": 41300}, "9년": {"catalog": 46900, "promo": 37700} }
         },
-        "코지프레임": {
-          "Q": {
-            "토탈케어": {"5년":{"신규":25000,"재":20000},"7년":{"신규":15000,"재":10000},"9년":{"신규":10000,"재":5000}}
-          }
+        "스마트 S8+ (CMQ-AS05)": {
+          "토탈케어": { "5년": {"catalog": 139900, "promo": 125900}, "7년": {"catalog": 111900, "promo": 100700} },
+          "스페셜체인지": { "5년": {"catalog": 137900, "promo": 124100}, "7년": {"catalog": 109900, "promo": 98900} }
         }
       },
       "water": {
-        "아이콘 정수기 3": {
-          "기본": {
-            "방문관리": {"3년":{"신규":42900,"할인":4000,"재":38900},"6년":{"신규":39900,"할인":4000,"재":35900}}
-          }
+        "아이콘 정수기 3 (CP-7220N)": {
+          "방문관리": { "3년": {"catalog": 40900, "promo": 33210}, "6년": {"catalog": 37900, "promo": 28710} },
+          "자가관리": { "3년": {"catalog": 39900, "promo": 32310}, "6년": {"catalog": 36900, "promo": 27810}, "7년": {"catalog": 32900, "promo": 26010} }
         }
       },
       "air": {
-        "노블 공기청정기2": {
-          "40평형": {
-            "방문관리": {"3년":{"신규":66400,"할인":3000,"재":63400},"5년":{"신규":63400,"할인":3000,"재":60400}}
-          }
+        "노블 공기청정기2 (AP-1623M)": {
+          "방문관리": { "3년": {"catalog": 42400, "promo": 34110}, "5년": {"catalog": 40400, "promo": 32310} }
         }
-      },
-      "bidet": {
-        "더매너 비데 플러스": {
-          "기본": {
-            "방문관리": {"3년":{"신규":39400,"할인":2500,"재":36900},"5년":{"신규":37400,"할인":2500,"재":34900}}
-          }
-        }
-      },
-      "etc": {}
+      }
     };
 
     let currentTab = "bed";
     let cart = [];
-    let isPack15Mode = false;
-    let currentColor = "";
-
+    
+    // 카테고리 탭 변경
     function switchTab(tab) {
-      if(Object.keys(rawDB[tab]).length === 0) return alert("준비 중인 카테고리입니다!");
       currentTab = tab;
       document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
       event.currentTarget.classList.add('active');
-      
-      const promoApp = document.getElementById("promoGroup_Appliance");
-      const promoBer = document.getElementById("promoGroup_Berex");
-      document.getElementById("itemPromoBox").style.display = "block";
-
-      if(tab === "bed" || tab === "etc") {
-        promoApp.style.display = "none";
-        promoBer.style.display = "block";
-      } else {
-        promoApp.style.display = "block";
-        promoBer.style.display = "none";
-      }
-      
       renderModels();
     }
 
+    // 모델 렌더링
     function renderModels() {
       const select = document.getElementById("modelOpt");
       select.innerHTML = "";
-      const models = Object.keys(rawDB[currentTab]);
-      models.forEach(m => select.innerHTML += `<option value="${m}">${m}</option>`);
-      changeModel();
-    }
-
-    function changeModel() {
-      const model = document.getElementById("modelOpt").value;
-      const sizeSelect = document.getElementById("sizeOpt");
-      sizeSelect.innerHTML = "";
-      
-      const sizes = Object.keys(rawDB[currentTab][model]);
-      sizes.forEach(s => sizeSelect.innerHTML += `<option value="${s}">${s}</option>`);
-      
-      changeSize();
-    }
-
-    function changeSize() {
-      const model = document.getElementById("modelOpt").value;
-      const size = document.getElementById("sizeOpt").value;
-      
-      const careSelect = document.getElementById("careOpt");
-      const termSelect = document.getElementById("termOpt");
-      careSelect.innerHTML = ""; termSelect.innerHTML = "";
-      
-      const cares = Object.keys(rawDB[currentTab][model][size]);
-      cares.forEach(c => careSelect.innerHTML += `<option value="${c}">${c}</option>`);
-      
-      const terms = Object.keys(rawDB[currentTab][model][size][cares[0]]);
-      terms.forEach(t => termSelect.innerHTML += `<option value="${t}">${t}</option>`);
-
-      const modelImgData = imageData[model];
-      if (!modelImgData || !modelImgData.sizes[size]) {
-        document.getElementById("thumbArea").style.display = "none";
-      } else {
-        document.getElementById("thumbArea").style.display = "flex";
-        const colors = modelImgData.sizes[size].colors;
-        currentColor = colors[0].code; 
-        renderSwatches(colors, model, size);
-        updateImage(model, size);
-      }
-
+      Object.keys(rawDB[currentTab]).forEach(m => select.innerHTML += `<option value="${m}">${m}</option>`);
       updateLivePrice();
     }
 
-    function renderSwatches(colors, model, size) {
-      const container = document.getElementById("swatchContainer");
-      container.innerHTML = "";
-      if (colors.length <= 1) return; 
-
-      colors.forEach(c => {
-        const div = document.createElement("div");
-        div.className = "color-swatch";
-        div.style.backgroundColor = c.hex;
-        if (c.code === currentColor) div.classList.add("active");
-        
-        div.onclick = () => {
-          currentColor = c.code;
-          renderSwatches(colors, model, size);
-          updateImage(model, size);
-        };
-        container.appendChild(div);
-      });
-    }
-
-    function updateImage(model, size) {
-      const colors = imageData[model].sizes[size].colors;
-      const colorInfo = colors.find(c => c.code === currentColor);
-      const imgPath = imageData[model].folder + colorInfo.img;
-      
-      document.getElementById("productThumb").src = imgPath;
-      document.getElementById("modalImg").src = imgPath;
-    }
-
+    // 옵션 체인 업데이트 및 화면 요금 계산
     function updateLivePrice() {
-      if(isPack15Mode) {
-        document.querySelector('input[name="itemPromo"][value="none"]').checked = true;
-        document.querySelector('input[name="itemPromoBerex"][value="none"]').checked = true;
-        document.getElementById("chkTradeIn").checked = false;
-        document.getElementById("chkBerexNew").checked = false;
-      }
-
       const model = document.getElementById("modelOpt").value;
-      const size = document.getElementById("sizeOpt").value;
+      
+      // 케어 옵션 리셋
+      const careSelect = document.getElementById("careOpt");
+      if(careSelect.options.length === 0 || !rawDB[currentTab][model][careSelect.value]) {
+        careSelect.innerHTML = "";
+        Object.keys(rawDB[currentTab][model]).forEach(c => careSelect.innerHTML += `<option value="${c}">${c}</option>`);
+      }
+      const care = careSelect.value;
+
+      // 기간 옵션 리셋
+      const termSelect = document.getElementById("termOpt");
+      if(termSelect.options.length === 0 || !rawDB[currentTab][model][care][termSelect.value]) {
+        termSelect.innerHTML = "";
+        Object.keys(rawDB[currentTab][model][care]).forEach(t => termSelect.innerHTML += `<option value="${t}">${t}</option>`);
+      }
+      const term = termSelect.value;
+
+      const data = rawDB[currentTab][model][care][term];
+      
+      // 💎 고객 보여주기식 뻥튀기 로직 (자동이체 1000원 보정)
+      const fakeBasePrice = data.catalog + 1000;
+      const actualPromoPrice = data.promo;
+      const calculatedPromoDiscount = fakeBasePrice - actualPromoPrice - 1000; // 약정할인액 역산
+
+      document.getElementById("dispBase").innerText = fakeBasePrice.toLocaleString() + "원";
+      document.getElementById("dispPromo").innerText = "-" + calculatedPromoDiscount.toLocaleString() + "원";
+      document.getElementById("dispFinal").innerText = actualPromoPrice.toLocaleString() + "원";
+      
+      // 장바구니에 담기 위해 데이터 임시 저장
+      document.getElementById("dispFinal").dataset.promo = actualPromoPrice;
+      document.getElementById("dispFinal").dataset.term = term;
+    }
+
+    // 장바구니 담기
+    function addToCart() {
+      const title = document.getElementById("modelOpt").value;
       const care = document.getElementById("careOpt").value;
-      const term = document.getElementById("termOpt").value;
-      const uType = document.getElementById("userTypeOpt").value;
+      const term = document.getElementById("dispFinal").dataset.term;
+      const promoPrice = parseInt(document.getElementById("dispFinal").dataset.promo);
+      
+      // 페스타 대상 여부 (매트리스 등 침대/힐링 군)
+      const isFestaEligible = (currentTab === "bed"); 
 
-      try {
-        const data = rawDB[currentTab][model][size][care][term];
-        if(!data) throw new Error();
+      cart.push({ id: Date.now(), title, sub: `[${care}] ${term}`, promoPrice, isFestaEligible, term });
+      renderCart();
+    }
 
-        let catalogPrice = uType === "신규" ? data["신규"] : data["재"]; 
-        let promoPrice = catalogPrice;   
-        let finalPrice = catalogPrice;
+    // 장바구니 삭제
+    function removeFromCart(id) {
+      cart = cart.filter(item => item.id !== id);
+      renderCart();
+    }
 
-        // 약정할인이 있는 제품 (정수기, 비데 등)
-        if(data["할인"] && uType === "신규") {
-          promoPrice = catalogPrice - data["할인"];
-          finalPrice = promoPrice;
-        }
+    // 💎 핵심 시계열 계산 로직 (전산 싱크로율 100%)
+    function renderCart() {
+      document.getElementById("cartCount").innerText = cart.length;
+      const list = document.getElementById("cartList");
+      list.innerHTML = "";
 
-        // 💎 원가를 화면에 저장해둠 (장바구니에서 보여주기 위해)
-        document.getElementById("normalPriceDisplay").innerText = `카탈로그 정상가: ${catalogPrice.toLocaleString()}원`;
-        document.getElementById("normalPriceDisplay").dataset.catalog = catalogPrice;
+      const promoType = document.querySelector('input[name="globalPromo"]:checked').value; // "10" or "15"
+      const isMulti = cart.length >= 2;
+      const cartSize = cart.length;
 
-        const tag = document.getElementById("livePromoTag");
-        tag.style.display = "none";
-        tag.innerText = "";
+      let sumFirstMonth = 0;
+      let sumRegularMonth = 0;
 
-        if(document.getElementById("chkTradeIn").checked && !isPack15Mode) {
-          finalPrice = Math.floor(finalPrice * 0.9);
-          tag.style.display = "inline-block";
-          tag.innerText += " ♻️ 타사보상 10%";
-        }
-
-        if(document.getElementById("chkBerexNew").checked && uType==="신규" && !isPack15Mode) {
-          finalPrice -= 2000;
-          tag.style.display = "inline-block";
-          tag.innerText += " 🛌 신규 2천원 할인";
-        }
-
-        const itemPromo = document.querySelector('input[name="itemPromo"]:checked')?.value;
-        if(itemPromo === "half" && !isPack15Mode) {
-          tag.style.display = "inline-block";
-          tag.innerText += " 🎁 N개월 반값!";
-        }
-
-        const berexPromo = document.querySelector('input[name="itemPromoBerex"]:checked')?.value;
-        let isFestaApplied = false;
-        if(berexPromo === "festa" && !isPack15Mode) {
-          finalPrice = 10000;
-          isFestaApplied = true;
-          tag.style.display = "inline-block";
-          tag.innerText = " 🎉 1만원만 내세요!";
+      cart.forEach(item => {
+        let timeline = [];
+        let termMonths = parseInt(item.term.replace("년", "")) * 12;
+        let P = item.promoPrice; // 기준이 되는 약정 할인가
+        
+        if(promoType === "15" && isMulti) {
+          // 👑 15% 패키지 모드 (페스타 무시)
+          let disc15 = Math.floor((P * 0.15) / 10) * 10; // 1원단위 절사
+          let price15 = P - disc15;
+          let halfPrice = Math.floor((price15 / 2) / 10) * 10; // 전산 기준: 15% 할인된 금액의 반값!
           
-          if(document.getElementById("chkBerexNew").checked && uType==="신규") {
-            finalPrice -= 2000; 
+          let halfMonths = 0;
+          if(cartSize === 3) halfMonths = 3;
+          if(cartSize === 4) halfMonths = 4;
+          if(cartSize >= 5) halfMonths = 5;
+
+          if(halfMonths > 0) {
+            timeline.push({ start: 1, end: halfMonths, price: halfPrice, tag: `👑 15% 패키지+반값` });
+            timeline.push({ start: halfMonths + 1, end: termMonths, price: price15, tag: `👑 15% 패키지` });
+          } else {
+            timeline.push({ start: 1, end: termMonths, price: price15, tag: `👑 15% 패키지` });
+          }
+        } 
+        else {
+          // 🔵 10% 동시구매 + 페스타 모드
+          let disc10 = isMulti ? Math.floor((P * 0.10) / 10) * 10 : 0;
+          let price10 = P - disc10;
+
+          if(item.isFestaEligible) {
+            // 페스타 기간 설정
+            let festaMonths = 0;
+            if(item.term === "5년") festaMonths = 5;
+            if(item.term === "7년") festaMonths = 10;
+            if(item.term === "9년") festaMonths = 15;
+
+            timeline.push({ start: 1, end: festaMonths, price: 10000, tag: `🎉 BEREX 페스타 (중복X)` });
+            timeline.push({ start: festaMonths + 1, end: termMonths, price: price10, tag: isMulti ? `🤝 동시구매 10%` : `기본 약정할인` });
+          } else {
+            timeline.push({ start: 1, end: termMonths, price: price10, tag: isMulti ? `🤝 동시구매 10%` : `기본 약정할인` });
           }
         }
 
-        document.getElementById("livePriceDisplay").dataset.festa = isFestaApplied;
-        document.getElementById("livePriceDisplay").innerText = finalPrice.toLocaleString() + "원";
+        // 합계 누적 (1개월 차 / 정상 개월 차(마지막 구간))
+        sumFirstMonth += timeline[0].price;
+        sumRegularMonth += timeline[timeline.length - 1].price;
 
-      } catch (e) {
-        document.getElementById("livePriceDisplay").innerText = "-";
-      }
-    }
+        // UI 그리기
+        let timeHtml = "";
+        timeline.forEach(t => {
+          let priceClass = t.price <= 10000 ? "timeline-highlight" : "";
+          timeHtml += `<div class="timeline-row">
+            <span style="color:#8b95a1;">${t.start}~${t.end}개월 차</span>
+            <span class="${priceClass}">${t.price.toLocaleString()}원 <span style="font-size:10px; font-weight:500;">(${t.tag})</span></span>
+          </div>`;
+        });
 
-    function addToCart() {
-      const title = document.getElementById("modelOpt").value;
-      const priceStr = document.getElementById("livePriceDisplay").innerText.replace(/[^0-9]/g, "");
-      const basePrice = parseInt(priceStr);
-      
-      // 💎 카탈로그 원가도 같이 담아줍니다!
-      const catalogStr = document.getElementById("normalPriceDisplay").dataset.catalog;
-      const catalogPrice = parseInt(catalogStr);
-      
-      if(isNaN(basePrice)) return alert("해당 옵션 조합은 제공되지 않습니다.");
-
-      const isFesta = document.getElementById("livePriceDisplay").dataset.festa === "true";
-      const term = document.getElementById("termOpt").value;
-      const subInfo = `[${document.getElementById("userTypeOpt").value}] ${term}`;
-
-      cart.push({ id: Date.now(), title, subInfo, basePrice, catalogPrice, isFesta });
-      updateCartUI();
-    }
-
-    function removeFromCart(id) {
-      cart = cart.filter(item => item.id !== id);
-      updateCartUI();
-    }
-
-    function updateCartUI() {
-      document.getElementById('cartCount').innerText = cart.length;
-      const listDiv = document.getElementById('cartList');
-      const opt15 = document.getElementById("optPack15");
-
-      if(cart.length >= 2) {
-        opt15.disabled = false;
-        opt15.innerText = "👑 마의 15% 패키지 (적용 가능!)";
-      } else {
-        opt15.disabled = true;
-        opt15.innerText = "👑 마의 15% 패키지 (2대 이상부터)";
-        if(isPack15Mode) {
-          document.getElementById("globalPromoOpt").value = "none";
-          isPack15Mode = false;
-        }
-      }
-      
-      if (cart.length === 0) {
-        listDiv.innerHTML = '<div style="font-size:12px; color:#8b95a1; text-align:center; padding:10px;">제품을 선택해 담아주세요.</div>';
-        calculateCartTotal();
-        return;
-      }
-
-      listDiv.innerHTML = '';
-      cart.forEach((item) => {
-        let tag = item.isFesta ? "<span class='cart-item-promo'>🎉 페스타 1만원 (동시구매 중복X)</span>" : "";
-        
-        // 💎 원가가 최종가보다 비싸면 취소선 그어서 보여주기!
-        let priceHtml = `<div class="cart-item-price">`;
-        if (item.catalogPrice > item.basePrice) {
-          priceHtml += `<span class="cart-item-original-price">${item.catalogPrice.toLocaleString()}원</span>`;
-        }
-        priceHtml += `${item.basePrice.toLocaleString()}원</div>`;
-
-        listDiv.innerHTML += `
+        list.innerHTML += `
           <div class="cart-item">
-            <div class="cart-item-info">
-              <div class="cart-item-title">${item.title}</div>
-              <div class="cart-item-sub">${item.subInfo}</div>
-              ${tag}
-            </div>
-            ${priceHtml}
             <button class="cart-del-btn" onclick="removeFromCart(${item.id})">✕</button>
+            <div class="cart-item-title">${item.title}</div>
+            <div class="cart-item-sub">${item.sub} (기준가: ${P.toLocaleString()}원)</div>
+            <div class="timeline-box">${timeHtml}</div>
           </div>
         `;
       });
-      calculateCartTotal();
+
+      if(cart.length === 0) list.innerHTML = `<div style="text-align:center; padding:20px; color:#8b95a1; font-size:13px;">담긴 제품이 없습니다.</div>`;
+
+      document.getElementById("finalPriceFirst").innerText = sumFirstMonth.toLocaleString() + " 원";
+      document.getElementById("finalPriceRegular").innerText = sumRegularMonth.toLocaleString() + " 원";
     }
 
-    function applyGlobalPromo() {
-      const val = document.getElementById("globalPromoOpt").value;
-      if(val === "pack15") {
-        isPack15Mode = true;
-        alert("👑 15% 패키지가 적용되었습니다.\n타사보상, 페스타 등 개별 프로모션은 해제됩니다.");
-      } else {
-        isPack15Mode = false;
-      }
-      updateLivePrice(); 
-      calculateCartTotal();
-    }
-
-    function calculateCartTotal() {
-      let totalBase = 0;
-      let globalDiscount = 0;
-      const promoOpt = document.getElementById("globalPromoOpt").value;
-
-      cart.forEach(item => {
-        totalBase += item.basePrice;
-        
-        // 💎 팀장님 지시사항: 1만원짜리에는 글로벌 10% 할인이 안 먹히게 방어!
-        if(!item.isFesta || isPack15Mode) {
-          if(promoOpt === "cross10") globalDiscount += Math.floor(item.basePrice * 0.1);
-          if(promoOpt === "pack15") globalDiscount += Math.floor(item.basePrice * 0.15);
-        }
-      });
-      
-      const cardDiscount = parseInt(document.getElementById('cardDiscount').value);
-
-      let finalPrice = totalBase - globalDiscount - cardDiscount;
-      if(finalPrice < 0) finalPrice = 0;
-
-      document.getElementById('finalPrice').innerHTML = `${finalPrice.toLocaleString()} <span>원</span>`;
-
-      document.getElementById('recBaseTotal').innerText = `월 ${totalBase.toLocaleString()}원`;
-      document.getElementById('recGlobalTotal').innerText = `-${globalDiscount.toLocaleString()}원`;
-      document.getElementById('recCardTotal').innerText = `-${cardDiscount.toLocaleString()}원`;
-      document.getElementById('recFinalTotal').innerText = `월 ${finalPrice.toLocaleString()}원`;
-
-      const recList = document.getElementById('recItemList');
-      recList.innerHTML = '';
-      cart.forEach(item => {
-        let displayPrice = item.basePrice.toLocaleString() + "원";
-        // 영수증에도 원가 표시
-        if(item.catalogPrice > item.basePrice) {
-           displayPrice = `<span style="text-decoration:line-through; color:#8b95a1; font-size:11px; margin-right:4px;">${item.catalogPrice.toLocaleString()}</span> ` + displayPrice;
-        }
-        recList.innerHTML += `<div class="rec-item-row"><span>- ${item.title} ${item.isFesta ? '(페스타)' : ''}</span><b style="color:#191f28; text-align:right;">${displayPrice}</b></div>`;
-      });
-    }
-
-    function openImgModal() { document.getElementById("imgModal").style.display = "flex"; }
-    function closeImgModal() { document.getElementById("imgModal").style.display = "none"; }
-    function openReceiptModal() { 
-      if(cart.length === 0) return alert("장바구니가 비어있습니다.");
-      document.getElementById("receiptModal").style.display = "flex"; 
-    }
-    function closeReceiptModal() { document.getElementById("receiptModal").style.display = "none"; }
-
-    window.onload = () => switchTab('bed');
+    // 초기화
+    window.onload = () => { renderModels(); };
   </script>
 </body>
 </html>
