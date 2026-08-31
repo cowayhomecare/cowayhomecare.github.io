@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>맞춤 견적 계산기 (실전 2.0)</title>
+  <title>맞춤 견적 계산기 (실전 2.1)</title>
   
   <link rel="icon" href="img/icon/logo.png" type="image/png">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,600,1,0" />
 
   <style>
-    /* CSS는 디자인 살려둔 버전으로 원상복구! */
     body { background-color: #f2f4f6; font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif; margin: 0; padding-bottom: 40px; display: flex; justify-content: center; }
     .app-container { width: 100%; max-width: 480px; background-color: #f2f4f6; min-height: 100vh; box-shadow: 0 0 20px rgba(0,0,0,0.05); padding: 0 16px; box-sizing: border-box; }
     
@@ -42,7 +41,6 @@
     .input-group label { display: block; font-size: 11.5px; color: #8b95a1; margin-bottom: 4px; font-weight: 700; }
     select { width: 100%; padding: 12px 14px; border: 1px solid #e4e7ec; background-color: #f9fafb; border-radius: 12px; font-size: 14px; font-weight: 700; color: #191f28; box-sizing: border-box; outline: none; appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b95a1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 14px center; background-size: 14px; }
     
-    /* 💎 프로모션 UI 깔끔하게 정리 */
     .promo-box { background: #fff5f5; border: 1px solid #ffe3e3; border-radius: 12px; padding: 14px; margin-bottom: 14px; }
     .promo-box-title { font-size: 12px; font-weight: 800; color: #f04452; margin-bottom: 8px; display: flex; align-items: center; gap: 4px; }
     .promo-box label { display: flex; align-items: center; font-size: 13px; font-weight: 700; color: #4e5968; cursor: pointer; margin-bottom: 8px; }
@@ -62,7 +60,9 @@
     .cart-item-info { flex: 1; }
     .cart-item-title { font-size: 13.5px; font-weight: 800; color: #191f28; }
     .cart-item-sub { font-size: 11px; color: #8b95a1; margin-top: 2px; }
-    .cart-item-price { font-size: 14px; font-weight: 800; color: #3182f6; text-align: right; }
+    .cart-item-price { font-size: 16px; font-weight: 900; color: #3182f6; text-align: right; }
+    /* 💎 원가 줄긋기 표시용 클래스 추가 */
+    .cart-item-original-price { font-size: 11px; color: #8b95a1; text-decoration: line-through; display: block; margin-bottom: 2px; font-weight: 600; }
     .cart-item-promo { font-size: 11px; color: #f04452; font-weight: 700; display: block; margin-top: 4px;}
     .cart-del-btn { background: none; border: none; color: #f04452; padding: 4px; cursor: pointer; margin-left: 8px; }
 
@@ -149,11 +149,10 @@
         </div>
       </div>
 
-      <!-- 💡 동적 프로모션 UI (완벽 분리) -->
+      <!-- 동적 프로모션 UI -->
       <div class="promo-box" id="itemPromoBox" style="display:none;">
         <div class="promo-box-title"><span class="material-symbols-rounded" style="font-size:16px;">redeem</span> 개별 프로모션 적용</div>
         
-        <!-- 정수기/비데/청정기 전용 -->
         <div id="promoGroup_Appliance" style="display:none;">
           <label><input type="radio" name="itemPromo" value="none" checked onchange="updateLivePrice()"> 기본 혜택 (정상가 및 약정할인)</label>
           <label><input type="radio" name="itemPromo" value="half" onchange="updateLivePrice()"> 🎁 신규 반값 할인 (약정별 차등)</label>
@@ -162,7 +161,6 @@
           </label>
         </div>
         
-        <!-- 매트/프레임/안마 전용 -->
         <div id="promoGroup_Berex" style="display:none;">
           <label><input type="radio" name="itemPromoBerex" value="none" checked onchange="updateLivePrice()"> 기본 혜택 (정상가 및 약정할인)</label>
           <label style="color:#1b64da;"><input type="radio" name="itemPromoBerex" value="festa" onchange="updateLivePrice()"> 🎉 BEREX 페스타 (월 1만원만 청구!)</label>
@@ -172,7 +170,6 @@
         </div>
       </div>
 
-      <!-- 실시간 금액 표시기 -->
       <div class="live-price-box">
         <span class="strike" id="normalPriceDisplay">정상가 0원</span>
         <span>최종 월 렌탈료 (프로모션 적용가)</span>
@@ -196,7 +193,6 @@
         <div style="font-size:12px; color:#8b95a1; text-align:center; padding:10px;">제품을 선택해 담아주세요.</div>
       </div>
 
-      <!-- 💡 다기기 글로벌 엔진 -->
       <div class="global-promo-box">
         <div class="input-group" style="margin-bottom:8px;">
           <label>📦 다기기 / 패키지 강력 할인</label>
@@ -227,7 +223,6 @@
     </div>
   </div>
 
-  <!-- 영수증 모달 -->
   <div class="modal-overlay" id="receiptModal">
     <div class="receipt-modal">
       <div class="receipt-header">
@@ -252,7 +247,6 @@
     </div>
   </div>
 
-  <!-- 이미지 모달 -->
   <div class="img-modal" id="imgModal" onclick="closeImgModal()">
     <div class="img-modal-content" onclick="event.stopPropagation()">
       <button class="img-modal-close" onclick="closeImgModal()">✕</button>
@@ -261,7 +255,7 @@
   </div>
 
   <script>
-    // 💎 이미지 연동 DB
+    // 💎 이미지 데이터
     const imageData = {
       "코지프레임": {
         folder: "img/calc/berexbed/frame/",
@@ -282,7 +276,7 @@
       }
     };
 
-    // 💎 기밀 DB (정상가, 약정할인가 분리)
+    // 💎 샘플용 DB (약정기간, 신규/재렌탈 데이터)
     const rawDB = {
       "bed": {
         "하이브리드4": {
@@ -369,7 +363,6 @@
       const model = document.getElementById("modelOpt").value;
       const size = document.getElementById("sizeOpt").value;
       
-      // 약정, 관리방식 세팅
       const careSelect = document.getElementById("careOpt");
       const termSelect = document.getElementById("termOpt");
       careSelect.innerHTML = ""; termSelect.innerHTML = "";
@@ -380,7 +373,6 @@
       const terms = Object.keys(rawDB[currentTab][model][size][cares[0]]);
       terms.forEach(t => termSelect.innerHTML += `<option value="${t}">${t}</option>`);
 
-      // 이미지 세팅
       const modelImgData = imageData[model];
       if (!modelImgData || !modelImgData.sizes[size]) {
         document.getElementById("thumbArea").style.display = "none";
@@ -424,7 +416,6 @@
       document.getElementById("modalImg").src = imgPath;
     }
 
-    // 💡 핵심 룰 엔진: 단품 가격 계산
     function updateLivePrice() {
       if(isPack15Mode) {
         document.querySelector('input[name="itemPromo"][value="none"]').checked = true;
@@ -443,63 +434,55 @@
         const data = rawDB[currentTab][model][size][care][term];
         if(!data) throw new Error();
 
-        let normalPrice = data["신규"]; 
-        let promoPrice = normalPrice;   
-        let finalPrice = normalPrice;
+        let catalogPrice = uType === "신규" ? data["신규"] : data["재"]; 
+        let promoPrice = catalogPrice;   
+        let finalPrice = catalogPrice;
 
-        if(data["할인"]) {
-          promoPrice = uType === "신규" ? normalPrice - data["할인"] : data["재"];
-          finalPrice = promoPrice;
-        } else {
-          promoPrice = uType === "신규" ? normalPrice : data["재"];
+        // 약정할인이 있는 제품 (정수기, 비데 등)
+        if(data["할인"] && uType === "신규") {
+          promoPrice = catalogPrice - data["할인"];
           finalPrice = promoPrice;
         }
 
-        document.getElementById("normalPriceDisplay").innerText = `카탈로그 정상가: ${normalPrice.toLocaleString()}원`;
+        // 💎 원가를 화면에 저장해둠 (장바구니에서 보여주기 위해)
+        document.getElementById("normalPriceDisplay").innerText = `카탈로그 정상가: ${catalogPrice.toLocaleString()}원`;
+        document.getElementById("normalPriceDisplay").dataset.catalog = catalogPrice;
 
         const tag = document.getElementById("livePromoTag");
         tag.style.display = "none";
         tag.innerText = "";
 
-        // 타사보상 10%
         if(document.getElementById("chkTradeIn").checked && !isPack15Mode) {
           finalPrice = Math.floor(finalPrice * 0.9);
           tag.style.display = "inline-block";
           tag.innerText += " ♻️ 타사보상 10%";
         }
 
-        // 신규 2천원
         if(document.getElementById("chkBerexNew").checked && uType==="신규" && !isPack15Mode) {
           finalPrice -= 2000;
           tag.style.display = "inline-block";
           tag.innerText += " 🛌 신규 2천원 할인";
         }
 
-        // 반값 텍스트
         const itemPromo = document.querySelector('input[name="itemPromo"]:checked')?.value;
         if(itemPromo === "half" && !isPack15Mode) {
           tag.style.display = "inline-block";
           tag.innerText += " 🎁 N개월 반값!";
         }
 
-        // 💡 페스타 1만원 (팀장님 요청: 여기서 덮어쓰기!)
         const berexPromo = document.querySelector('input[name="itemPromoBerex"]:checked')?.value;
         let isFestaApplied = false;
         if(berexPromo === "festa" && !isPack15Mode) {
-          finalPrice = 10000; // 1만원 고정!
+          finalPrice = 10000;
           isFestaApplied = true;
           tag.style.display = "inline-block";
           tag.innerText = " 🎉 1만원만 내세요!";
           
-          // 페스타일 땐 2천원 중복할인도 원가에서 빼는게 아니라 1만원에서 빼는건 아니므로, 
-          // 만약 "1만원 내는데 2천원 또 할인"이 아니라면 여기서 방어해야 함.
-          // 일단 본문 내용상 "페스타 중복가능"이라 하셨으므로 10000-2000 = 8000원 되게 둠. (아니면 수정 가능)
           if(document.getElementById("chkBerexNew").checked && uType==="신규") {
             finalPrice -= 2000; 
           }
         }
 
-        // 전역 변수에 저장 (장바구니 담을때 1만원짜리인지 식별하기 위해)
         document.getElementById("livePriceDisplay").dataset.festa = isFestaApplied;
         document.getElementById("livePriceDisplay").innerText = finalPrice.toLocaleString() + "원";
 
@@ -513,13 +496,17 @@
       const priceStr = document.getElementById("livePriceDisplay").innerText.replace(/[^0-9]/g, "");
       const basePrice = parseInt(priceStr);
       
+      // 💎 카탈로그 원가도 같이 담아줍니다!
+      const catalogStr = document.getElementById("normalPriceDisplay").dataset.catalog;
+      const catalogPrice = parseInt(catalogStr);
+      
       if(isNaN(basePrice)) return alert("해당 옵션 조합은 제공되지 않습니다.");
 
       const isFesta = document.getElementById("livePriceDisplay").dataset.festa === "true";
       const term = document.getElementById("termOpt").value;
       const subInfo = `[${document.getElementById("userTypeOpt").value}] ${term}`;
 
-      cart.push({ id: Date.now(), title, subInfo, basePrice, isFesta });
+      cart.push({ id: Date.now(), title, subInfo, basePrice, catalogPrice, isFesta });
       updateCartUI();
     }
 
@@ -553,7 +540,15 @@
 
       listDiv.innerHTML = '';
       cart.forEach((item) => {
-        let tag = item.isFesta ? "<span class='cart-item-promo'>🎉 페스타 1만원 (추가할인 제외)</span>" : "";
+        let tag = item.isFesta ? "<span class='cart-item-promo'>🎉 페스타 1만원 (동시구매 중복X)</span>" : "";
+        
+        // 💎 원가가 최종가보다 비싸면 취소선 그어서 보여주기!
+        let priceHtml = `<div class="cart-item-price">`;
+        if (item.catalogPrice > item.basePrice) {
+          priceHtml += `<span class="cart-item-original-price">${item.catalogPrice.toLocaleString()}원</span>`;
+        }
+        priceHtml += `${item.basePrice.toLocaleString()}원</div>`;
+
         listDiv.innerHTML += `
           <div class="cart-item">
             <div class="cart-item-info">
@@ -561,7 +556,7 @@
               <div class="cart-item-sub">${item.subInfo}</div>
               ${tag}
             </div>
-            <div class="cart-item-price">${item.basePrice.toLocaleString()}원</div>
+            ${priceHtml}
             <button class="cart-del-btn" onclick="removeFromCart(${item.id})">✕</button>
           </div>
         `;
@@ -577,11 +572,10 @@
       } else {
         isPack15Mode = false;
       }
-      updateLivePrice(); // 실시간 요금도 업데이트
+      updateLivePrice(); 
       calculateCartTotal();
     }
 
-    // 💡 1만원 페스타에는 글로벌 할인 10%가 안 먹히도록 방어 로직 추가!
     function calculateCartTotal() {
       let totalBase = 0;
       let globalDiscount = 0;
@@ -590,7 +584,7 @@
       cart.forEach(item => {
         totalBase += item.basePrice;
         
-        // 페스타(1만원)가 아니거나, 마의 15% 패키지(페스타를 무시함)일 때만 글로벌 할인 적용
+        // 💎 팀장님 지시사항: 1만원짜리에는 글로벌 10% 할인이 안 먹히게 방어!
         if(!item.isFesta || isPack15Mode) {
           if(promoOpt === "cross10") globalDiscount += Math.floor(item.basePrice * 0.1);
           if(promoOpt === "pack15") globalDiscount += Math.floor(item.basePrice * 0.15);
@@ -612,7 +606,12 @@
       const recList = document.getElementById('recItemList');
       recList.innerHTML = '';
       cart.forEach(item => {
-        recList.innerHTML += `<div class="rec-item-row"><span>- ${item.title} ${item.isFesta ? '(페스타)' : ''}</span><b style="color:#191f28;">${item.basePrice.toLocaleString()}원</b></div>`;
+        let displayPrice = item.basePrice.toLocaleString() + "원";
+        // 영수증에도 원가 표시
+        if(item.catalogPrice > item.basePrice) {
+           displayPrice = `<span style="text-decoration:line-through; color:#8b95a1; font-size:11px; margin-right:4px;">${item.catalogPrice.toLocaleString()}</span> ` + displayPrice;
+        }
+        recList.innerHTML += `<div class="rec-item-row"><span>- ${item.title} ${item.isFesta ? '(페스타)' : ''}</span><b style="color:#191f28; text-align:right;">${displayPrice}</b></div>`;
       });
     }
 
