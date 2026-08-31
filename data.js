@@ -1554,3 +1554,91 @@ Object.assign(rawDB.bed, {
     }
   }
 });
+// ======================================================
+// 🛏️ [프레임 1차: 모던 플러스 파운데이션, 모던 파운데이션]
+// ======================================================
+Object.assign(rawDB.bed, {
+  "모던 플러스 파운데이션": {
+    "img": "img/calc/berexbed/frame/f05.png",
+    "colors": [
+      {"name": "뉴트럴 베이지", "hex": "#e8e1d5", "img_code": "bg"},
+      {"name": "애쉬 브라운", "hex": "#6e5c51", "img_code": "br"}
+    ],
+    "sizes": {
+      "LK (CFLK-F05)": {
+        "img_prefix": "f05",
+        "기본형": {
+          "5년": { "신규": {"catalog": 22900, "promo": 22900}, "재렌탈": {"catalog": 20600, "promo": 20600} },
+          "7년": { "신규": {"catalog": 20900, "promo": 20900}, "재렌탈": {"catalog": 18800, "promo": 18800} },
+          "9년": { "신규": {"catalog": 18900, "promo": 18900}, "재렌탈": {"catalog": 17000, "promo": 17000} }
+        }
+      },
+      "K (CFK-F05)": {
+        "img_prefix": "f05",
+        "기본형": {
+          "5년": { "신규": {"catalog": 21900, "promo": 21900}, "재렌탈": {"catalog": 19700, "promo": 19700} },
+          "7년": { "신규": {"catalog": 19900, "promo": 19900}, "재렌탈": {"catalog": 17900, "promo": 17900} },
+          "9년": { "신규": {"catalog": 17900, "promo": 17900}, "재렌탈": {"catalog": 16100, "promo": 16100} }
+        }
+      },
+      "Q (CFQ-F05)": {
+        "img_prefix": "f05",
+        "기본형": {
+          "5년": { "신규": {"catalog": 20900, "promo": 20900}, "재렌탈": {"catalog": 18800, "promo": 18800} },
+          "7년": { "신규": {"catalog": 18900, "promo": 18900}, "재렌탈": {"catalog": 17000, "promo": 17000} },
+          "9년": { "신규": {"catalog": 16900, "promo": 16900}, "재렌탈": {"catalog": 15200, "promo": 15200} }
+        }
+      },
+      "SS (CFSS-F05)": {
+        "img_prefix": "f05",
+        "기본형": {
+          "5년": { "신규": {"catalog": 19900, "promo": 19900}, "재렌탈": {"catalog": 17900, "promo": 17900} },
+          "7년": { "신규": {"catalog": 17900, "promo": 17900}, "재렌탈": {"catalog": 16100, "promo": 16100} },
+          "9년": { "신규": {"catalog": 15900, "promo": 15900}, "재렌탈": {"catalog": 14300, "promo": 14300} }
+        }
+      }
+    }
+  },
+  "모던 파운데이션": {
+    "img": "img/calc/berexbed/frame/f04.png",
+    "colors": [
+      {"name": "오트밀 베이지", "hex": "#e8e1d5", "img_code": "bg"},
+      {"name": "차콜 그레이", "hex": "#5e5e5e", "img_code": "gr"},
+      {"name": "퓨어 아이보리", "hex": "#f5f5f5", "img_code": "iv"}
+    ],
+    "sizes": {
+      "LK (CFLK-F04)": {
+        "img_prefix": "f04",
+        "기본형": {
+          "5년": { "신규": {"catalog": 18900, "promo": 18900}, "재렌탈": {"catalog": 17000, "promo": 17000} },
+          "7년": { "신규": {"catalog": 16900, "promo": 16900}, "재렌탈": {"catalog": 15200, "promo": 15200} },
+          "9년": { "신규": {"catalog": 15900, "promo": 15900}, "재렌탈": {"catalog": 14300, "promo": 14300} }
+        }
+      },
+      "K (CFK-F04)": {
+        "img_prefix": "f04",
+        "기본형": {
+          "5년": { "신규": {"catalog": 17900, "promo": 17900}, "재렌탈": {"catalog": 16100, "promo": 16100} },
+          "7년": { "신규": {"catalog": 15900, "promo": 15900}, "재렌탈": {"catalog": 14300, "promo": 14300} },
+          "9년": { "신규": {"catalog": 14900, "promo": 14900}, "재렌탈": {"catalog": 13400, "promo": 13400} }
+        }
+      },
+      "Q (CFQ-F04)": {
+        "img_prefix": "f04",
+        "기본형": {
+          "5년": { "신규": {"catalog": 16900, "promo": 16900}, "재렌탈": {"catalog": 15200, "promo": 15200} },
+          "7년": { "신규": {"catalog": 14900, "promo": 14900}, "재렌탈": {"catalog": 13400, "promo": 13400} },
+          "9년": { "신규": {"catalog": 13900, "promo": 13900}, "재렌탈": {"catalog": 12500, "promo": 12500} }
+        }
+      },
+      "SS (CFSS-F04)": {
+        "img_prefix": "f04",
+        "기본형": {
+          "5년": { "신규": {"catalog": 15900, "promo": 15900}, "재렌탈": {"catalog": 14300, "promo": 14300} },
+          "7년": { "신규": {"catalog": 13900, "promo": 13900}, "재렌탈": {"catalog": 12500, "promo": 12500} },
+          "9년": { "신규": {"catalog": 12900, "promo": 12900}, "재렌탈": {"catalog": 11600, "promo": 11600} }
+        }
+      }
+    }
+  }
+});
