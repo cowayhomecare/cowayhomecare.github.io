@@ -2211,3 +2211,79 @@ Object.assign(rawDB.bed, {
     }
   }
 });
+// ======================================================
+// 💨 [공기청정기: 스퀘어핏 전체 라인업 완전체]
+// ======================================================
+Object.assign(rawDB.air, {
+  "스퀘어핏 공기청정기": {
+    "img": "img/calc/air/ap1125g.png",
+    "colors": [
+      {"name": "오트밀 베이지", "hex": "#e8e1d5", "img_code": "bg"},
+      {"name": "도브 화이트", "hex": "#f5f5f5", "img_code": "wt"},
+      {"name": "세이지 그린", "hex": "#c1d5c0", "img_code": "gn"},
+      {"name": "테라코타 핑크", "hex": "#c88a82", "img_code": "pk"}
+    ],
+    "sizes": {
+      "11평형 (AP-1125G)": {
+        "img_prefix": "ap1125g", 
+        "방문관리": {
+          "3년": { "신규": {"catalog": 28900, "promo": 25900}, "재렌탈": {"catalog": 26000, "promo": 23300} },
+          "5년": { "신규": {"catalog": 24900, "promo": 22400}, "재렌탈": {"catalog": 22400, "promo": 20100} },
+          "6년": { "신규": {"catalog": 23900, "promo": 21500}, "재렌탈": {"catalog": 21500, "promo": 19300} },
+          "7년": { "신규": {"catalog": 21900, "promo": 19700}, "재렌탈": {"catalog": 19700, "promo": 17700} }
+        },
+        "자가관리": {
+          "3년": { "신규": {"catalog": 24900, "promo": 22400}, "재렌탈": {"catalog": 22400, "promo": 20100} },
+          "5년": { "신규": {"catalog": 21900, "promo": 19700}, "재렌탈": {"catalog": 19700, "promo": 17700} },
+          "6년": { "신규": {"catalog": 20900, "promo": 18800}, "재렌탈": {"catalog": 18800, "promo": 16900} },
+          "7년": { "신규": {"catalog": 19400, "promo": 17400}, "재렌탈": {"catalog": 17400, "promo": 15600} }
+        }
+      },
+      "15평형 (AP-1526A)": {
+        "img_prefix": "ap1526a",
+        "방문관리": {
+          "3년": { "신규": {"catalog": 31900, "promo": 28900}, "재렌탈": {"catalog": 28700, "promo": 26000} },
+          "5년": { "신규": {"catalog": 27900, "promo": 25100}, "재렌탈": {"catalog": 25100, "promo": 22500} },
+          "6년": { "신규": {"catalog": 26400, "promo": 23700}, "재렌탈": {"catalog": 23700, "promo": 21300} },
+          "7년": { "신규": {"catalog": 24400, "promo": 21900}, "재렌탈": {"catalog": 21900, "promo": 19700} }
+        },
+        "자가관리": {
+          "3년": { "신규": {"catalog": 27900, "promo": 25100}, "재렌탈": {"catalog": 25100, "promo": 22500} },
+          "5년": { "신규": {"catalog": 24900, "promo": 22400}, "재렌탈": {"catalog": 22400, "promo": 20100} },
+          "6년": { "신규": {"catalog": 23400, "promo": 21000}, "재렌탈": {"catalog": 21000, "promo": 18900} },
+          "7년": { "신규": {"catalog": 21400, "promo": 19200}, "재렌탈": {"catalog": 19200, "promo": 17200} }
+        }
+      },
+      "20평형 (AP-2026B)": {
+        "img_prefix": "ap2026b",
+        "방문관리": {
+          "3년": { "신규": {"catalog": 0, "promo": 0}, "재렌탈": {"catalog": 0, "promo": 0} },
+          "5년": { "신규": {"catalog": 0, "promo": 0}, "재렌탈": {"catalog": 0, "promo": 0} },
+          "6년": { "신규": {"catalog": 0, "promo": 0}, "재렌탈": {"catalog": 0, "promo": 0} },
+          "7년": { "신규": {"catalog": 0, "promo": 0}, "재렌탈": {"catalog": 0, "promo": 0} }
+        },
+        "자가관리": {
+          "3년": { "신규": {"catalog": 0, "promo": 0}, "재렌탈": {"catalog": 0, "promo": 0} },
+          "5년": { "신규": {"catalog": 0, "promo": 0}, "재렌탈": {"catalog": 0, "promo": 0} },
+          "6년": { "신규": {"catalog": 0, "promo": 0}, "재렌탈": {"catalog": 0, "promo": 0} },
+          "7년": { "신규": {"catalog": 0, "promo": 0}, "재렌탈": {"catalog": 0, "promo": 0} }
+        }
+      },
+      "24평형 (AP-2425H)": {
+        "img_prefix": "ap2425h",
+        "방문관리": {
+          "3년": { "신규": {"catalog": 0, "promo": 0}, "재렌탈": {"catalog": 0, "promo": 0} },
+          "5년": { "신규": {"catalog": 0, "promo": 0}, "재렌탈": {"catalog": 0, "promo": 0} },
+          "6년": { "신규": {"catalog": 0, "promo": 0}, "재렌탈": {"catalog": 0, "promo": 0} },
+          "7년": { "신규": {"catalog": 0, "promo": 0}, "재렌탈": {"catalog": 0, "promo": 0} }
+        },
+        "자가관리": {
+          "3년": { "신규": {"catalog": 0, "promo": 0}, "재렌탈": {"catalog": 0, "promo": 0} },
+          "5년": { "신규": {"catalog": 0, "promo": 0}, "재렌탈": {"catalog": 0, "promo": 0} },
+          "6년": { "신규": {"catalog": 0, "promo": 0}, "재렌탈": {"catalog": 0, "promo": 0} },
+          "7년": { "신규": {"catalog": 0, "promo": 0}, "재렌탈": {"catalog": 0, "promo": 0} }
+        }
+      }
+    }
+  }
+});
