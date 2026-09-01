@@ -1642,3 +1642,92 @@ Object.assign(rawDB.bed, {
     }
   }
 });
+// ======================================================
+// 🛏️ [프레임 2차: 루나 프레임, 코지 프레임]
+// ======================================================
+Object.assign(rawDB.bed, {
+  "루나 프레임": {
+    "img": "img/calc/berexbed/frame/tm14.png",
+    "colors": [
+      {"name": "퓨어 아이보리", "hex": "#f5f5f5", "img_code": "iv"},
+      {"name": "피치 핑크", "hex": "#ffdab9", "img_code": "pk"},
+      {"name": "민트 스트라이프", "hex": "#bdfcc9", "img_code": "gn"}
+    ],
+    "sizes": {
+      "LK (CFLK-TM14)": {
+        "img_prefix": "lktm14",
+        "기본형": {
+          "5년": { "신규": {"catalog": 37900, "promo": 37900}, "재렌탈": {"catalog": 34100, "promo": 34100} },
+          "7년": { "신규": {"catalog": 27900, "promo": 27900}, "재렌탈": {"catalog": 25100, "promo": 25100} },
+          "9년": { "신규": {"catalog": 22900, "promo": 22900}, "재렌탈": {"catalog": 20600, "promo": 20600} }
+        }
+      },
+      "K (CFK-TM14)": {
+        "img_prefix": "tm14",
+        "기본형": {
+          "5년": { "신규": {"catalog": 31900, "promo": 31900}, "재렌탈": {"catalog": 28700, "promo": 28700} },
+          "7년": { "신규": {"catalog": 24900, "promo": 24900}, "재렌탈": {"catalog": 22400, "promo": 22400} },
+          "9년": { "신규": {"catalog": 19900, "promo": 19900}, "재렌탈": {"catalog": 17900, "promo": 17900} }
+        }
+      },
+      "Q (CFQ-TM14)": {
+        "img_prefix": "tm14",
+        "기본형": {
+          "5년": { "신규": {"catalog": 29900, "promo": 29900}, "재렌탈": {"catalog": 26900, "promo": 26900} },
+          "7년": { "신규": {"catalog": 22900, "promo": 22900}, "재렌탈": {"catalog": 20600, "promo": 20600} },
+          "9년": { "신규": {"catalog": 19900, "promo": 19900}, "재렌탈": {"catalog": 17900, "promo": 17900} }
+        }
+      },
+      "SS (CFSS-TM14)": {
+        "img_prefix": "tm14",
+        "기본형": {
+          "5년": { "신규": {"catalog": 27900, "promo": 27900}, "재렌탈": {"catalog": 25100, "promo": 25100} },
+          "7년": { "신규": {"catalog": 20900, "promo": 20900}, "재렌탈": {"catalog": 18800, "promo": 18800} },
+          "9년": { "신규": {"catalog": 17900, "promo": 17900}, "재렌탈": {"catalog": 16100, "promo": 16100} }
+        }
+      }
+    }
+  },
+  "코지 프레임": {
+    "img": "img/calc/berexbed/frame/tm13.png",
+    "colors": [
+      {"name": "퓨어 아이보리", "hex": "#f5f5f5", "img_code": "iv"},
+      {"name": "오트밀 베이지", "hex": "#e8e1d5", "img_code": "bg"},
+      {"name": "차콜 그레이", "hex": "#5e5e5e", "img_code": "gr"}
+    ],
+    "sizes": {
+      "LK (CFLK-TM13)": {
+        "img_prefix": "lktm13",
+        "기본형": {
+          "5년": { "신규": {"catalog": 36900, "promo": 36900}, "재렌탈": {"catalog": 33200, "promo": 33200} },
+          "7년": { "신규": {"catalog": 26900, "promo": 26900}, "재렌탈": {"catalog": 24200, "promo": 24200} },
+          "9년": { "신규": {"catalog": 21900, "promo": 21900}, "재렌탈": {"catalog": 19700, "promo": 19700} }
+        }
+      },
+      "K (CFK-TM13)": {
+        "img_prefix": "tm13",
+        "기본형": {
+          "5년": { "신규": {"catalog": 30900, "promo": 30900}, "재렌탈": {"catalog": 27800, "promo": 27800} },
+          "7년": { "신규": {"catalog": 23900, "promo": 23900}, "재렌탈": {"catalog": 21500, "promo": 21500} },
+          "9년": { "신규": {"catalog": 20900, "promo": 20900}, "재렌탈": {"catalog": 18800, "promo": 18800} }
+        }
+      },
+      "Q (CFQ-TM13)": {
+        "img_prefix": "tm13",
+        "기본형": {
+          "5년": { "신규": {"catalog": 28900, "promo": 28900}, "재렌탈": {"catalog": 26000, "promo": 26000} },
+          "7년": { "신규": {"catalog": 21900, "promo": 21900}, "재렌탈": {"catalog": 19700, "promo": 19700} },
+          "9년": { "신규": {"catalog": 19900, "promo": 19900}, "재렌탈": {"catalog": 17900, "promo": 17900} }
+        }
+      },
+      "SS (CFSS-TM13)": {
+        "img_prefix": "tm13",
+        "기본형": {
+          "5년": { "신규": {"catalog": 26900, "promo": 26900}, "재렌탈": {"catalog": 24200, "promo": 24200} },
+          "7년": { "신규": {"catalog": 19900, "promo": 19900}, "재렌탈": {"catalog": 17900, "promo": 17900} },
+          "9년": { "신규": {"catalog": 16900, "promo": 16900}, "재렌탈": {"catalog": 15200, "promo": 15200} }
+        }
+      }
+    }
+  }
+});
