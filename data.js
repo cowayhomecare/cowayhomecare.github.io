@@ -1802,3 +1802,251 @@ Object.assign(rawDB.bed, {
     }
   }
 });
+// ======================================================
+// 🛏️ [프레임 4차: 볼륨 프레임, 스위트 호텔 프레임]
+// ======================================================
+Object.assign(rawDB.bed, {
+  "볼륨 프레임": {
+    "img": "img/calc/berexbed/frame/tm12_bg.png",
+    "colors": [
+      {"name": "오트밀 베이지", "hex": "#e8e1d5", "img_code": "bg"},
+      {"name": "차콜 그레이", "hex": "#5e5e5e", "img_code": "gr"}
+    ],
+    "sizes": {
+      "LK (CFLK-TM12)": {
+        "img_prefix": "tm12",
+        "기본형": {
+          "5년": { "신규": {"catalog": 40900, "promo": 40900}, "재렌탈": {"catalog": 36800, "promo": 36800} },
+          "7년": { "신규": {"catalog": 30900, "promo": 30900}, "재렌탈": {"catalog": 27800, "promo": 27800} },
+          "9년": { "신규": {"catalog": 25900, "promo": 25900}, "재렌탈": {"catalog": 23300, "promo": 23300} }
+        }
+      },
+      "K (CFK-TM12)": {
+        "img_prefix": "tm12",
+        "기본형": {
+          "5년": { "신규": {"catalog": 33900, "promo": 33900}, "재렌탈": {"catalog": 30500, "promo": 30500} },
+          "7년": { "신규": {"catalog": 27900, "promo": 27900}, "재렌탈": {"catalog": 25100, "promo": 25100} },
+          "9년": { "신규": {"catalog": 24900, "promo": 24900}, "재렌탈": {"catalog": 22400, "promo": 22400} }
+        }
+      },
+      "Q (CFQ-TM12)": {
+        "img_prefix": "tm12",
+        "기본형": {
+          "5년": { "신규": {"catalog": 31900, "promo": 31900}, "재렌탈": {"catalog": 28700, "promo": 28700} },
+          "7년": { "신규": {"catalog": 25900, "promo": 25900}, "재렌탈": {"catalog": 23300, "promo": 23300} },
+          "9년": { "신규": {"catalog": 22900, "promo": 22900}, "재렌탈": {"catalog": 20600, "promo": 20600} }
+        }
+      },
+      "SS (CFSS-TM12)": {
+        "img_prefix": "tm12",
+        "기본형": {
+          "5년": { "신규": {"catalog": 29900, "promo": 29900}, "재렌탈": {"catalog": 26900, "promo": 26900} },
+          "7년": { "신규": {"catalog": 23900, "promo": 23900}, "재렌탈": {"catalog": 21500, "promo": 21500} },
+          "9년": { "신규": {"catalog": 20900, "promo": 20900}, "재렌탈": {"catalog": 18800, "promo": 18800} }
+        }
+      }
+    }
+  },
+  "스위트 호텔 프레임": {
+    "img": "img/calc/berexbed/frame/ht01_bg.png",
+    "colors": [
+      {"name": "뉴트럴 베이지", "hex": "#e8e1d5", "img_code": "bg"},
+      {"name": "애쉬 브라운", "hex": "#6e5c51", "img_code": "br"}
+    ],
+    "sizes": {
+      "LK (CFLK-HT01)": {
+        "img_prefix": "ht01",
+        "기본형": {
+          "5년": { "신규": {"catalog": 48900, "promo": 48900}, "재렌탈": {"catalog": 44000, "promo": 44000} },
+          "7년": { "신규": {"catalog": 37900, "promo": 37900}, "재렌탈": {"catalog": 34100, "promo": 34100} },
+          "9년": { "신규": {"catalog": 32900, "promo": 32900}, "재렌탈": {"catalog": 29600, "promo": 29600} }
+        }
+      },
+      "K (CFK-HT01)": {
+        "img_prefix": "ht01",
+        "기본형": {
+          "5년": { "신규": {"catalog": 44900, "promo": 44900}, "재렌탈": {"catalog": 40400, "promo": 40400} },
+          "7년": { "신규": {"catalog": 34900, "promo": 34900}, "재렌탈": {"catalog": 31400, "promo": 31400} },
+          "9년": { "신규": {"catalog": 29900, "promo": 29900}, "재렌탈": {"catalog": 26900, "promo": 26900} }
+        }
+      },
+      "Q (CFQ-HT01)": {
+        "img_prefix": "ht01",
+        "기본형": {
+          "5년": { "신규": {"catalog": 40900, "promo": 40900}, "재렌탈": {"catalog": 36800, "promo": 36800} },
+          "7년": { "신규": {"catalog": 31900, "promo": 31900}, "재렌탈": {"catalog": 28700, "promo": 28700} },
+          "9년": { "신규": {"catalog": 26900, "promo": 26900}, "재렌탈": {"catalog": 24200, "promo": 24200} }
+        }
+      },
+      "SS (CFSS-HT01)": {
+        "img_prefix": "ht01",
+        "기본형": {
+          "5년": { "신규": {"catalog": 37900, "promo": 37900}, "재렌탈": {"catalog": 34100, "promo": 34100} },
+          "7년": { "신규": {"catalog": 28900, "promo": 28900}, "재렌탈": {"catalog": 26000, "promo": 26000} },
+          "9년": { "신규": {"catalog": 23900, "promo": 23900}, "재렌탈": {"catalog": 21500, "promo": 21500} }
+        }
+      }
+    }
+  }
+});
+// ======================================================
+// 🛏️ [프레임 5차: 컴포트 프레임, 소프트 쿠션 프레임]
+// ======================================================
+Object.assign(rawDB.bed, {
+  "컴포트 프레임": {
+    "img": "img/calc/berexbed/frame/qkcb01_iv.png",
+    "colors": [
+      {"name": "크림 아이보리", "hex": "#fdfbf7", "img_code": "iv"},
+      {"name": "멜란지 그레이", "hex": "#8c8c8c", "img_code": "gr"}
+    ],
+    "sizes": {
+      "K (CFK-CB01)": {
+        "img_prefix": "qkcb01",
+        "기본형": {
+          "5년": { "신규": {"catalog": 45900, "promo": 45900}, "재렌탈": {"catalog": 41300, "promo": 41300} },
+          "7년": { "신규": {"catalog": 35900, "promo": 35900}, "재렌탈": {"catalog": 32300, "promo": 32300} },
+          "9년": { "신규": {"catalog": 30900, "promo": 30900}, "재렌탈": {"catalog": 27800, "promo": 27800} }
+        }
+      },
+      "Q (CFQ-CB01)": {
+        "img_prefix": "qkcb01",
+        "기본형": {
+          "5년": { "신규": {"catalog": 42900, "promo": 42900}, "재렌탈": {"catalog": 38600, "promo": 38600} },
+          "7년": { "신규": {"catalog": 32900, "promo": 32900}, "재렌탈": {"catalog": 29600, "promo": 29600} },
+          "9년": { "신규": {"catalog": 27900, "promo": 27900}, "재렌탈": {"catalog": 25100, "promo": 25100} }
+        }
+      },
+      "SS (CFSS-CB01)": {
+        "img_prefix": "cb01",
+        "기본형": {
+          "5년": { "신규": {"catalog": 38900, "promo": 38900}, "재렌탈": {"catalog": 35000, "promo": 35000} },
+          "7년": { "신규": {"catalog": 28900, "promo": 28900}, "재렌탈": {"catalog": 26000, "promo": 26000} },
+          "9년": { "신규": {"catalog": 23900, "promo": 23900}, "재렌탈": {"catalog": 21500, "promo": 21500} }
+        }
+      }
+    }
+  },
+  "소프트 쿠션 프레임": {
+    "img": "img/calc/berexbed/frame/cb03_iv.png",
+    "colors": [
+      {"name": "코튼 아이보리", "hex": "#f5f5f5", "img_code": "iv"},
+      {"name": "스톤 그레이", "hex": "#7f8386", "img_code": "gr"},
+      {"name": "로즈 핑크", "hex": "#e8b4b8", "img_code": "pk"}
+    ],
+    "sizes": {
+      "K (CFK-CB03)": {
+        "img_prefix": "cb03",
+        "기본형": {
+          "5년": { "신규": {"catalog": 40900, "promo": 40900}, "재렌탈": {"catalog": 36800, "promo": 36800} },
+          "7년": { "신규": {"catalog": 31900, "promo": 31900}, "재렌탈": {"catalog": 28700, "promo": 28700} },
+          "9년": { "신규": {"catalog": 26900, "promo": 26900}, "재렌탈": {"catalog": 24200, "promo": 24200} }
+        }
+      },
+      "Q (CFQ-CB03)": {
+        "img_prefix": "cb03",
+        "기본형": {
+          "5년": { "신규": {"catalog": 38900, "promo": 38900}, "재렌탈": {"catalog": 35000, "promo": 35000} },
+          "7년": { "신규": {"catalog": 29900, "promo": 29900}, "재렌탈": {"catalog": 26900, "promo": 26900} },
+          "9년": { "신규": {"catalog": 24900, "promo": 24900}, "재렌탈": {"catalog": 22400, "promo": 22400} }
+        }
+      },
+      "SS (CFSS-CB03)": {
+        "img_prefix": "cb03",
+        "기본형": {
+          "5년": { "신규": {"catalog": 34900, "promo": 34900}, "재렌탈": {"catalog": 31400, "promo": 31400} },
+          "7년": { "신규": {"catalog": 25900, "promo": 25900}, "재렌탈": {"catalog": 23300, "promo": 23300} },
+          "9년": { "신규": {"catalog": 21900, "promo": 21900}, "재렌탈": {"catalog": 19700, "promo": 19700} }
+        }
+      }
+    }
+  }
+});
+// ======================================================
+// 🛏️ [프레임 6차: 모던 라운드 프레임, 그레이스 프레임]
+// ======================================================
+Object.assign(rawDB.bed, {
+  "모던 라운드 프레임": {
+    "img": "img/calc/berexbed/frame/cb02_bghc.png",
+    "colors": [
+      {"name": "오트 베이지", "hex": "#e8e1d5", "img_code": "bghc"},
+      {"name": "딥 블루", "hex": "#4682b4", "img_code": "buhc"},
+      {"name": "카키 브라운", "hex": "#8b7355", "img_code": "brhb"}
+    ],
+    "sizes": {
+      "GK (CFGK-CB02)": {
+        "img_prefix": "lkcb02",
+        "기본형": {
+          "5년": { "신규": {"catalog": 53900, "promo": 53900}, "재렌탈": {"catalog": 48500, "promo": 48500} },
+          "7년": { "신규": {"catalog": 43900, "promo": 43900}, "재렌탈": {"catalog": 39500, "promo": 39500} },
+          "9년": { "신규": {"catalog": 38900, "promo": 38900}, "재렌탈": {"catalog": 35000, "promo": 35000} }
+        }
+      },
+      "LK (CFLK-CB02)": {
+        "img_prefix": "lkcb02",
+        "기본형": {
+          "5년": { "신규": {"catalog": 49900, "promo": 49900}, "재렌탈": {"catalog": 44900, "promo": 44900} },
+          "7년": { "신규": {"catalog": 39900, "promo": 39900}, "재렌탈": {"catalog": 35900, "promo": 35900} },
+          "9년": { "신규": {"catalog": 34900, "promo": 34900}, "재렌탈": {"catalog": 31400, "promo": 31400} }
+        }
+      },
+      "K (CFK-CB02)": {
+        "img_prefix": "cb02",
+        "기본형": {
+          "5년": { "신규": {"catalog": 45900, "promo": 45900}, "재렌탈": {"catalog": 41300, "promo": 41300} },
+          "7년": { "신규": {"catalog": 35900, "promo": 35900}, "재렌탈": {"catalog": 32300, "promo": 32300} },
+          "9년": { "신규": {"catalog": 30900, "promo": 30900}, "재렌탈": {"catalog": 27800, "promo": 27800} }
+        }
+      },
+      "Q (CFQ-CB02)": {
+        "img_prefix": "cb02",
+        "기본형": {
+          "5년": { "신규": {"catalog": 42900, "promo": 42900}, "재렌탈": {"catalog": 38600, "promo": 38600} },
+          "7년": { "신규": {"catalog": 32900, "promo": 32900}, "재렌탈": {"catalog": 29600, "promo": 29600} },
+          "9년": { "신규": {"catalog": 27900, "promo": 27900}, "재렌탈": {"catalog": 25100, "promo": 25100} }
+        }
+      },
+      "SS (CFSS-CB02)": {
+        "img_prefix": "cb02",
+        "기본형": {
+          "5년": { "신규": {"catalog": 39900, "promo": 39900}, "재렌탈": {"catalog": 35900, "promo": 35900} },
+          "7년": { "신규": {"catalog": 29900, "promo": 29900}, "재렌탈": {"catalog": 26900, "promo": 26900} },
+          "9년": { "신규": {"catalog": 24900, "promo": 24900}, "재렌탈": {"catalog": 22400, "promo": 22400} }
+        }
+      }
+    }
+  },
+  "그레이스 프레임": {
+    "img": "img/calc/berexbed/frame/cb04_grhb.png",
+    "colors": [
+      {"name": "헤링본 그레이", "hex": "#8c8c8c", "img_code": "grhb"},
+      {"name": "헤링본 블랙", "hex": "#333333", "img_code": "bkhb"},
+      {"name": "글렌체크 그레이", "hex": "#a9a9a9", "img_code": "grgc"}
+    ],
+    "sizes": {
+      "LK (CFLK-CB04)": {
+        "img_prefix": "cb04",
+        "기본형": {
+          "5년": { "신규": {"catalog": 49900, "promo": 49900}, "재렌탈": {"catalog": 44900, "promo": 44900} },
+          "7년": { "신규": {"catalog": 39900, "promo": 39900}, "재렌탈": {"catalog": 35900, "promo": 35900} },
+          "9년": { "신규": {"catalog": 34900, "promo": 34900}, "재렌탈": {"catalog": 31400, "promo": 31400} }
+        }
+      },
+      "K (CFK-CB04)": {
+        "img_prefix": "cb04",
+        "기본형": {
+          "5년": { "신규": {"catalog": 45900, "promo": 45900}, "재렌탈": {"catalog": 41300, "promo": 41300} },
+          "7년": { "신규": {"catalog": 35900, "promo": 35900}, "재렌탈": {"catalog": 32300, "promo": 32300} },
+          "9년": { "신규": {"catalog": 30900, "promo": 30900}, "재렌탈": {"catalog": 27800, "promo": 27800} }
+        }
+      },
+      "Q (CFQ-CB04)": {
+        "img_prefix": "cb04",
+        "기본형": {
+          "5년": { "신규": {"catalog": 42900, "promo": 42900}, "재렌탈": {"catalog": 38600, "promo": 38600} },
+          "7년": { "신규": {"catalog": 32900, "promo": 32900}, "재렌탈": {"catalog": 29600, "promo": 29600} },
+          "9년": { "신규": {"catalog": 27900, "promo": 27900}, "재렌탈": {"catalog": 25100, "promo": 25100} }
+        }
+      }
+    }
+  }
+});
