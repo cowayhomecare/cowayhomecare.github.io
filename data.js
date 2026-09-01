@@ -1731,3 +1731,74 @@ Object.assign(rawDB.bed, {
     }
   }
 });
+// ======================================================
+// 🛏️ [프레임 3차: 우디 프레임, 원목 프레임]
+// ======================================================
+Object.assign(rawDB.bed, {
+  "우디 프레임": {
+    "img": "img/calc/berexbed/frame/tm11_nt.png",
+    "colors": [
+      {"name": "내추럴 오크", "hex": "#d2b48c", "img_code": "nt"},
+      {"name": "스노우 화이트", "hex": "#f5f5f5", "img_code": "wt"}
+    ],
+    "sizes": {
+      "K (CFK-TM11)": {
+        "img_prefix": "tm11",
+        "기본형": {
+          "5년": { "신규": {"catalog": 28900, "promo": 28900}, "재렌탈": {"catalog": 26900, "promo": 26900} },
+          "7년": { "신규": {"catalog": 22900, "promo": 22900}, "재렌탈": {"catalog": 20600, "promo": 20600} },
+          "9년": { "신규": {"catalog": 19900, "promo": 19900}, "재렌탈": {"catalog": 17900, "promo": 17900} }
+        }
+      },
+      "Q (CFQ-TM11)": {
+        "img_prefix": "tm11",
+        "기본형": {
+          "5년": { "신규": {"catalog": 26900, "promo": 26900}, "재렌탈": {"catalog": 24200, "promo": 24200} },
+          "7년": { "신규": {"catalog": 20900, "promo": 20900}, "재렌탈": {"catalog": 18800, "promo": 18800} },
+          "9년": { "신규": {"catalog": 17900, "promo": 17900}, "재렌탈": {"catalog": 16100, "promo": 16100} }
+        }
+      },
+      "SS (CFSS-TM11)": {
+        "img_prefix": "tm11",
+        "기본형": {
+          "5년": { "신규": {"catalog": 24900, "promo": 24900}, "재렌탈": {"catalog": 22400, "promo": 22400} },
+          "7년": { "신규": {"catalog": 18900, "promo": 18900}, "재렌탈": {"catalog": 17000, "promo": 17000} },
+          "9년": { "신규": {"catalog": 15900, "promo": 15900}, "재렌탈": {"catalog": 14300, "promo": 14300} }
+        }
+      }
+    }
+  },
+  "원목 프레임": {
+    "img": "img/calc/berexbed/frame/tm09_n.png",
+    "colors": [
+      {"name": "내추럴", "hex": "#d2b48c", "img_code": "n"},
+      {"name": "월넛", "hex": "#5c4033", "img_code": "w"}
+    ],
+    "sizes": {
+      "K (CFK-TM09N)": {
+        "img_prefix": "tm09",
+        "기본형": {
+          "5년": { "신규": {"catalog": 28900, "promo": 28900}, "재렌탈": {"catalog": 26000, "promo": 26000} },
+          "7년": { "신규": {"catalog": 22900, "promo": 22900}, "재렌탈": {"catalog": 20600, "promo": 20600} },
+          "9년": { "신규": {"catalog": 19900, "promo": 19900}, "재렌탈": {"catalog": 17900, "promo": 17900} }
+        }
+      },
+      "Q (CFQ-TM09N)": {
+        "img_prefix": "tm09",
+        "기본형": {
+          "5년": { "신규": {"catalog": 26900, "promo": 26900}, "재렌탈": {"catalog": 24200, "promo": 24200} },
+          "7년": { "신규": {"catalog": 20900, "promo": 20900}, "재렌탈": {"catalog": 18800, "promo": 18800} },
+          "9년": { "신규": {"catalog": 17900, "promo": 17900}, "재렌탈": {"catalog": 16100, "promo": 16100} }
+        }
+      },
+      "SS (CFSS-TM09N)": {
+        "img_prefix": "tm09",
+        "기본형": {
+          "5년": { "신규": {"catalog": 24900, "promo": 24900}, "재렌탈": {"catalog": 22400, "promo": 22400} },
+          "7년": { "신규": {"catalog": 18900, "promo": 18900}, "재렌탈": {"catalog": 17000, "promo": 17000} },
+          "9년": { "신규": {"catalog": 15900, "promo": 15900}, "재렌탈": {"catalog": 14300, "promo": 14300} }
+        }
+      }
+    }
+  }
+});
