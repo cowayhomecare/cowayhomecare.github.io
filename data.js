@@ -9,7 +9,6 @@ const rawDB = {
 Object.assign(rawDB.bed, {
   "엘리트": {
     "img": "img/calc/berexbed/mattress/st01.png",
-    "colors": [],
     "sizes": {
       "Q (CMQ-ST01EH)": {
         "img_prefix": "st01",
@@ -85,7 +84,6 @@ Object.assign(rawDB.bed, {
 
   "모디": {
     "img": "img/calc/berexbed/mattress/se02.png",
-    "colors": [],
     "sizes": {
       "LK (CMLK-SE02)": {
         "img_prefix": "se02",
@@ -184,7 +182,6 @@ Object.assign(rawDB.bed, {
 
   "루네어": {
     "img": "img/calc/berexbed/mattress/se03.png",
-    "colors": [],
     "sizes": {
       "LK (CMLK-SE03H/M)": {
         "img_prefix": "se03",
@@ -287,7 +284,6 @@ Object.assign(rawDB.bed, {
 Object.assign(rawDB.bed, {
   "하이브리드3": {
     "img": "img/calc/berexbed/mattress/pr03.png",
-    "colors": [],
     "sizes": {
       "K (CMK-PR03)": {
         "img_prefix": "pr03",
@@ -363,7 +359,6 @@ Object.assign(rawDB.bed, {
 
   "하이브리드4": {
     "img": "img/calc/berexbed/mattress/pr04.png",
-    "colors": [],
     "sizes": {
       "LK (CMLK-PR04_V2)": {
         "img_prefix": "pr04",
@@ -462,7 +457,6 @@ Object.assign(rawDB.bed, {
 
   "컴팩트 메모리폼": {
     "img": "img/calc/berexbed/mattress/m01.png",
-    "colors": [],
     "sizes": {
       "Q (CMQ-M01S/M)": {
         "img_prefix": "m01",
@@ -519,7 +513,6 @@ Object.assign(rawDB.bed, {
 Object.assign(rawDB.bed, {
   "더블사이드": {
     "img": "img/calc/berexbed/mattress/se01.png",
-    "colors": [],
     "sizes": {
       "K (CMK-SE01)": {
         "img_prefix": "se01",
@@ -595,7 +588,6 @@ Object.assign(rawDB.bed, {
 
   "더블체인지": {
     "img": "img/calc/berexbed/mattress/sl01.png",
-    "colors": [],
     "sizes": {
       "K (CMK-SL01)": {
         "img_prefix": "sl01",
@@ -671,7 +663,6 @@ Object.assign(rawDB.bed, {
 
   "시그니처": {
     "img": "img/calc/berexbed/mattress/sp01s.png",
-    "colors": [],
     "sizes": {
       "GK (CMGK-SP01S)": {
         "img_prefix": "sp01s",
@@ -747,7 +738,6 @@ Object.assign(rawDB.bed, {
 Object.assign(rawDB.bed, {
   "시그니처 컴포트": {
     "img": "img/calc/berexbed/mattress/sp01.png",
-    "colors": [],
     "sizes": {
       "GK (CMGK-SP01SC)": {
         "img_prefix": "sp01sc",
@@ -869,7 +859,6 @@ Object.assign(rawDB.bed, {
 
   "시그니처 파이어쉴드": {
     "img": "img/calc/berexbed/mattress/sp02.png",
-    "colors": [],
     "sizes": {
       "GK (CMGK-SP02S)": {
         "img_prefix": "sp02s",
@@ -941,7 +930,6 @@ Object.assign(rawDB.bed, {
 
   "시그니처 파이어쉴드 컴포트": {
     "img": "img/calc/berexbed/mattress/sp02.png",
-    "colors": [],
     "sizes": {
       "GK (CMGK-SP02SC)": {
         "img_prefix": "sp02sc",
