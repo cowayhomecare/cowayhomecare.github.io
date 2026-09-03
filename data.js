@@ -1067,7 +1067,6 @@ Object.assign(rawDB.bed, {
 Object.assign(rawDB.bed, {
   "스마트 S6+": {
     "img": "img/calc/berexbed/mattress/as04_bg.png",
-    "colors": [],
     "sizes": {
       "LK (CMLK-AS04)": {
         "img_prefix": "as04",
@@ -1150,7 +1149,6 @@ Object.assign(rawDB.bed, {
 
   "스마트 S8+": {
     "img": "img/calc/berexbed/mattress/as05_bg.png",
-    "colors": [],
     "sizes": {
       "LK (CMLK-AS05)": {
         "img_prefix": "as05",
@@ -1233,7 +1231,6 @@ Object.assign(rawDB.bed, {
 
   "원바디2": {
     "img": "img/calc/berexbed/mattress/ob03.png",
-    "colors": [],
     "sizes": {
       "Q (CMQ-OB03)": {
         "img_prefix": "ob03",
