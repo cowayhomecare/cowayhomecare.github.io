@@ -15,9 +15,22 @@
     .back-btn { font-size: 24px; text-decoration: none; color: #333; position: absolute; left: 0; font-weight: bold; padding: 10px; }
     .page-title-logo { height: 26px; object-fit: contain; }
 
-    /* 프리미엄 4탭 UI */
-    .cat-container { display: flex; gap: 8px; margin-bottom: 16px; justify-content: space-between; }
-    .cat-btn { flex: 1; background: white; border-radius: 16px; padding: 12px 4px; text-align: center; cursor: pointer; border: 2px solid transparent; box-shadow: 0 2px 6px rgba(0,0,0,0.02); transition: 0.2s; display: flex; flex-direction: column; align-items: center; }
+    /* 프리미엄 탭 UI (가로 스크롤 적용) */
+    .cat-container { 
+      display: flex; 
+      gap: 8px; 
+      margin-bottom: 16px; 
+      overflow-x: auto; 
+      padding-bottom: 5px; 
+      scrollbar-width: none; 
+    }
+    .cat-container::-webkit-scrollbar { display: none; }
+    
+    .cat-btn { 
+      flex: 0 0 auto; 
+      width: 76px; 
+      background: white; border-radius: 16px; padding: 12px 4px; text-align: center; cursor: pointer; border: 2px solid transparent; box-shadow: 0 2px 6px rgba(0,0,0,0.02); transition: 0.2s; display: flex; flex-direction: column; align-items: center; 
+    }
     .cat-btn.active { border-color: #3182f6; box-shadow: 0 4px 12px rgba(49, 130, 246, 0.1); }
     
     .icon-wrap { width: 36px; height: 36px; border-radius: 12px; display: flex; justify-content: center; align-items: center; margin-bottom: 8px; }
@@ -108,23 +121,35 @@
       </a>
     </div>
 
-    <!-- 프리미엄 4탭 -->
+    <!-- 스크롤 가능한 상단 카테고리 탭 -->
     <div class="cat-container">
-      <div class="cat-btn active" onclick="switchTab('bed', this)">
+      <div class="cat-btn active" onclick="switchTab('mattress', this)">
         <div class="icon-wrap color-blue"><span class="material-symbols-rounded">bed</span></div>
-        <div class="cat-name">매트/프레임</div>
+        <div class="cat-name">매트리스</div>
       </div>
-      <div class="cat-btn" onclick="switchTab('healing', this)">
-        <div class="icon-wrap color-green"><span class="material-symbols-rounded">chair_alt</span></div>
-        <div class="cat-name">힐링상품</div>
+      <div class="cat-btn" onclick="switchTab('frame', this)">
+        <div class="icon-wrap color-blue"><span class="material-symbols-rounded">weekend</span></div>
+        <div class="cat-name">프레임</div>
       </div>
       <div class="cat-btn" onclick="switchTab('air', this)">
         <div class="icon-wrap color-purple"><span class="material-symbols-rounded">air</span></div>
         <div class="cat-name">공기청정기</div>
       </div>
-      <div class="cat-btn" onclick="switchTab('life', this)">
-        <div class="icon-wrap color-red"><span class="material-symbols-rounded">water_drop</span></div>
-        <div class="cat-name">생활/환경</div>
+      <div class="cat-btn" onclick="switchTab('massage', this)">
+        <div class="icon-wrap color-green"><span class="material-symbols-rounded">chair_alt</span></div>
+        <div class="cat-name">힐링상품</div>
+      </div>
+      <div class="cat-btn" onclick="switchTab('water', this)">
+        <div class="icon-wrap color-blue"><span class="material-symbols-rounded">water_drop</span></div>
+        <div class="cat-name">정수기</div>
+      </div>
+      <div class="cat-btn" onclick="switchTab('bidet', this)">
+        <div class="icon-wrap color-blue"><span class="material-symbols-rounded">wc</span></div>
+        <div class="cat-name">비데</div>
+      </div>
+      <div class="cat-btn" onclick="switchTab('kitchen', this)">
+        <div class="icon-wrap color-red"><span class="material-symbols-rounded">cooking</span></div>
+        <div class="cat-name">주방가전</div>
       </div>
     </div>
 
@@ -268,7 +293,7 @@
   <script src="data.js"></script>
 
   <script>
-    let currentTab = "bed";
+    let currentTab = "mattress"; // 👈 초기 탭을 mattress로 변경
     let cart = [];
     let selectedColorName = ""; 
     let selectedColorCode = ""; 
@@ -324,7 +349,7 @@
         const modelData = rawDB[currentTab][document.getElementById("modelOpt").value];
         const colors = modelData.colors;
         selectedColorName = colors[index].name;
-        selectedColorCode = colors[index].img_code; // 색상 영문 코드 가져오기
+        selectedColorCode = colors[index].img_code; 
         document.getElementById("selectedColorName").innerText = `- ${selectedColorName}`;
         
         const container = document.getElementById("colorContainer");
@@ -337,23 +362,20 @@
                 el.innerHTML = "";
             }
         });
-        updateDynamicImage(); // 색상 누를때마다 사진 업데이트
+        updateDynamicImage(); 
     }
 
-    // 💎 파일명 자동 조합 엔진 (사이즈 + 색상)
     function updateDynamicImage() {
         const model = document.getElementById("modelOpt").value;
         const size = document.getElementById("sizeOpt").value;
         const modelData = rawDB[currentTab][model];
         const sizeData = modelData.sizes[size];
 
-        let finalImgPath = modelData.img; // 기본 사진
+        let finalImgPath = modelData.img; 
 
-        // 만약 사이즈에 img_prefix(예: lktm14, qsb01)가 있고, 색상 코드(예: iv)가 있다면?
         if (sizeData.img_prefix && selectedColorCode) {
             finalImgPath = `img/calc/berexbed/frame/${sizeData.img_prefix}_${selectedColorCode}.png`;
         } else if (sizeData.img_prefix) {
-            // 색상 코드가 없는 모델이라면 (단일)
             finalImgPath = `img/calc/berexbed/frame/${sizeData.img_prefix}.png`;
         }
 
@@ -366,11 +388,10 @@
       const size = document.getElementById("sizeOpt").value;
       const sizeData = rawDB[currentTab][model].sizes[size];
       
-      updateDynamicImage(); // 사이즈 바뀔 때마다 사진 업데이트
+      updateDynamicImage(); 
 
       const careSelect = document.getElementById("careOpt");
       careSelect.innerHTML = "";
-      // 데이터 정리 중 img_prefix 등 시스템 값이 섞일 수 있으므로 객체만 필터링
       Object.keys(sizeData).forEach(c => {
           if(typeof sizeData[c] === 'object') {
               careSelect.innerHTML += `<option value="${c}">${c}</option>`;
@@ -414,25 +435,30 @@
       
       const data = rawDB[currentTab][model].sizes[size][care][term][rType];
       const box = document.getElementById("priceDisplayBox");
-      
-      // 💡 데이터가 기존 객체 형태이든, 새로 바뀐 순수 원가(숫자) 형태이든 상관없이 기준 금액을 빼옵니다.
-      const basePrice = (typeof data === 'object') ? (data.promo || data.catalog || data.신규 || data.재렌탈) : data;
+      const actualPromoPrice = data.promo || data.신규 || data.재렌탈 || data; // 데이터 구조 변경 대응
 
-      // 💡 이전의 복잡했던 가짜 할인 렌더링을 없애고, 원가를 직관적으로 보여준 뒤 
-      // 할인 계산은 온전히 장바구니(renderCart) 로직에 맡깁니다.
-      let html = "";
-      if(currentTab === "bed" || currentTab === "healing") {
-        html = `<div class="receipt-row total"><span>카탈로그/기본 렌탈료</span><span id="dispFinal">${basePrice.toLocaleString()}원</span></div>`;
+      // 👈 베드/힐링 카테고리 로직 변경 대응
+      if(currentTab === "mattress" || currentTab === "frame" || currentTab === "massage") {
+        let html = `<div class="receipt-row total"><span>카탈로그/기본 렌탈료</span><span id="dispFinal">${actualPromoPrice.toLocaleString()}원</span></div>`;
+        if(data.catalog && data.catalog > actualPromoPrice) {
+          html = `<div class="receipt-row"><span>정상 렌탈료</span><span style="text-decoration:line-through;">${data.catalog.toLocaleString()}원</span></div>` + html;
+        }
+        box.innerHTML = html;
       } else {
-        html = `
-          <div class="receipt-row total"><span>카탈로그/기본 렌탈료</span><span id="dispFinal">${basePrice.toLocaleString()}원</span></div>
-          <div style="font-size:11px; color:#8b95a1; margin-top:4px;">* 장바구니에 담으면 프로모션 할인이 자동 계산됩니다.</div>
-        `;
+        const fakeBasePrice = data.catalog || actualPromoPrice; 
+        const calculatedPromoDiscount = fakeBasePrice - actualPromoPrice - 1000;
+        
+        let html = `<div class="receipt-row"><span>기본 렌탈료</span><span>${fakeBasePrice.toLocaleString()}원</span></div>`;
+        if(calculatedPromoDiscount > 0) {
+            html += `<div class="receipt-row discount"><span>자동이체 할인</span><span>-1,000원</span></div>
+                     <div class="receipt-row discount"><span>약정 할인</span><span>-${calculatedPromoDiscount.toLocaleString()}원</span></div>`;
+        }
+        html += `<div class="receipt-row total"><span>실 청구 렌탈료</span><span id="dispFinal">${actualPromoPrice.toLocaleString()}원</span></div>`;
+        
+        box.innerHTML = html;
       }
-      box.innerHTML = html;
       
-      // 장바구니로 넘어갈 기준 금액 세팅
-      document.getElementById("dispFinal").dataset.promo = basePrice;
+      document.getElementById("dispFinal").dataset.promo = actualPromoPrice;
       document.getElementById("dispFinal").dataset.term = term;
       document.getElementById("dispFinal").dataset.rtype = rType;
     }
@@ -444,7 +470,9 @@
       const term = document.getElementById("dispFinal").dataset.term;
       const rType = document.getElementById("dispFinal").dataset.rtype;
       const promoPrice = parseInt(document.getElementById("dispFinal").dataset.promo);
-      const isFestaEligible = (currentTab === "bed" || currentTab === "healing"); 
+      
+      // 👈 페스타 적용 카테고리 업데이트
+      const isFestaEligible = (currentTab === "mattress" || currentTab === "frame" || currentTab === "massage"); 
 
       const title = selectedColorName ? `${model} ${size} [${selectedColorName}]` : `${model} ${size}`;
 
