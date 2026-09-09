@@ -177,7 +177,7 @@ Object.assign(rawDB.bed, {
         }
       }
     }
-  }
+},
 
   "루네어": {
     "img": "img/calc/berexbed/mattress/se03.png",
@@ -1221,6 +1221,7 @@ Object.assign(rawDB.bed, {
       }
     }
   }
+},
   "R3 모션베드": {
     "img": "img/calc/bed/r3.png",
     "colors": [
@@ -2287,7 +2288,7 @@ Object.assign(rawDB.air, {
         }
       }
     }
-  }
+},
 
 "노블 공기청정기 30평 (AP-3021D)": {
     "img": "img/calc/air/ap3021d.png",
