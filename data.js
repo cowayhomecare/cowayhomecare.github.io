@@ -1,6 +1,7 @@
 // 1. 빈 창고 모든 카테고리 틀 만들기
 const rawDB = {
-  bed: {},
+  mattress: {},
+  frame: {}, 
   healing: {},
   air: {},
   life: {},
@@ -12,7 +13,7 @@ const rawDB = {
   kitchen: {},
   etc: {}
 };
-Object.assign(rawDB.bed, {
+Object.assign(rawDB.mattress, {
   "엘리트": {
     "img": "img/calc/berexbed/mattress/st01.png",
     "sizes": {
@@ -276,7 +277,7 @@ Object.assign(rawDB.bed, {
 // ======================================================
 // 🛏️ [매트리스 2차: 하이브리드3, 하이브리드4, 컴팩트 메모리폼]
 // ======================================================
-Object.assign(rawDB.bed, {
+Object.assign(rawDB.mattress, {
   "하이브리드3": {
     "img": "img/calc/berexbed/mattress/pr03.png",
     "sizes": {
@@ -496,7 +497,7 @@ Object.assign(rawDB.bed, {
 // ======================================================
 // 🛏️ [매트리스 3차: 더블사이드, 더블체인지, 시그니처]
 // ======================================================
-Object.assign(rawDB.bed, {
+Object.assign(rawDB.mattress, {
 "더블사이드": {
     "img": "img/calc/berexbed/mattress/se01.png",
     "sizes": {
@@ -710,7 +711,7 @@ Object.assign(rawDB.bed, {
 // ======================================================
 // 🛏️ [매트리스 4차: 시그니처 컴포트, 시그니처 파이어쉴드, 시그니처 파이어쉴드 컴포트]
 // ======================================================
-Object.assign(rawDB.bed, {
+Object.assign(rawDB.mattress, {
   "시그니처 컴포트": {
     "img": "img/calc/berexbed/mattress/sp01.png",
     "sizes": {
@@ -1012,7 +1013,7 @@ Object.assign(rawDB.bed, {
 // ======================================================
 // 🛏️ [매트리스 5차: 스마트 S6+, 스마트 S8+, 원바디2,모션베드]
 // ======================================================
-Object.assign(rawDB.bed, {
+Object.assign(rawDB.mattress, {
   "스마트 S6+": {
     "img": "img/calc/berexbed/mattress/as04_bg.png",
     "sizes": {
@@ -1500,7 +1501,7 @@ Object.assign(rawDB.bed, {
 // ======================================================
 // 🛏️ [프레임 1차: 모던 파운데이션, 모던 플러스 파운데이션, 원목 프레임]
 // ======================================================
-Object.assign(rawDB.bed, {
+Object.assign(rawDB.mattress, {
   "모던 파운데이션": {
     "img": "img/calc/berexbed/frame/f04.png",
     "colors": [
@@ -1623,7 +1624,7 @@ Object.assign(rawDB.bed, {
 // ======================================================
 // 🛏️ [프레임 2차: 우디 프레임, 루나 프레임, 코지 프레임]
 // ======================================================
-Object.assign(rawDB.bed, {
+Object.assign(rawDB.frame, {
   "우디 프레임": {
     "img": "img/calc/berexbed/frame/tm11_nt.png",
     "colors": [
@@ -1748,7 +1749,7 @@ Object.assign(rawDB.bed, {
 // ======================================================
 // 🛏️ [프레임 3차: 볼륨 프레임, 스위트 호텔 프레임]
 // ======================================================
-Object.assign(rawDB.bed, {
+Object.assign(rawDB.frame, {
   "볼륨 프레임": {
     "img": "img/calc/berexbed/frame/tm12_bg.png",
     "colors": [
@@ -1856,7 +1857,7 @@ Object.assign(rawDB.bed, {
 // ======================================================
 // 🛏️ [프레임 4차: 컴포트 프레임, 소프트 쿠션 프레임, 모던 라운드 프레임]
 // ======================================================
-Object.assign(rawDB.bed, {
+Object.assign(rawDB.frame, {
   "컴포트 프레임": {
     "img": "img/calc/berexbed/frame/cb01_iv.png",
     "colors": [
@@ -1980,7 +1981,7 @@ Object.assign(rawDB.bed, {
 // ======================================================
 // 🛏️ [프레임 5차: 그레이스, 수납형, 패밀리 프레임(결합/단독)]
 // ======================================================
-Object.assign(rawDB.bed, {
+Object.assign(rawDB.frame, {
   "그레이스 프레임": {
     "img": "img/calc/berexbed/frame/cb04_grhb.png",
     "colors": [
@@ -2107,7 +2108,7 @@ Object.assign(rawDB.bed, {
 // ======================================================
 // 🛏️ [프레임 6차: 마이 프레임 기본형 & 사이드형]
 // ======================================================
-Object.assign(rawDB.bed, {
+Object.assign(rawDB.frame, {
   "마이 프레임 기본형 [플랫/볼륨]": {
     "img": "img/calc/berexbed/frame/fp01_bg.png",
     "colors": [
