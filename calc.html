@@ -365,25 +365,29 @@
         updateDynamicImage(); 
     }
 
-    function updateDynamicImage() {
-        const model = document.getElementById("modelOpt").value;
-        const size = document.getElementById("sizeOpt").value;
-        const modelData = rawDB[currentTab][model];
-        const sizeData = modelData.sizes[size];
+function updateDynamicImage() {
+    const model = document.getElementById("modelOpt").value;
+    const size = document.getElementById("sizeOpt").value;
+    const modelData = rawDB[currentTab][model];
+    const sizeData = modelData.sizes[size];
 
-        let finalImgPath = modelData.img; 
+    let finalImgPath = modelData.img; 
+    let folderPath = finalImgPath.substring(0, finalImgPath.lastIndexOf('/') + 1);
 
-        if (sizeData.img_prefix && selectedColorCode) {
-            finalImgPath = `img/calc/berexbed/frame/${sizeData.img_prefix}_${selectedColorCode}.png`;
-        } else if (sizeData.img_prefix) {
-            finalImgPath = `img/calc/berexbed/frame/${sizeData.img_prefix}.png`;
+    if (sizeData.img_prefix) {
+        if (selectedColorCode) {
+            finalImgPath = `${folderPath}${sizeData.img_prefix}_${selectedColorCode}.png`;
+        } else {
+            finalImgPath = `${folderPath}${sizeData.img_prefix}.png`;
         }
-
-        document.getElementById("productThumb").src = finalImgPath;
-        document.getElementById("modalImg").src = finalImgPath;
     }
 
-    function updateCares() {
+    document.getElementById("productThumb").src = finalImgPath;
+    document.getElementById("modalImg").src = finalImgPath;
+}
+
+function updateCares() {
+// ...
       const model = document.getElementById("modelOpt").value;
       const size = document.getElementById("sizeOpt").value;
       const sizeData = rawDB[currentTab][model].sizes[size];
