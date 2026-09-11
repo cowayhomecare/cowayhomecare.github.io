@@ -1,6 +1,7 @@
 // AUTO-GENERATED FROM 카달로그가격.xlsx — 금액은 직접 수정하지 마세요.
 // 공식 PDF 가격 검증: 1,771행 / 3,542개 금액 불일치 0건.
-// 엑셀에 없던 공식 일시불 제품: 노블 가습기 (AM-1421G), 649000원.
+// 렌탈 전용 DB: 일시불 전용 제품과 일시불 가격은 포함하지 않습니다.
+// 모델별 색상은 현재 코웨이 공홈 옵션을 우선하고, 공홈 미노출 제품은 공식 PDF/카탈로그 값을 유지합니다.
 // 화면 노출명·순서는 displayConfig에서 수정합니다. rawDB는 엑셀 행 순서를 보존한 원본 DB입니다.
 // 음식물처리기 2L/3L의 잘못 옮겨진 12개월 관리키는 공식 PDF 기준 4개월로 교정했습니다.
 // 요청에 따라 제외한 제품군: 비렉스 안마매트리스 MM, 비렉스 안마매트리스 MS
@@ -285,8 +286,7 @@ const displayConfig = {
         "인버터 제습기 23L",
         "인버터 제습기 20L",
         "노블 제습기",
-        "듀얼클린 가습공기청정기 2",
-        "노블 가습기"
+        "듀얼클린 가습공기청정기 2"
       ],
       "벽걸이": [
         "벽걸이 공기청정기 2",
@@ -400,8 +400,8 @@ const displayConfig = {
       ],
       "소모품": [
         "방수커버",
-        "아로마 샤워헤드",
-        "메모리폼 베개"
+        "메모리폼 베개",
+        "아로마 샤워헤드"
       ]
     }
   },
@@ -467,7 +467,6 @@ const displayConfig = {
       "인버터 제습기 20L": "인버터 제습기 20L",
       "노블 제습기": "노블 제습기",
       "듀얼클린 가습공기청정기 2": "듀얼클린 가습공기청정기 2",
-      "노블 가습기": "노블 가습기",
       "벽걸이 공기청정기 2": "벽걸이 공기청정기 2",
       "AP-3519A": "벽걸이/스탠드 공기청정기 (AP-3519A)",
       "사계절 의류청정기 더블케어": "사계절 의류청정기 더블케어"
@@ -552,8 +551,8 @@ const displayConfig = {
       "분쇄형 2L": "분쇄형 2L",
       "분쇄형 3L": "분쇄형 3L",
       "방수커버": "방수커버",
-      "아로마 샤워헤드": "아로마 샤워헤드",
-      "메모리폼 베개": "메모리폼 베개"
+      "메모리폼 베개": "메모리폼 베개",
+      "아로마 샤워헤드": "아로마 샤워헤드"
     }
   },
   "imageRules": {
@@ -572,11 +571,14 @@ const rawDB = {
         "model_codes": [
           "CMQ-ST01EH"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmq-st01eh",
         "colors": [],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
         "prices": {
           "베이직케어": {
             "5년": {
@@ -652,11 +654,14 @@ const rawDB = {
         "model_codes": [
           "CMS-ST01EH"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cms-st01eh",
         "colors": [],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
         "prices": {
           "베이직케어": {
             "5년": {
@@ -732,11 +737,14 @@ const rawDB = {
         "model_codes": [
           "CMSS-ST01EH"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmss-st01eh",
         "colors": [],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
         "prices": {
           "베이직케어": {
             "5년": {
@@ -814,11 +822,15 @@ const rawDB = {
         "model_codes": [
           "CMK-SE02"
         ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "cmk-se02",
         "colors": [],
         "source_group": "매트리스·모션베드",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_no_color_option",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 30,
         "prices": {
           "베이직케어": {
             "5년": {
@@ -888,17 +900,24 @@ const rawDB = {
               "source_row": 53
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "K (CMK-SE02)"
+        ]
       },
       "LK (CMLK-SE02)": {
         "model_codes": [
           "CMLK-SE02"
         ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "cmlk-se02",
         "colors": [],
         "source_group": "매트리스·모션베드",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_no_color_option",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 30,
         "prices": {
           "베이직케어": {
             "5년": {
@@ -968,17 +987,24 @@ const rawDB = {
               "source_row": 65
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "LK (CMLK-SE02)"
+        ]
       },
       "Q (CMQ-SE02)": {
         "model_codes": [
           "CMQ-SE02"
         ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "cmq-se02",
         "colors": [],
         "source_group": "매트리스·모션베드",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_no_color_option",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 30,
         "prices": {
           "베이직케어": {
             "5년": {
@@ -1048,17 +1074,24 @@ const rawDB = {
               "source_row": 77
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "Q (CMQ-SE02)"
+        ]
       },
       "SS (CMSS-SE02)": {
         "model_codes": [
           "CMSS-SE02"
         ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "cmss-se02",
         "colors": [],
         "source_group": "매트리스·모션베드",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_no_color_option",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 30,
         "prices": {
           "베이직케어": {
             "5년": {
@@ -1128,7 +1161,10 @@ const rawDB = {
               "source_row": 89
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "SS (CMSS-SE02)"
+        ]
       }
     },
     "루네어": {
@@ -1136,11 +1172,14 @@ const rawDB = {
         "model_codes": [
           "CMK-SE03H/M"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmk-se03hm",
         "colors": [],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
         "prices": {
           "베이직케어": {
             "5년": {
@@ -1216,11 +1255,14 @@ const rawDB = {
         "model_codes": [
           "CMLK-SE03H/M"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmlk-se03hm",
         "colors": [],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
         "prices": {
           "베이직케어": {
             "5년": {
@@ -1296,11 +1338,14 @@ const rawDB = {
         "model_codes": [
           "CMQ-SE03H/M"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmq-se03hm",
         "colors": [],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
         "prices": {
           "베이직케어": {
             "5년": {
@@ -1376,11 +1421,14 @@ const rawDB = {
         "model_codes": [
           "CMSS-SE03H/M"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmss-se03hm",
         "colors": [],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
         "prices": {
           "베이직케어": {
             "5년": {
@@ -1458,11 +1506,15 @@ const rawDB = {
         "model_codes": [
           "CMK-PR03"
         ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "cmk-pr03",
         "colors": [],
         "source_group": "매트리스·모션베드",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_no_color_option",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 29,
         "prices": {
           "베이직케어": {
             "5년": {
@@ -1532,17 +1584,24 @@ const rawDB = {
               "source_row": 149
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "K (CMK-PR03)"
+        ]
       },
       "Q (CMQ-PR03)": {
         "model_codes": [
           "CMQ-PR03"
         ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "cmq-pr03",
         "colors": [],
         "source_group": "매트리스·모션베드",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_no_color_option",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 29,
         "prices": {
           "베이직케어": {
             "5년": {
@@ -1612,17 +1671,24 @@ const rawDB = {
               "source_row": 161
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "Q (CMQ-PR03)"
+        ]
       },
       "SS (CMSS-PR03)": {
         "model_codes": [
           "CMSS-PR03"
         ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "cmss-pr03",
         "colors": [],
         "source_group": "매트리스·모션베드",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_no_color_option",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 29,
         "prices": {
           "베이직케어": {
             "5년": {
@@ -1692,7 +1758,10 @@ const rawDB = {
               "source_row": 173
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "SS (CMSS-PR03)"
+        ]
       }
     },
     "하이브리드 4": {
@@ -1700,11 +1769,15 @@ const rawDB = {
         "model_codes": [
           "CMK-PR04_V2"
         ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "cmk-pr04_v2",
         "colors": [],
         "source_group": "매트리스·모션베드",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_no_color_option",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 29,
         "prices": {
           "베이직케어": {
             "5년": {
@@ -1774,17 +1847,24 @@ const rawDB = {
               "source_row": 185
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "K (CMK-PR04_V2)"
+        ]
       },
       "LK (CMLK-PR04)": {
         "model_codes": [
           "CMLK-PR04"
         ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "cmlk-pr04",
         "colors": [],
         "source_group": "매트리스·모션베드",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_no_color_option",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 29,
         "prices": {
           "베이직케어": {
             "5년": {
@@ -1854,17 +1934,24 @@ const rawDB = {
               "source_row": 197
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "LK (CMLK-PR04)"
+        ]
       },
       "Q (CMQ-PR04_V2)": {
         "model_codes": [
           "CMQ-PR04_V2"
         ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "cmq-pr04_v2",
         "colors": [],
         "source_group": "매트리스·모션베드",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_no_color_option",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 29,
         "prices": {
           "베이직케어": {
             "5년": {
@@ -1934,17 +2021,24 @@ const rawDB = {
               "source_row": 209
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "Q (CMQ-PR04_V2)"
+        ]
       },
       "SS (CMSS-PR04_V2)": {
         "model_codes": [
           "CMSS-PR04_V2"
         ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "cmss-pr04_v2",
         "colors": [],
         "source_group": "매트리스·모션베드",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_no_color_option",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 29,
         "prices": {
           "베이직케어": {
             "5년": {
@@ -2014,7 +2108,10 @@ const rawDB = {
               "source_row": 221
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "SS (CMSS-PR04_V2)"
+        ]
       }
     },
     "컴팩트 메모리폼": {
@@ -2022,11 +2119,15 @@ const rawDB = {
         "model_codes": [
           "CMQ-M01S/M"
         ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "cmq-m01sm",
         "colors": [],
         "source_group": "매트리스·모션베드",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_no_color_option",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 31,
         "prices": {
           "베이직케어": {
             "5년": {
@@ -2096,17 +2197,24 @@ const rawDB = {
               "source_row": 233
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "Q (CMQ-M01S/M)"
+        ]
       },
       "SS (CMSS-M01M)": {
         "model_codes": [
           "CMSS-M01M"
         ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "cmss-m01m",
         "colors": [],
         "source_group": "매트리스·모션베드",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_no_color_option",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 31,
         "prices": {
           "베이직케어": {
             "5년": {
@@ -2176,7 +2284,10 @@ const rawDB = {
               "source_row": 245
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "SS (CMSS-M01M)"
+        ]
       }
     },
     "더블 사이드": {
@@ -2184,11 +2295,14 @@ const rawDB = {
         "model_codes": [
           "CMK-SE01"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmk-se01",
         "colors": [],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
         "prices": {
           "베이직케어": {
             "5년": {
@@ -2264,11 +2378,14 @@ const rawDB = {
         "model_codes": [
           "CMQ-SE01"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmq-se01",
         "colors": [],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
         "prices": {
           "베이직케어": {
             "5년": {
@@ -2344,11 +2461,14 @@ const rawDB = {
         "model_codes": [
           "CMSS-SE01"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmss-se01",
         "colors": [],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
         "prices": {
           "베이직케어": {
             "5년": {
@@ -2426,11 +2546,15 @@ const rawDB = {
         "model_codes": [
           "CMK-SL01"
         ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "cmk-sl01",
         "colors": [],
         "source_group": "매트리스·모션베드",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_no_color_option",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 30,
         "prices": {
           "베이직케어": {
             "5년": {
@@ -2500,17 +2624,24 @@ const rawDB = {
               "source_row": 293
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "K (CMK-SL01)"
+        ]
       },
       "Q (CMQ-SL01)": {
         "model_codes": [
           "CMQ-SL01"
         ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "cmq-sl01",
         "colors": [],
         "source_group": "매트리스·모션베드",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_no_color_option",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 30,
         "prices": {
           "베이직케어": {
             "5년": {
@@ -2580,17 +2711,24 @@ const rawDB = {
               "source_row": 305
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "Q (CMQ-SL01)"
+        ]
       },
       "SS (CMSS-SL01)": {
         "model_codes": [
           "CMSS-SL01"
         ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "cmss-sl01",
         "colors": [],
         "source_group": "매트리스·모션베드",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_no_color_option",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 30,
         "prices": {
           "베이직케어": {
             "5년": {
@@ -2660,7 +2798,10 @@ const rawDB = {
               "source_row": 317
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "SS (CMSS-SL01)"
+        ]
       }
     },
     "시그니처": {
@@ -2668,11 +2809,14 @@ const rawDB = {
         "model_codes": [
           "CMGK-SP01S"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmgk-sp01s",
         "colors": [],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
         "prices": {
           "베이직케어": {
             "5년": {
@@ -2714,11 +2858,14 @@ const rawDB = {
         "model_codes": [
           "CMK-SP01S"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmk-sp01s",
         "colors": [],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
         "prices": {
           "베이직케어": {
             "5년": {
@@ -2760,11 +2907,14 @@ const rawDB = {
         "model_codes": [
           "CMLK-SP01S"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmlk-sp01s",
         "colors": [],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
         "prices": {
           "베이직케어": {
             "5년": {
@@ -2806,11 +2956,14 @@ const rawDB = {
         "model_codes": [
           "CMQ-SP01S"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmq-sp01s",
         "colors": [],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
         "prices": {
           "베이직케어": {
             "5년": {
@@ -2852,11 +3005,14 @@ const rawDB = {
         "model_codes": [
           "CMSS-SP01S"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmss-sp01s",
         "colors": [],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
         "prices": {
           "베이직케어": {
             "5년": {
@@ -2900,11 +3056,14 @@ const rawDB = {
         "model_codes": [
           "CMGK-SP01SC"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmgk-sp01sc",
         "colors": [],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
         "prices": {
           "베이직케어": {
             "5년": {
@@ -2980,11 +3139,14 @@ const rawDB = {
         "model_codes": [
           "CMK-SP01SC"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmk-sp01sc",
         "colors": [],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
         "prices": {
           "베이직케어": {
             "5년": {
@@ -3060,11 +3222,14 @@ const rawDB = {
         "model_codes": [
           "CMLK-SP01SC"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmlk-sp01sc",
         "colors": [],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
         "prices": {
           "베이직케어": {
             "5년": {
@@ -3140,11 +3305,14 @@ const rawDB = {
         "model_codes": [
           "CMQ-SP01SC"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmq-sp01sc",
         "colors": [],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
         "prices": {
           "베이직케어": {
             "5년": {
@@ -3220,11 +3388,14 @@ const rawDB = {
         "model_codes": [
           "CMSS-SP01SC"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmss-sp01sc",
         "colors": [],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
         "prices": {
           "베이직케어": {
             "5년": {
@@ -3302,11 +3473,14 @@ const rawDB = {
         "model_codes": [
           "CMGK-SP02S"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmgk-sp02s",
         "colors": [],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
         "prices": {
           "베이직케어": {
             "5년": {
@@ -3348,11 +3522,14 @@ const rawDB = {
         "model_codes": [
           "CMK-SP02S"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmk-sp02s",
         "colors": [],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
         "prices": {
           "베이직케어": {
             "5년": {
@@ -3394,11 +3571,14 @@ const rawDB = {
         "model_codes": [
           "CMLK-SP02S"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmlk-sp02s",
         "colors": [],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
         "prices": {
           "베이직케어": {
             "5년": {
@@ -3440,11 +3620,14 @@ const rawDB = {
         "model_codes": [
           "CMQ-SP02S"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmq-sp02s",
         "colors": [],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
         "prices": {
           "베이직케어": {
             "5년": {
@@ -3486,11 +3669,14 @@ const rawDB = {
         "model_codes": [
           "CMSS-SP02S"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmss-sp02s",
         "colors": [],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
         "prices": {
           "베이직케어": {
             "5년": {
@@ -3534,11 +3720,14 @@ const rawDB = {
         "model_codes": [
           "CMGK-SP02SC"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmgk-sp02sc",
         "colors": [],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
         "prices": {
           "베이직케어": {
             "5년": {
@@ -3614,11 +3803,14 @@ const rawDB = {
         "model_codes": [
           "CMK-SP02SC"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmk-sp02sc",
         "colors": [],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
         "prices": {
           "베이직케어": {
             "5년": {
@@ -3694,11 +3886,14 @@ const rawDB = {
         "model_codes": [
           "CMLK-SP02SC"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmlk-sp02sc",
         "colors": [],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
         "prices": {
           "베이직케어": {
             "5년": {
@@ -3774,11 +3969,14 @@ const rawDB = {
         "model_codes": [
           "CMQ-SP02SC"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmq-sp02sc",
         "colors": [],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
         "prices": {
           "베이직케어": {
             "5년": {
@@ -3854,11 +4052,14 @@ const rawDB = {
         "model_codes": [
           "CMSS-SP02SC"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmss-sp02sc",
         "colors": [],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
         "prices": {
           "베이직케어": {
             "5년": {
@@ -3936,11 +4137,27 @@ const rawDB = {
         "model_codes": [
           "CMK-AS04"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmk-as04",
-        "colors": [],
+        "colors": [
+          {
+            "name": "네이비",
+            "img_code": "nv"
+          },
+          {
+            "name": "베이지",
+            "img_code": "bg"
+          }
+        ],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1189&optno=2",
+          "https://www.coway.com/product/detail?prdno=1189&optno=6"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -3996,11 +4213,27 @@ const rawDB = {
         "model_codes": [
           "CMLK-AS04"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmlk-as04",
-        "colors": [],
+        "colors": [
+          {
+            "name": "네이비",
+            "img_code": "nv"
+          },
+          {
+            "name": "베이지",
+            "img_code": "bg"
+          }
+        ],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1189&optno=3",
+          "https://www.coway.com/product/detail?prdno=1189&optno=5"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -4056,11 +4289,27 @@ const rawDB = {
         "model_codes": [
           "CMQ-AS04"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmq-as04",
-        "colors": [],
+        "colors": [
+          {
+            "name": "네이비",
+            "img_code": "nv"
+          },
+          {
+            "name": "베이지",
+            "img_code": "bg"
+          }
+        ],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1189&optno=1",
+          "https://www.coway.com/product/detail?prdno=1189&optno=7"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -4116,11 +4365,27 @@ const rawDB = {
         "model_codes": [
           "CMSS-AS04"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmss-as04",
-        "colors": [],
+        "colors": [
+          {
+            "name": "네이비",
+            "img_code": "nv"
+          },
+          {
+            "name": "베이지",
+            "img_code": "bg"
+          }
+        ],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1189&optno=4",
+          "https://www.coway.com/product/detail?prdno=1189&optno=8"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -4178,11 +4443,27 @@ const rawDB = {
         "model_codes": [
           "CMK-AS05"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmk-as05",
-        "colors": [],
+        "colors": [
+          {
+            "name": "네이비",
+            "img_code": "nv"
+          },
+          {
+            "name": "베이지",
+            "img_code": "bg"
+          }
+        ],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1188&optno=2",
+          "https://www.coway.com/product/detail?prdno=1188&optno=6"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -4238,11 +4519,27 @@ const rawDB = {
         "model_codes": [
           "CMLK-AS05"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmlk-as05",
-        "colors": [],
+        "colors": [
+          {
+            "name": "네이비",
+            "img_code": "nv"
+          },
+          {
+            "name": "베이지",
+            "img_code": "bg"
+          }
+        ],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1188&optno=3",
+          "https://www.coway.com/product/detail?prdno=1188&optno=5"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -4298,11 +4595,27 @@ const rawDB = {
         "model_codes": [
           "CMQ-AS05"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmq-as05",
-        "colors": [],
+        "colors": [
+          {
+            "name": "네이비",
+            "img_code": "nv"
+          },
+          {
+            "name": "베이지",
+            "img_code": "bg"
+          }
+        ],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1188&optno=1",
+          "https://www.coway.com/product/detail?prdno=1188&optno=7"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -4358,11 +4671,27 @@ const rawDB = {
         "model_codes": [
           "CMSS-AS05"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmss-as05",
-        "colors": [],
+        "colors": [
+          {
+            "name": "네이비",
+            "img_code": "nv"
+          },
+          {
+            "name": "베이지",
+            "img_code": "bg"
+          }
+        ],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1188&optno=4",
+          "https://www.coway.com/product/detail?prdno=1188&optno=8"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -4420,11 +4749,27 @@ const rawDB = {
         "model_codes": [
           "CMQ-OB03"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmq-ob03",
-        "colors": [],
+        "colors": [
+          {
+            "name": "베이지",
+            "img_code": "bg"
+          },
+          {
+            "name": "챠콜",
+            "img_code": "bk"
+          }
+        ],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1026&optno=1",
+          "https://www.coway.com/product/detail?prdno=1026&optno=2"
+        ],
         "prices": {
           "베이직케어": {
             "3년": {
@@ -4485,11 +4830,27 @@ const rawDB = {
         "model_codes": [
           "CMSS-OB03"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cmss-ob03",
-        "colors": [],
+        "colors": [
+          {
+            "name": "베이지",
+            "img_code": "bg"
+          },
+          {
+            "name": "챠콜",
+            "img_code": "bk"
+          }
+        ],
         "source_group": "매트리스·모션베드",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1026&optno=3",
+          "https://www.coway.com/product/detail?prdno=1026&optno=4"
+        ],
         "prices": {
           "베이직케어": {
             "3년": {
@@ -4552,27 +4913,28 @@ const rawDB = {
         "model_codes": [
           "CMSS-EM03"
         ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "cmss-em03",
         "colors": [
           {
             "name": "오트 베이지",
-            "hex": "#e8e1d5",
-            "img_code": "bg"
+            "img_code": "bghc"
           },
           {
             "name": "딥 블루",
-            "hex": "#00008b",
-            "img_code": "bu"
+            "img_code": "buhc"
           },
           {
             "name": "카키 브라운",
-            "hex": "#8b4513",
-            "img_code": "br"
+            "img_code": "brhb"
           }
         ],
         "source_group": "매트리스·모션베드",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_verified",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 37,
         "prices": {
           "베이직케어": {
             "5년": {
@@ -4622,33 +4984,37 @@ const rawDB = {
               "source_row": 587
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "무헤드형 (CMSS-EM03)"
+        ]
       },
       "헤드형 (CFSS-EM03)": {
         "model_codes": [
           "CFSS-EM03"
         ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "cfss-em03",
         "colors": [
           {
             "name": "오트 베이지",
-            "hex": "#e8e1d5",
-            "img_code": "bg"
+            "img_code": "bghc"
           },
           {
             "name": "딥 블루",
-            "hex": "#00008b",
-            "img_code": "bu"
+            "img_code": "buhc"
           },
           {
             "name": "카키 브라운",
-            "hex": "#8b4513",
-            "img_code": "br"
+            "img_code": "brhb"
           }
         ],
         "source_group": "매트리스·모션베드",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_verified",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 37,
         "prices": {
           "베이직케어": {
             "5년": {
@@ -4698,33 +5064,40 @@ const rawDB = {
               "source_row": 595
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "헤드형 (CFSS-EM03)"
+        ]
       }
     },
     "[트윈형] R7 스트레칭 모션베드": {
       "무헤드형": {
-        "model_codes": [],
+        "model_codes": [
+          "CFSS-EM07",
+          "CMSS-EM07"
+        ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "r7-twin-nohead",
         "colors": [
           {
             "name": "오트 베이지",
-            "hex": "#e8e1d5",
-            "img_code": "bg"
+            "img_code": "bghc"
           },
           {
             "name": "딥 블루",
-            "hex": "#00008b",
-            "img_code": "bu"
+            "img_code": "buhc"
           },
           {
             "name": "카키 브라운",
-            "hex": "#8b4513",
-            "img_code": "br"
+            "img_code": "brhb"
           }
         ],
         "source_group": "매트리스·모션베드",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_verified",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 38,
         "prices": {
           "베이직케어": {
             "5년": {
@@ -4774,31 +5147,38 @@ const rawDB = {
               "source_row": 603
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "무헤드형"
+        ]
       },
       "헤드형": {
-        "model_codes": [],
+        "model_codes": [
+          "CFSS-EM07",
+          "CMSS-EM07"
+        ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "r7-twin-head",
         "colors": [
           {
             "name": "오트 베이지",
-            "hex": "#e8e1d5",
-            "img_code": "bg"
+            "img_code": "bghc"
           },
           {
             "name": "딥 블루",
-            "hex": "#00008b",
-            "img_code": "bu"
+            "img_code": "buhc"
           },
           {
             "name": "카키 브라운",
-            "hex": "#8b4513",
-            "img_code": "br"
+            "img_code": "brhb"
           }
         ],
         "source_group": "매트리스·모션베드",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_verified",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 38,
         "prices": {
           "베이직케어": {
             "5년": {
@@ -4848,33 +5228,40 @@ const rawDB = {
               "source_row": 611
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "헤드형"
+        ]
       }
     },
     "[트윈형] R5 스트레칭 베드": {
       "무헤드형": {
-        "model_codes": [],
+        "model_codes": [
+          "CFSS-EM05",
+          "CMSS-EM07"
+        ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "r5-twin-nohead",
         "colors": [
           {
             "name": "오트 베이지",
-            "hex": "#e8e1d5",
-            "img_code": "bg"
+            "img_code": "bghc"
           },
           {
             "name": "딥 블루",
-            "hex": "#00008b",
-            "img_code": "bu"
+            "img_code": "buhc"
           },
           {
             "name": "카키 브라운",
-            "hex": "#8b4513",
-            "img_code": "br"
+            "img_code": "brhb"
           }
         ],
         "source_group": "매트리스·모션베드",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_verified",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 38,
         "prices": {
           "베이직케어": {
             "5년": {
@@ -4924,31 +5311,38 @@ const rawDB = {
               "source_row": 619
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "무헤드형"
+        ]
       },
       "헤드형": {
-        "model_codes": [],
+        "model_codes": [
+          "CFSS-EM05",
+          "CMSS-EM07"
+        ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "r5-twin-head",
         "colors": [
           {
             "name": "오트 베이지",
-            "hex": "#e8e1d5",
-            "img_code": "bg"
+            "img_code": "bghc"
           },
           {
             "name": "딥 블루",
-            "hex": "#00008b",
-            "img_code": "bu"
+            "img_code": "buhc"
           },
           {
             "name": "카키 브라운",
-            "hex": "#8b4513",
-            "img_code": "br"
+            "img_code": "brhb"
           }
         ],
         "source_group": "매트리스·모션베드",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_verified",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 38,
         "prices": {
           "베이직케어": {
             "5년": {
@@ -4998,33 +5392,40 @@ const rawDB = {
               "source_row": 627
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "헤드형"
+        ]
       }
     },
     "[트윈형] R3 모션 베드": {
       "무헤드형": {
-        "model_codes": [],
+        "model_codes": [
+          "CFSS-EM03",
+          "CMSS-EM03"
+        ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "r3-twin-nohead",
         "colors": [
           {
             "name": "오트 베이지",
-            "hex": "#e8e1d5",
-            "img_code": "bg"
+            "img_code": "bghc"
           },
           {
             "name": "딥 블루",
-            "hex": "#00008b",
-            "img_code": "bu"
+            "img_code": "buhc"
           },
           {
             "name": "카키 브라운",
-            "hex": "#8b4513",
-            "img_code": "br"
+            "img_code": "brhb"
           }
         ],
         "source_group": "매트리스·모션베드",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_verified",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 38,
         "prices": {
           "베이직케어": {
             "5년": {
@@ -5074,31 +5475,38 @@ const rawDB = {
               "source_row": 635
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "무헤드형"
+        ]
       },
       "헤드형": {
-        "model_codes": [],
+        "model_codes": [
+          "CFSS-EM03",
+          "CMSS-EM03"
+        ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "r3-twin-head",
         "colors": [
           {
             "name": "오트 베이지",
-            "hex": "#e8e1d5",
-            "img_code": "bg"
+            "img_code": "bghc"
           },
           {
             "name": "딥 블루",
-            "hex": "#00008b",
-            "img_code": "bu"
+            "img_code": "buhc"
           },
           {
             "name": "카키 브라운",
-            "hex": "#8b4513",
-            "img_code": "br"
+            "img_code": "brhb"
           }
         ],
         "source_group": "매트리스·모션베드",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_verified",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 38,
         "prices": {
           "베이직케어": {
             "5년": {
@@ -5148,33 +5556,40 @@ const rawDB = {
               "source_row": 643
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "헤드형"
+        ]
       }
     },
     "[트윈형] RS 스마트 베드": {
       "헤드형": {
-        "model_codes": [],
+        "model_codes": [
+          "CFSS-EM02",
+          "CMSS-AS05_EM"
+        ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "rs-twin-head",
         "colors": [
           {
             "name": "오트 베이지",
-            "hex": "#e8e1d5",
-            "img_code": "bg"
+            "img_code": "bghc"
           },
           {
             "name": "딥 블루",
-            "hex": "#00008b",
-            "img_code": "bu"
+            "img_code": "buhc"
           },
           {
             "name": "카키 브라운",
-            "hex": "#8b4513",
-            "img_code": "br"
+            "img_code": "brhb"
           }
         ],
         "source_group": "매트리스·모션베드",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_verified",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 38,
         "prices": {
           "베이직케어": {
             "5년": {
@@ -5224,33 +5639,40 @@ const rawDB = {
               "source_row": 651
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "헤드형"
+        ]
       }
     },
     "[트윈형] R0 일반 베드": {
       "무헤드형": {
-        "model_codes": [],
+        "model_codes": [
+          "CFSS-EM01",
+          "CMSS-EM03"
+        ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "r0-twin-nohead",
         "colors": [
           {
             "name": "오트 베이지",
-            "hex": "#e8e1d5",
-            "img_code": "bg"
+            "img_code": "bghc"
           },
           {
             "name": "딥 블루",
-            "hex": "#00008b",
-            "img_code": "bu"
+            "img_code": "buhc"
           },
           {
             "name": "카키 브라운",
-            "hex": "#8b4513",
-            "img_code": "br"
+            "img_code": "brhb"
           }
         ],
         "source_group": "매트리스·모션베드",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_verified",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 38,
         "prices": {
           "베이직케어": {
             "5년": {
@@ -5300,31 +5722,38 @@ const rawDB = {
               "source_row": 659
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "무헤드형"
+        ]
       },
       "헤드형": {
-        "model_codes": [],
+        "model_codes": [
+          "CFSS-EM01",
+          "CMSS-EM03"
+        ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "r0-twin-head",
         "colors": [
           {
             "name": "오트 베이지",
-            "hex": "#e8e1d5",
-            "img_code": "bg"
+            "img_code": "bghc"
           },
           {
             "name": "딥 블루",
-            "hex": "#00008b",
-            "img_code": "bu"
+            "img_code": "buhc"
           },
           {
             "name": "카키 브라운",
-            "hex": "#8b4513",
-            "img_code": "br"
+            "img_code": "brhb"
           }
         ],
         "source_group": "매트리스·모션베드",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_verified",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 38,
         "prices": {
           "베이직케어": {
             "5년": {
@@ -5374,17 +5803,40 @@ const rawDB = {
               "source_row": 667
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "헤드형"
+        ]
       }
     },
     "[싱글형] R7 스트레칭 모션베드": {
       "무헤드형": {
-        "model_codes": [],
+        "model_codes": [
+          "CFSS-EM07",
+          "CMSS-EM07"
+        ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "r7-single-nohead",
-        "colors": [],
+        "colors": [
+          {
+            "name": "오트 베이지",
+            "img_code": "bghc"
+          },
+          {
+            "name": "딥 블루",
+            "img_code": "buhc"
+          },
+          {
+            "name": "카키 브라운",
+            "img_code": "brhb"
+          }
+        ],
         "source_group": "매트리스·모션베드",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_verified",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 37,
         "prices": {
           "베이직케어": {
             "5년": {
@@ -5434,15 +5886,38 @@ const rawDB = {
               "source_row": 675
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "무헤드형"
+        ]
       },
       "헤드형": {
-        "model_codes": [],
+        "model_codes": [
+          "CFSS-EM07",
+          "CMSS-EM07"
+        ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "r7-single-head",
-        "colors": [],
+        "colors": [
+          {
+            "name": "오트 베이지",
+            "img_code": "bghc"
+          },
+          {
+            "name": "딥 블루",
+            "img_code": "buhc"
+          },
+          {
+            "name": "카키 브라운",
+            "img_code": "brhb"
+          }
+        ],
         "source_group": "매트리스·모션베드",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_verified",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 37,
         "prices": {
           "베이직케어": {
             "5년": {
@@ -5492,33 +5967,40 @@ const rawDB = {
               "source_row": 683
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "헤드형"
+        ]
       }
     },
     "R5 스트레칭 베드": {
       "무헤드형": {
-        "model_codes": [],
+        "model_codes": [
+          "CFSS-EM05",
+          "CMSS-EM07"
+        ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "r5-single-nohead",
         "colors": [
           {
             "name": "오트 베이지",
-            "hex": "#e8e1d5",
-            "img_code": "bg"
+            "img_code": "bghc"
           },
           {
             "name": "딥 블루",
-            "hex": "#00008b",
-            "img_code": "bu"
+            "img_code": "buhc"
           },
           {
             "name": "카키 브라운",
-            "hex": "#8b4513",
-            "img_code": "br"
+            "img_code": "brhb"
           }
         ],
         "source_group": "매트리스·모션베드",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_verified",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 37,
         "prices": {
           "베이직케어": {
             "5년": {
@@ -5568,31 +6050,38 @@ const rawDB = {
               "source_row": 691
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "무헤드형"
+        ]
       },
       "헤드형": {
-        "model_codes": [],
+        "model_codes": [
+          "CFSS-EM05",
+          "CMSS-EM07"
+        ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "r5-single-head",
         "colors": [
           {
             "name": "오트 베이지",
-            "hex": "#e8e1d5",
-            "img_code": "bg"
+            "img_code": "bghc"
           },
           {
             "name": "딥 블루",
-            "hex": "#00008b",
-            "img_code": "bu"
+            "img_code": "buhc"
           },
           {
             "name": "카키 브라운",
-            "hex": "#8b4513",
-            "img_code": "br"
+            "img_code": "brhb"
           }
         ],
         "source_group": "매트리스·모션베드",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_verified",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 37,
         "prices": {
           "베이직케어": {
             "5년": {
@@ -5642,7 +6131,10 @@ const rawDB = {
               "source_row": 699
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "헤드형"
+        ]
       }
     }
   },
@@ -5652,27 +6144,32 @@ const rawDB = {
         "model_codes": [
           "CFK-F04"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfk-f04",
         "colors": [
           {
             "name": "오트밀 베이지",
-            "hex": "#e8e1d5",
             "img_code": "bg"
           },
           {
             "name": "차콜 그레이",
-            "hex": "#5e5e5e",
             "img_code": "gr"
           },
           {
             "name": "퓨어 아이보리",
-            "hex": "#f5f5f5",
             "img_code": "iv"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1113&optno=5",
+          "https://www.coway.com/product/detail?prdno=1113&optno=6",
+          "https://www.coway.com/product/detail?prdno=1113&optno=11"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -5697,27 +6194,32 @@ const rawDB = {
         "model_codes": [
           "CFLK-F04"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cflk-f04",
         "colors": [
           {
             "name": "오트밀 베이지",
-            "hex": "#e8e1d5",
             "img_code": "bg"
           },
           {
             "name": "차콜 그레이",
-            "hex": "#5e5e5e",
             "img_code": "gr"
           },
           {
             "name": "퓨어 아이보리",
-            "hex": "#f5f5f5",
             "img_code": "iv"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1113&optno=7",
+          "https://www.coway.com/product/detail?prdno=1113&optno=8",
+          "https://www.coway.com/product/detail?prdno=1113&optno=12"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -5742,27 +6244,32 @@ const rawDB = {
         "model_codes": [
           "CFQ-F04"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfq-f04",
         "colors": [
           {
             "name": "오트밀 베이지",
-            "hex": "#e8e1d5",
             "img_code": "bg"
           },
           {
             "name": "차콜 그레이",
-            "hex": "#5e5e5e",
             "img_code": "gr"
           },
           {
             "name": "퓨어 아이보리",
-            "hex": "#f5f5f5",
             "img_code": "iv"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1113&optno=3",
+          "https://www.coway.com/product/detail?prdno=1113&optno=4",
+          "https://www.coway.com/product/detail?prdno=1113&optno=10"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -5787,27 +6294,32 @@ const rawDB = {
         "model_codes": [
           "CFSS-F04"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfss-f04",
         "colors": [
           {
             "name": "오트밀 베이지",
-            "hex": "#e8e1d5",
             "img_code": "bg"
           },
           {
             "name": "차콜 그레이",
-            "hex": "#5e5e5e",
             "img_code": "gr"
           },
           {
             "name": "퓨어 아이보리",
-            "hex": "#f5f5f5",
             "img_code": "iv"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1113&optno=1",
+          "https://www.coway.com/product/detail?prdno=1113&optno=2",
+          "https://www.coway.com/product/detail?prdno=1113&optno=9"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -5834,22 +6346,27 @@ const rawDB = {
         "model_codes": [
           "CFK-F05"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfk-f05",
         "colors": [
           {
             "name": "뉴트럴 베이지",
-            "hex": "#e8e1d5",
             "img_code": "bg"
           },
           {
             "name": "애쉬 브라운",
-            "hex": "#6e5c51",
             "img_code": "br"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1435&optno=3",
+          "https://www.coway.com/product/detail?prdno=1435&optno=7"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -5874,22 +6391,27 @@ const rawDB = {
         "model_codes": [
           "CFLK-F05"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cflk-f05",
         "colors": [
           {
             "name": "뉴트럴 베이지",
-            "hex": "#e8e1d5",
             "img_code": "bg"
           },
           {
             "name": "애쉬 브라운",
-            "hex": "#6e5c51",
             "img_code": "br"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1435&optno=4",
+          "https://www.coway.com/product/detail?prdno=1435&optno=8"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -5914,22 +6436,27 @@ const rawDB = {
         "model_codes": [
           "CFQ-F05"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfq-f05",
         "colors": [
           {
             "name": "뉴트럴 베이지",
-            "hex": "#e8e1d5",
             "img_code": "bg"
           },
           {
             "name": "애쉬 브라운",
-            "hex": "#6e5c51",
             "img_code": "br"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1435&optno=2",
+          "https://www.coway.com/product/detail?prdno=1435&optno=6"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -5954,22 +6481,27 @@ const rawDB = {
         "model_codes": [
           "CFSS-F05"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfss-f05",
         "colors": [
           {
             "name": "뉴트럴 베이지",
-            "hex": "#e8e1d5",
             "img_code": "bg"
           },
           {
             "name": "애쉬 브라운",
-            "hex": "#6e5c51",
             "img_code": "br"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1435&optno=1",
+          "https://www.coway.com/product/detail?prdno=1435&optno=5"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -5996,22 +6528,22 @@ const rawDB = {
         "model_codes": [
           "CFK-TM09N"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfk-tm09n",
         "colors": [
           {
-            "name": "다크 브라운",
-            "hex": "#3e2723",
-            "img_code": "b"
-          },
-          {
-            "name": "그레이",
-            "hex": "#808080",
-            "img_code": "g"
+            "name": "네츄럴 오크",
+            "img_code": "nt"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=194&optno=6"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -6036,22 +6568,22 @@ const rawDB = {
         "model_codes": [
           "CFQ-TM09N"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfq-tm09n",
         "colors": [
           {
-            "name": "다크 브라운",
-            "hex": "#3e2723",
-            "img_code": "b"
-          },
-          {
-            "name": "그레이",
-            "hex": "#808080",
-            "img_code": "g"
+            "name": "네츄럴 오크",
+            "img_code": "nt"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=194&optno=4"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -6076,22 +6608,22 @@ const rawDB = {
         "model_codes": [
           "CFSS-TM09N"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfss-tm09n",
         "colors": [
           {
-            "name": "다크 브라운",
-            "hex": "#3e2723",
-            "img_code": "b"
-          },
-          {
-            "name": "그레이",
-            "hex": "#808080",
-            "img_code": "g"
+            "name": "네츄럴 오크",
+            "img_code": "nt"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=194&optno=2"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -6118,11 +6650,22 @@ const rawDB = {
         "model_codes": [
           "CFK-TM11_NT"
         ],
-        "img_prefix": "cfk-tm11_nt",
-        "colors": [],
+        "model_code_status": "excel_model_text_verified",
+        "img_prefix": "cfk-tm11",
+        "colors": [
+          {
+            "name": "네츄럴 오크",
+            "img_code": "nt"
+          }
+        ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1099&optno=1"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -6147,11 +6690,22 @@ const rawDB = {
         "model_codes": [
           "CFK-TM11_WT"
         ],
-        "img_prefix": "cfk-tm11_wt",
-        "colors": [],
+        "model_code_status": "excel_model_text_verified",
+        "img_prefix": "cfk-tm11",
+        "colors": [
+          {
+            "name": "스노우 화이트",
+            "img_code": "wt"
+          }
+        ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1099&optno=6"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -6176,11 +6730,22 @@ const rawDB = {
         "model_codes": [
           "CFQ-TM11_NT"
         ],
-        "img_prefix": "cfq-tm11_nt",
-        "colors": [],
+        "model_code_status": "excel_model_text_verified",
+        "img_prefix": "cfq-tm11",
+        "colors": [
+          {
+            "name": "네츄럴 오크",
+            "img_code": "nt"
+          }
+        ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1099&optno=2"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -6205,11 +6770,22 @@ const rawDB = {
         "model_codes": [
           "CFQ-TM11_WT"
         ],
-        "img_prefix": "cfq-tm11_wt",
-        "colors": [],
+        "model_code_status": "excel_model_text_verified",
+        "img_prefix": "cfq-tm11",
+        "colors": [
+          {
+            "name": "스노우 화이트",
+            "img_code": "wt"
+          }
+        ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1099&optno=5"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -6234,11 +6810,22 @@ const rawDB = {
         "model_codes": [
           "CFSS-TM11_NT"
         ],
-        "img_prefix": "cfss-tm11_nt",
-        "colors": [],
+        "model_code_status": "excel_model_text_verified",
+        "img_prefix": "cfss-tm11",
+        "colors": [
+          {
+            "name": "네츄럴 오크",
+            "img_code": "nt"
+          }
+        ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1099&optno=3"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -6263,11 +6850,22 @@ const rawDB = {
         "model_codes": [
           "CFSS-TM11_WT"
         ],
-        "img_prefix": "cfss-tm11_wt",
-        "colors": [],
+        "model_code_status": "excel_model_text_verified",
+        "img_prefix": "cfss-tm11",
+        "colors": [
+          {
+            "name": "스노우 화이트",
+            "img_code": "wt"
+          }
+        ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1099&optno=4"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -6294,27 +6892,32 @@ const rawDB = {
         "model_codes": [
           "CFK-TM14"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfk-tm14",
         "colors": [
           {
             "name": "퓨어 아이보리",
-            "hex": "#f5f5f5",
             "img_code": "iv"
           },
           {
             "name": "피치 핑크",
-            "hex": "#ffdab9",
             "img_code": "pk"
           },
           {
             "name": "민트 스트라이프",
-            "hex": "#bdfcc9",
             "img_code": "gn"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1354&optno=3",
+          "https://www.coway.com/product/detail?prdno=1354&optno=7",
+          "https://www.coway.com/product/detail?prdno=1354&optno=10"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -6339,27 +6942,22 @@ const rawDB = {
         "model_codes": [
           "CFLK-TM14"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cflk-tm14",
         "colors": [
           {
             "name": "퓨어 아이보리",
-            "hex": "#f5f5f5",
             "img_code": "iv"
-          },
-          {
-            "name": "피치 핑크",
-            "hex": "#ffdab9",
-            "img_code": "pk"
-          },
-          {
-            "name": "민트 스트라이프",
-            "hex": "#bdfcc9",
-            "img_code": "gn"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1354&optno=4"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -6384,27 +6982,32 @@ const rawDB = {
         "model_codes": [
           "CFQ-TM14"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfq-tm14",
         "colors": [
           {
             "name": "퓨어 아이보리",
-            "hex": "#f5f5f5",
             "img_code": "iv"
           },
           {
             "name": "피치 핑크",
-            "hex": "#ffdab9",
             "img_code": "pk"
           },
           {
             "name": "민트 스트라이프",
-            "hex": "#bdfcc9",
             "img_code": "gn"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1354&optno=2",
+          "https://www.coway.com/product/detail?prdno=1354&optno=6",
+          "https://www.coway.com/product/detail?prdno=1354&optno=9"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -6429,27 +7032,32 @@ const rawDB = {
         "model_codes": [
           "CFSS-TM14"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfss-tm14",
         "colors": [
           {
             "name": "퓨어 아이보리",
-            "hex": "#f5f5f5",
             "img_code": "iv"
           },
           {
             "name": "피치 핑크",
-            "hex": "#ffdab9",
             "img_code": "pk"
           },
           {
             "name": "민트 스트라이프",
-            "hex": "#bdfcc9",
             "img_code": "gn"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1354&optno=1",
+          "https://www.coway.com/product/detail?prdno=1354&optno=5",
+          "https://www.coway.com/product/detail?prdno=1354&optno=8"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -6476,32 +7084,37 @@ const rawDB = {
         "model_codes": [
           "CFK-TM13"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfk-tm13",
         "colors": [
           {
-            "name": "오트밀 베이지",
-            "hex": "#e8e1d5",
-            "img_code": "bg"
-          },
-          {
             "name": "퓨어 아이보리",
-            "hex": "#f5f5f5",
             "img_code": "iv"
           },
           {
-            "name": "차콜 그레이",
-            "hex": "#5e5e5e",
+            "name": "린넨 베이지",
+            "img_code": "bg"
+          },
+          {
+            "name": "어반 그레이",
             "img_code": "gr"
           },
           {
             "name": "미스티 민트",
-            "hex": "#bdfcc9",
             "img_code": "gn"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1353&optno=3",
+          "https://www.coway.com/product/detail?prdno=1353&optno=7",
+          "https://www.coway.com/product/detail?prdno=1353&optno=11",
+          "https://www.coway.com/product/detail?prdno=1353&optno=15"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -6526,32 +7139,32 @@ const rawDB = {
         "model_codes": [
           "CFLK-TM13"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cflk-tm13",
         "colors": [
           {
-            "name": "오트밀 베이지",
-            "hex": "#e8e1d5",
-            "img_code": "bg"
-          },
-          {
             "name": "퓨어 아이보리",
-            "hex": "#f5f5f5",
             "img_code": "iv"
           },
           {
-            "name": "차콜 그레이",
-            "hex": "#5e5e5e",
-            "img_code": "gr"
+            "name": "린넨 베이지",
+            "img_code": "bg"
           },
           {
-            "name": "미스티 민트",
-            "hex": "#bdfcc9",
-            "img_code": "gn"
+            "name": "어반 그레이",
+            "img_code": "gr"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1353&optno=4",
+          "https://www.coway.com/product/detail?prdno=1353&optno=8",
+          "https://www.coway.com/product/detail?prdno=1353&optno=12"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -6576,32 +7189,37 @@ const rawDB = {
         "model_codes": [
           "CFQ-TM13"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfq-tm13",
         "colors": [
           {
-            "name": "오트밀 베이지",
-            "hex": "#e8e1d5",
-            "img_code": "bg"
-          },
-          {
             "name": "퓨어 아이보리",
-            "hex": "#f5f5f5",
             "img_code": "iv"
           },
           {
-            "name": "차콜 그레이",
-            "hex": "#5e5e5e",
+            "name": "린넨 베이지",
+            "img_code": "bg"
+          },
+          {
+            "name": "어반 그레이",
             "img_code": "gr"
           },
           {
             "name": "미스티 민트",
-            "hex": "#bdfcc9",
             "img_code": "gn"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1353&optno=2",
+          "https://www.coway.com/product/detail?prdno=1353&optno=6",
+          "https://www.coway.com/product/detail?prdno=1353&optno=10",
+          "https://www.coway.com/product/detail?prdno=1353&optno=14"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -6626,32 +7244,37 @@ const rawDB = {
         "model_codes": [
           "CFSS-TM13"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfss-tm13",
         "colors": [
           {
-            "name": "오트밀 베이지",
-            "hex": "#e8e1d5",
-            "img_code": "bg"
-          },
-          {
             "name": "퓨어 아이보리",
-            "hex": "#f5f5f5",
             "img_code": "iv"
           },
           {
-            "name": "차콜 그레이",
-            "hex": "#5e5e5e",
+            "name": "린넨 베이지",
+            "img_code": "bg"
+          },
+          {
+            "name": "어반 그레이",
             "img_code": "gr"
           },
           {
             "name": "미스티 민트",
-            "hex": "#bdfcc9",
             "img_code": "gn"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1353&optno=1",
+          "https://www.coway.com/product/detail?prdno=1353&optno=5",
+          "https://www.coway.com/product/detail?prdno=1353&optno=9",
+          "https://www.coway.com/product/detail?prdno=1353&optno=13"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -6678,22 +7301,27 @@ const rawDB = {
         "model_codes": [
           "CFK-TM12"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfk-tm12",
         "colors": [
           {
-            "name": "오트밀 베이지",
-            "hex": "#e8e1d5",
-            "img_code": "bg"
+            "name": "차콜 그레이",
+            "img_code": "gr"
           },
           {
-            "name": "차콜 그레이",
-            "hex": "#5e5e5e",
-            "img_code": "gr"
+            "name": "오트밀 베이지",
+            "img_code": "bg"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1134&optno=6",
+          "https://www.coway.com/product/detail?prdno=1134&optno=7"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -6718,22 +7346,27 @@ const rawDB = {
         "model_codes": [
           "CFLK-TM12"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cflk-tm12",
         "colors": [
           {
-            "name": "오트밀 베이지",
-            "hex": "#e8e1d5",
-            "img_code": "bg"
+            "name": "차콜 그레이",
+            "img_code": "gr"
           },
           {
-            "name": "차콜 그레이",
-            "hex": "#5e5e5e",
-            "img_code": "gr"
+            "name": "오트밀 베이지",
+            "img_code": "bg"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1134&optno=8",
+          "https://www.coway.com/product/detail?prdno=1134&optno=9"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -6758,22 +7391,27 @@ const rawDB = {
         "model_codes": [
           "CFQ-TM12"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfq-tm12",
         "colors": [
           {
-            "name": "오트밀 베이지",
-            "hex": "#e8e1d5",
-            "img_code": "bg"
+            "name": "차콜 그레이",
+            "img_code": "gr"
           },
           {
-            "name": "차콜 그레이",
-            "hex": "#5e5e5e",
-            "img_code": "gr"
+            "name": "오트밀 베이지",
+            "img_code": "bg"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1134&optno=4",
+          "https://www.coway.com/product/detail?prdno=1134&optno=5"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -6798,22 +7436,27 @@ const rawDB = {
         "model_codes": [
           "CFSS-TM12"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfss-tm12",
         "colors": [
           {
             "name": "오트밀 베이지",
-            "hex": "#e8e1d5",
             "img_code": "bg"
           },
           {
             "name": "차콜 그레이",
-            "hex": "#5e5e5e",
             "img_code": "gr"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1134&optno=1",
+          "https://www.coway.com/product/detail?prdno=1134&optno=2"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -6840,22 +7483,27 @@ const rawDB = {
         "model_codes": [
           "CFK-HT01"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfk-ht01",
         "colors": [
           {
             "name": "뉴트럴 베이지",
-            "hex": "#e8e1d5",
             "img_code": "bg"
           },
           {
             "name": "애쉬 브라운",
-            "hex": "#6e5c51",
             "img_code": "br"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1434&optno=3",
+          "https://www.coway.com/product/detail?prdno=1434&optno=7"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -6897,22 +7545,27 @@ const rawDB = {
         "model_codes": [
           "CFLK-HT01"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cflk-ht01",
         "colors": [
           {
             "name": "뉴트럴 베이지",
-            "hex": "#e8e1d5",
             "img_code": "bg"
           },
           {
             "name": "애쉬 브라운",
-            "hex": "#6e5c51",
             "img_code": "br"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1434&optno=4",
+          "https://www.coway.com/product/detail?prdno=1434&optno=8"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -6954,22 +7607,27 @@ const rawDB = {
         "model_codes": [
           "CFQ-HT01"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfq-ht01",
         "colors": [
           {
             "name": "뉴트럴 베이지",
-            "hex": "#e8e1d5",
             "img_code": "bg"
           },
           {
             "name": "애쉬 브라운",
-            "hex": "#6e5c51",
             "img_code": "br"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1434&optno=2",
+          "https://www.coway.com/product/detail?prdno=1434&optno=6"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -7011,22 +7669,27 @@ const rawDB = {
         "model_codes": [
           "CFSS-HT01"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfss-ht01",
         "colors": [
           {
             "name": "뉴트럴 베이지",
-            "hex": "#e8e1d5",
             "img_code": "bg"
           },
           {
             "name": "애쉬 브라운",
-            "hex": "#6e5c51",
             "img_code": "br"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1434&optno=1",
+          "https://www.coway.com/product/detail?prdno=1434&optno=5"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -7070,22 +7733,27 @@ const rawDB = {
         "model_codes": [
           "CFK-CB01"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfk-cb01",
         "colors": [
           {
             "name": "크림 아이보리",
-            "hex": "#fdfbf7",
             "img_code": "iv"
           },
           {
             "name": "멜란지 그레이",
-            "hex": "#8c8c8c",
             "img_code": "gr"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1057&optno=6",
+          "https://www.coway.com/product/detail?prdno=1057&optno=7"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -7110,22 +7778,27 @@ const rawDB = {
         "model_codes": [
           "CFQ-CB01"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfq-cb01",
         "colors": [
           {
             "name": "크림 아이보리",
-            "hex": "#fdfbf7",
             "img_code": "iv"
           },
           {
             "name": "멜란지 그레이",
-            "hex": "#8c8c8c",
             "img_code": "gr"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1057&optno=3",
+          "https://www.coway.com/product/detail?prdno=1057&optno=4"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -7150,22 +7823,27 @@ const rawDB = {
         "model_codes": [
           "CFSS-CB01"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfss-cb01",
         "colors": [
           {
             "name": "크림 아이보리",
-            "hex": "#fdfbf7",
             "img_code": "iv"
           },
           {
             "name": "멜란지 그레이",
-            "hex": "#8c8c8c",
             "img_code": "gr"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1057&optno=1",
+          "https://www.coway.com/product/detail?prdno=1057&optno=2"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -7192,27 +7870,32 @@ const rawDB = {
         "model_codes": [
           "CFK-CB03"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfk-cb03",
         "colors": [
           {
             "name": "코튼 아이보리",
-            "hex": "#f5f5f5",
             "img_code": "iv"
           },
           {
             "name": "스톤 그레이",
-            "hex": "#7f8386",
             "img_code": "gr"
           },
           {
             "name": "로즈 핑크",
-            "hex": "#e8b4b8",
             "img_code": "pk"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1190&optno=3",
+          "https://www.coway.com/product/detail?prdno=1190&optno=6",
+          "https://www.coway.com/product/detail?prdno=1190&optno=9"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -7237,27 +7920,32 @@ const rawDB = {
         "model_codes": [
           "CFQ-CB03"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfq-cb03",
         "colors": [
           {
             "name": "코튼 아이보리",
-            "hex": "#f5f5f5",
             "img_code": "iv"
           },
           {
             "name": "스톤 그레이",
-            "hex": "#7f8386",
             "img_code": "gr"
           },
           {
             "name": "로즈 핑크",
-            "hex": "#e8b4b8",
             "img_code": "pk"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1190&optno=2",
+          "https://www.coway.com/product/detail?prdno=1190&optno=5",
+          "https://www.coway.com/product/detail?prdno=1190&optno=8"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -7282,27 +7970,32 @@ const rawDB = {
         "model_codes": [
           "CFSS-CB03"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfss-cb03",
         "colors": [
           {
             "name": "코튼 아이보리",
-            "hex": "#f5f5f5",
             "img_code": "iv"
           },
           {
             "name": "스톤 그레이",
-            "hex": "#7f8386",
             "img_code": "gr"
           },
           {
             "name": "로즈 핑크",
-            "hex": "#e8b4b8",
             "img_code": "pk"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1190&optno=1",
+          "https://www.coway.com/product/detail?prdno=1190&optno=4",
+          "https://www.coway.com/product/detail?prdno=1190&optno=7"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -7329,27 +8022,27 @@ const rawDB = {
         "model_codes": [
           "CFGK-CB02"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfgk-cb02",
         "colors": [
           {
-            "name": "오트 베이지",
-            "hex": "#e8e1d5",
+            "name": "오트베이지",
             "img_code": "bghc"
           },
           {
-            "name": "딥 블루",
-            "hex": "#4682b4",
+            "name": "딥블루",
             "img_code": "buhc"
-          },
-          {
-            "name": "카키 브라운",
-            "hex": "#8b7355",
-            "img_code": "brhb"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1309&optno=12",
+          "https://www.coway.com/product/detail?prdno=1309&optno=13"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -7374,27 +8067,32 @@ const rawDB = {
         "model_codes": [
           "CFK-CB02"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfk-cb02",
         "colors": [
           {
-            "name": "오트 베이지",
-            "hex": "#e8e1d5",
+            "name": "카키브라운",
+            "img_code": "brhb"
+          },
+          {
+            "name": "오트베이지",
             "img_code": "bghc"
           },
           {
-            "name": "딥 블루",
-            "hex": "#4682b4",
+            "name": "딥블루",
             "img_code": "buhc"
-          },
-          {
-            "name": "카키 브라운",
-            "hex": "#8b7355",
-            "img_code": "brhb"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1309&optno=7",
+          "https://www.coway.com/product/detail?prdno=1309&optno=8",
+          "https://www.coway.com/product/detail?prdno=1309&optno=9"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -7419,27 +8117,27 @@ const rawDB = {
         "model_codes": [
           "CFLK-CB02"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cflk-cb02",
         "colors": [
           {
-            "name": "오트 베이지",
-            "hex": "#e8e1d5",
+            "name": "오트베이지",
             "img_code": "bghc"
           },
           {
-            "name": "딥 블루",
-            "hex": "#4682b4",
+            "name": "딥블루",
             "img_code": "buhc"
-          },
-          {
-            "name": "카키 브라운",
-            "hex": "#8b7355",
-            "img_code": "brhb"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1309&optno=10",
+          "https://www.coway.com/product/detail?prdno=1309&optno=11"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -7464,27 +8162,32 @@ const rawDB = {
         "model_codes": [
           "CFQ-CB02"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfq-cb02",
         "colors": [
           {
-            "name": "오트 베이지",
-            "hex": "#e8e1d5",
+            "name": "카키브라운",
+            "img_code": "brhb"
+          },
+          {
+            "name": "오트베이지",
             "img_code": "bghc"
           },
           {
-            "name": "딥 블루",
-            "hex": "#4682b4",
+            "name": "딥블루",
             "img_code": "buhc"
-          },
-          {
-            "name": "카키 브라운",
-            "hex": "#8b7355",
-            "img_code": "brhb"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1309&optno=4",
+          "https://www.coway.com/product/detail?prdno=1309&optno=5",
+          "https://www.coway.com/product/detail?prdno=1309&optno=6"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -7509,27 +8212,32 @@ const rawDB = {
         "model_codes": [
           "CFSS-CB02"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfss-cb02",
         "colors": [
           {
-            "name": "오트 베이지",
-            "hex": "#e8e1d5",
+            "name": "오트베이지",
             "img_code": "bghc"
           },
           {
-            "name": "딥 블루",
-            "hex": "#4682b4",
-            "img_code": "buhc"
+            "name": "카키브라운",
+            "img_code": "brhb"
           },
           {
-            "name": "카키 브라운",
-            "hex": "#8b7355",
-            "img_code": "brhb"
+            "name": "딥블루",
+            "img_code": "buhc"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1309&optno=1",
+          "https://www.coway.com/product/detail?prdno=1309&optno=2",
+          "https://www.coway.com/product/detail?prdno=1309&optno=3"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -7556,27 +8264,32 @@ const rawDB = {
         "model_codes": [
           "CFK-CB04"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfk-cb04",
         "colors": [
           {
             "name": "헤링본 그레이",
-            "hex": "#8c8c8c",
             "img_code": "grhb"
           },
           {
             "name": "헤링본 블랙",
-            "hex": "#333333",
             "img_code": "bkhb"
           },
           {
             "name": "글렌체크 그레이",
-            "hex": "#a9a9a9",
             "img_code": "grgc"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1204&optno=4",
+          "https://www.coway.com/product/detail?prdno=1204&optno=5",
+          "https://www.coway.com/product/detail?prdno=1204&optno=6"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -7601,27 +8314,32 @@ const rawDB = {
         "model_codes": [
           "CFLK-CB04"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cflk-cb04",
         "colors": [
           {
             "name": "헤링본 그레이",
-            "hex": "#8c8c8c",
             "img_code": "grhb"
           },
           {
             "name": "헤링본 블랙",
-            "hex": "#333333",
             "img_code": "bkhb"
           },
           {
             "name": "글렌체크 그레이",
-            "hex": "#a9a9a9",
             "img_code": "grgc"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1204&optno=7",
+          "https://www.coway.com/product/detail?prdno=1204&optno=8",
+          "https://www.coway.com/product/detail?prdno=1204&optno=9"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -7646,27 +8364,32 @@ const rawDB = {
         "model_codes": [
           "CFQ-CB04"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfq-cb04",
         "colors": [
           {
             "name": "헤링본 그레이",
-            "hex": "#8c8c8c",
             "img_code": "grhb"
           },
           {
             "name": "헤링본 블랙",
-            "hex": "#333333",
             "img_code": "bkhb"
           },
           {
             "name": "글렌체크 그레이",
-            "hex": "#a9a9a9",
             "img_code": "grgc"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1204&optno=1",
+          "https://www.coway.com/product/detail?prdno=1204&optno=2",
+          "https://www.coway.com/product/detail?prdno=1204&optno=3"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -7693,27 +8416,22 @@ const rawDB = {
         "model_codes": [
           "CFQ-SB01"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfq-sb01",
         "colors": [
           {
             "name": "샌드 베이지",
-            "hex": "#e8e1d5",
             "img_code": "bg"
-          },
-          {
-            "name": "파우더 핑크",
-            "hex": "#ffb6c1",
-            "img_code": "pk"
-          },
-          {
-            "name": "스카이 블루",
-            "hex": "#87ceeb",
-            "img_code": "bu"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1195&optno=5"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -7738,27 +8456,22 @@ const rawDB = {
         "model_codes": [
           "CFS-SB01"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfs-sb01",
         "colors": [
           {
             "name": "샌드 베이지",
-            "hex": "#e8e1d5",
             "img_code": "bg"
-          },
-          {
-            "name": "파우더 핑크",
-            "hex": "#ffb6c1",
-            "img_code": "pk"
-          },
-          {
-            "name": "스카이 블루",
-            "hex": "#87ceeb",
-            "img_code": "bu"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1195&optno=1"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -7783,27 +8496,32 @@ const rawDB = {
         "model_codes": [
           "CFSS-SB01"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfss-sb01",
         "colors": [
           {
             "name": "샌드 베이지",
-            "hex": "#e8e1d5",
             "img_code": "bg"
           },
           {
             "name": "파우더 핑크",
-            "hex": "#ffb6c1",
             "img_code": "pk"
           },
           {
             "name": "스카이 블루",
-            "hex": "#87ceeb",
             "img_code": "bu"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1195&optno=2",
+          "https://www.coway.com/product/detail?prdno=1195&optno=3",
+          "https://www.coway.com/product/detail?prdno=1195&optno=4"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -7830,17 +8548,20 @@ const rawDB = {
         "model_codes": [
           "CFQ-LM01G/LM02G"
         ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "cfq-lm01glm02g",
         "colors": [
           {
             "name": "다크 그레이",
-            "hex": "#4a4a4a",
             "img_code": "g"
           }
         ],
         "source_group": "프레임·파운데이션",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_verified",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 35,
         "prices": {
           "기본형": {
             "5년": {
@@ -7854,23 +8575,29 @@ const rawDB = {
               "source_row": 1007
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "Q+Q (CFQ-LM01G/LM02G)"
+        ]
       },
       "Q+SS (CFQ-LM01G/CFSS-LM02G)": {
         "model_codes": [
           "CFQ-LM01G/CFSS-LM02G"
         ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "cfq-lm01gcfss-lm02g",
         "colors": [
           {
             "name": "다크 그레이",
-            "hex": "#4a4a4a",
             "img_code": "g"
           }
         ],
         "source_group": "프레임·파운데이션",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_verified",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 35,
         "prices": {
           "기본형": {
             "5년": {
@@ -7884,23 +8611,29 @@ const rawDB = {
               "source_row": 1009
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "Q+SS (CFQ-LM01G/CFSS-LM02G)"
+        ]
       },
       "SS+SS (CFSS-LM01G/LM02G)": {
         "model_codes": [
           "CFSS-LM01G/LM02G"
         ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "cfss-lm01glm02g",
         "colors": [
           {
             "name": "다크 그레이",
-            "hex": "#4a4a4a",
             "img_code": "g"
           }
         ],
         "source_group": "프레임·파운데이션",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_verified",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 35,
         "prices": {
           "기본형": {
             "5년": {
@@ -7914,7 +8647,10 @@ const rawDB = {
               "source_row": 1011
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "SS+SS (CFSS-LM01G/LM02G)"
+        ]
       }
     },
     "패밀리 프레임 [단독형]": {
@@ -7922,17 +8658,22 @@ const rawDB = {
         "model_codes": [
           "CFQ-LM01G"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfq-lm01g",
         "colors": [
           {
             "name": "다크 그레이",
-            "hex": "#4a4a4a",
             "img_code": "g"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=192&optno=2"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -7952,17 +8693,22 @@ const rawDB = {
         "model_codes": [
           "CFSS-LM01G"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfss-lm01g",
         "colors": [
           {
             "name": "다크 그레이",
-            "hex": "#4a4a4a",
             "img_code": "g"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=192&optno=1"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -7984,37 +8730,42 @@ const rawDB = {
         "model_codes": [
           "CFK-FP01/02"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfk-fp0102",
         "colors": [
           {
             "name": "오트밀 베이지",
-            "hex": "#e8e1d5",
             "img_code": "bg"
           },
           {
             "name": "차콜 그레이",
-            "hex": "#5e5e5e",
             "img_code": "gr"
           },
           {
             "name": "모카 브라운",
-            "hex": "#6b4423",
             "img_code": "br"
           },
           {
-            "name": "크림 아이보리",
-            "hex": "#fdfbf7",
-            "img_code": "iv"
+            "name": "민트 그린",
+            "img_code": "gn"
           },
           {
-            "name": "민트 그린(SS전용)",
-            "hex": "#bdfcc9",
-            "img_code": "gn"
+            "name": "크림 아이보리",
+            "img_code": "iv"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1000&optno=6",
+          "https://www.coway.com/product/detail?prdno=1000&optno=12",
+          "https://www.coway.com/product/detail?prdno=1000&optno=18",
+          "https://www.coway.com/product/detail?prdno=1000&optno=24",
+          "https://www.coway.com/product/detail?prdno=1000&optno=30"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -8039,37 +8790,37 @@ const rawDB = {
         "model_codes": [
           "CFQ-FP01/02"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfq-fp0102",
         "colors": [
           {
             "name": "오트밀 베이지",
-            "hex": "#e8e1d5",
             "img_code": "bg"
           },
           {
             "name": "차콜 그레이",
-            "hex": "#5e5e5e",
             "img_code": "gr"
           },
           {
             "name": "모카 브라운",
-            "hex": "#6b4423",
             "img_code": "br"
           },
           {
             "name": "크림 아이보리",
-            "hex": "#fdfbf7",
             "img_code": "iv"
-          },
-          {
-            "name": "민트 그린(SS전용)",
-            "hex": "#bdfcc9",
-            "img_code": "gn"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1000&optno=2",
+          "https://www.coway.com/product/detail?prdno=1000&optno=10",
+          "https://www.coway.com/product/detail?prdno=1000&optno=16",
+          "https://www.coway.com/product/detail?prdno=1000&optno=26"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -8094,37 +8845,42 @@ const rawDB = {
         "model_codes": [
           "CFSS-FP01/02"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfss-fp0102",
         "colors": [
           {
             "name": "오트밀 베이지",
-            "hex": "#e8e1d5",
             "img_code": "bg"
           },
           {
             "name": "차콜 그레이",
-            "hex": "#5e5e5e",
             "img_code": "gr"
           },
           {
             "name": "모카 브라운",
-            "hex": "#6b4423",
             "img_code": "br"
           },
           {
-            "name": "크림 아이보리",
-            "hex": "#fdfbf7",
-            "img_code": "iv"
+            "name": "민트 그린",
+            "img_code": "gn"
           },
           {
-            "name": "민트 그린(SS전용)",
-            "hex": "#bdfcc9",
-            "img_code": "gn"
+            "name": "크림 아이보리",
+            "img_code": "iv"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1000&optno=4",
+          "https://www.coway.com/product/detail?prdno=1000&optno=8",
+          "https://www.coway.com/product/detail?prdno=1000&optno=14",
+          "https://www.coway.com/product/detail?prdno=1000&optno=22",
+          "https://www.coway.com/product/detail?prdno=1000&optno=28"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -8151,37 +8907,42 @@ const rawDB = {
         "model_codes": [
           "CFK-FP01S/02S"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfk-fp01s02s",
         "colors": [
           {
             "name": "오트밀 베이지",
-            "hex": "#e8e1d5",
             "img_code": "bg"
           },
           {
             "name": "차콜 그레이",
-            "hex": "#5e5e5e",
             "img_code": "gr"
           },
           {
             "name": "모카 브라운",
-            "hex": "#6b4423",
             "img_code": "br"
           },
           {
             "name": "크림 아이보리",
-            "hex": "#fdfbf7",
             "img_code": "iv"
           },
           {
-            "name": "민트 그린(SS전용)",
-            "hex": "#bdfcc9",
+            "name": "민트 그린",
             "img_code": "gn"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1001&optno=6",
+          "https://www.coway.com/product/detail?prdno=1001&optno=12",
+          "https://www.coway.com/product/detail?prdno=1001&optno=18",
+          "https://www.coway.com/product/detail?prdno=1001&optno=24",
+          "https://www.coway.com/product/detail?prdno=1001&optno=30"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -8206,37 +8967,37 @@ const rawDB = {
         "model_codes": [
           "CFQ-FP01S/02S"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfq-fp01s02s",
         "colors": [
           {
             "name": "오트밀 베이지",
-            "hex": "#e8e1d5",
             "img_code": "bg"
           },
           {
             "name": "차콜 그레이",
-            "hex": "#5e5e5e",
             "img_code": "gr"
           },
           {
             "name": "모카 브라운",
-            "hex": "#6b4423",
             "img_code": "br"
           },
           {
             "name": "크림 아이보리",
-            "hex": "#fdfbf7",
             "img_code": "iv"
-          },
-          {
-            "name": "민트 그린(SS전용)",
-            "hex": "#bdfcc9",
-            "img_code": "gn"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1001&optno=5",
+          "https://www.coway.com/product/detail?prdno=1001&optno=10",
+          "https://www.coway.com/product/detail?prdno=1001&optno=16",
+          "https://www.coway.com/product/detail?prdno=1001&optno=23"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -8261,37 +9022,42 @@ const rawDB = {
         "model_codes": [
           "CFSS-FP01S/02S"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cfss-fp01s02s",
         "colors": [
           {
             "name": "오트밀 베이지",
-            "hex": "#e8e1d5",
             "img_code": "bg"
           },
           {
             "name": "차콜 그레이",
-            "hex": "#5e5e5e",
             "img_code": "gr"
           },
           {
             "name": "모카 브라운",
-            "hex": "#6b4423",
             "img_code": "br"
           },
           {
             "name": "크림 아이보리",
-            "hex": "#fdfbf7",
             "img_code": "iv"
           },
           {
-            "name": "민트 그린(SS전용)",
-            "hex": "#bdfcc9",
+            "name": "민트 그린",
             "img_code": "gn"
           }
         ],
         "source_group": "프레임·파운데이션",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1001&optno=4",
+          "https://www.coway.com/product/detail?prdno=1001&optno=8",
+          "https://www.coway.com/product/detail?prdno=1001&optno=14",
+          "https://www.coway.com/product/detail?prdno=1001&optno=22",
+          "https://www.coway.com/product/detail?prdno=1001&optno=28"
+        ],
         "prices": {
           "기본형": {
             "5년": {
@@ -8320,11 +9086,42 @@ const rawDB = {
         "model_codes": [
           "AP-1623M"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "ap-1623m",
-        "colors": [],
+        "colors": [
+          {
+            "name": "샌드 베이지",
+            "img_code": "bg"
+          },
+          {
+            "name": "포슬린 화이트",
+            "img_code": "wh"
+          },
+          {
+            "name": "임페리얼 브라운",
+            "img_code": "br"
+          },
+          {
+            "name": "페블 그레이",
+            "img_code": "gr"
+          },
+          {
+            "name": "가든 그레이",
+            "img_code": "gg"
+          }
+        ],
         "source_group": "공기청정·제습·가습",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1068&optno=1",
+          "https://www.coway.com/product/detail?prdno=1068&optno=2",
+          "https://www.coway.com/product/detail?prdno=1068&optno=3",
+          "https://www.coway.com/product/detail?prdno=1068&optno=4",
+          "https://www.coway.com/product/detail?prdno=1068&optno=5"
+        ],
         "prices": {
           "방문관리(4개월)": {
             "3년": {
@@ -8398,11 +9195,42 @@ const rawDB = {
         "model_codes": [
           "AP-2023K"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "ap-2023k",
-        "colors": [],
+        "colors": [
+          {
+            "name": "샌드 베이지",
+            "img_code": "bg"
+          },
+          {
+            "name": "포슬린 화이트",
+            "img_code": "wh"
+          },
+          {
+            "name": "임페리얼 브라운",
+            "img_code": "br"
+          },
+          {
+            "name": "페블 그레이",
+            "img_code": "gr"
+          },
+          {
+            "name": "가든 그레이",
+            "img_code": "gg"
+          }
+        ],
         "source_group": "공기청정·제습·가습",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1056&optno=1",
+          "https://www.coway.com/product/detail?prdno=1056&optno=2",
+          "https://www.coway.com/product/detail?prdno=1056&optno=3",
+          "https://www.coway.com/product/detail?prdno=1056&optno=4",
+          "https://www.coway.com/product/detail?prdno=1056&optno=5"
+        ],
         "prices": {
           "방문관리(4개월)": {
             "3년": {
@@ -8476,11 +9304,42 @@ const rawDB = {
         "model_codes": [
           "AP-3024H"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "ap-3024h",
-        "colors": [],
+        "colors": [
+          {
+            "name": "샌드 베이지",
+            "img_code": "bg"
+          },
+          {
+            "name": "포슬린 화이트",
+            "img_code": "wh"
+          },
+          {
+            "name": "임페리얼 브라운",
+            "img_code": "br"
+          },
+          {
+            "name": "페블 그레이",
+            "img_code": "gr"
+          },
+          {
+            "name": "가든 그레이",
+            "img_code": "gg"
+          }
+        ],
         "source_group": "공기청정·제습·가습",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1186&optno=1",
+          "https://www.coway.com/product/detail?prdno=1186&optno=2",
+          "https://www.coway.com/product/detail?prdno=1186&optno=3",
+          "https://www.coway.com/product/detail?prdno=1186&optno=4",
+          "https://www.coway.com/product/detail?prdno=1186&optno=5"
+        ],
         "prices": {
           "방문관리(4개월)": {
             "3년": {
@@ -8554,11 +9413,42 @@ const rawDB = {
         "model_codes": [
           "AP-4025D"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "ap-4025d",
-        "colors": [],
+        "colors": [
+          {
+            "name": "샌드 베이지",
+            "img_code": "bg"
+          },
+          {
+            "name": "포슬린 화이트",
+            "img_code": "wh"
+          },
+          {
+            "name": "임페리얼 브라운",
+            "img_code": "br"
+          },
+          {
+            "name": "페블 그레이",
+            "img_code": "gr"
+          },
+          {
+            "name": "가든 그레이",
+            "img_code": "gg"
+          }
+        ],
         "source_group": "공기청정·제습·가습",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1219&optno=1",
+          "https://www.coway.com/product/detail?prdno=1219&optno=2",
+          "https://www.coway.com/product/detail?prdno=1219&optno=3",
+          "https://www.coway.com/product/detail?prdno=1219&optno=4",
+          "https://www.coway.com/product/detail?prdno=1219&optno=5"
+        ],
         "prices": {
           "방문관리(4개월)": {
             "3년": {
@@ -8634,11 +9524,32 @@ const rawDB = {
         "model_codes": [
           "AP-3021D"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "ap-3021d",
-        "colors": [],
+        "colors": [
+          {
+            "name": "샌드 베이지",
+            "img_code": "bg"
+          },
+          {
+            "name": "페블 그레이",
+            "img_code": "gr"
+          },
+          {
+            "name": "포슬린 화이트",
+            "img_code": "wh"
+          }
+        ],
         "source_group": "공기청정·제습·가습",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=4&optno=1",
+          "https://www.coway.com/product/detail?prdno=4&optno=2",
+          "https://www.coway.com/product/detail?prdno=4&optno=3"
+        ],
         "prices": {
           "방문관리(4개월)": {
             "3년": {
@@ -8714,11 +9625,22 @@ const rawDB = {
         "model_codes": [
           "AP-1523D"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "ap-1523d",
-        "colors": [],
+        "colors": [
+          {
+            "name": "화이트",
+            "img_code": "wt"
+          }
+        ],
         "source_group": "공기청정·제습·가습",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1051&optno=1"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -8794,11 +9716,37 @@ const rawDB = {
         "model_codes": [
           "AP-1125G"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "ap-1125g",
-        "colors": [],
+        "colors": [
+          {
+            "name": "퓨어 화이트",
+            "img_code": "wt"
+          },
+          {
+            "name": "샌드 베이지",
+            "img_code": "bg"
+          },
+          {
+            "name": "세이지 그린",
+            "img_code": "gn"
+          },
+          {
+            "name": "페블 그레이",
+            "img_code": "gr"
+          }
+        ],
         "source_group": "공기청정·제습·가습",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1284&optno=1",
+          "https://www.coway.com/product/detail?prdno=1284&optno=2",
+          "https://www.coway.com/product/detail?prdno=1284&optno=3",
+          "https://www.coway.com/product/detail?prdno=1284&optno=4"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -8872,11 +9820,37 @@ const rawDB = {
         "model_codes": [
           "AP-1526A"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "ap-1526a",
-        "colors": [],
+        "colors": [
+          {
+            "name": "샌드 베이지",
+            "img_code": "bg"
+          },
+          {
+            "name": "퓨어 화이트",
+            "img_code": "wt"
+          },
+          {
+            "name": "세이지 그린",
+            "img_code": "gn"
+          },
+          {
+            "name": "페블 그레이",
+            "img_code": "gr"
+          }
+        ],
         "source_group": "공기청정·제습·가습",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1437&optno=1",
+          "https://www.coway.com/product/detail?prdno=1437&optno=2",
+          "https://www.coway.com/product/detail?prdno=1437&optno=3",
+          "https://www.coway.com/product/detail?prdno=1437&optno=4"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -8950,11 +9924,37 @@ const rawDB = {
         "model_codes": [
           "AP-2026B"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "ap-2026b",
-        "colors": [],
+        "colors": [
+          {
+            "name": "샌드 베이지",
+            "img_code": "bg"
+          },
+          {
+            "name": "퓨어 화이트",
+            "img_code": "wt"
+          },
+          {
+            "name": "세이지 그린",
+            "img_code": "gn"
+          },
+          {
+            "name": "페블 그레이",
+            "img_code": "gr"
+          }
+        ],
         "source_group": "공기청정·제습·가습",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1438&optno=1",
+          "https://www.coway.com/product/detail?prdno=1438&optno=2",
+          "https://www.coway.com/product/detail?prdno=1438&optno=3",
+          "https://www.coway.com/product/detail?prdno=1438&optno=4"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -9028,11 +10028,37 @@ const rawDB = {
         "model_codes": [
           "AP-2425H"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "ap-2425h",
-        "colors": [],
+        "colors": [
+          {
+            "name": "샌드 베이지",
+            "img_code": "bg"
+          },
+          {
+            "name": "퓨어 화이트",
+            "img_code": "wt"
+          },
+          {
+            "name": "세이지 그린",
+            "img_code": "gn"
+          },
+          {
+            "name": "페블 그레이",
+            "img_code": "gr"
+          }
+        ],
         "source_group": "공기청정·제습·가습",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1285&optno=1",
+          "https://www.coway.com/product/detail?prdno=1285&optno=2",
+          "https://www.coway.com/product/detail?prdno=1285&optno=3",
+          "https://www.coway.com/product/detail?prdno=1285&optno=4"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -9108,11 +10134,22 @@ const rawDB = {
         "model_codes": [
           "AP-1023F"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "ap-1023f",
-        "colors": [],
+        "colors": [
+          {
+            "name": "화이트",
+            "img_code": "wt"
+          }
+        ],
         "source_group": "공기청정·제습·가습",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1047&optno=1"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -9166,11 +10203,22 @@ const rawDB = {
         "model_codes": [
           "AP-1019D"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "ap-1019d",
-        "colors": [],
+        "colors": [
+          {
+            "name": "라이트 웜 그레이",
+            "img_code": "lgr"
+          }
+        ],
         "source_group": "공기청정·제습·가습",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=7&optno=2"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -9202,11 +10250,32 @@ const rawDB = {
         "model_codes": [
           "AP-3525I"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "ap-3525i",
-        "colors": [],
+        "colors": [
+          {
+            "name": "포슬린 화이트",
+            "img_code": "wh"
+          },
+          {
+            "name": "샌드 베이지",
+            "img_code": "bg"
+          },
+          {
+            "name": "페블 그레이",
+            "img_code": "gr"
+          }
+        ],
         "source_group": "공기청정·제습·가습",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1251&optno=1",
+          "https://www.coway.com/product/detail?prdno=1251&optno=2",
+          "https://www.coway.com/product/detail?prdno=1251&optno=3"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -9235,12 +10304,26 @@ const rawDB = {
     },
     "콰트로파워 공기청정기": {
       "기본형": {
-        "model_codes": [],
+        "model_codes": [
+          "AP-3018B"
+        ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "ap-3018b",
-        "colors": [],
+        "colors": [
+          {
+            "name": "화이트",
+            "img_code": "wt"
+          }
+        ],
         "source_group": "공기청정·제습·가습",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=129&optno=1"
+        ],
+        "official_pdf_page": 17,
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -9264,15 +10347,32 @@ const rawDB = {
               "source_row": 1173
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "기본형"
+        ]
       },
       "탈취 강화형": {
-        "model_codes": [],
+        "model_codes": [
+          "AP-3018B"
+        ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "ap-3018b",
-        "colors": [],
+        "colors": [
+          {
+            "name": "화이트",
+            "img_code": "wt"
+          }
+        ],
         "source_group": "공기청정·제습·가습",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=129&optno=1"
+        ],
+        "official_pdf_page": 17,
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -9281,7 +10381,10 @@ const rawDB = {
               "source_row": 1174
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "탈취 강화형"
+        ]
       }
     },
     "히티브 온풍 공기청정기": {
@@ -9289,11 +10392,37 @@ const rawDB = {
         "model_codes": [
           "APH-0525F"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "aph-0525f",
-        "colors": [],
+        "colors": [
+          {
+            "name": "샌드 베이지",
+            "img_code": "bg"
+          },
+          {
+            "name": "스웨이드 블루",
+            "img_code": "bu"
+          },
+          {
+            "name": "포슬린 화이트",
+            "img_code": "wh"
+          },
+          {
+            "name": "페블 그레이",
+            "img_code": "gr"
+          }
+        ],
         "source_group": "공기청정·제습·가습",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1343&optno=1",
+          "https://www.coway.com/product/detail?prdno=1343&optno=2",
+          "https://www.coway.com/product/detail?prdno=1343&optno=3",
+          "https://www.coway.com/product/detail?prdno=1343&optno=4"
+        ],
         "prices": {
           "방문관리(4개월)": {
             "3년": {
@@ -9369,11 +10498,32 @@ const rawDB = {
         "model_codes": [
           "APD-1025E"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "apd-1025e",
-        "colors": [],
+        "colors": [
+          {
+            "name": "포슬린 화이트",
+            "img_code": "wh"
+          },
+          {
+            "name": "샌드 베이지",
+            "img_code": "bg"
+          },
+          {
+            "name": "페블 그레이",
+            "img_code": "gr"
+          }
+        ],
         "source_group": "공기청정·제습·가습",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1254&optno=1",
+          "https://www.coway.com/product/detail?prdno=1254&optno=2",
+          "https://www.coway.com/product/detail?prdno=1254&optno=3"
+        ],
         "prices": {
           "방문관리(4개월)": {
             "3년": {
@@ -9449,11 +10599,22 @@ const rawDB = {
         "model_codes": [
           "APD-1023A"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "apd-1023a",
-        "colors": [],
+        "colors": [
+          {
+            "name": "화이트",
+            "img_code": "wt"
+          }
+        ],
         "source_group": "공기청정·제습·가습",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1049&optno=1"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -9529,11 +10690,27 @@ const rawDB = {
         "model_codes": [
           "AD-2526N"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "ad-2526n",
-        "colors": [],
+        "colors": [
+          {
+            "name": "크림 베이지",
+            "img_code": "bg"
+          },
+          {
+            "name": "퓨어 화이트",
+            "img_code": "wt"
+          }
+        ],
         "source_group": "공기청정·제습·가습",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1518&optno=1",
+          "https://www.coway.com/product/detail?prdno=1518&optno=2"
+        ],
         "prices": {
           "방문관리(연1회)": {
             "5년": {
@@ -9577,11 +10754,27 @@ const rawDB = {
         "model_codes": [
           "AD-2325C"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "ad-2325c",
-        "colors": [],
+        "colors": [
+          {
+            "name": "크림 베이지",
+            "img_code": "bg"
+          },
+          {
+            "name": "퓨어 화이트",
+            "img_code": "wt"
+          }
+        ],
         "source_group": "공기청정·제습·가습",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1255&optno=1",
+          "https://www.coway.com/product/detail?prdno=1255&optno=2"
+        ],
         "prices": {
           "방문관리(연1회)": {
             "5년": {
@@ -9625,11 +10818,27 @@ const rawDB = {
         "model_codes": [
           "AD-2026C"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "ad-2026c",
-        "colors": [],
+        "colors": [
+          {
+            "name": "크림 베이지",
+            "img_code": "bg"
+          },
+          {
+            "name": "퓨어 화이트",
+            "img_code": "wt"
+          }
+        ],
         "source_group": "공기청정·제습·가습",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1479&optno=1",
+          "https://www.coway.com/product/detail?prdno=1479&optno=2"
+        ],
         "prices": {
           "방문관리(연1회)": {
             "5년": {
@@ -9673,11 +10882,22 @@ const rawDB = {
         "model_codes": [
           "AD-1221E"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "ad-1221e",
-        "colors": [],
+        "colors": [
+          {
+            "name": "스톤 그레이",
+            "img_code": "gr"
+          }
+        ],
         "source_group": "공기청정·제습·가습",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=157&optno=1"
+        ],
         "prices": {
           "방문관리(연1회)": {
             "5년": {
@@ -9721,11 +10941,22 @@ const rawDB = {
         "model_codes": [
           "APM-1226H"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "apm-1226h",
-        "colors": [],
+        "colors": [
+          {
+            "name": "화이트",
+            "img_code": "wt"
+          }
+        ],
         "source_group": "공기청정·제습·가습",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1491&optno=1"
+        ],
         "prices": {
           "방문관리(4개월)": {
             "3년": {
@@ -9774,45 +11005,27 @@ const rawDB = {
         }
       }
     },
-    "노블 가습기": {
-      "단일모델 (AM-1421G)": {
-        "model_codes": [
-          "AM-1421G"
-        ],
-        "img_prefix": "am-1421g",
-        "colors": [
-          {
-            "name": "헤이지 블루",
-            "img_code": "bl"
-          },
-          {
-            "name": "샌드 베이지",
-            "img_code": "bg"
-          },
-          {
-            "name": "포슬린 화이트",
-            "img_code": "wh"
-          }
-        ],
-        "source_group": "공식 PDF 일시불 제품",
-        "model_name_status": "official_pdf_verified",
-        "colors_status": "official_pdf_verified",
-        "official_pdf_page": 18,
-        "price_type": "cash",
-        "cash_price": 649000,
-        "publish_ready": true
-      }
-    },
     "벽걸이 공기청정기 2": {
       "단일모델 (AP-1225F)": {
         "model_codes": [
           "AP-1225F"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "ap-1225f",
-        "colors": [],
+        "colors": [
+          {
+            "name": "포슬린 화이트",
+            "img_code": "wh"
+          }
+        ],
         "source_group": "공기청정·제습·가습",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1212&optno=1"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -9834,11 +11047,22 @@ const rawDB = {
         "model_codes": [
           "AP-3519A"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "ap-3519a",
-        "colors": [],
+        "colors": [
+          {
+            "name": "화이트",
+            "img_code": "wt"
+          }
+        ],
         "source_group": "공기청정·제습·가습",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=149&optno=1"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -9860,22 +11084,22 @@ const rawDB = {
         "model_codes": [
           "FAD-01S"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "fad-01s",
         "colors": [
           {
-            "name": "미러",
-            "hex": "#a9a9a9",
+            "name": "미러실버",
             "img_code": "mr"
-          },
-          {
-            "name": "화이트",
-            "hex": "#f5f5f5",
-            "img_code": "wt"
           }
         ],
         "source_group": "의류청정",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=32&optno=2"
+        ],
         "prices": {
           "방문관리(4개월)": {
             "5년": {
@@ -9907,22 +11131,22 @@ const rawDB = {
         "model_codes": [
           "FAD-02S"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "fad-02s",
         "colors": [
           {
-            "name": "미러",
-            "hex": "#a9a9a9",
-            "img_code": "mr"
-          },
-          {
             "name": "화이트",
-            "hex": "#f5f5f5",
             "img_code": "wt"
           }
         ],
         "source_group": "의류청정",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=254&optno=1"
+        ],
         "prices": {
           "방문관리(4개월)": {
             "5년": {
@@ -9958,32 +11182,37 @@ const rawDB = {
         "model_codes": [
           "MB-R05M"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "mb-r05m",
         "colors": [
           {
-            "name": "샴페인 베이지",
-            "hex": "#e8e1d5",
-            "img_code": "bg"
-          },
-          {
-            "name": "모카 브라운",
-            "hex": "#8b4513",
-            "img_code": "br"
-          },
-          {
             "name": "잉크 블랙",
-            "hex": "#333333",
             "img_code": "bk"
           },
           {
-            "name": "몽블랑 화이트",
-            "hex": "#f5f5f5",
+            "name": "모카 브라운",
+            "img_code": "br"
+          },
+          {
+            "name": "샴페인 베이지",
+            "img_code": "bg"
+          },
+          {
+            "name": "크림 화이트",
             "img_code": "wt"
           }
         ],
         "source_group": "안마·리클라이닝",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1359&optno=1",
+          "https://www.coway.com/product/detail?prdno=1359&optno=2",
+          "https://www.coway.com/product/detail?prdno=1359&optno=3",
+          "https://www.coway.com/product/detail?prdno=1359&optno=4"
+        ],
         "prices": {
           "서비스 프리": {
             "5년": {
@@ -10029,32 +11258,37 @@ const rawDB = {
         "model_codes": [
           "MB-M05M"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "mb-m05m",
         "colors": [
           {
-            "name": "샴페인 베이지",
-            "hex": "#e8e1d5",
-            "img_code": "bg"
+            "name": "크림 화이트",
+            "img_code": "wt"
           },
           {
             "name": "모카 브라운",
-            "hex": "#8b4513",
             "img_code": "br"
           },
           {
             "name": "잉크 블랙",
-            "hex": "#333333",
             "img_code": "bk"
           },
           {
-            "name": "몽블랑 화이트",
-            "hex": "#f5f5f5",
-            "img_code": "wt"
+            "name": "샴페인 베이지",
+            "img_code": "bg"
           }
         ],
         "source_group": "안마·리클라이닝",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1358&optno=1",
+          "https://www.coway.com/product/detail?prdno=1358&optno=2",
+          "https://www.coway.com/product/detail?prdno=1358&optno=3",
+          "https://www.coway.com/product/detail?prdno=1358&optno=4"
+        ],
         "prices": {
           "서비스 프리": {
             "5년": {
@@ -10100,32 +11334,47 @@ const rawDB = {
         "model_codes": [
           "MC-C02AT"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "mc-c02at",
         "colors": [
           {
-            "name": "헤이즈 블루",
-            "hex": "#b0c4de",
+            "name": "헤이지 블루",
             "img_code": "bu"
           },
           {
-            "name": "미스틱 그레이",
-            "hex": "#808080",
-            "img_code": "gr"
+            "name": "테라코타 핑크",
+            "img_code": "pk"
           },
           {
-            "name": "샌드 베이지",
-            "hex": "#e8e1d5",
+            "name": "에토프 베이지",
             "img_code": "bg"
           },
           {
-            "name": "테라코타 핑크",
-            "hex": "#e2725b",
-            "img_code": "pk"
+            "name": "버터 옐로우",
+            "img_code": "yl"
+          },
+          {
+            "name": "린넨 화이트",
+            "img_code": "wtfb"
+          },
+          {
+            "name": "페더 화이트",
+            "img_code": "wtvv"
           }
         ],
         "source_group": "안마·리클라이닝",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1426&optno=1",
+          "https://www.coway.com/product/detail?prdno=1426&optno=2",
+          "https://www.coway.com/product/detail?prdno=1426&optno=3",
+          "https://www.coway.com/product/detail?prdno=1426&optno=4",
+          "https://www.coway.com/product/detail?prdno=1426&optno=5",
+          "https://www.coway.com/product/detail?prdno=1426&optno=6"
+        ],
         "prices": {
           "서비스 프리": {
             "5년": {
@@ -10156,32 +11405,37 @@ const rawDB = {
         "model_codes": [
           "MC-C01"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "mc-c01",
         "colors": [
           {
-            "name": "헤이즈 블루",
-            "hex": "#b0c4de",
+            "name": "헤이지 블루",
             "img_code": "bu"
           },
           {
             "name": "미스틱 그레이",
-            "hex": "#808080",
             "img_code": "gr"
           },
           {
-            "name": "샌드 베이지",
-            "hex": "#e8e1d5",
-            "img_code": "bg"
+            "name": "테라코타 핑크",
+            "img_code": "pk"
           },
           {
-            "name": "테라코타 핑크",
-            "hex": "#e2725b",
-            "img_code": "pk"
+            "name": "샌드 베이지",
+            "img_code": "bg"
           }
         ],
         "source_group": "안마·리클라이닝",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1059&optno=1",
+          "https://www.coway.com/product/detail?prdno=1059&optno=2",
+          "https://www.coway.com/product/detail?prdno=1059&optno=3",
+          "https://www.coway.com/product/detail?prdno=1059&optno=4"
+        ],
         "prices": {
           "서비스 프리": {
             "5년": {
@@ -10212,32 +11466,37 @@ const rawDB = {
         "model_codes": [
           "MC-B02"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "mc-b02",
         "colors": [
           {
             "name": "샴페인 베이지",
-            "hex": "#e8e1d5",
             "img_code": "bg"
           },
           {
-            "name": "로즈 브라운",
-            "hex": "#bc8f8f",
-            "img_code": "br"
-          },
-          {
             "name": "잉크 블랙",
-            "hex": "#333333",
             "img_code": "bk"
           },
           {
+            "name": "로즈 브라운",
+            "img_code": "br"
+          },
+          {
             "name": "아틱 그레이",
-            "hex": "#708090",
             "img_code": "gr"
           }
         ],
         "source_group": "안마·리클라이닝",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1149&optno=1",
+          "https://www.coway.com/product/detail?prdno=1149&optno=2",
+          "https://www.coway.com/product/detail?prdno=1149&optno=3",
+          "https://www.coway.com/product/detail?prdno=1149&optno=4"
+        ],
         "prices": {
           "서비스 프리": {
             "5년": {
@@ -10268,32 +11527,37 @@ const rawDB = {
         "model_codes": [
           "MC-B03"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "mc-b03",
         "colors": [
           {
+            "name": "샴페인 베이지",
+            "img_code": "bg"
+          },
+          {
             "name": "잉크 블랙",
-            "hex": "#333333",
             "img_code": "bk"
           },
           {
             "name": "로즈 브라운",
-            "hex": "#bc8f8f",
             "img_code": "br"
           },
           {
-            "name": "샴페인 베이지",
-            "hex": "#e8e1d5",
-            "img_code": "bg"
-          },
-          {
             "name": "아틱 그레이",
-            "hex": "#708090",
             "img_code": "gr"
           }
         ],
         "source_group": "안마·리클라이닝",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1169&optno=1",
+          "https://www.coway.com/product/detail?prdno=1169&optno=2",
+          "https://www.coway.com/product/detail?prdno=1169&optno=3",
+          "https://www.coway.com/product/detail?prdno=1169&optno=4"
+        ],
         "prices": {
           "서비스 프리": {
             "5년": {
@@ -10324,27 +11588,32 @@ const rawDB = {
         "model_codes": [
           "MC-SC01"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "mc-sc01",
         "colors": [
           {
-            "name": "미스틱 그레이",
-            "hex": "#808080",
+            "name": "차콜 블랙",
+            "img_code": "bk"
+          },
+          {
+            "name": "애쉬 그레이",
             "img_code": "gr"
           },
           {
             "name": "샌드 베이지",
-            "hex": "#e8e1d5",
             "img_code": "bg"
-          },
-          {
-            "name": "차콜 블랙",
-            "hex": "#333333",
-            "img_code": "bk"
           }
         ],
         "source_group": "안마·리클라이닝",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=234&optno=1",
+          "https://www.coway.com/product/detail?prdno=234&optno=2",
+          "https://www.coway.com/product/detail?prdno=234&optno=3"
+        ],
         "prices": {
           "서비스 프리": {
             "5년": {
@@ -10375,6 +11644,7 @@ const rawDB = {
         "model_codes": [
           "MB-R03M"
         ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "mb-r03m",
         "colors": [
           {
@@ -10396,7 +11666,15 @@ const rawDB = {
         ],
         "source_group": "안마·리클라이닝",
         "model_name_status": "official_pdf_verified",
-        "colors_status": "official_pdf_verified",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1357&optno=1",
+          "https://www.coway.com/product/detail?prdno=1357&optno=2",
+          "https://www.coway.com/product/detail?prdno=1357&optno=3",
+          "https://www.coway.com/product/detail?prdno=1357&optno=4"
+        ],
         "official_pdf_page": 43,
         "prices": {
           "서비스 프리": {
@@ -10451,12 +11729,9 @@ const rawDB = {
         "model_codes": [
           "MB-M03M"
         ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "mb-m03m",
         "colors": [
-          {
-            "name": "샴페인 베이지",
-            "img_code": "bg"
-          },
           {
             "name": "모카 브라운",
             "img_code": "br"
@@ -10466,13 +11741,25 @@ const rawDB = {
             "img_code": "bk"
           },
           {
+            "name": "샴페인 베이지",
+            "img_code": "bg"
+          },
+          {
             "name": "크림 화이트",
             "img_code": "wt"
           }
         ],
         "source_group": "안마·리클라이닝",
         "model_name_status": "official_pdf_verified",
-        "colors_status": "official_pdf_verified",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1356&optno=1",
+          "https://www.coway.com/product/detail?prdno=1356&optno=2",
+          "https://www.coway.com/product/detail?prdno=1356&optno=3",
+          "https://www.coway.com/product/detail?prdno=1356&optno=4"
+        ],
         "official_pdf_page": 43,
         "prices": {
           "서비스 프리": {
@@ -10527,11 +11814,27 @@ const rawDB = {
         "model_codes": [
           "MC-R01"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "mc-r01",
-        "colors": [],
+        "colors": [
+          {
+            "name": "와인 레드",
+            "img_code": "rd"
+          },
+          {
+            "name": "잉크 블랙",
+            "img_code": "bk"
+          }
+        ],
         "source_group": "안마·리클라이닝",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1207&optno=1",
+          "https://www.coway.com/product/detail?prdno=1207&optno=5"
+        ],
         "prices": {
           "서비스 프리": {
             "5년": {
@@ -10562,11 +11865,37 @@ const rawDB = {
         "model_codes": [
           "MC-R01M"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "mc-r01m",
-        "colors": [],
+        "colors": [
+          {
+            "name": "토프 베이지",
+            "img_code": "bg"
+          },
+          {
+            "name": "카멜 브라운",
+            "img_code": "or"
+          },
+          {
+            "name": "다크 브라운",
+            "img_code": "br"
+          },
+          {
+            "name": "잉크 블랙",
+            "img_code": "bk"
+          }
+        ],
         "source_group": "안마·리클라이닝",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "pending_image_folder_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1207&optno=6",
+          "https://www.coway.com/product/detail?prdno=1207&optno=7",
+          "https://www.coway.com/product/detail?prdno=1207&optno=9",
+          "https://www.coway.com/product/detail?prdno=1207&optno=10"
+        ],
         "prices": {
           "서비스 프리": {
             "5년": {
@@ -10599,32 +11928,42 @@ const rawDB = {
         "model_codes": [
           "CHPI-7430N"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "chpi-7430n",
         "colors": [
           {
             "name": "아이스 화이트",
-            "hex": "#f5f5f5",
             "img_code": "wh"
           },
           {
-            "name": "자연 베이지",
-            "hex": "#e8e1d5",
-            "img_code": "bg"
+            "name": "아이스 그레이",
+            "img_code": "gr"
           },
           {
-            "name": "코랄 핑크",
-            "hex": "#ffb6c1",
+            "name": "아이스 블루",
+            "img_code": "bu"
+          },
+          {
+            "name": "아이스 핑크",
             "img_code": "pk"
           },
           {
-            "name": "스카이 블루",
-            "hex": "#87ceeb",
-            "img_code": "bu"
+            "name": "아이스 베이지",
+            "img_code": "bg"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1527&optno=1",
+          "https://www.coway.com/product/detail?prdno=1527&optno=2",
+          "https://www.coway.com/product/detail?prdno=1527&optno=3",
+          "https://www.coway.com/product/detail?prdno=1527&optno=4",
+          "https://www.coway.com/product/detail?prdno=1527&optno=5"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -10700,32 +12039,37 @@ const rawDB = {
         "model_codes": [
           "CHPI-7410N"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "chpi-7410n",
         "colors": [
           {
             "name": "아이스 화이트",
-            "hex": "#f5f5f5",
             "img_code": "wh"
           },
           {
-            "name": "자연 베이지",
-            "hex": "#e8e1d5",
-            "img_code": "bg"
+            "name": "아이스 그레이",
+            "img_code": "gr"
           },
           {
-            "name": "코랄 핑크",
-            "hex": "#ffb6c1",
+            "name": "아이스 블루",
+            "img_code": "bu"
+          },
+          {
+            "name": "아이스 핑크",
             "img_code": "pk"
-          },
-          {
-            "name": "실버",
-            "hex": "#c0c0c0",
-            "img_code": "sv"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1272&optno=5",
+          "https://www.coway.com/product/detail?prdno=1272&optno=6",
+          "https://www.coway.com/product/detail?prdno=1272&optno=7",
+          "https://www.coway.com/product/detail?prdno=1272&optno=8"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -10777,32 +12121,37 @@ const rawDB = {
         "model_codes": [
           "CPI-7410N"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cpi-7410n",
         "colors": [
           {
             "name": "아이스 화이트",
-            "hex": "#f5f5f5",
             "img_code": "wh"
           },
           {
-            "name": "자연 베이지",
-            "hex": "#e8e1d5",
-            "img_code": "bg"
+            "name": "아이스 그레이",
+            "img_code": "gr"
           },
           {
-            "name": "코랄 핑크",
-            "hex": "#ffb6c1",
+            "name": "아이스 블루",
+            "img_code": "bu"
+          },
+          {
+            "name": "아이스 핑크",
             "img_code": "pk"
-          },
-          {
-            "name": "실버",
-            "hex": "#c0c0c0",
-            "img_code": "sv"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1272&optno=1",
+          "https://www.coway.com/product/detail?prdno=1272&optno=2",
+          "https://www.coway.com/product/detail?prdno=1272&optno=3",
+          "https://www.coway.com/product/detail?prdno=1272&optno=4"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -10856,22 +12205,32 @@ const rawDB = {
         "model_codes": [
           "CHPI-7420N"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "chpi-7420n",
         "colors": [
           {
             "name": "아이스 화이트",
-            "hex": "#f5f5f5",
             "img_code": "wh"
           },
           {
+            "name": "아이스 그레이",
+            "img_code": "gr"
+          },
+          {
             "name": "아이스 블루",
-            "hex": "#87ceeb",
             "img_code": "bu"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1288&optno=1",
+          "https://www.coway.com/product/detail?prdno=1288&optno=2",
+          "https://www.coway.com/product/detail?prdno=1288&optno=3"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -10925,32 +12284,37 @@ const rawDB = {
         "model_codes": [
           "CHPI-7400N"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "chpi-7400n",
         "colors": [
           {
             "name": "아이스 화이트",
-            "hex": "#f5f5f5",
             "img_code": "wh"
           },
           {
-            "name": "다크 실버",
-            "hex": "#a9a9a9",
-            "img_code": "sv"
+            "name": "아이스 블루",
+            "img_code": "bu"
           },
           {
-            "name": "코랄 핑크",
-            "hex": "#ffb6c1",
+            "name": "아이스 핑크",
             "img_code": "pk"
           },
           {
-            "name": "아이스 블루",
-            "hex": "#87ceeb",
-            "img_code": "bu"
+            "name": "아이스 그레이",
+            "img_code": "gr"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1148&optno=1",
+          "https://www.coway.com/product/detail?prdno=1148&optno=2",
+          "https://www.coway.com/product/detail?prdno=1148&optno=3",
+          "https://www.coway.com/product/detail?prdno=1148&optno=4"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -11002,32 +12366,37 @@ const rawDB = {
         "model_codes": [
           "CPI-7400N"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cpi-7400n",
         "colors": [
           {
             "name": "아이스 화이트",
-            "hex": "#f5f5f5",
             "img_code": "wh"
           },
           {
-            "name": "다크 실버",
-            "hex": "#a9a9a9",
-            "img_code": "sv"
+            "name": "아이스 블루",
+            "img_code": "bu"
           },
           {
-            "name": "코랄 핑크",
-            "hex": "#ffb6c1",
+            "name": "아이스 핑크",
             "img_code": "pk"
           },
           {
-            "name": "아이스 블루",
-            "hex": "#87ceeb",
-            "img_code": "bu"
+            "name": "아이스 그레이",
+            "img_code": "gr"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1148&optno=5",
+          "https://www.coway.com/product/detail?prdno=1148&optno=6",
+          "https://www.coway.com/product/detail?prdno=1148&optno=7",
+          "https://www.coway.com/product/detail?prdno=1148&optno=8"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -11081,22 +12450,27 @@ const rawDB = {
         "model_codes": [
           "CHPCI-8400N"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "chpci-8400n",
         "colors": [
           {
-            "name": "포슬린 화이트",
-            "hex": "#f5f5f5",
-            "img_code": "wh"
+            "name": "퓨어 화이트",
+            "img_code": "wt"
           },
           {
-            "name": "캐비어 블랙",
-            "hex": "#333333",
+            "name": "페블 블랙",
             "img_code": "bk"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1544&optno=1",
+          "https://www.coway.com/product/detail?prdno=1544&optno=2"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -11150,22 +12524,27 @@ const rawDB = {
         "model_codes": [
           "CHPI-7521L"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "chpi-7521l",
         "colors": [
           {
-            "name": "화이트",
-            "hex": "#f5f5f5",
+            "name": "아이스 화이트",
             "img_code": "wh"
           },
           {
-            "name": "블랙",
-            "hex": "#333333",
-            "img_code": "bk"
+            "name": "아이스 그레이",
+            "img_code": "gr"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1220&optno=1",
+          "https://www.coway.com/product/detail?prdno=1220&optno=2"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -11219,22 +12598,22 @@ const rawDB = {
         "model_codes": [
           "CHPI-7511L"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "chpi-7511l",
         "colors": [
           {
-            "name": "포슬린 화이트",
-            "hex": "#f5f5f5",
-            "img_code": "wh"
-          },
-          {
-            "name": "플래티넘 실버",
-            "hex": "#c0c0c0",
-            "img_code": "sv"
+            "name": "미스티 그레이",
+            "img_code": "gr"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=3&optno=1"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -11286,22 +12665,22 @@ const rawDB = {
         "model_codes": [
           "CPI-7511L"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cpi-7511l",
         "colors": [
           {
-            "name": "포슬린 화이트",
-            "hex": "#f5f5f5",
-            "img_code": "wh"
-          },
-          {
-            "name": "플래티넘 실버",
-            "hex": "#c0c0c0",
-            "img_code": "sv"
+            "name": "미스티 그레이",
+            "img_code": "gr"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=3&optno=2"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -11355,17 +12734,22 @@ const rawDB = {
         "model_codes": [
           "CPSI-8510L"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cpsi-8510l",
         "colors": [
           {
-            "name": "플래티넘 실버",
-            "hex": "#c0c0c0",
-            "img_code": "sv"
+            "name": "미스티 그레이",
+            "img_code": "gr"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=87&optno=1"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -11392,37 +12776,47 @@ const rawDB = {
         "model_codes": [
           "CHP-7220N"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "chp-7220n",
         "colors": [
           {
-            "name": "스노우 화이트",
-            "hex": "#f5f5f5",
-            "img_code": "wh"
+            "name": "크림 베이지",
+            "img_code": "bg"
           },
           {
-            "name": "트러플 실버",
-            "hex": "#c0c0c0",
-            "img_code": "sv"
+            "name": "퓨어 화이트",
+            "img_code": "wt"
           },
           {
-            "name": "미네랄 블루",
-            "hex": "#87ceeb",
+            "name": "페블 그레이",
+            "img_code": "gr"
+          },
+          {
+            "name": "씨엘 블루",
             "img_code": "bu"
           },
           {
-            "name": "브론즈 핑크",
-            "hex": "#ffb6c1",
+            "name": "블룸 핑크",
             "img_code": "pk"
           },
           {
-            "name": "자연 베이지",
-            "hex": "#e8e1d5",
-            "img_code": "bg"
+            "name": "플래티넘 실버",
+            "img_code": "sl"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1384&optno=2",
+          "https://www.coway.com/product/detail?prdno=1384&optno=4",
+          "https://www.coway.com/product/detail?prdno=1384&optno=6",
+          "https://www.coway.com/product/detail?prdno=1384&optno=8",
+          "https://www.coway.com/product/detail?prdno=1384&optno=10",
+          "https://www.coway.com/product/detail?prdno=1384&optno=12"
+        ],
         "prices": {
           "방문관리": {
             "3년": {
@@ -11474,37 +12868,47 @@ const rawDB = {
         "model_codes": [
           "CP-7220N"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cp-7220n",
         "colors": [
           {
-            "name": "스노우 화이트",
-            "hex": "#f5f5f5",
-            "img_code": "wh"
+            "name": "크림 베이지",
+            "img_code": "bg"
           },
           {
-            "name": "트러플 실버",
-            "hex": "#c0c0c0",
-            "img_code": "sv"
+            "name": "퓨어 화이트",
+            "img_code": "wt"
           },
           {
-            "name": "미네랄 블루",
-            "hex": "#87ceeb",
+            "name": "페블 그레이",
+            "img_code": "gr"
+          },
+          {
+            "name": "씨엘 블루",
             "img_code": "bu"
           },
           {
-            "name": "브론즈 핑크",
-            "hex": "#ffb6c1",
+            "name": "블룸 핑크",
             "img_code": "pk"
           },
           {
-            "name": "자연 베이지",
-            "hex": "#e8e1d5",
-            "img_code": "bg"
+            "name": "플래티넘 실버",
+            "img_code": "sl"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1384&optno=1",
+          "https://www.coway.com/product/detail?prdno=1384&optno=3",
+          "https://www.coway.com/product/detail?prdno=1384&optno=5",
+          "https://www.coway.com/product/detail?prdno=1384&optno=7",
+          "https://www.coway.com/product/detail?prdno=1384&optno=9",
+          "https://www.coway.com/product/detail?prdno=1384&optno=11"
+        ],
         "prices": {
           "방문관리": {
             "3년": {
@@ -11558,37 +12962,47 @@ const rawDB = {
         "model_codes": [
           "CHP-7211N_V2"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "chp-7211n_v2",
         "colors": [
           {
-            "name": "스노우 화이트",
-            "hex": "#f5f5f5",
-            "img_code": "wh"
+            "name": "퓨어 화이트",
+            "img_code": "wt"
           },
           {
-            "name": "트러플 실버",
-            "hex": "#c0c0c0",
-            "img_code": "sv"
+            "name": "플래티넘 실버",
+            "img_code": "sl"
           },
           {
-            "name": "미네랄 블루",
-            "hex": "#87ceeb",
-            "img_code": "bu"
-          },
-          {
-            "name": "브론즈 핑크",
-            "hex": "#ffb6c1",
+            "name": "블룸 핑크",
             "img_code": "pk"
           },
           {
-            "name": "자연 베이지",
-            "hex": "#e8e1d5",
+            "name": "씨엘 블루",
+            "img_code": "bu"
+          },
+          {
+            "name": "크림 베이지",
             "img_code": "bg"
+          },
+          {
+            "name": "페블 그레이",
+            "img_code": "gr"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1494&optno=1",
+          "https://www.coway.com/product/detail?prdno=1494&optno=2",
+          "https://www.coway.com/product/detail?prdno=1494&optno=3",
+          "https://www.coway.com/product/detail?prdno=1494&optno=4",
+          "https://www.coway.com/product/detail?prdno=1494&optno=5",
+          "https://www.coway.com/product/detail?prdno=1494&optno=6"
+        ],
         "prices": {
           "방문관리": {
             "3년": {
@@ -11640,37 +13054,47 @@ const rawDB = {
         "model_codes": [
           "CP-7211N_V2"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cp-7211n_v2",
         "colors": [
           {
-            "name": "스노우 화이트",
-            "hex": "#f5f5f5",
-            "img_code": "wh"
+            "name": "퓨어 화이트",
+            "img_code": "wt"
           },
           {
-            "name": "트러플 실버",
-            "hex": "#c0c0c0",
-            "img_code": "sv"
+            "name": "페블 그레이",
+            "img_code": "gr"
           },
           {
-            "name": "미네랄 블루",
-            "hex": "#87ceeb",
-            "img_code": "bu"
+            "name": "플래티넘 실버",
+            "img_code": "sl"
           },
           {
-            "name": "브론즈 핑크",
-            "hex": "#ffb6c1",
+            "name": "블룸 핑크",
             "img_code": "pk"
           },
           {
-            "name": "자연 베이지",
-            "hex": "#e8e1d5",
+            "name": "씨엘 블루",
+            "img_code": "bu"
+          },
+          {
+            "name": "크림 베이지",
             "img_code": "bg"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1494&optno=7",
+          "https://www.coway.com/product/detail?prdno=1494&optno=8",
+          "https://www.coway.com/product/detail?prdno=1494&optno=9",
+          "https://www.coway.com/product/detail?prdno=1494&optno=10",
+          "https://www.coway.com/product/detail?prdno=1494&optno=11",
+          "https://www.coway.com/product/detail?prdno=1494&optno=12"
+        ],
         "prices": {
           "방문관리": {
             "3년": {
@@ -11724,32 +13148,42 @@ const rawDB = {
         "model_codes": [
           "CHP-7212N"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "chp-7212n",
         "colors": [
           {
-            "name": "스노우 화이트",
-            "hex": "#f5f5f5",
+            "name": "페블 블랙",
+            "img_code": "bk"
+          },
+          {
+            "name": "포슬린 화이트",
             "img_code": "wh"
           },
           {
-            "name": "트러플 실버",
-            "hex": "#c0c0c0",
+            "name": "아이언 실버",
             "img_code": "sv"
           },
           {
-            "name": "미네랄 블루",
-            "hex": "#87ceeb",
-            "img_code": "bu"
+            "name": "브론즈 베이지",
+            "img_code": "bg"
           },
           {
-            "name": "브론즈 핑크",
-            "hex": "#ffb6c1",
-            "img_code": "pk"
+            "name": "아이시 블루",
+            "img_code": "bu"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1253&optno=1",
+          "https://www.coway.com/product/detail?prdno=1253&optno=2",
+          "https://www.coway.com/product/detail?prdno=1253&optno=3",
+          "https://www.coway.com/product/detail?prdno=1253&optno=4",
+          "https://www.coway.com/product/detail?prdno=1253&optno=5"
+        ],
         "prices": {
           "방문관리": {
             "3년": {
@@ -11803,27 +13237,37 @@ const rawDB = {
         "model_codes": [
           "CHP-3140N"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "chp-3140n",
         "colors": [
           {
             "name": "포슬린 화이트",
-            "hex": "#f5f5f5",
             "img_code": "wh"
           },
           {
+            "name": "브론즈 베이지",
+            "img_code": "bg"
+          },
+          {
             "name": "플래티넘 실버",
-            "hex": "#c0c0c0",
             "img_code": "sv"
           },
           {
-            "name": "페블 베이지",
-            "hex": "#e8e1d5",
-            "img_code": "bg"
+            "name": "페블 그레이",
+            "img_code": "gr"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=212&optno=1",
+          "https://www.coway.com/product/detail?prdno=212&optno=2",
+          "https://www.coway.com/product/detail?prdno=212&optno=3",
+          "https://www.coway.com/product/detail?prdno=212&optno=4"
+        ],
         "prices": {
           "방문관리": {
             "3년": {
@@ -11877,27 +13321,37 @@ const rawDB = {
         "model_codes": [
           "CHP-8310L"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "chp-8310l",
         "colors": [
           {
             "name": "포슬린 화이트",
-            "hex": "#f5f5f5",
             "img_code": "wh"
           },
           {
+            "name": "브론즈 베이지",
+            "img_code": "bg"
+          },
+          {
             "name": "플래티넘 실버",
-            "hex": "#c0c0c0",
             "img_code": "sv"
           },
           {
-            "name": "페블 베이지",
-            "hex": "#e8e1d5",
-            "img_code": "bg"
+            "name": "페블 그레이",
+            "img_code": "gr"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=235&optno=1",
+          "https://www.coway.com/product/detail?prdno=235&optno=2",
+          "https://www.coway.com/product/detail?prdno=235&optno=3",
+          "https://www.coway.com/product/detail?prdno=235&optno=4"
+        ],
         "prices": {
           "방문관리": {
             "3년": {
@@ -11951,27 +13405,37 @@ const rawDB = {
         "model_codes": [
           "CHP-8200N"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "chp-8200n",
         "colors": [
           {
             "name": "포슬린 화이트",
-            "hex": "#f5f5f5",
             "img_code": "wh"
           },
           {
+            "name": "브론즈 베이지",
+            "img_code": "bg"
+          },
+          {
             "name": "플래티넘 실버",
-            "hex": "#c0c0c0",
             "img_code": "sv"
           },
           {
-            "name": "페블 베이지",
-            "hex": "#e8e1d5",
-            "img_code": "bg"
+            "name": "페블 그레이",
+            "img_code": "gr"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=211&optno=1",
+          "https://www.coway.com/product/detail?prdno=211&optno=2",
+          "https://www.coway.com/product/detail?prdno=211&optno=3",
+          "https://www.coway.com/product/detail?prdno=211&optno=4"
+        ],
         "prices": {
           "방문관리": {
             "3년": {
@@ -12003,27 +13467,37 @@ const rawDB = {
         "model_codes": [
           "CHP-8210N"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "chp-8210n",
         "colors": [
           {
             "name": "포슬린 화이트",
-            "hex": "#f5f5f5",
             "img_code": "wh"
           },
           {
+            "name": "브론즈 베이지",
+            "img_code": "bg"
+          },
+          {
             "name": "플래티넘 실버",
-            "hex": "#c0c0c0",
             "img_code": "sv"
           },
           {
-            "name": "페블 베이지",
-            "hex": "#e8e1d5",
-            "img_code": "bg"
+            "name": "페블 그레이",
+            "img_code": "gr"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=233&optno=1",
+          "https://www.coway.com/product/detail?prdno=233&optno=2",
+          "https://www.coway.com/product/detail?prdno=233&optno=3",
+          "https://www.coway.com/product/detail?prdno=233&optno=4"
+        ],
         "prices": {
           "자가관리": {
             "3년": {
@@ -12055,27 +13529,37 @@ const rawDB = {
         "model_codes": [
           "CHP-1111N/1112N"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "chp-1111n1112n",
         "colors": [
           {
-            "name": "실버",
-            "hex": "#c0c0c0",
+            "name": "아이언 실버",
             "img_code": "sv"
           },
           {
-            "name": "화이트",
-            "hex": "#f5f5f5",
-            "img_code": "wh"
+            "name": "페블 그레이",
+            "img_code": "gr"
           },
           {
-            "name": "블랙",
-            "hex": "#333333",
-            "img_code": "bk"
+            "name": "쿼츠브라운",
+            "img_code": "br"
+          },
+          {
+            "name": "아이시 블루",
+            "img_code": "bu"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1252&optno=5",
+          "https://www.coway.com/product/detail?prdno=1252&optno=6",
+          "https://www.coway.com/product/detail?prdno=1252&optno=7",
+          "https://www.coway.com/product/detail?prdno=1252&optno=8"
+        ],
         "prices": {
           "방문관리(6개월)": {
             "3년": {
@@ -12129,17 +13613,22 @@ const rawDB = {
         "model_codes": [
           "CHP-6340L"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "chp-6340l",
         "colors": [
           {
-            "name": "화이트",
-            "hex": "#f5f5f5",
+            "name": "포슬린 화이트",
             "img_code": "wh"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1055&optno=2"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -12169,17 +13658,22 @@ const rawDB = {
         "model_codes": [
           "CP-6340L"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cp-6340l",
         "colors": [
           {
-            "name": "화이트",
-            "hex": "#f5f5f5",
+            "name": "포슬린 화이트",
             "img_code": "wh"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1055&optno=1"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -12211,17 +13705,22 @@ const rawDB = {
         "model_codes": [
           "CHP-264L"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "chp-264l",
         "colors": [
           {
-            "name": "화이트",
-            "hex": "#f5f5f5",
-            "img_code": "wh"
+            "name": "화이트&실버",
+            "img_code": "wtsv"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=110&optno=1"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -12253,27 +13752,37 @@ const rawDB = {
         "model_codes": [
           "P-2200N"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "p-2200n",
         "colors": [
           {
             "name": "다크 그레이",
-            "hex": "#555555",
             "img_code": "gy"
           },
           {
-            "name": "오트밀 베이지",
-            "hex": "#e8e1d5",
+            "name": "포슬린 화이트",
+            "img_code": "wh"
+          },
+          {
+            "name": "크림 베이지",
             "img_code": "bg"
           },
           {
-            "name": "포슬린 화이트",
-            "hex": "#f5f5f5",
-            "img_code": "wh"
+            "name": "트러플 실버",
+            "img_code": "sv"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1248&optno=1",
+          "https://www.coway.com/product/detail?prdno=1248&optno=2",
+          "https://www.coway.com/product/detail?prdno=1248&optno=3",
+          "https://www.coway.com/product/detail?prdno=1248&optno=4"
+        ],
         "prices": {
           "방문관리(6개월)": {
             "3년": {
@@ -12327,27 +13836,37 @@ const rawDB = {
         "model_codes": [
           "P-2210N"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "p-2210n",
         "colors": [
           {
             "name": "다크 그레이",
-            "hex": "#555555",
             "img_code": "gy"
           },
           {
-            "name": "오트밀 베이지",
-            "hex": "#e8e1d5",
+            "name": "포슬린 화이트",
+            "img_code": "wh"
+          },
+          {
+            "name": "크림 베이지",
             "img_code": "bg"
           },
           {
-            "name": "포슬린 화이트",
-            "hex": "#f5f5f5",
-            "img_code": "wh"
+            "name": "트러플 실버",
+            "img_code": "sv"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1248&optno=5",
+          "https://www.coway.com/product/detail?prdno=1248&optno=6",
+          "https://www.coway.com/product/detail?prdno=1248&optno=7",
+          "https://www.coway.com/product/detail?prdno=1248&optno=8"
+        ],
         "prices": {
           "방문관리(6개월)": {
             "3년": {
@@ -12401,17 +13920,22 @@ const rawDB = {
         "model_codes": [
           "P-6320L"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "p-6320l",
         "colors": [
           {
-            "name": "화이트",
-            "hex": "#f5f5f5",
-            "img_code": "wh"
+            "name": "오트밀 베이지",
+            "img_code": "bg"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=109&optno=1"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -12443,17 +13967,15 @@ const rawDB = {
         "model_codes": [
           "P-3150C"
         ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "p-3150c",
-        "colors": [
-          {
-            "name": "실버",
-            "hex": "#c0c0c0",
-            "img_code": "sv"
-          }
-        ],
+        "colors": [],
         "source_group": "정수기",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_no_color_option",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 10,
         "prices": {
           "자가관리(6개월)": {
             "단일": {
@@ -12462,7 +13984,10 @@ const rawDB = {
               "source_row": 1438
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "정수 (P-3150C)"
+        ]
       }
     },
     "워터 스탠드 플러스": {
@@ -12470,17 +13995,22 @@ const rawDB = {
         "model_codes": [
           "CHP-5730L"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "chp-5730l",
         "colors": [
           {
-            "name": "화이트",
-            "hex": "#f5f5f5",
+            "name": "포슬린 화이트",
             "img_code": "wh"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1299&optno=1"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -12522,17 +14052,22 @@ const rawDB = {
         "model_codes": [
           "CHP-5730N"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "chp-5730n",
         "colors": [
           {
-            "name": "화이트",
-            "hex": "#f5f5f5",
+            "name": "포슬린 화이트",
             "img_code": "wh"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1299&optno=3"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -12557,17 +14092,22 @@ const rawDB = {
         "model_codes": [
           "CHP-5730R"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "chp-5730r",
         "colors": [
           {
-            "name": "화이트",
-            "hex": "#f5f5f5",
+            "name": "포슬린 화이트",
             "img_code": "wh"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1299&optno=2"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -12611,17 +14151,22 @@ const rawDB = {
         "model_codes": [
           "CHP-5711L"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "chp-5711l",
         "colors": [
           {
             "name": "화이트",
-            "hex": "#f5f5f5",
             "img_code": "wh"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1137&optno=1"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -12663,17 +14208,22 @@ const rawDB = {
         "model_codes": [
           "CHP-5711R"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "chp-5711r",
         "colors": [
           {
             "name": "화이트",
-            "hex": "#f5f5f5",
             "img_code": "wh"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1137&optno=2"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -12717,17 +14267,22 @@ const rawDB = {
         "model_codes": [
           "CHP-5720L"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "chp-5720l",
         "colors": [
           {
             "name": "오트밀 베이지",
-            "hex": "#e8e1d5",
             "img_code": "bg"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1045&optno=1"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -12771,22 +14326,27 @@ const rawDB = {
         "model_codes": [
           "CHPI-5830L"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "chpi-5830l",
         "colors": [
           {
-            "name": "화이트",
-            "hex": "#f5f5f5",
+            "name": "포슬린 화이트",
             "img_code": "wh"
           },
           {
-            "name": "블랙",
-            "hex": "#333333",
-            "img_code": "bk"
+            "name": "페블 그레이",
+            "img_code": "gr"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1370&optno=1",
+          "https://www.coway.com/product/detail?prdno=1370&optno=2"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -12830,17 +14390,22 @@ const rawDB = {
         "model_codes": [
           "CHPI-5810L"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "chpi-5810l",
         "colors": [
           {
-            "name": "화이트",
-            "hex": "#f5f5f5",
-            "img_code": "wh"
+            "name": "미스티 그레이",
+            "img_code": "gr"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1010&optno=1"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -12884,22 +14449,27 @@ const rawDB = {
         "model_codes": [
           "CHPI-5820L"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "chpi-5820l",
         "colors": [
           {
-            "name": "화이트",
-            "hex": "#f5f5f5",
+            "name": "포슬린 화이트",
             "img_code": "wh"
           },
           {
-            "name": "블랙",
-            "hex": "#333333",
-            "img_code": "bk"
+            "name": "페블 그레이",
+            "img_code": "gr"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1427&optno=1",
+          "https://www.coway.com/product/detail?prdno=1427&optno=2"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -12943,17 +14513,22 @@ const rawDB = {
         "model_codes": [
           "CHPI-5801L"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "chpi-5801l",
         "colors": [
           {
             "name": "블랙",
-            "hex": "#333333",
             "img_code": "bk"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=2&optno=3"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -12978,17 +14553,22 @@ const rawDB = {
         "model_codes": [
           "CHPI-5801L"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "chpi-5801l",
         "colors": [
           {
             "name": "화이트",
-            "hex": "#f5f5f5",
             "img_code": "wh"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=2&optno=4"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -13015,22 +14595,27 @@ const rawDB = {
         "model_codes": [
           "CHPI-620L"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "chpi-620l",
         "colors": [
           {
             "name": "화이트",
-            "hex": "#f5f5f5",
             "img_code": "wh"
           },
           {
             "name": "블랙",
-            "hex": "#333333",
             "img_code": "bk"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=100&optno=1",
+          "https://www.coway.com/product/detail?prdno=100&optno=2"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -13057,17 +14642,22 @@ const rawDB = {
         "model_codes": [
           "CHP-700L"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "chp-700l",
         "colors": [
           {
             "name": "화이트",
-            "hex": "#f5f5f5",
             "img_code": "wh"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=104&optno=1"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -13094,17 +14684,22 @@ const rawDB = {
         "model_codes": [
           "CHP-5700R"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "chp-5700r",
         "colors": [
           {
             "name": "화이트",
-            "hex": "#f5f5f5",
             "img_code": "wh"
           }
         ],
         "source_group": "정수기",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=101&optno=1"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -13133,32 +14728,37 @@ const rawDB = {
         "model_codes": [
           "BAS51-A"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "bas51-a",
         "colors": [
           {
-            "name": "코튼 화이트",
-            "hex": "#f5f5f5",
-            "img_code": "wt"
-          },
-          {
-            "name": "스노우 실버",
-            "hex": "#c0c0c0",
-            "img_code": "ss"
-          },
-          {
             "name": "브론즈 베이지",
-            "hex": "#e8e1d5",
             "img_code": "bg"
           },
           {
+            "name": "쿼츠 화이트",
+            "img_code": "wt"
+          },
+          {
+            "name": "스노위 실버",
+            "img_code": "ss"
+          },
+          {
             "name": "티탄 실버",
-            "hex": "#a9a9a9",
             "img_code": "sl"
           }
         ],
         "source_group": "비데",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1477&optno=1",
+          "https://www.coway.com/product/detail?prdno=1477&optno=2",
+          "https://www.coway.com/product/detail?prdno=1477&optno=3",
+          "https://www.coway.com/product/detail?prdno=1477&optno=4"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -13234,22 +14834,22 @@ const rawDB = {
         "model_codes": [
           "BAS38-C"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "bas38-c",
         "colors": [
           {
-            "name": "티탄 실버",
-            "hex": "#a9a9a9",
-            "img_code": "sl"
-          },
-          {
-            "name": "차콜 블랙",
-            "hex": "#333333",
-            "img_code": "bk"
+            "name": "화이트",
+            "img_code": "wt"
           }
         ],
         "source_group": "비데",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1206&optno=1"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -13325,22 +14925,22 @@ const rawDB = {
         "model_codes": [
           "BAS37-C"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "bas37-c",
         "colors": [
           {
-            "name": "티탄 실버",
-            "hex": "#a9a9a9",
-            "img_code": "sl"
-          },
-          {
-            "name": "차콜 블랙",
-            "hex": "#333333",
-            "img_code": "bk"
+            "name": "화이트",
+            "img_code": "wt"
           }
         ],
         "source_group": "비데",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1205&optno=1"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -13416,32 +15016,37 @@ const rawDB = {
         "model_codes": [
           "BAS49-A"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "bas49-a",
         "colors": [
           {
-            "name": "로즈 화이트",
-            "hex": "#f5f5f5",
+            "name": "쿼츠 화이트",
             "img_code": "wt"
           },
           {
-            "name": "스노우 실버",
-            "hex": "#c0c0c0",
+            "name": "스노위 실버",
             "img_code": "ss"
           },
           {
             "name": "브론즈 베이지",
-            "hex": "#e8e1d5",
             "img_code": "bg"
           },
           {
             "name": "티탄 실버",
-            "hex": "#a9a9a9",
             "img_code": "sl"
           }
         ],
         "source_group": "비데",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1351&optno=1",
+          "https://www.coway.com/product/detail?prdno=1351&optno=2",
+          "https://www.coway.com/product/detail?prdno=1351&optno=3",
+          "https://www.coway.com/product/detail?prdno=1351&optno=4"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -13517,27 +15122,32 @@ const rawDB = {
         "model_codes": [
           "BAS41-B"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "bas41-b",
         "colors": [
           {
             "name": "핑크",
-            "hex": "#ffc0cb",
             "img_code": "pk"
           },
           {
-            "name": "그린",
-            "hex": "#90ee90",
-            "img_code": "gn"
+            "name": "그레이",
+            "img_code": "gr"
           },
           {
-            "name": "그레이",
-            "hex": "#808080",
-            "img_code": "gr"
+            "name": "그린",
+            "img_code": "gn"
           }
         ],
         "source_group": "비데",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1523&optno=1",
+          "https://www.coway.com/product/detail?prdno=1523&optno=2",
+          "https://www.coway.com/product/detail?prdno=1523&optno=3"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -13613,17 +15223,22 @@ const rawDB = {
         "model_codes": [
           "BAS39-A"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "bas39-a",
         "colors": [
           {
             "name": "화이트",
-            "hex": "#f5f5f5",
             "img_code": "wt"
           }
         ],
         "source_group": "비데",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1048&optno=1"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -13677,17 +15292,22 @@ const rawDB = {
         "model_codes": [
           "BAS40-B"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "bas40-b",
         "colors": [
           {
             "name": "화이트",
-            "hex": "#f5f5f5",
             "img_code": "wt"
           }
         ],
         "source_group": "비데",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1522&optno=1"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -13763,17 +15383,22 @@ const rawDB = {
         "model_codes": [
           "BA52-A"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "ba52-a",
         "colors": [
           {
             "name": "화이트",
-            "hex": "#f5f5f5",
             "img_code": "wt"
           }
         ],
         "source_group": "비데",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1524&optno=1"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -13847,17 +15472,22 @@ const rawDB = {
         "model_codes": [
           "BA20-D"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "ba20-d",
         "colors": [
           {
             "name": "화이트",
-            "hex": "#f5f5f5",
             "img_code": "wt"
           }
         ],
         "source_group": "비데",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=43&optno=1"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -13913,32 +15543,32 @@ const rawDB = {
         "model_codes": [
           "CIP-31W"
         ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "cip-31w",
         "colors": [
           {
             "name": "화이트",
-            "hex": "#f5f5f5",
-            "img_code": "wt"
-          },
-          {
-            "name": "핑크",
-            "hex": "#ffc0cb",
-            "img_code": "pk"
+            "img_code": "ws"
           },
           {
             "name": "블루",
-            "hex": "#87ceeb",
-            "img_code": "bu"
+            "img_code": "ls"
+          },
+          {
+            "name": "핑크",
+            "img_code": "ps"
           },
           {
             "name": "그레이",
-            "hex": "#808080",
-            "img_code": "gr"
+            "img_code": "gs"
           }
         ],
         "source_group": "주방",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_verified",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 47,
         "prices": {
           "서비스 프리": {
             "5년": {
@@ -13974,7 +15604,10 @@ const rawDB = {
               "source_row": 1678
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "단일모델 (CIP-31W)"
+        ]
       }
     },
     "S 인덕션": {
@@ -13982,17 +15615,22 @@ const rawDB = {
         "model_codes": [
           "CUP-30KS"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cup-30ks",
         "colors": [
           {
             "name": "블랙",
-            "hex": "#333333",
             "img_code": "bk"
           }
         ],
         "source_group": "주방",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1511&optno=1"
+        ],
         "prices": {
           "서비스 프리": {
             "5년": {
@@ -14036,17 +15674,22 @@ const rawDB = {
         "model_codes": [
           "CIR-F60GS"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cir-f60gs",
         "colors": [
           {
-            "name": "페블 베이지",
-            "hex": "#e8e1d5",
-            "img_code": "bg"
+            "name": "페블 그레이",
+            "img_code": "gr"
           }
         ],
         "source_group": "주방",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=244&optno=1"
+        ],
         "prices": {
           "서비스 프리": {
             "5년": {
@@ -14090,27 +15733,32 @@ const rawDB = {
         "model_codes": [
           "CIR-F41"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cir-f41",
         "colors": [
           {
-            "name": "페블 베이지",
-            "hex": "#e8e1d5",
-            "img_code": "bg"
+            "name": "페블 그레이",
+            "img_code": "gs"
           },
           {
-            "name": "블랙",
-            "hex": "#333333",
-            "img_code": "bk"
+            "name": "히말라얀 솔트 핑크",
+            "img_code": "ps"
           },
           {
-            "name": "화이트",
-            "hex": "#f5f5f5",
-            "img_code": "wt"
+            "name": "오트밀 베이지",
+            "img_code": "bs"
           }
         ],
         "source_group": "주방",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=246&optno=1",
+          "https://www.coway.com/product/detail?prdno=246&optno=2",
+          "https://www.coway.com/product/detail?prdno=246&optno=3"
+        ],
         "prices": {
           "서비스 프리": {
             "5년": {
@@ -14154,17 +15802,22 @@ const rawDB = {
         "model_codes": [
           "CIR-303"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cir-303",
         "colors": [
           {
             "name": "블랙",
-            "hex": "#333333",
             "img_code": "bk"
           }
         ],
         "source_group": "주방",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1070&optno=1"
+        ],
         "prices": {
           "서비스 프리": {
             "5년": {
@@ -14208,17 +15861,22 @@ const rawDB = {
         "model_codes": [
           "CER-04"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "cer-04",
         "colors": [
           {
             "name": "블랙",
-            "hex": "#333333",
             "img_code": "bk"
           }
         ],
         "source_group": "주방",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1058&optno=1"
+        ],
         "prices": {
           "서비스 프리": {
             "5년": {
@@ -14262,17 +15920,22 @@ const rawDB = {
         "model_codes": [
           "NIP-31KE"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "nip-31ke",
         "colors": [
           {
             "name": "블랙",
-            "hex": "#333333",
             "img_code": "bk"
           }
         ],
         "source_group": "주방",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1071&optno=1"
+        ],
         "prices": {
           "서비스 프리": {
             "5년": {
@@ -14316,17 +15979,22 @@ const rawDB = {
         "model_codes": [
           "NHP-31KE"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "nhp-31ke",
         "colors": [
           {
             "name": "블랙",
-            "hex": "#333333",
             "img_code": "bk"
           }
         ],
         "source_group": "주방",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1072&optno=1"
+        ],
         "prices": {
           "서비스 프리": {
             "5년": {
@@ -14372,22 +16040,27 @@ const rawDB = {
         "model_codes": [
           "BB17-A"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "bb17-a",
         "colors": [
           {
-            "name": "미러",
-            "hex": "#a9a9a9",
-            "img_code": "mr"
+            "name": "포슬린 화이트",
+            "img_code": "wt"
           },
           {
-            "name": "화이트",
-            "hex": "#f5f5f5",
-            "img_code": "wt"
+            "name": "페블 그레이",
+            "img_code": "gr"
           }
         ],
         "source_group": "연수·샤워",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1017&optno=1",
+          "https://www.coway.com/product/detail?prdno=1017&optno=2"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -14431,22 +16104,27 @@ const rawDB = {
         "model_codes": [
           "BB16-A"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "bb16-a",
         "colors": [
           {
-            "name": "미러",
-            "hex": "#a9a9a9",
-            "img_code": "mr"
+            "name": "포슬린 화이트",
+            "img_code": "wt"
           },
           {
-            "name": "화이트",
-            "hex": "#f5f5f5",
-            "img_code": "wt"
+            "name": "페블 그레이",
+            "img_code": "gr"
           }
         ],
         "source_group": "연수·샤워",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1016&optno=1",
+          "https://www.coway.com/product/detail?prdno=1016&optno=2"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -14490,17 +16168,22 @@ const rawDB = {
         "model_codes": [
           "BB15-A"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "bb15-a",
         "colors": [
           {
             "name": "화이트",
-            "hex": "#f5f5f5",
             "img_code": "wt"
           }
         ],
         "source_group": "연수·샤워",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=9&optno=1"
+        ],
         "prices": {
           "방문관리(2개월)": {
             "3년": {
@@ -14527,17 +16210,22 @@ const rawDB = {
         "model_codes": [
           "HCM-U01"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "hcm-u01",
         "colors": [
           {
-            "name": "화이트",
-            "hex": "#f5f5f5",
-            "img_code": "wt"
+            "name": "피치베이지",
+            "img_code": "bg"
           }
         ],
         "source_group": "기타",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1360&optno=1"
+        ],
         "prices": {
           "서비스 프리": {
             "5년": {
@@ -14566,17 +16254,22 @@ const rawDB = {
         "model_codes": [
           "HCM-P01"
         ],
+        "model_code_status": "excel_model_text_verified",
         "img_prefix": "hcm-p01",
         "colors": [
           {
-            "name": "화이트",
-            "hex": "#f5f5f5",
-            "img_code": "wt"
+            "name": "피치베이지",
+            "img_code": "bg"
           }
         ],
         "source_group": "기타",
         "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1452&optno=1"
+        ],
         "prices": {
           "서비스 프리": {
             "5년": {
@@ -14637,17 +16330,15 @@ const rawDB = {
         "model_codes": [
           "ACAH-061AAS"
         ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "acah-061aas",
-        "colors": [
-          {
-            "name": "화이트",
-            "hex": "#f5f5f5",
-            "img_code": "wt"
-          }
-        ],
+        "colors": [],
         "source_group": "기타",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_no_color_option",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 52,
         "prices": {
           "베이직 케어": {
             "5년": {
@@ -14697,7 +16388,10 @@ const rawDB = {
               "source_row": 1740
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "단일모델 (ACAH-061AAS)"
+        ]
       }
     },
     "벽걸이에어컨 6평 5등급": {
@@ -14705,17 +16399,15 @@ const rawDB = {
         "model_codes": [
           "ACAH-065AAS"
         ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "acah-065aas",
-        "colors": [
-          {
-            "name": "화이트",
-            "hex": "#f5f5f5",
-            "img_code": "wt"
-          }
-        ],
+        "colors": [],
         "source_group": "기타",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_no_color_option",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 52,
         "prices": {
           "베이직 케어": {
             "5년": {
@@ -14765,7 +16457,10 @@ const rawDB = {
               "source_row": 1748
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "단일모델 (ACAH-065AAS)"
+        ]
       }
     },
     "벽걸이에어컨 8평 5등급": {
@@ -14773,17 +16468,15 @@ const rawDB = {
         "model_codes": [
           "ACAH-085AAS"
         ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "acah-085aas",
-        "colors": [
-          {
-            "name": "화이트",
-            "hex": "#f5f5f5",
-            "img_code": "wt"
-          }
-        ],
+        "colors": [],
         "source_group": "기타",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_no_color_option",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 52,
         "prices": {
           "베이직 케어": {
             "5년": {
@@ -14833,7 +16526,10 @@ const rawDB = {
               "source_row": 1756
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "단일모델 (ACAH-085AAS)"
+        ]
       }
     },
     "벽걸이에어컨 10평 5등급": {
@@ -14841,17 +16537,15 @@ const rawDB = {
         "model_codes": [
           "ACAH-105AAS"
         ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "acah-105aas",
-        "colors": [
-          {
-            "name": "화이트",
-            "hex": "#f5f5f5",
-            "img_code": "wt"
-          }
-        ],
+        "colors": [],
         "source_group": "기타",
-        "model_name_status": "excel_model_text_verified",
-        "colors_status": "legacy_metadata_pending_image_check",
+        "model_name_status": "official_pdf_verified",
+        "colors_status": "official_pdf_no_color_option",
+        "official_site_status": "not_listed_in_current_snapshot",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_pdf_page": 52,
         "prices": {
           "베이직 케어": {
             "5년": {
@@ -14901,7 +16595,10 @@ const rawDB = {
               "source_row": 1764
             }
           }
-        }
+        },
+        "source_model_texts": [
+          "단일모델 (ACAH-105AAS)"
+        ]
       }
     },
     "분쇄형 2L": {
@@ -14909,6 +16606,7 @@ const rawDB = {
         "model_codes": [
           "WMG-2005"
         ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "wmg-2005",
         "colors": [
           {
@@ -14926,7 +16624,14 @@ const rawDB = {
         ],
         "source_group": "기타",
         "model_name_status": "official_pdf_verified",
-        "colors_status": "official_pdf_verified",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1493&optno=1",
+          "https://www.coway.com/product/detail?prdno=1493&optno=2",
+          "https://www.coway.com/product/detail?prdno=1493&optno=3"
+        ],
         "official_pdf_page": 53,
         "prices": {
           "자가관리(1회/4개월)": {
@@ -14980,6 +16685,7 @@ const rawDB = {
         "model_codes": [
           "WMG-3004"
         ],
+        "model_code_status": "official_pdf_verified",
         "img_prefix": "wmg-3004",
         "colors": [
           {
@@ -14997,7 +16703,14 @@ const rawDB = {
         ],
         "source_group": "기타",
         "model_name_status": "official_pdf_verified",
-        "colors_status": "official_pdf_verified",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
+        "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1492&optno=1",
+          "https://www.coway.com/product/detail?prdno=1492&optno=2",
+          "https://www.coway.com/product/detail?prdno=1492&optno=3"
+        ],
         "official_pdf_page": 53,
         "prices": {
           "자가관리(1회/4개월)": {
@@ -15061,10 +16774,10 @@ const rawDB = {
         "publish_ready": false
       }
     },
-    "아로마 샤워헤드": {
+    "메모리폼 베개": {
       "단일상품": {
         "model_codes": [],
-        "img_prefix": "aroma-showerhead",
+        "img_prefix": "memory-foam-pillow",
         "colors": [],
         "source_group": "수동 등록 소모품",
         "model_name_status": "manual_placeholder",
@@ -15076,10 +16789,10 @@ const rawDB = {
         "publish_ready": false
       }
     },
-    "메모리폼 베개": {
+    "아로마 샤워헤드": {
       "단일상품": {
         "model_codes": [],
-        "img_prefix": "memory-foam-pillow",
+        "img_prefix": "aroma-showerhead",
         "colors": [],
         "source_group": "수동 등록 소모품",
         "model_name_status": "manual_placeholder",
