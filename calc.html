@@ -2,8 +2,9 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>COWAY 견적 계산기</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#f2f4f6">
+  <title>COWAY 제품 선택</title>
   <link rel="icon" href="img/icon/logo.png" type="image/png">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,600,1,0">
 
@@ -491,6 +492,646 @@
       .thumb-img-box { height: 60px; }
       select { font-size: 12.5px; }
     }
+
+    /* Shopping UI v1 */
+    html {
+      background: var(--gray-100);
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      min-width: 320px;
+      min-height: 100dvh;
+      padding-bottom: 0;
+      line-height: 1.45;
+      word-break: keep-all;
+    }
+
+    .app-container {
+      min-height: 100dvh;
+      padding: 0 18px 164px;
+      box-shadow: none;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      min-height: 66px;
+      margin: 0 -18px;
+      padding: 11px 18px;
+      background: rgba(242, 244, 246, 0.9);
+      border-bottom: 1px solid rgba(209, 214, 219, 0.45);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .back-btn {
+      left: 8px;
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      padding: 0;
+      border-radius: 14px;
+      font-size: 26px;
+    }
+
+    .page-title-logo { height: 24px; }
+
+    .category-scroll {
+      gap: 9px;
+      margin: 14px -18px 15px;
+      padding: 0 18px 5px;
+      scroll-padding-inline: 18px;
+      scroll-snap-type: x proximity;
+    }
+
+    .category-btn {
+      width: 82px;
+      min-height: 92px;
+      padding: 12px 6px;
+      border: 0;
+      border-radius: 21px;
+      scroll-snap-align: start;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.045);
+    }
+
+    .category-btn.active {
+      border: 0;
+      box-shadow: 0 0 0 2px var(--blue) inset, 0 8px 22px rgba(49, 130, 246, 0.13);
+    }
+
+    .icon-wrap {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 9px;
+      border-radius: 13px;
+    }
+
+    .category-name {
+      font-size: 13.5px;
+      font-weight: 760;
+      letter-spacing: -0.04em;
+    }
+
+    .card {
+      margin-bottom: 14px;
+      padding: 22px 20px;
+      border-radius: 24px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+    }
+
+    .card-title {
+      margin-bottom: 18px;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .card-title .material-symbols-rounded { font-size: 24px; }
+
+    .section-label,
+    .input-group label,
+    .color-label {
+      margin-bottom: 8px;
+      color: var(--gray-500);
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    .section-scroll {
+      gap: 8px;
+      margin: 0 -20px 18px;
+      padding: 0 20px 4px;
+    }
+
+    .section-btn {
+      min-height: 44px;
+      padding: 10px 16px;
+      border: 0;
+      background: var(--gray-100);
+      font-size: 14px;
+      font-weight: 750;
+    }
+
+    .section-btn.active {
+      border: 0;
+      background: var(--blue);
+      box-shadow: 0 7px 16px rgba(49, 130, 246, 0.2);
+    }
+
+    .product-header {
+      align-items: stretch;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .thumb-area,
+    .thumb-img-box {
+      width: 84px;
+    }
+
+    .thumb-img-box {
+      height: 84px;
+      border: 0;
+      border-radius: 18px;
+      background: var(--gray-100);
+      box-shadow: none;
+    }
+
+    select {
+      min-height: 54px;
+      padding: 14px 38px 14px 15px;
+      border: 0;
+      border-radius: 15px;
+      background-color: var(--gray-100);
+      font-size: 15.5px;
+      font-weight: 700;
+    }
+
+    select:focus-visible {
+      outline: 3px solid rgba(49, 130, 246, 0.25);
+      outline-offset: 2px;
+    }
+
+    .picker-source {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      overflow: hidden !important;
+      clip: rect(0 0 0 0) !important;
+      clip-path: inset(50%) !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+
+    .picker-trigger {
+      width: 100%;
+      min-height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 13px 13px 13px 15px;
+      border: 0;
+      border-radius: 15px;
+      background: var(--gray-100);
+      color: var(--ink);
+      cursor: pointer;
+      text-align: left;
+      transition: background 150ms ease, transform 150ms ease, box-shadow 150ms ease;
+    }
+
+    .picker-trigger:active { transform: scale(0.985); }
+
+    .picker-trigger:focus-visible,
+    .picker-trigger.step-highlight {
+      outline: 0;
+      box-shadow: 0 0 0 3px rgba(49, 130, 246, 0.22);
+      background: #edf5ff;
+    }
+
+    .color-row.step-highlight,
+    .receipt-box.step-highlight {
+      border-radius: 20px;
+      box-shadow: 0 0 0 3px rgba(49, 130, 246, 0.22);
+    }
+
+    .picker-trigger:disabled {
+      color: var(--gray-500);
+      cursor: default;
+    }
+
+    .picker-value {
+      min-width: 0;
+      overflow: hidden;
+      display: -webkit-box;
+      color: inherit;
+      font-size: 15.5px;
+      font-weight: 720;
+      line-height: 1.35;
+      letter-spacing: -0.025em;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+
+    .picker-chevron {
+      flex: 0 0 auto;
+      color: var(--gray-500);
+      font-size: 22px;
+    }
+
+    .input-row { gap: 10px; margin-bottom: 16px; }
+    .color-row { margin-bottom: 18px; }
+    .color-container { gap: 12px; }
+
+    .color-swatch {
+      width: 42px;
+      height: 42px;
+      border-width: 2px;
+      box-shadow: 0 3px 8px rgba(15, 23, 42, 0.11);
+    }
+
+    .receipt-box {
+      min-height: 80px;
+      margin-bottom: 15px;
+      padding: 17px;
+      border: 0;
+      border-radius: 17px;
+      background: #f4f8fd;
+    }
+
+    .receipt-row { font-size: 14px; }
+
+    .receipt-row.total {
+      border-color: rgba(49, 130, 246, 0.18);
+      font-size: 18px;
+    }
+
+    .price-badge {
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-size: 12px;
+    }
+
+    .add-cart-btn {
+      min-height: 54px;
+      border-radius: 16px;
+      font-size: 16px;
+      box-shadow: 0 9px 20px rgba(49, 130, 246, 0.23);
+    }
+
+    .toggle-switch {
+      padding: 15px;
+      border: 0 !important;
+      border-radius: 16px;
+      background: var(--gray-100);
+      box-shadow: none;
+    }
+
+    .toggle-label { font-size: 14px; }
+    .toggle-desc { font-size: 12px; line-height: 1.4; }
+    .promo-area { border: 0; }
+
+    .cart-list { gap: 10px; }
+
+    .cart-empty {
+      padding: 24px 12px;
+      border-radius: 16px;
+      background: var(--gray-100);
+      font-size: 14px;
+    }
+
+    .cart-item {
+      padding: 17px;
+      border: 0;
+      border-radius: 16px;
+      background: var(--gray-100);
+    }
+
+    .cart-item-title { font-size: 15px; }
+    .cart-item-sub { font-size: 13px; }
+
+    .timeline-box {
+      padding: 12px;
+      border-radius: 12px;
+      background: #fff;
+      font-size: 13px;
+    }
+
+    .result-card {
+      position: fixed;
+      right: 0;
+      bottom: calc(12px + env(safe-area-inset-bottom));
+      left: 0;
+      z-index: 90;
+      width: min(calc(100% - 28px), 452px);
+      min-height: 86px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 12px 12px 18px;
+      border: 1px solid rgba(209, 214, 219, 0.68);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.96);
+      color: var(--ink);
+      box-shadow: 0 12px 36px rgba(15, 23, 42, 0.15);
+      text-align: left;
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+    }
+
+    .result-copy { min-width: 0; }
+
+    .final-price-title {
+      margin: 0 0 1px;
+      color: var(--gray-500);
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .final-price {
+      color: var(--blue-dark);
+      font-size: 22px;
+      font-weight: 850;
+      line-height: 1.2;
+      letter-spacing: -0.045em;
+    }
+
+    .regular-price-line,
+    .one-time-summary {
+      margin-top: 3px;
+      padding: 0;
+      border: 0;
+      color: var(--gray-500);
+      font-size: 11.5px;
+      font-weight: 650;
+    }
+
+    .regular-price-line #finalPriceRegular,
+    .one-time-summary #finalPriceCash {
+      color: var(--gray-700);
+      font-size: inherit;
+      font-weight: 750;
+    }
+
+    .detail-btn {
+      width: auto;
+      min-width: 88px;
+      min-height: 56px;
+      margin: 0;
+      padding: 12px 15px;
+      border-radius: 17px;
+      background: var(--blue);
+      color: #fff;
+      font-size: 14px;
+      box-shadow: 0 8px 18px rgba(49, 130, 246, 0.22);
+    }
+
+    .modal-overlay {
+      align-items: flex-end;
+      padding: 0 10px;
+      background: rgba(25, 31, 40, 0.48);
+    }
+
+    .receipt-modal {
+      width: min(100%, 480px);
+      max-width: 480px;
+      max-height: 88dvh;
+      padding: 12px 22px calc(24px + env(safe-area-inset-bottom));
+      border-radius: 28px 28px 0 0;
+    }
+
+    .receipt-modal::before {
+      width: 42px;
+      height: 5px;
+      display: block;
+      margin: 0 auto 18px;
+      border-radius: 999px;
+      background: var(--gray-300);
+      content: "";
+    }
+
+    .receipt-title { font-size: 21px; }
+    .receipt-caption { font-size: 13px; }
+    .image-modal { align-items: center; padding: 20px; }
+
+    .picker-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 10020;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 0 10px;
+      visibility: hidden;
+      background: rgba(25, 31, 40, 0);
+      transition: visibility 220ms ease, background 220ms ease;
+    }
+
+    .picker-overlay.open {
+      visibility: visible;
+      background: rgba(25, 31, 40, 0.46);
+    }
+
+    .picker-sheet {
+      width: min(100%, 480px);
+      max-height: 84dvh;
+      overflow: hidden;
+      padding: 10px 18px calc(20px + env(safe-area-inset-bottom));
+      border-radius: 28px 28px 0 0;
+      background: #fff;
+      box-shadow: 0 -14px 38px rgba(15, 23, 42, 0.17);
+      transform: translateY(104%);
+      transition: transform 230ms cubic-bezier(0.22, 0.8, 0.24, 1);
+    }
+
+    .picker-overlay.open .picker-sheet { transform: translateY(0); }
+
+    .picker-handle {
+      width: 42px;
+      height: 5px;
+      margin: 0 auto 14px;
+      border-radius: 999px;
+      background: var(--gray-300);
+    }
+
+    .picker-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .picker-title {
+      margin: 0;
+      font-size: 21px;
+      font-weight: 800;
+      letter-spacing: -0.045em;
+    }
+
+    .picker-close {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 0;
+      border-radius: 14px;
+      background: var(--gray-100);
+      color: var(--gray-700);
+      cursor: pointer;
+    }
+
+    .picker-search-wrap {
+      position: relative;
+      margin-bottom: 10px;
+    }
+
+    .picker-search-wrap.hidden { display: none; }
+
+    .picker-search-icon {
+      position: absolute;
+      top: 50%;
+      left: 14px;
+      color: var(--gray-500);
+      font-size: 21px;
+      pointer-events: none;
+      transform: translateY(-50%);
+    }
+
+    .picker-search {
+      width: 100%;
+      min-height: 50px;
+      padding: 12px 14px 12px 44px;
+      border: 0;
+      border-radius: 15px;
+      outline: 0;
+      background: var(--gray-100);
+      color: var(--ink);
+      font: inherit;
+      font-size: 15px;
+    }
+
+    .picker-search:focus { box-shadow: 0 0 0 3px rgba(49, 130, 246, 0.2); }
+
+    .picker-options {
+      max-height: min(58dvh, 520px);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      scrollbar-width: none;
+    }
+
+    .picker-options::-webkit-scrollbar { display: none; }
+
+    .picker-option {
+      width: 100%;
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 12px 10px;
+      border: 0;
+      border-bottom: 1px solid var(--gray-100);
+      background: transparent;
+      color: var(--ink);
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .picker-option:last-child { border-bottom: 0; }
+
+    .picker-option-text {
+      min-width: 0;
+      font-size: 16px;
+      font-weight: 650;
+      line-height: 1.4;
+      letter-spacing: -0.025em;
+    }
+
+    .picker-option-check {
+      width: 24px;
+      height: 24px;
+      flex: 0 0 24px;
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--gray-300);
+      border-radius: 50%;
+      color: transparent;
+    }
+
+    .picker-option.selected {
+      color: var(--blue-dark);
+      font-weight: 750;
+    }
+
+    .picker-option.selected .picker-option-check {
+      border-color: var(--blue);
+      background: var(--blue);
+      color: #fff;
+    }
+
+    .picker-option-check .material-symbols-rounded { font-size: 17px; }
+
+    .picker-empty {
+      padding: 30px 10px;
+      color: var(--gray-500);
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .shop-toast {
+      position: fixed;
+      right: 0;
+      bottom: calc(112px + env(safe-area-inset-bottom));
+      left: 0;
+      z-index: 10010;
+      width: fit-content;
+      max-width: calc(100% - 40px);
+      margin: 0 auto;
+      padding: 12px 17px;
+      border-radius: 999px;
+      background: rgba(25, 31, 40, 0.94);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px);
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+
+    .shop-toast.show { opacity: 1; transform: translateY(0); }
+
+    body.picker-open { overflow: hidden; }
+
+    .picker-trigger:focus-visible,
+    .picker-option:focus-visible,
+    .picker-close:focus-visible,
+    .detail-btn:focus-visible,
+    .add-cart-btn:focus-visible {
+      outline: 3px solid rgba(49, 130, 246, 0.28);
+      outline-offset: 2px;
+    }
+
+    @media (min-width: 700px) {
+      body { padding: 22px 0; }
+      .app-container {
+        min-height: calc(100dvh - 44px);
+        overflow: hidden;
+        border-radius: 32px;
+        box-shadow: 0 18px 60px rgba(15, 23, 42, 0.12);
+      }
+      .result-card { bottom: 26px; }
+      .picker-sheet,
+      .receipt-modal {
+        margin-bottom: 18px;
+        border-radius: 28px;
+      }
+    }
+
+    @media (max-width: 370px) {
+      .app-container { padding-right: 14px; padding-left: 14px; }
+      .header { margin-right: -14px; margin-left: -14px; }
+      .category-scroll { margin-right: -14px; margin-left: -14px; padding-right: 14px; padding-left: 14px; }
+      .card { padding: 19px 17px; }
+      .thumb-area, .thumb-img-box { width: 72px; }
+      .thumb-img-box { height: 72px; }
+      .picker-value { font-size: 14.5px; }
+      .result-card { width: calc(100% - 20px); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+      }
+    }
   </style>
 </head>
 
@@ -514,7 +1155,7 @@
     <section class="card" aria-labelledby="optionTitle">
       <h1 id="optionTitle" class="card-title">
         <span class="material-symbols-rounded" style="color:#3182f6">add_shopping_cart</span>
-        제품 옵션 선택
+        제품 선택
       </h1>
 
       <div class="section-label">소분류</div>
@@ -548,19 +1189,19 @@
       <div id="rentalOptions">
         <div class="input-row">
           <div class="input-group">
-            <label for="rentalTypeOpt">렌탈 구분</label>
-            <select id="rentalTypeOpt"></select>
-          </div>
-        </div>
-
-        <div class="input-row">
-          <div class="input-group">
             <label for="careOpt">관리 방식 (케어)</label>
             <select id="careOpt"></select>
           </div>
           <div class="input-group">
             <label for="termOpt">약정 기간</label>
             <select id="termOpt"></select>
+          </div>
+        </div>
+
+        <div class="input-row">
+          <div class="input-group">
+            <label for="rentalTypeOpt">렌탈 구분</label>
+            <select id="rentalTypeOpt"></select>
           </div>
         </div>
       </div>
@@ -570,14 +1211,14 @@
 
       <button id="addCartBtn" class="add-cart-btn" type="button">
         <span class="material-symbols-rounded">add_shopping_cart</span>
-        견적함에 담기
+        장바구니에 담기
       </button>
     </section>
 
     <section class="card" aria-labelledby="cartTitle">
       <div id="cartTitle" class="card-title">
         <span class="material-symbols-rounded" style="color:#0ca678">shopping_bag</span>
-        내 견적함 (<span id="cartCount">0</span>개)
+        장바구니 (<span id="cartCount">0</span>개)
       </div>
 
       <div id="combineSwitchBox" class="toggle-switch" style="display:none">
@@ -618,21 +1259,17 @@
       <div id="cartList" class="cart-list"></div>
     </section>
 
-    <section class="result-card" aria-label="견적 합계">
-      <div class="final-price-title">최초 1개월 차 렌탈 납입금</div>
-      <div id="finalPriceFirst" class="final-price">0 원</div>
-
-      <div class="final-price-title" style="margin-top:10px">프로모션 종료 후 월 렌탈 납입금</div>
-      <div id="finalPriceRegular" class="final-price" style="color:#fff;font-size:18px">0 원</div>
-
-      <div id="oneTimeSummary" class="one-time-summary">
-        <div class="final-price-title">일시불 상품 합계</div>
-        <div id="finalPriceCash" class="final-price" style="color:#ffd43b;font-size:20px">0 원</div>
+    <section class="result-card" aria-label="장바구니 합계">
+      <div class="result-copy">
+        <div class="final-price-title">첫 달 예상 금액</div>
+        <div id="finalPriceFirst" class="final-price">0 원</div>
+        <div class="regular-price-line">혜택 종료 후 월 <span id="finalPriceRegular">0 원</span></div>
+        <div id="oneTimeSummary" class="one-time-summary">일시불 합계 <span id="finalPriceCash">0 원</span></div>
       </div>
 
       <button id="receiptBtn" class="detail-btn" type="button">
         <span class="material-symbols-rounded">receipt_long</span>
-        맞춤 견적 상세 영수증 보기
+        상세
       </button>
     </section>
   </main>
@@ -640,8 +1277,8 @@
   <div id="receiptModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="receiptTitle">
     <div class="receipt-modal">
       <div class="receipt-header">
-        <div id="receiptTitle" class="receipt-title">COWAY 스마트 견적서</div>
-        <div class="receipt-caption">선택한 카탈로그 가격과 기존 계산 규칙 기준</div>
+        <div id="receiptTitle" class="receipt-title">장바구니 가격 요약</div>
+        <div class="receipt-caption">선택한 카탈로그 가격과 적용 혜택 기준</div>
       </div>
 
       <div id="receiptItemList" class="receipt-items"></div>
@@ -649,7 +1286,7 @@
       <div id="receiptDiscountDetails"></div>
       <div id="receiptCashRow" class="receipt-sum-row" style="display:none"><span>일시불 상품 합계</span><span id="receiptCashSum">0원</span></div>
       <div class="receipt-sum-row total"><span>최종 월 납입금 (1개월 차)</span><span id="receiptFinalSum">0원</span></div>
-      <button id="closeReceiptBtn" class="close-modal-btn" type="button">확인 완료</button>
+      <button id="closeReceiptBtn" class="close-modal-btn" type="button">닫기</button>
     </div>
   </div>
 
@@ -659,6 +1296,25 @@
       <img id="modalImage" class="image-modal-img" alt="선택한 제품 확대 이미지">
     </div>
   </div>
+
+  <div id="pickerOverlay" class="picker-overlay" aria-hidden="true">
+    <section id="pickerSheet" class="picker-sheet" role="dialog" aria-modal="true" aria-labelledby="pickerTitle" tabindex="-1">
+      <div class="picker-handle" aria-hidden="true"></div>
+      <header class="picker-header">
+        <h2 id="pickerTitle" class="picker-title">항목 선택</h2>
+        <button id="pickerClose" class="picker-close" type="button" aria-label="선택창 닫기">
+          <span class="material-symbols-rounded" aria-hidden="true">close</span>
+        </button>
+      </header>
+      <div id="pickerSearchWrap" class="picker-search-wrap hidden">
+        <span class="material-symbols-rounded picker-search-icon" aria-hidden="true">search</span>
+        <input id="pickerSearch" class="picker-search" type="search" placeholder="이름으로 찾기" autocomplete="off">
+      </div>
+      <div id="pickerOptions" class="picker-options" role="radiogroup"></div>
+    </section>
+  </div>
+
+  <div id="shopToast" class="shop-toast" role="status" aria-live="polite">장바구니에 담았어요</div>
 
   <script src="data.js"></script>
 
@@ -1314,7 +1970,7 @@
 
         el.cartList.insertAdjacentHTML("beforeend", `
           <article class="cart-item">
-            <button type="button" class="cart-del-btn" data-remove-id="${escapeHtml(item.id)}" aria-label="견적에서 삭제">✕</button>
+            <button type="button" class="cart-del-btn" data-remove-id="${escapeHtml(item.id)}" aria-label="장바구니에서 삭제">✕</button>
             <div class="cart-item-title">${escapeHtml(item.title)}</div>
             <div class="cart-item-sub">${escapeHtml(sub)}</div>
             <div class="timeline-box">${bodyHtml}</div>
@@ -1322,7 +1978,7 @@
         `);
       });
 
-      if (!state.cart.length) el.cartList.innerHTML = '<div class="cart-empty">담긴 제품이 없습니다.</div>';
+      if (!state.cart.length) el.cartList.innerHTML = '<div class="cart-empty">장바구니가 비어 있습니다.</div>';
 
       el.finalPriceFirst.textContent = `${firstMonthTotal.toLocaleString("ko-KR")} 원`;
       el.finalPriceRegular.textContent = `${regularMonthTotal.toLocaleString("ko-KR")} 원`;
@@ -1383,7 +2039,7 @@
     }
 
     function openReceiptModal() {
-      if (!state.cart.length) return alert("견적함이 비어 있습니다.");
+      if (!state.cart.length) return alert("장바구니가 비어 있습니다.");
       el.receiptModal.style.display = "flex";
     }
 
@@ -1436,6 +2092,265 @@
     }
 
     document.addEventListener("DOMContentLoaded", init);
+  </script>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const PICKERS = {
+        productOpt: "제품을 선택하세요",
+        modelOpt: "세부 모델을 선택하세요",
+        careOpt: "관리 방식을 선택하세요",
+        termOpt: "약정 기간을 선택하세요",
+        rentalTypeOpt: "렌탈 구분을 선택하세요"
+      };
+      const FLOW = ["modelOpt", "careOpt", "termOpt", "rentalTypeOpt"];
+      const triggerMap = new Map();
+      const observerMap = new Map();
+
+      const overlay = document.getElementById("pickerOverlay");
+      const sheet = document.getElementById("pickerSheet");
+      const pickerTitle = document.getElementById("pickerTitle");
+      const pickerClose = document.getElementById("pickerClose");
+      const searchWrap = document.getElementById("pickerSearchWrap");
+      const searchInput = document.getElementById("pickerSearch");
+      const optionList = document.getElementById("pickerOptions");
+      const toast = document.getElementById("shopToast");
+
+      let activeSelect = null;
+      let activeTrigger = null;
+      let toastTimer = 0;
+      let touchStartY = 0;
+
+      function validOptions(select) {
+        return [...select.options].filter(option => !option.disabled && String(option.value) !== "");
+      }
+
+      function selectedText(select) {
+        const selected = select.options[select.selectedIndex];
+        return selected?.textContent?.trim() || validOptions(select)[0]?.textContent?.trim() || "선택 가능한 항목 없음";
+      }
+
+      function syncTrigger(select) {
+        const trigger = triggerMap.get(select.id);
+        if (!trigger) return;
+
+        const options = validOptions(select);
+        const value = trigger.querySelector(".picker-value");
+        const chevron = trigger.querySelector(".picker-chevron");
+        value.textContent = selectedText(select);
+        trigger.disabled = options.length === 0;
+        trigger.setAttribute("aria-disabled", options.length === 0 ? "true" : "false");
+        chevron.textContent = options.length === 1 ? "check_circle" : "expand_more";
+      }
+
+      function makeTrigger(select) {
+        select.classList.add("picker-source");
+        select.setAttribute("aria-hidden", "true");
+        select.tabIndex = -1;
+
+        const button = document.createElement("button");
+        button.type = "button";
+        button.id = `${select.id}Picker`;
+        button.className = "picker-trigger";
+        button.setAttribute("aria-haspopup", "dialog");
+        button.setAttribute("aria-controls", "pickerSheet");
+        button.setAttribute("aria-expanded", "false");
+
+        const value = document.createElement("span");
+        value.className = "picker-value";
+
+        const chevron = document.createElement("span");
+        chevron.className = "material-symbols-rounded picker-chevron";
+        chevron.setAttribute("aria-hidden", "true");
+        chevron.textContent = "expand_more";
+
+        button.append(value, chevron);
+        select.insertAdjacentElement("afterend", button);
+        triggerMap.set(select.id, button);
+
+        const label = document.querySelector(`label[for="${select.id}"]`);
+        if (label) label.htmlFor = button.id;
+
+        button.addEventListener("click", () => openPicker(select, button));
+        select.addEventListener("change", () => syncTrigger(select));
+
+        const observer = new MutationObserver(() => syncTrigger(select));
+        observer.observe(select, {
+          childList: true,
+          subtree: true,
+          attributes: true,
+          attributeFilter: ["disabled"]
+        });
+        observerMap.set(select.id, observer);
+        syncTrigger(select);
+      }
+
+      function optionButton(option) {
+        const button = document.createElement("button");
+        const selected = activeSelect && String(option.value) === String(activeSelect.value);
+        button.type = "button";
+        button.className = `picker-option${selected ? " selected" : ""}`;
+        button.setAttribute("role", "radio");
+        button.setAttribute("aria-checked", selected ? "true" : "false");
+        button.dataset.value = String(option.value);
+
+        const text = document.createElement("span");
+        text.className = "picker-option-text";
+        text.textContent = option.textContent.trim();
+
+        const check = document.createElement("span");
+        check.className = "picker-option-check";
+        check.setAttribute("aria-hidden", "true");
+        check.innerHTML = '<span class="material-symbols-rounded">check</span>';
+
+        button.append(text, check);
+        button.addEventListener("click", () => chooseOption(option.value));
+        return button;
+      }
+
+      function renderOptions(query = "") {
+        if (!activeSelect) return;
+        const normalized = query.trim().toLocaleLowerCase("ko-KR");
+        const options = validOptions(activeSelect).filter(option =>
+          option.textContent.toLocaleLowerCase("ko-KR").includes(normalized)
+        );
+
+        optionList.replaceChildren();
+        if (!options.length) {
+          const empty = document.createElement("div");
+          empty.className = "picker-empty";
+          empty.textContent = "검색 결과가 없습니다.";
+          optionList.appendChild(empty);
+          return;
+        }
+
+        options.forEach(option => optionList.appendChild(optionButton(option)));
+      }
+
+      function openPicker(select, trigger) {
+        const options = validOptions(select);
+        if (!options.length) return;
+
+        activeSelect = select;
+        activeTrigger = trigger;
+        pickerTitle.textContent = PICKERS[select.id] || "항목을 선택하세요";
+        searchInput.value = "";
+        searchWrap.classList.toggle("hidden", options.length < 7);
+        renderOptions();
+
+        document.body.classList.add("picker-open");
+        overlay.classList.add("open");
+        overlay.setAttribute("aria-hidden", "false");
+        trigger.setAttribute("aria-expanded", "true");
+
+        window.setTimeout(() => {
+          sheet.focus();
+          optionList.querySelector(".picker-option.selected")?.scrollIntoView({ block: "center" });
+        }, 40);
+      }
+
+      function closePicker({ restoreFocus = true } = {}) {
+        if (!overlay.classList.contains("open")) return;
+        document.body.classList.remove("picker-open");
+        overlay.classList.remove("open");
+        overlay.setAttribute("aria-hidden", "true");
+        activeTrigger?.setAttribute("aria-expanded", "false");
+        if (restoreFocus) activeTrigger?.focus();
+      }
+
+      function firstNextTarget(fromId) {
+        const colorRow = document.getElementById("colorRow");
+        const colorCount = document.getElementById("colorContainer")?.children.length || 0;
+        if ((fromId === "productOpt" || fromId === "modelOpt") && colorRow?.offsetParent && colorCount > 1) {
+          return colorRow;
+        }
+
+        const start = fromId === "productOpt"
+          ? 0
+          : fromId === "color"
+            ? 1
+            : Math.max(0, FLOW.indexOf(fromId) + 1);
+        for (let index = start; index < FLOW.length; index += 1) {
+          const select = document.getElementById(FLOW[index]);
+          const options = select ? validOptions(select) : [];
+          if (options.length > 1) return triggerMap.get(FLOW[index]);
+        }
+        return document.getElementById("priceDisplayBox");
+      }
+
+      function highlightNext(fromId) {
+        window.setTimeout(() => {
+          const target = firstNextTarget(fromId);
+          if (!target) return;
+          target.scrollIntoView({ behavior: "smooth", block: "center" });
+          target.classList.add("step-highlight");
+          window.setTimeout(() => target.classList.remove("step-highlight"), 850);
+        }, 230);
+      }
+
+      function chooseOption(value) {
+        if (!activeSelect) return;
+        const select = activeSelect;
+        select.value = String(value);
+        select.dispatchEvent(new Event("change", { bubbles: true }));
+        syncTrigger(select);
+        closePicker({ restoreFocus: false });
+        highlightNext(select.id);
+      }
+
+      function showToast(message) {
+        window.clearTimeout(toastTimer);
+        toast.textContent = message;
+        toast.classList.add("show");
+        toastTimer = window.setTimeout(() => toast.classList.remove("show"), 1700);
+      }
+
+      function initShoppingUI() {
+        Object.keys(PICKERS).forEach(id => {
+          const select = document.getElementById(id);
+          if (select) makeTrigger(select);
+        });
+
+        document.getElementById("categoryTabs")?.addEventListener("click", event => {
+          const button = event.target.closest(".category-btn");
+          if (button) window.setTimeout(() => button.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" }), 20);
+        });
+
+        document.getElementById("sectionTabs")?.addEventListener("click", event => {
+          const button = event.target.closest(".section-btn");
+          if (button) window.setTimeout(() => button.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" }), 20);
+        });
+
+        document.getElementById("colorContainer")?.addEventListener("click", event => {
+          if (event.target.closest(".color-swatch")) highlightNext("color");
+        });
+
+        document.getElementById("addCartBtn")?.addEventListener("click", event => {
+          if (!event.currentTarget.disabled) showToast("장바구니에 담았어요");
+        });
+      }
+
+      pickerClose.addEventListener("click", () => closePicker());
+      overlay.addEventListener("click", event => {
+        if (event.target === overlay) closePicker();
+      });
+      searchInput.addEventListener("input", event => renderOptions(event.target.value));
+      document.addEventListener("keydown", event => {
+        if (event.key === "Escape") closePicker();
+      });
+
+      sheet.addEventListener("touchstart", event => {
+        touchStartY = optionList.scrollTop === 0 ? event.changedTouches[0].clientY : 0;
+      }, { passive: true });
+      sheet.addEventListener("touchend", event => {
+        if (touchStartY && event.changedTouches[0].clientY - touchStartY > 80) closePicker();
+        touchStartY = 0;
+      }, { passive: true });
+
+      document.addEventListener("DOMContentLoaded", initShoppingUI);
+    })();
   </script>
 </body>
 </html>
