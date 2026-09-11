@@ -579,6 +579,9 @@ const rawDB = {
         "colors_status": "official_site_verified",
         "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1082&optno=3"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -662,6 +665,9 @@ const rawDB = {
         "colors_status": "official_site_verified",
         "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1082&optno=2"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -745,6 +751,9 @@ const rawDB = {
         "colors_status": "official_site_verified",
         "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1082&optno=1"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -827,9 +836,13 @@ const rawDB = {
         "colors": [],
         "source_group": "매트리스·모션베드",
         "model_name_status": "official_pdf_verified",
-        "colors_status": "official_pdf_no_color_option",
-        "official_site_status": "not_listed_in_current_snapshot",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1300&optno=3",
+          "https://www.coway.com/product/detail?prdno=1300&optno=7"
+        ],
         "official_pdf_page": 30,
         "prices": {
           "베이직케어": {
@@ -914,9 +927,13 @@ const rawDB = {
         "colors": [],
         "source_group": "매트리스·모션베드",
         "model_name_status": "official_pdf_verified",
-        "colors_status": "official_pdf_no_color_option",
-        "official_site_status": "not_listed_in_current_snapshot",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1300&optno=4",
+          "https://www.coway.com/product/detail?prdno=1300&optno=8"
+        ],
         "official_pdf_page": 30,
         "prices": {
           "베이직케어": {
@@ -1001,9 +1018,13 @@ const rawDB = {
         "colors": [],
         "source_group": "매트리스·모션베드",
         "model_name_status": "official_pdf_verified",
-        "colors_status": "official_pdf_no_color_option",
-        "official_site_status": "not_listed_in_current_snapshot",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1300&optno=2",
+          "https://www.coway.com/product/detail?prdno=1300&optno=6"
+        ],
         "official_pdf_page": 30,
         "prices": {
           "베이직케어": {
@@ -1088,9 +1109,13 @@ const rawDB = {
         "colors": [],
         "source_group": "매트리스·모션베드",
         "model_name_status": "official_pdf_verified",
-        "colors_status": "official_pdf_no_color_option",
-        "official_site_status": "not_listed_in_current_snapshot",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1300&optno=1",
+          "https://www.coway.com/product/detail?prdno=1300&optno=5"
+        ],
         "official_pdf_page": 30,
         "prices": {
           "베이직케어": {
@@ -1180,6 +1205,9 @@ const rawDB = {
         "colors_status": "official_site_verified",
         "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1352&optno=7"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -1263,6 +1291,9 @@ const rawDB = {
         "colors_status": "official_site_verified",
         "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1352&optno=8"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -1346,6 +1377,9 @@ const rawDB = {
         "colors_status": "official_site_verified",
         "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1352&optno=6"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -1429,6 +1463,9 @@ const rawDB = {
         "colors_status": "official_site_verified",
         "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1352&optno=5"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -2303,6 +2340,9 @@ const rawDB = {
         "colors_status": "official_site_verified",
         "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1112&optno=3"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -2386,6 +2426,9 @@ const rawDB = {
         "colors_status": "official_site_verified",
         "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1112&optno=2"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -2469,6 +2512,9 @@ const rawDB = {
         "colors_status": "official_site_verified",
         "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1112&optno=1"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -2817,6 +2863,9 @@ const rawDB = {
         "colors_status": "official_site_verified",
         "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1111&optno=5"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -2866,6 +2915,9 @@ const rawDB = {
         "colors_status": "official_site_verified",
         "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1111&optno=2"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -2915,6 +2967,9 @@ const rawDB = {
         "colors_status": "official_site_verified",
         "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1111&optno=1"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -2964,6 +3019,9 @@ const rawDB = {
         "colors_status": "official_site_verified",
         "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1111&optno=3"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -3013,6 +3071,9 @@ const rawDB = {
         "colors_status": "official_site_verified",
         "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1111&optno=4"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -3064,6 +3125,9 @@ const rawDB = {
         "colors_status": "official_site_verified",
         "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1111&optno=10"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -3147,6 +3211,9 @@ const rawDB = {
         "colors_status": "official_site_verified",
         "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1111&optno=8"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -3230,6 +3297,9 @@ const rawDB = {
         "colors_status": "official_site_verified",
         "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1111&optno=9"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -3313,6 +3383,9 @@ const rawDB = {
         "colors_status": "official_site_verified",
         "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1111&optno=7"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -3396,6 +3469,9 @@ const rawDB = {
         "colors_status": "official_site_verified",
         "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1111&optno=6"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -3481,6 +3557,9 @@ const rawDB = {
         "colors_status": "official_site_verified",
         "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1311&optno=5"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -3530,6 +3609,9 @@ const rawDB = {
         "colors_status": "official_site_verified",
         "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1311&optno=3"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -3579,6 +3661,9 @@ const rawDB = {
         "colors_status": "official_site_verified",
         "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1311&optno=4"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -3628,6 +3713,9 @@ const rawDB = {
         "colors_status": "official_site_verified",
         "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1311&optno=2"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -3677,6 +3765,9 @@ const rawDB = {
         "colors_status": "official_site_verified",
         "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1311&optno=1"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -3728,6 +3819,9 @@ const rawDB = {
         "colors_status": "official_site_verified",
         "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1311&optno=10"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -3811,6 +3905,9 @@ const rawDB = {
         "colors_status": "official_site_verified",
         "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1311&optno=8"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -3894,6 +3991,9 @@ const rawDB = {
         "colors_status": "official_site_verified",
         "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1311&optno=9"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -3977,6 +4077,9 @@ const rawDB = {
         "colors_status": "official_site_verified",
         "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1311&optno=7"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -4060,6 +4163,9 @@ const rawDB = {
         "colors_status": "official_site_verified",
         "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1311&optno=6"
+        ],
         "prices": {
           "베이직케어": {
             "5년": {
@@ -15551,12 +15657,12 @@ const rawDB = {
             "img_code": "ws"
           },
           {
-            "name": "블루",
-            "img_code": "ls"
-          },
-          {
             "name": "핑크",
             "img_code": "ps"
+          },
+          {
+            "name": "블루",
+            "img_code": "ls"
           },
           {
             "name": "그레이",
@@ -15565,9 +15671,15 @@ const rawDB = {
         ],
         "source_group": "주방",
         "model_name_status": "official_pdf_verified",
-        "colors_status": "official_pdf_verified",
-        "official_site_status": "not_listed_in_current_snapshot",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1480&optno=1",
+          "https://www.coway.com/product/detail?prdno=1480&optno=2",
+          "https://www.coway.com/product/detail?prdno=1480&optno=3",
+          "https://www.coway.com/product/detail?prdno=1480&optno=4"
+        ],
         "official_pdf_page": 47,
         "prices": {
           "서비스 프리": {
@@ -16332,12 +16444,20 @@ const rawDB = {
         ],
         "model_code_status": "official_pdf_verified",
         "img_prefix": "acah-061aas",
-        "colors": [],
+        "colors": [
+          {
+            "name": "화이트",
+            "img_code": "wt"
+          }
+        ],
         "source_group": "기타",
         "model_name_status": "official_pdf_verified",
-        "colors_status": "official_pdf_no_color_option",
-        "official_site_status": "not_listed_in_current_snapshot",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1488&optno=1"
+        ],
         "official_pdf_page": 52,
         "prices": {
           "베이직 케어": {
@@ -16401,12 +16521,20 @@ const rawDB = {
         ],
         "model_code_status": "official_pdf_verified",
         "img_prefix": "acah-065aas",
-        "colors": [],
+        "colors": [
+          {
+            "name": "화이트",
+            "img_code": "wt"
+          }
+        ],
         "source_group": "기타",
         "model_name_status": "official_pdf_verified",
-        "colors_status": "official_pdf_no_color_option",
-        "official_site_status": "not_listed_in_current_snapshot",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1488&optno=2"
+        ],
         "official_pdf_page": 52,
         "prices": {
           "베이직 케어": {
@@ -16470,12 +16598,20 @@ const rawDB = {
         ],
         "model_code_status": "official_pdf_verified",
         "img_prefix": "acah-085aas",
-        "colors": [],
+        "colors": [
+          {
+            "name": "화이트",
+            "img_code": "wt"
+          }
+        ],
         "source_group": "기타",
         "model_name_status": "official_pdf_verified",
-        "colors_status": "official_pdf_no_color_option",
-        "official_site_status": "not_listed_in_current_snapshot",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1488&optno=3"
+        ],
         "official_pdf_page": 52,
         "prices": {
           "베이직 케어": {
@@ -16539,12 +16675,20 @@ const rawDB = {
         ],
         "model_code_status": "official_pdf_verified",
         "img_prefix": "acah-105aas",
-        "colors": [],
+        "colors": [
+          {
+            "name": "화이트",
+            "img_code": "wt"
+          }
+        ],
         "source_group": "기타",
         "model_name_status": "official_pdf_verified",
-        "colors_status": "official_pdf_no_color_option",
-        "official_site_status": "not_listed_in_current_snapshot",
+        "colors_status": "official_site_verified",
+        "official_site_status": "verified",
         "official_site_checked_at": "2026-09-11T02:52:02.736Z",
+        "official_product_urls": [
+          "https://www.coway.com/product/detail?prdno=1488&optno=4"
+        ],
         "official_pdf_page": 52,
         "prices": {
           "베이직 케어": {
