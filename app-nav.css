@@ -1,0 +1,333 @@
+:root {
+  --app-nav-primary: #3182f6;
+  --app-nav-primary-deep: #1b64da;
+  --app-nav-primary-soft: #e8f3ff;
+  --app-nav-ink: #191f28;
+  --app-nav-gray-700: #4e5968;
+  --app-nav-gray-600: #6b7684;
+  --app-nav-gray-500: #8b95a1;
+  --app-nav-gray-300: #d1d6db;
+  --app-nav-gray-200: #e5e8eb;
+  --app-nav-gray-100: #f2f4f6;
+  --app-nav-surface: #ffffff;
+}
+
+body[data-app-page] {
+  min-width: 320px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+body[data-app-page]:not([data-app-page="home"]) .app-container {
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-bottom: calc(126px + env(safe-area-inset-bottom)) !important;
+}
+
+body[data-app-page="products"] .app-container {
+  padding-bottom: calc(264px + env(safe-area-inset-bottom)) !important;
+}
+
+body[data-app-page] .back-btn {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  padding: 0 !important;
+  border: 0;
+  border-radius: 14px;
+  color: var(--app-nav-ink);
+  font-size: 0 !important;
+  line-height: 1;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body[data-app-page] .back-btn .material-symbols-rounded {
+  font-size: 27px;
+}
+
+body[data-app-page] .back-btn:active {
+  background: rgba(209, 214, 219, 0.42);
+  transform: scale(0.94);
+}
+
+.bottom-dock-wrap {
+  position: fixed;
+  right: 0;
+  bottom: calc(12px + env(safe-area-inset-bottom));
+  left: 0;
+  z-index: 9000;
+  width: min(calc(100% - 28px), 452px);
+  margin: 0 auto;
+}
+
+.bottom-dock {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding: 7px;
+  border: 1px solid rgba(209, 214, 219, 0.66);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 12px 36px rgba(15, 23, 42, 0.14);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+
+.dock-item {
+  min-width: 0;
+  min-height: 58px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 6px 3px;
+  border: 0;
+  border-radius: 18px;
+  background: transparent;
+  color: var(--app-nav-gray-500);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: color 150ms ease, background 150ms ease, transform 150ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dock-item .material-symbols-rounded {
+  font-size: 1.45rem;
+}
+
+.dock-item.active {
+  background: var(--app-nav-primary-soft);
+  color: var(--app-nav-primary-deep);
+}
+
+.dock-item:active {
+  transform: scale(0.94);
+}
+
+.sheet-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 11000;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0 12px;
+  visibility: hidden;
+  background: rgba(25, 31, 40, 0);
+  transition: visibility 220ms ease, background 220ms ease;
+}
+
+.sheet-overlay.open {
+  visibility: visible;
+  background: rgba(25, 31, 40, 0.38);
+}
+
+.tool-sheet {
+  width: min(100%, 480px);
+  max-height: min(76vh, 620px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 10px 20px calc(24px + env(safe-area-inset-bottom));
+  border-radius: 28px 28px 0 0;
+  background: var(--app-nav-surface);
+  box-shadow: 0 -12px 36px rgba(15, 23, 42, 0.16);
+  outline: none;
+  transform: translateY(104%);
+  transition: transform 230ms cubic-bezier(0.22, 0.8, 0.24, 1);
+}
+
+.sheet-overlay.open .tool-sheet {
+  transform: translateY(0);
+}
+
+.sheet-handle {
+  width: 42px;
+  height: 5px;
+  margin: 0 auto 20px;
+  border-radius: 999px;
+  background: var(--app-nav-gray-300);
+}
+
+.sheet-header {
+  position: relative;
+  margin-bottom: 18px;
+  padding-right: 48px;
+}
+
+.sheet-title {
+  margin: 0;
+  color: var(--app-nav-ink);
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.045em;
+}
+
+.sheet-description {
+  margin: 7px 0 0;
+  color: var(--app-nav-gray-600);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.sheet-close {
+  position: absolute;
+  top: -5px;
+  right: 0;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 14px;
+  background: var(--app-nav-gray-100);
+  color: var(--app-nav-gray-600);
+  cursor: pointer;
+}
+
+.sheet-close .material-symbols-rounded {
+  font-size: 25px;
+}
+
+.tool-list {
+  display: grid;
+  gap: 10px;
+}
+
+.tool-item {
+  width: 100%;
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 13px 14px;
+  border: 0;
+  border-radius: 17px;
+  background: var(--app-nav-gray-100);
+  color: var(--app-nav-ink);
+  text-align: left;
+  text-decoration: none;
+  transition: transform 150ms ease, background 150ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tool-item:active:not(.disabled) {
+  background: #e9edf1;
+  transform: scale(0.985);
+}
+
+.tool-item.current {
+  background: var(--app-nav-primary-soft);
+}
+
+.tool-item.disabled {
+  color: var(--app-nav-gray-500);
+  cursor: default;
+}
+
+.tool-item-icon {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  background: var(--app-nav-surface);
+  color: var(--app-nav-primary-deep);
+}
+
+.tool-item-icon .material-symbols-rounded {
+  font-size: 24px;
+}
+
+.tool-item.disabled .tool-item-icon {
+  color: var(--app-nav-gray-500);
+}
+
+.tool-item-copy {
+  min-width: 0;
+  flex: 1;
+}
+
+.tool-item-title {
+  display: block;
+  color: inherit;
+  font-size: 0.98rem;
+  font-weight: 760;
+}
+
+.tool-item-description {
+  display: block;
+  margin-top: 2px;
+  color: var(--app-nav-gray-500);
+  font-size: 0.8rem;
+  font-weight: 520;
+}
+
+.tool-badge {
+  flex: 0 0 auto;
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: var(--app-nav-surface);
+  color: var(--app-nav-gray-500);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+body.sheet-open {
+  overflow: hidden;
+}
+
+.dock-item:focus-visible,
+.tool-item:focus-visible,
+.sheet-close:focus-visible,
+body[data-app-page] .back-btn:focus-visible {
+  outline: 3px solid rgba(49, 130, 246, 0.3);
+  outline-offset: 2px;
+}
+
+body[data-app-page="products"] .result-card {
+  bottom: calc(94px + env(safe-area-inset-bottom));
+  z-index: 9050;
+}
+
+@media (min-width: 700px) {
+  .bottom-dock-wrap {
+    bottom: 26px;
+  }
+
+  .tool-sheet {
+    margin-bottom: 18px;
+    border-radius: 28px;
+  }
+
+  body[data-app-page="products"] .result-card {
+    bottom: 108px;
+  }
+}
+
+@media (max-width: 359px) {
+  .bottom-dock-wrap {
+    width: calc(100% - 20px);
+  }
+
+  .tool-sheet {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dock-item,
+  .tool-item,
+  .sheet-overlay,
+  .tool-sheet {
+    transition-duration: 0.01ms !important;
+  }
+}

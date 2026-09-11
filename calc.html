@@ -7,6 +7,7 @@
   <title>COWAY 제품 선택</title>
   <link rel="icon" href="img/icon/logo.png" type="image/png">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,600,1,0">
+  <script src="ui-config.js"></script>
 
   <style>
     :root {
@@ -1133,9 +1134,10 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="app-nav.css">
 </head>
 
-<body>
+<body data-app-page="products">
   <main class="app-container">
     <header class="header">
       <a href="main.html" class="back-btn" aria-label="메인으로 돌아가기">←</a>
@@ -2352,5 +2354,6 @@
       document.addEventListener("DOMContentLoaded", initShoppingUI);
     })();
   </script>
+  <script src="app-nav.js"></script>
 </body>
 </html>

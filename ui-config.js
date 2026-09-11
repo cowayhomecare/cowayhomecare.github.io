@@ -12,7 +12,7 @@ window.COWAY_UI_CONFIG = {
     pageTitle: "COWAY 홈케어",
     productMenu: "제품",
     benefitMenu: "혜택",
-    toolsMenu: "메뉴",
+    toolsMenu: "도구",
 
     heroLabel: "제품 둘러보기",
     heroTitle: "고객님께 맞는 제품을\n한눈에 찾아보세요",
@@ -27,8 +27,8 @@ window.COWAY_UI_CONFIG = {
     galleryTitle: "갤러리",
     galleryDescription: "제품과 설치 사례",
 
-    toolSheetTitle: "업무 메뉴",
-    toolSheetDescription: "회사 앱과 자주 쓰는 링크를 이곳에 연결할 수 있어요.",
+    toolSheetTitle: "업무 도구",
+    toolSheetDescription: "상담 중 자주 쓰는 화면과 회사 앱을 모았어요.",
     disconnected: "연결 전"
   },
 
