@@ -1,0 +1,62 @@
+name: Coway photo gallery and Pages
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: coway-gallery-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    if: github.ref_name == github.event.repository.default_branch
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install image tools
+        run: npm ci --prefix scripts/gallery --no-audit --no-fund
+      - name: Validate folder rules
+        run: node --test scripts/gallery/test.cjs
+      - name: Build photo list and optimized images
+        run: node scripts/gallery/build.cjs
+      - name: Set up Pages
+        uses: actions/configure-pages@v5
+      - name: Prepare existing static site
+        run: |
+          test -f main.html
+          test -f calc.html
+          mkdir -p _gallery_site
+          rsync -a --exclude '/_gallery_site' --exclude '/.git' --exclude '/.github' --exclude '/.env*' --exclude '/node_modules' --exclude '/.vscode' --exclude '/.DS_Store' --exclude '/scripts/gallery' --exclude '/img/gallery' --exclude '/GALLERY_GUIDE_KO.md' --exclude '/gallery-preview.png' ./ _gallery_site/
+          mkdir -p _gallery_site/img/gallery
+          cp -R img/gallery/_web img/gallery/_thumbs _gallery_site/img/gallery/
+          touch _gallery_site/.nojekyll
+      - name: Upload site
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _gallery_site
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy site
+        id: deployment
+        uses: actions/deploy-pages@v4

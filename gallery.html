@@ -1,181 +1,85 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <meta name="theme-color" content="#f2f4f6">
-  <title>갤러리</title>
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f8f9fb">
+  <title>공간 갤러리 · COWAY</title>
   <link rel="icon" href="logo.png" type="image/png">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,600,1,0" />
   <link rel="stylesheet" href="app-nav.css">
-  <script src="ui-config.js"></script>
-
-  <style>
-    body { background-color: #f2f4f6; font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif; margin: 0; padding-bottom: 40px; display: flex; justify-content: center; }
-    .app-container { width: 100%; max-width: 480px; background-color: #f2f4f6; min-height: 100vh; box-shadow: 0 0 20px rgba(0,0,0,0.05); }
-    
-    .header { min-height: 60px; background: #ffffff; display: flex; align-items: center; justify-content: center; padding: 8px 0; margin-bottom: 8px; position: relative; border-bottom-left-radius: 24px; border-bottom-right-radius: 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
-    .back-btn { font-size: 24px; text-decoration: none; color: #333; position: absolute; left: 16px; font-weight: bold; padding: 10px; }
-    .page-title-logo { height: 24px; object-fit: contain; }
-
-    .page-title { padding: 0 20px; font-size: 18px; font-weight: 900; color: #191f28; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-
-    /* 💎 1안: 가로 스와이프 칩(Chip) 메뉴 스타일 */
-    .chip-container { display: flex; gap: 8px; padding: 0 20px 16px 20px; overflow-x: auto; scroll-behavior: smooth; }
-    .chip-container::-webkit-scrollbar { display: none; } /* 스크롤바 숨기기 */
-    .chip-btn { padding: 8px 16px; background: #ffffff; border: 1px solid #e4e7ec; border-radius: 20px; font-size: 13.5px; font-weight: 700; color: #4e5968; cursor: pointer; white-space: nowrap; transition: 0.2s; box-shadow: 0 2px 6px rgba(0,0,0,0.02); -webkit-tap-highlight-color: transparent; }
-    .chip-btn.active { background: #3182f6; color: white; border-color: #3182f6; box-shadow: 0 4px 12px rgba(49, 130, 246, 0.25); }
-
-    .gallery-grid { padding: 0 20px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .gallery-item { width: 100%; aspect-ratio: 1 / 1; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.03); cursor: pointer; background-color: #e4e7ec; position: relative; }
-    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.2s; }
-    .gallery-item:active img { transform: scale(0.95); }
-    .empty-msg { grid-column: span 2; text-align: center; padding: 40px 0; color: #8b95a1; font-size: 14px; font-weight: 700; }
-
-    /* 모달 (스와이프 화면) */
-    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.95); z-index: 9999; flex-direction: column; justify-content: center; align-items: center; }
-    .modal-img-container { width: 100%; height: 80vh; display: flex; justify-content: center; align-items: center; overflow: hidden; position: relative; touch-action: none; }
-    .modal-img { max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.3s ease; }
-    .close-btn { position: absolute; top: 20px; right: 20px; color: white; font-size: 32px; font-weight: bold; cursor: pointer; z-index: 10001; padding: 10px; background: rgba(0,0,0,0.5); border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; }
-    .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); color: white; font-size: 36px; font-weight: 300; cursor: pointer; padding: 20px; z-index: 10001; -webkit-tap-highlight-color: transparent; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
-    .prev-btn { left: 0; }
-    .next-btn { right: 0; }
-    .counter { color: white; font-size: 14px; font-weight: 700; position: absolute; bottom: 40px; letter-spacing: 2px; background: rgba(255,255,255,0.2); backdrop-filter: blur(4px); padding: 8px 20px; border-radius: 20px; }
-  </style>
+  <link rel="stylesheet" href="gallery.css?v=1">
+  <script src="ui-config.js" defer></script>
+  <script src="gallery-data.js" defer></script>
+  <script src="app-nav.js" defer></script>
+  <script src="gallery.js?v=1" defer></script>
 </head>
 <body data-app-page="gallery">
-  <div class="app-container">
-    
-    <div class="header">
-      <a href="main.html" class="back-btn">←</a>
-      <a href="main.html">
-        <img src="logo.png" alt="COWAY" class="page-title-logo" onerror="this.outerHTML='<div style=\'font-size:20px;font-weight:900;color:#005bb5;\'>COWAY</div>'">
-      </a>
-    </div>
+  <div class="app-container" id="galleryApp">
+    <header class="gallery-header">
+      <a class="back-btn" href="main.html" aria-label="이전 화면">←</a>
+      <a href="main.html" class="brand" aria-label="코웨이 홈">coway<span>home care</span></a>
+      <button id="helpButton" class="icon-button" type="button" aria-label="사진 추가 방법" data-icon="folder-plus"></button>
+    </header>
 
-    <div class="page-title">
-      <span class="material-symbols-rounded" style="color: #3182f6;">photo_library</span>
-      프리미엄 갤러리
-    </div>
+    <main>
+      <div class="page-heading">
+        <div><p class="eyebrow">REAL SPACE, REAL LIFE</p><h1>공간 갤러리<span class="title-dot">.</span></h1></div>
+        <button id="savedButton" class="save-filter" type="button" aria-pressed="false"><span data-icon="heart"></span><span>모아보기</span><b id="savedCount">0</b></button>
+      </div>
 
-    <!-- 💎 1안: 가로 스와이프 칩 메뉴 -->
-    <div class="chip-container" id="chipContainer">
-      <div class="chip-btn active" onclick="filterGallery('전체', this)">전체보기</div>
-      <div class="chip-btn" onclick="filterGallery('페블', this)">안마의자 페블</div>
-      <div class="chip-btn" onclick="filterGallery('사제', this)">사제/타사 비교</div>
-      <div class="chip-btn" onclick="filterGallery('정수기', this)">아이콘 정수기</div>
-      <div class="chip-btn" onclick="filterGallery('매트리스', this)">스마트 매트리스</div>
-      <div class="chip-btn" onclick="filterGallery('비데', this)">룰루 비데</div>
-    </div>
+      <section id="showcase" class="showcase" aria-label="대표 설치 사진">
+        <button type="button" class="showcase-photo" id="showcaseOpen">
+          <img id="showcaseImage" alt="" fetchpriority="high">
+          <span class="showcase-shade"></span>
+          <span class="showcase-kicker" id="showcaseKicker">IN YOUR SPACE</span>
+          <span class="showcase-copy"><strong id="showcaseTitle">우리 집에 놓이면,<br>이런 느낌.</strong><span id="showcaseCaption"></span></span>
+          <span class="showcase-open" data-icon="expand"></span>
+        </button>
+        <div class="showcase-bottom"><span><i></i><span id="showcaseNote">설치된 모습으로 살펴보세요</span></span><button type="button" id="showcaseNext" aria-label="다음 대표 사진"><span id="showcaseCounter"></span><span data-icon="arrow-right"></span></button></div>
+      </section>
 
-    <!-- 갤러리 바둑판 -->
-    <div class="gallery-grid" id="galleryGrid"></div>
+      <section class="gallery-controls" id="galleryControls" aria-label="사진 찾기">
+        <nav class="category-tabs" id="categoryTabs" aria-label="제품 분류"></nav>
+        <div class="filter-chips" id="caseFilters" aria-label="설치 유형"></div>
+        <div class="filter-chips small-chips" id="frameFilters" aria-label="프레임 종류" hidden></div>
+        <div class="select-row" id="selectRow">
+          <label class="select-wrap"><span class="sr-only">모델 선택</span><select id="modelSelect" aria-label="모델 선택"><option value="">모든 모델</option></select><span data-icon="chevron-down"></span></label>
+          <label class="select-wrap color-select"><span id="colorDot" class="color-dot" aria-hidden="true"></span><span class="sr-only">색상 선택</span><select id="colorSelect" aria-label="색상 선택"><option value="">모든 색상</option></select><span data-icon="chevron-down"></span></label>
+          <button class="icon-button search-toggle" type="button" id="searchToggle" aria-label="사진 검색 열기" aria-expanded="false" data-icon="search"></button>
+        </div>
+        <label class="search-box" id="searchBox" hidden><span data-icon="search"></span><input id="searchInput" type="search" placeholder="제품명이나 색상으로 검색" autocomplete="off" aria-label="사진 검색"><button type="button" id="searchClear" aria-label="검색어 지우기" data-icon="x"></button></label>
+      </section>
+
+      <div class="results-heading"><h2 id="resultsTitle">설치 사진 <span id="resultCount"></span></h2><button type="button" id="resetFilters">필터 초기화</button></div>
+      <p class="context-note" id="contextNote" hidden></p>
+      <div id="galleryGrid" class="photo-grid" aria-label="설치 사진 목록"></div>
+      <div class="empty-state" id="emptyState" hidden><span data-icon="images"></span><h3 id="emptyTitle">조건에 맞는 사진이 없어요</h3><p id="emptyText">다른 모델이나 색상을 골라보세요.</p><button type="button" id="emptyAction" class="plain-action">필터 초기화</button></div>
+      <p class="gallery-footnote">실제 공간의 빛과 화면에 따라 색상이 다르게 보일 수 있어요.</p>
+      <noscript><p class="empty-state">갤러리를 보려면 브라우저의 JavaScript를 켜주세요.</p></noscript>
+    </main>
   </div>
 
-  <!-- 이미지 모달 -->
-  <div class="modal" id="imageModal">
-    <div class="close-btn" onclick="closeModal()">✕</div>
-    <div class="nav-btn prev-btn" onclick="changeImage(-1)">‹</div>
-    <div class="modal-img-container" id="swipeZone">
-      <img src="" class="modal-img" id="modalImg">
+  <dialog id="photoViewer" class="photo-viewer" aria-labelledby="viewerTitle">
+    <div class="viewer-top"><span id="viewerCounter"></span><div><button type="button" id="viewerSave" class="viewer-icon" aria-label="사진 모아두기" aria-pressed="false" data-icon="heart"></button><button type="button" id="viewerClose" class="viewer-icon" aria-label="사진 닫기" data-icon="x"></button></div></div>
+    <div class="viewer-stage" id="viewerStage">
+      <img id="viewerImage" alt="" draggable="false">
+      <p id="viewerError" class="viewer-error" hidden>사진을 불러오지 못했어요.<br>연결 상태를 확인하고 다시 열어주세요.</p>
+      <button type="button" id="viewerPrev" class="viewer-arrow prev" aria-label="이전 사진" data-icon="chevron-left"></button>
+      <button type="button" id="viewerNext" class="viewer-arrow next" aria-label="다음 사진" data-icon="chevron-right"></button>
+      <span class="zoom-hint" id="zoomHint">두 번 톡하면 확대 · 좌우로 넘기기</span>
     </div>
-    <div class="nav-btn next-btn" onclick="changeImage(1)">›</div>
-    <div class="counter" id="imgCounter">1 / 1</div>
-  </div>
+    <footer class="viewer-footer"><div class="viewer-details"><p id="viewerCategory"></p><h2 id="viewerTitle"></h2><p id="viewerColor"></p><div id="viewerTags" class="viewer-tags"></div></div><button type="button" class="share-button" id="viewerShare"><span data-icon="share"></span>사진 공유</button></footer>
+  </dialog>
 
-  <script>
-    // 💎 사진 데이터베이스 (카테고리 태그 추가)
-    const allImages = [
-      { src: "pade1.jpg", cat: "페블" }, { src: "pade2.jpg", cat: "페블" },
-      { src: "pade3.jpg", cat: "페블" }, { src: "pade4.jpg", cat: "페블" },
-      { src: "pade5.jpg", cat: "페블" }, { src: "pade6.jpg", cat: "페블" },
-      { src: "saje1.jpg", cat: "사제" }, { src: "saje2.jpg", cat: "사제" },
-      { src: "saje3.jpg", cat: "사제" }, { src: "saje4.jpg", cat: "사제" },
-      { src: "saje5.jpg", cat: "사제" }
-    ];
-
-    let filteredList = [...allImages]; // 현재 화면에 보이는 리스트
-    let currentIndex = 0;
-
-    // 카테고리 필터링 함수
-    function filterGallery(category, btnElement) {
-      // 1. 버튼 색상 변경
-      document.querySelectorAll('.chip-btn').forEach(btn => btn.classList.remove('active'));
-      btnElement.classList.add('active');
-
-      // 2. 버튼이 화면 중앙에 오도록 스크롤 이동 애니메이션
-      btnElement.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-
-      // 3. 사진 리스트 거르기
-      if (category === '전체') {
-        filteredList = [...allImages];
-      } else {
-        filteredList = allImages.filter(item => item.cat === category);
-      }
-
-      renderGrid();
-    }
-
-    // 바둑판 그리기 함수
-    function renderGrid() {
-      const grid = document.getElementById("galleryGrid");
-      grid.innerHTML = "";
-
-      if (filteredList.length === 0) {
-        grid.innerHTML = `<div class="empty-msg">해당 카테고리의 시공 사진이<br>아직 업데이트되지 않았습니다.</div>`;
-        return;
-      }
-
-      filteredList.forEach((item, index) => {
-        const div = document.createElement("div");
-        div.className = "gallery-item";
-        div.onclick = () => openModal(index);
-        div.innerHTML = `<img src="${item.src}" alt="${item.cat} 사진" onerror="this.src='https://via.placeholder.com/400x400?text=No+Image'">`;
-        grid.appendChild(div);
-      });
-    }
-
-    // 모달 관련 함수
-    const modal = document.getElementById("imageModal");
-    const modalImg = document.getElementById("modalImg");
-    const counter = document.getElementById("imgCounter");
-
-    function openModal(index) {
-      currentIndex = index;
-      updateModal();
-      modal.style.display = "flex";
-    }
-
-    function closeModal() { modal.style.display = "none"; }
-
-    function changeImage(step) {
-      currentIndex += step;
-      if (currentIndex >= filteredList.length) currentIndex = 0;
-      if (currentIndex < 0) currentIndex = filteredList.length - 1;
-      updateModal();
-    }
-
-    function updateModal() {
-      modalImg.src = filteredList[currentIndex].src;
-      counter.innerText = `${currentIndex + 1} / ${filteredList.length}`;
-    }
-
-    // 스와이프 기능
-    const swipeZone = document.getElementById("swipeZone");
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    swipeZone.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; });
-    swipeZone.addEventListener('touchend', e => {
-      touchEndX = e.changedTouches[0].screenX;
-      if (touchStartX - touchEndX > 40) changeImage(1);
-      if (touchEndX - touchStartX > 40) changeImage(-1);
-    });
-
-    // 시작 시 전체 렌더링
-    window.onload = function() { renderGrid(); }
-  </script>
-  <script src="app-nav.js"></script>
+  <dialog id="helpDialog" class="help-dialog" aria-labelledby="helpTitle">
+    <header><div><p class="eyebrow">MY PHOTO COLLECTION</p><h2 id="helpTitle">사진만 넣으면, 준비 끝.</h2></div><button type="button" class="icon-button" id="helpClose" aria-label="안내 닫기" data-icon="x"></button></header>
+    <p>최초 자동 반영 설정 후에는 <strong>img/gallery</strong> 안에 사진만 추가하고 GitHub에 저장하면 돼요.</p>
+    <div class="folder-example"><b>작업사진</b><span>직접 작업한 사진은 첫 화면에</span><code>img/gallery/Work/아무이름.jpg</code></div>
+    <div class="folder-example"><b>제품 · 색상</b><span>폴더 이름이 메뉴와 색상이 돼요</span><code>img/gallery/파운데이션/모던 파운데이션/오트밀 베이지/아무이름.jpg</code></div>
+    <div class="folder-example"><b>사진 하나, 여러 분류</b><span>해당되는 이름을 + 로 연결하세요</span><code>img/gallery/Work+파운데이션+패밀리+가드/모던 파운데이션/아이보리/아무이름.jpg</code></div>
+    <ul><li>파일명은 자유. JPG·PNG·WebP 등을 사용할 수 있어요.</li><li>기존 pade·saje 사진은 현재 위치에서도 작업사진으로 인식해요.</li><li>모아보기는 이 브라우저에만 저장돼요.</li><li>현재 화면에서 사진을 직접 업로드하는 기능은 아니에요.</li></ul>
+    <p class="setup-reminder">자동 반영은 동봉한 최초 설정 안내를 한 번 적용해야 작동해요.</p>
+  </dialog>
+  <div id="galleryToast" class="gallery-toast" role="status" aria-live="polite"></div>
 </body>
 </html>
