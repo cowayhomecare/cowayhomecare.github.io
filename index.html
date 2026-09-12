@@ -190,7 +190,71 @@
 
     .start-button:active { transform: scale(0.975); background: var(--blue-deep); box-shadow: 0 5px 16px rgba(49, 130, 246, 0.18); }
 
+    .biometric-button {
+      width: 100%;
+      min-height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 12px;
+      padding: 10px 18px;
+      border: 0;
+      border-radius: 18px;
+      background: var(--surface);
+      color: var(--blue-deep);
+      box-shadow: 0 6px 22px rgba(15, 23, 42, 0.055);
+      font-size: 0.96rem;
+      font-weight: 850;
+      cursor: pointer;
+      transition: transform 150ms ease, background 150ms ease, color 150ms ease, box-shadow 150ms ease;
+    }
+
+    .biometric-button[hidden] { display: none; }
+    .biometric-button:active { transform: scale(0.975); background: var(--blue-soft); }
+    .biometric-button:disabled { cursor: wait; opacity: 0.76; }
+    .biometric-button.is-success { background: #e8f8f1; color: #008f63; }
+
+    .biometric-icon {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      flex: 0 0 auto;
+      place-items: center;
+      border-radius: 11px;
+      background: var(--blue-soft);
+    }
+
+    .biometric-icon svg {
+      width: 23px;
+      height: 23px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.9;
+      stroke-linecap: round;
+    }
+
+    .biometric-button.is-busy .biometric-icon { animation: biometricPulse 950ms ease-in-out infinite; }
+
+    .biometric-status {
+      min-height: 20px;
+      margin: 8px 4px 0;
+      color: var(--gray-500);
+      font-size: 0.72rem;
+      font-weight: 650;
+      line-height: 1.45;
+      text-align: center;
+    }
+
+    .biometric-status[hidden] { display: none; }
+
+    @keyframes biometricPulse {
+      0%, 100% { transform: scale(0.9); opacity: 0.62; }
+      50% { transform: scale(1.06); opacity: 1; }
+    }
+
     .start-button:focus-visible,
+    .biometric-button:focus-visible,
     .employee-input:focus-visible { outline: 3px solid rgba(49, 130, 246, 0.35); outline-offset: 2px; }
 
     .privacy-note {
@@ -278,11 +342,27 @@
         >
         <p class="field-error" id="fieldError" role="alert">사원번호를 입력해 주세요.</p>
         <button class="start-button" id="startButton" type="submit">시작하기</button>
+        <button class="biometric-button" id="biometricButton" type="button" hidden>
+          <span class="biometric-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M6.2 9.4A5.9 5.9 0 0 1 12 4.7a5.9 5.9 0 0 1 5.8 4.7"/>
+              <path d="M4.4 8.2A8 8 0 0 1 12 2.8a8 8 0 0 1 7.6 5.4"/>
+              <path d="M8.1 10.4A4 4 0 0 1 12 7.2a4 4 0 0 1 3.9 3.2"/>
+              <path d="M7.1 13.1c.2 2.8-1 4.8-2.1 6"/>
+              <path d="M10 11.2c0 5.1-.9 7.3-2.2 9.1"/>
+              <path d="M13.9 11.2c0 5-.4 7.9-1.5 10"/>
+              <path d="M16.9 12.1c.1 3.7-.1 6.2-.8 8.2"/>
+              <path d="M19.5 11.2c.2 2.8.1 4.9-.2 6.6"/>
+            </svg>
+          </span>
+          <span id="biometricLabel">지문 빠른 시작 등록</span>
+        </button>
+        <p class="biometric-status" id="biometricStatus" role="status" aria-live="polite" hidden></p>
       </form>
 
       <p class="privacy-note">
         <span class="privacy-mark" aria-hidden="true">i</span>
-        입력한 사원번호는 이 기기에 저장되지 않아요.
+        사원번호는 저장되지 않고, 빠른 시작 연결 정보만 이 브라우저에 보관돼요.
       </p>
 
       <footer class="start-footer">COWAY 홈케어 업무 도구</footer>
@@ -297,6 +377,69 @@
       const input = document.getElementById("empId");
       const error = document.getElementById("fieldError");
       const button = document.getElementById("startButton");
+      const biometricButton = document.getElementById("biometricButton");
+      const biometricLabel = document.getElementById("biometricLabel");
+      const biometricStatus = document.getElementById("biometricStatus");
+      const BIOMETRIC_KEY = "coway-homecare-quick-start-v1";
+
+      let savedCredentialId = readCredentialId();
+
+      function readCredentialId() {
+        try {
+          return localStorage.getItem(BIOMETRIC_KEY) || "";
+        } catch (_) {
+          return "";
+        }
+      }
+
+      function saveCredentialId(value) {
+        try {
+          localStorage.setItem(BIOMETRIC_KEY, value);
+          return true;
+        } catch (_) {
+          return false;
+        }
+      }
+
+      function randomBytes(length = 32) {
+        return crypto.getRandomValues(new Uint8Array(length));
+      }
+
+      function toBase64Url(buffer) {
+        const bytes = new Uint8Array(buffer);
+        let binary = "";
+        bytes.forEach(byte => { binary += String.fromCharCode(byte); });
+        return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+      }
+
+      function fromBase64Url(value) {
+        const normalized = value.replace(/-/g, "+").replace(/_/g, "/");
+        const padded = normalized + "=".repeat((4 - normalized.length % 4) % 4);
+        const binary = atob(padded);
+        return Uint8Array.from(binary, character => character.charCodeAt(0));
+      }
+
+      function updateBiometricCopy() {
+        biometricLabel.textContent = savedCredentialId ? "지문으로 빠른 시작" : "지문 빠른 시작 등록";
+        biometricStatus.textContent = savedCredentialId
+          ? "등록한 기기의 지문·얼굴·화면 잠금으로 시작해요."
+          : "사원번호 입력 후 등록하면 다음부터 바로 시작할 수 있어요.";
+      }
+
+      function setBiometricBusy(isBusy, label = "") {
+        biometricButton.disabled = isBusy;
+        biometricButton.classList.toggle("is-busy", isBusy);
+        if (label) biometricLabel.textContent = label;
+      }
+
+      function showBiometricMessage(message) {
+        biometricStatus.hidden = false;
+        biometricStatus.textContent = message;
+      }
+
+      function enterMain() {
+        window.location.href = "main.html";
+      }
 
       function clearError() {
         input.removeAttribute("aria-invalid");
@@ -322,8 +465,105 @@
         clearError();
         button.disabled = true;
         button.textContent = "들어가는 중...";
-        window.location.href = "main.html";
+        enterMain();
       });
+
+      biometricButton.addEventListener("click", async () => {
+        if (!savedCredentialId && !input.value.trim()) {
+          input.setAttribute("aria-invalid", "true");
+          error.classList.add("show");
+          input.focus();
+          showBiometricMessage("처음 한 번만 사원번호를 입력해 주세요.");
+          return;
+        }
+
+        clearError();
+        biometricButton.classList.remove("is-success");
+        setBiometricBusy(true, savedCredentialId ? "지문 확인 중..." : "빠른 시작 등록 중...");
+        showBiometricMessage("휴대폰에 표시되는 인증창을 확인해 주세요.");
+
+        try {
+          let credential;
+
+          if (savedCredentialId) {
+            credential = await navigator.credentials.get({
+              publicKey: {
+                challenge: randomBytes(),
+                allowCredentials: [{
+                  id: fromBase64Url(savedCredentialId),
+                  type: "public-key",
+                  transports: ["internal"]
+                }],
+                userVerification: "required",
+                timeout: 60000
+              }
+            });
+          } else {
+            credential = await navigator.credentials.create({
+              publicKey: {
+                challenge: randomBytes(),
+                rp: { name: "COWAY 홈케어" },
+                user: {
+                  id: randomBytes(),
+                  name: `homecare-doctor-${Date.now()}`,
+                  displayName: "홈케어 닥터"
+                },
+                pubKeyCredParams: [
+                  { type: "public-key", alg: -7 },
+                  { type: "public-key", alg: -257 }
+                ],
+                authenticatorSelection: {
+                  authenticatorAttachment: "platform",
+                  residentKey: "preferred",
+                  userVerification: "required"
+                },
+                attestation: "none",
+                timeout: 60000
+              }
+            });
+
+            if (credential) {
+              const encodedCredentialId = toBase64Url(credential.rawId);
+              if (saveCredentialId(encodedCredentialId)) savedCredentialId = encodedCredentialId;
+            }
+          }
+
+          if (!credential) throw new Error("인증 결과가 없습니다.");
+
+          biometricButton.classList.add("is-success");
+          setBiometricBusy(false, "확인됐어요");
+          showBiometricMessage("빠른 시작 완료! 업무 도구로 이동해요.");
+          if (navigator.vibrate) navigator.vibrate(35);
+          window.setTimeout(enterMain, 420);
+        } catch (authError) {
+          setBiometricBusy(false);
+          updateBiometricCopy();
+
+          if (authError && authError.name === "NotAllowedError") {
+            showBiometricMessage("인증이 취소됐어요. 다시 누르거나 사원번호로 시작해 주세요.");
+          } else {
+            showBiometricMessage("이 브라우저에서는 빠른 시작을 사용할 수 없어요. 사원번호로 시작해 주세요.");
+          }
+        }
+      });
+
+      async function initializeBiometric() {
+        if (!window.isSecureContext || !window.PublicKeyCredential || !navigator.credentials) return;
+
+        try {
+          const available = await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable();
+          if (!available) return;
+
+          updateBiometricCopy();
+          biometricButton.hidden = false;
+          biometricStatus.hidden = false;
+        } catch (_) {
+          biometricButton.hidden = true;
+          biometricStatus.hidden = true;
+        }
+      }
+
+      initializeBiometric();
     })();
   </script>
 </body>
