@@ -23,7 +23,7 @@ window.COWAY_UI_CONFIG = {
     benefitTitle: "이번 달 혜택",
     benefitDescription: "프로모션과 제휴카드 할인",
     reportTitle: "안심 리포트",
-    reportDescription: "미세먼지와 실내 습도",
+    reportDescription: "미세먼지와 바깥 날씨",
     galleryTitle: "갤러리",
     galleryDescription: "제품과 설치 사례",
 

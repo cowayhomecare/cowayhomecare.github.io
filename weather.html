@@ -4,159 +4,672 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta name="theme-color" content="#f2f4f6">
-  <title>안심 케어 리포트</title>
+  <meta name="description" content="현재 위치의 초미세먼지, 미세먼지, 바깥 날씨를 한눈에 확인하는 안심 리포트">
+  <title>안심 리포트 | COWAY 홈케어</title>
   <link rel="icon" href="logo.png" type="image/png">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,600,1,0">
   <link rel="stylesheet" href="app-nav.css">
   <script src="ui-config.js"></script>
   <style>
-    body { background-color: #f2f4f6; font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif; margin: 0; padding-bottom: 40px; display: flex; justify-content: center; }
-    .app-container { width: 100%; max-width: 480px; background-color: #f2f4f6; min-height: 100vh; box-shadow: 0 0 20px rgba(0,0,0,0.05); padding: 0 20px; box-sizing: border-box; }
-    .header { display: flex; align-items: center; justify-content: center; padding: 24px 0; margin-bottom: 10px; position: relative; }
-    .back-btn { font-size: 24px; text-decoration: none; color: #333; position: absolute; left: 0; font-weight: bold; padding: 10px; }
-    .page-title-logo { height: 26px; object-fit: contain; }
-    .card { background-color: #ffffff; border-radius: 24px; padding: 24px; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02); }
-    .location-box { display: flex; align-items: center; justify-content: center; background-color: #e5f0fa; color: #005bb5; padding: 18px; border-radius: 20px; font-weight: 800; font-size: 16px; margin-bottom: 20px; cursor: pointer; transition: 0.2s; }
-    .location-box:active { transform: scale(0.98); }
-    .card-title { font-size: 16px; font-weight: 800; color: #333; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
-    .dust-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
-    .dust-box { border-radius: 16px; padding: 16px 12px; text-align: center; border: 1px solid #eee; }
-    .dust-box.korea { background-color: #f0fdf4; border-color: #bbf7d0; }
-    .dust-box.who { background-color: #fef2f2; border-color: #fecaca; }
-    .box-title { font-size: 12px; font-weight: 700; color: #666; margin-bottom: 8px; }
-    .box-status { font-size: 20px; font-weight: 900; margin-bottom: 4px; }
-    .box-value { font-size: 12px; color: #888; font-weight: 600; }
-    .warning-box { border-radius: 16px; padding: 16px; background-color: #f9f9f9; font-size: 13.5px; font-weight: 700; line-height: 1.5; color: #333; }
-    .humidity-value { font-size: 36px; font-weight: 900; color: #005bb5; text-align: center; margin-bottom: 16px; letter-spacing: -1px; }
-    .naver-btn { display: block; width: 100%; background-color: #03c75a; color: white; text-align: center; text-decoration: none; padding: 18px; border-radius: 20px; font-size: 16px; font-weight: 800; margin-top: 10px; box-shadow: 0 4px 12px rgba(3, 199, 90, 0.2); box-sizing: border-box; transition: 0.2s; }
-    .naver-btn:active { transform: scale(0.98); background-color: #02b350; }
+    :root {
+      --blue: #3182f6;
+      --blue-deep: #1b64da;
+      --ink: #191f28;
+      --gray-700: #4e5968;
+      --gray-600: #6b7684;
+      --gray-500: #8b95a1;
+      --gray-400: #b0b8c1;
+      --gray-300: #d1d6db;
+      --gray-200: #e5e8eb;
+      --gray-100: #f2f4f6;
+      --surface: #ffffff;
+      --status: #3182f6;
+      --status-deep: #1b64da;
+      --status-soft: #e8f3ff;
+    }
+
+    * { box-sizing: border-box; }
+    html { background: var(--gray-100); }
+
+    body {
+      margin: 0;
+      background: var(--gray-100);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button, a { font: inherit; }
+    button { -webkit-tap-highlight-color: transparent; }
+
+    .app-container {
+      width: min(100%, 520px);
+      min-height: 100vh;
+      min-height: 100dvh;
+      margin: 0 auto;
+      padding-bottom: calc(132px + env(safe-area-inset-bottom));
+      background: var(--gray-100);
+    }
+
+    .topbar {
+      position: relative;
+      z-index: 10;
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: calc(10px + env(safe-area-inset-top)) 18px 10px;
+      background: rgba(242, 244, 246, 0.92);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .back-btn,
+    .refresh-top {
+      position: absolute;
+      bottom: 10px;
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border: 0;
+      border-radius: 14px;
+      background: transparent;
+      color: var(--ink);
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .back-btn { left: 14px; }
+    .refresh-top { right: 14px; }
+    .refresh-top:active { background: rgba(209, 214, 219, 0.42); transform: scale(0.94); }
+    .refresh-top .material-symbols-rounded { font-size: 25px; }
+    .refresh-top.loading .material-symbols-rounded { animation: spin 900ms linear infinite; }
+
+    .brand-link { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; }
+    .page-title-logo { width: auto; height: 27px; object-fit: contain; }
+    main { padding: 4px 18px 28px; }
+
+    .status-card {
+      position: relative;
+      overflow: hidden;
+      padding: 22px;
+      border-radius: 28px;
+      background: linear-gradient(145deg, #ffffff 0%, var(--status-soft) 150%);
+      box-shadow: 0 10px 32px rgba(15, 23, 42, 0.07);
+      transition: background 240ms ease;
+    }
+
+    .status-card::after {
+      content: "";
+      position: absolute;
+      top: -52px;
+      right: -58px;
+      width: 158px;
+      height: 158px;
+      border-radius: 50%;
+      background: var(--status-soft);
+      opacity: 0.82;
+      pointer-events: none;
+    }
+
+    .status-card[data-tone="good"] { --status: #3182f6; --status-deep: #1b64da; --status-soft: #e8f3ff; }
+    .status-card[data-tone="moderate"] { --status: #22a06b; --status-deep: #087443; --status-soft: #e8f8f0; }
+    .status-card[data-tone="bad"] { --status: #f59f00; --status-deep: #b46900; --status-soft: #fff4d6; }
+    .status-card[data-tone="very-bad"] { --status: #f04452; --status-deep: #c92a38; --status-soft: #ffebee; }
+
+    .location-row {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .location-button {
+      min-width: 0;
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 9px 12px;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+      color: var(--status-deep);
+      font-size: 0.88rem;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03);
+    }
+
+    .location-button:active { transform: scale(0.97); }
+    .location-button .material-symbols-rounded { flex: 0 0 auto; font-size: 19px; }
+    #locationText { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+    .data-badge { flex: 0 0 auto; color: var(--gray-600); font-size: 0.76rem; font-weight: 700; }
+
+    .status-main {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: end;
+      gap: 12px;
+      padding: 26px 0 20px;
+    }
+
+    .status-kicker { margin: 0 0 7px; color: var(--gray-600); font-size: 0.9rem; font-weight: 700; }
+
+    .status-title {
+      margin: 0;
+      color: var(--status-deep);
+      font-size: clamp(2rem, 9vw, 2.8rem);
+      font-weight: 900;
+      letter-spacing: -0.06em;
+      line-height: 1.05;
+    }
+
+    .status-summary {
+      max-width: 250px;
+      margin: 10px 0 0;
+      color: var(--gray-700);
+      font-size: 0.9rem;
+      font-weight: 650;
+      line-height: 1.5;
+      word-break: keep-all;
+    }
+
+    .pm-reading { min-width: 96px; display: flex; flex-direction: column; align-items: flex-end; color: var(--status-deep); }
+    .pm-number { font-size: clamp(3rem, 14vw, 4.5rem); font-weight: 900; letter-spacing: -0.075em; line-height: 0.9; }
+    .pm-unit { margin-top: 9px; color: var(--gray-600); font-size: 0.78rem; font-weight: 700; }
+
+    .grade-scale {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 5px;
+      margin-top: 1px;
+    }
+
+    .grade-step { padding-top: 9px; border-top: 5px solid var(--gray-200); color: var(--gray-500); font-size: 0.73rem; font-weight: 750; text-align: center; }
+    .grade-step.active { border-color: var(--status); color: var(--status-deep); }
+
+    .updated-row {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 18px;
+      color: var(--gray-500);
+      font-size: 0.76rem;
+      font-weight: 650;
+    }
+
+    .updated-row .material-symbols-rounded { font-size: 16px; }
+    .section { margin-top: 28px; }
+
+    .section-heading { margin: 0 4px 13px; color: var(--ink); font-size: 1.25rem; font-weight: 900; letter-spacing: -0.045em; }
+
+    .comparison-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+
+    .comparison-card {
+      min-width: 0;
+      padding: 18px 16px;
+      border-radius: 22px;
+      background: var(--surface);
+      box-shadow: 0 5px 20px rgba(15, 23, 42, 0.045);
+    }
+
+    .comparison-label { display: flex; align-items: center; gap: 6px; margin-bottom: 18px; color: var(--gray-600); font-size: 0.82rem; font-weight: 750; }
+    .comparison-label .material-symbols-rounded { color: var(--gray-500); font-size: 19px; }
+    .comparison-value { margin: 0; color: var(--ink); font-size: 1.32rem; font-weight: 900; letter-spacing: -0.04em; line-height: 1.25; word-break: keep-all; }
+    .comparison-detail { margin: 7px 0 0; color: var(--gray-500); font-size: 0.78rem; font-weight: 650; line-height: 1.45; word-break: keep-all; }
+
+    .standard-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-top: 10px;
+      padding: 14px 15px;
+      border-radius: 17px;
+      background: #e8f3ff;
+      color: #36536f;
+      font-size: 0.8rem;
+      font-weight: 650;
+      line-height: 1.5;
+      word-break: keep-all;
+    }
+
+    .standard-note .material-symbols-rounded { flex: 0 0 auto; margin-top: 1px; color: var(--blue-deep); font-size: 18px; }
+    .metric-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; }
+
+    .metric-card {
+      min-width: 0;
+      padding: 17px 12px 16px;
+      border-radius: 21px;
+      background: var(--surface);
+      box-shadow: 0 5px 20px rgba(15, 23, 42, 0.045);
+    }
+
+    .metric-icon { width: 36px; height: 36px; display: grid; place-items: center; margin-bottom: 14px; border-radius: 13px; background: var(--gray-100); color: var(--gray-700); }
+    .metric-icon .material-symbols-rounded { font-size: 21px; }
+    .metric-label { color: var(--gray-500); font-size: 0.76rem; font-weight: 750; }
+    .metric-value { margin-top: 5px; color: var(--ink); font-size: 1.22rem; font-weight: 900; letter-spacing: -0.045em; white-space: nowrap; }
+    .metric-caption { overflow: hidden; margin-top: 5px; color: var(--gray-500); font-size: 0.72rem; font-weight: 650; line-height: 1.3; text-overflow: ellipsis; white-space: nowrap; }
+
+    .conversation-card { padding: 21px; border-radius: 24px; background: var(--surface); box-shadow: 0 5px 20px rgba(15, 23, 42, 0.045); }
+    .conversation-title { display: flex; align-items: center; gap: 8px; margin: 0; color: var(--ink); font-size: 1rem; font-weight: 850; }
+    .conversation-title .material-symbols-rounded { color: var(--blue); font-size: 22px; }
+
+    .conversation-text { margin: 15px 0 0; color: var(--gray-700); font-size: 0.96rem; font-weight: 650; line-height: 1.65; word-break: keep-all; }
+
+    .inside-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 7px;
+      margin: 16px 0 0;
+      padding-top: 15px;
+      border-top: 1px solid var(--gray-200);
+      color: var(--gray-500);
+      font-size: 0.78rem;
+      font-weight: 650;
+      line-height: 1.45;
+      word-break: keep-all;
+    }
+
+    .inside-note .material-symbols-rounded { flex: 0 0 auto; margin-top: 1px; font-size: 17px; }
+
+    .action-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 9px; margin-top: 12px; }
+
+    .action-button {
+      min-height: 54px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 13px 14px;
+      border: 0;
+      border-radius: 18px;
+      background: var(--blue);
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 850;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .action-button.secondary { background: var(--surface); color: var(--gray-700); }
+    .action-button:active { transform: scale(0.97); }
+    .action-button .material-symbols-rounded { font-size: 20px; }
+
+    .source-footer { margin: 22px 6px 0; color: var(--gray-500); font-size: 0.72rem; font-weight: 600; line-height: 1.65; word-break: keep-all; }
+    .source-footer a { color: var(--gray-600); text-underline-offset: 2px; }
+
+    .error-banner {
+      display: none;
+      align-items: flex-start;
+      gap: 8px;
+      margin-top: 12px;
+      padding: 14px 15px;
+      border-radius: 17px;
+      background: #fff0f1;
+      color: #a41e2c;
+      font-size: 0.84rem;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .error-banner.show { display: flex; }
+    .error-banner .material-symbols-rounded { flex: 0 0 auto; font-size: 19px; }
+
+    .is-loading .pm-number,
+    .is-loading .status-title {
+      color: transparent;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #e5e8eb 25%, #f2f4f6 50%, #e5e8eb 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.2s infinite;
+    }
+
+    .is-loading .pm-number { width: 70px; }
+    .is-loading .status-title { width: min(170px, 42vw); }
+
+    @keyframes shimmer { to { background-position: -200% 0; } }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (max-width: 360px) {
+      main { padding-right: 14px; padding-left: 14px; }
+      .status-card { padding: 19px; }
+      .status-main { gap: 8px; }
+      .pm-reading { min-width: 76px; }
+      .comparison-card { padding: 16px 13px; }
+      .metric-card { padding-right: 9px; padding-left: 9px; }
+      .metric-value { font-size: 1.04rem; }
+      .action-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    }
   </style>
 </head>
 <body data-app-page="report">
   <div class="app-container">
-    <div class="header">
-      <a href="main.html" class="back-btn">←</a>
-      <a href="main.html">
-        <img src="logo.png" alt="COWAY" class="page-title-logo" onerror="this.outerHTML='<div style=\'font-size:20px;font-weight:900;color:#005bb5;\'>COWAY</div>'">
+    <header class="topbar">
+      <a href="main.html" class="back-btn">이전</a>
+      <a href="main.html" class="brand-link" aria-label="홈으로 이동">
+        <img src="logo.png" alt="COWAY" class="page-title-logo" onerror="this.outerHTML='<strong style=\'font-size:1.25rem;color:#079bd3;\'>coway</strong>'">
       </a>
-    </div>
+      <button type="button" class="refresh-top" id="topRefreshButton" aria-label="현재 위치의 대기 정보 다시 측정">
+        <span class="material-symbols-rounded" aria-hidden="true">refresh</span>
+      </button>
+    </header>
 
-    <div class="location-box" id="locationCard" onclick="getLocation()">
-      📍 <span id="locationText">실시간 위치 분석 중...</span>
-    </div>
+    <main>
+      <section class="status-card is-loading" id="statusCard" data-tone="good" aria-live="polite">
+        <div class="location-row">
+          <button type="button" class="location-button" id="locationButton" aria-label="현재 위치 다시 찾기">
+            <span class="material-symbols-rounded" aria-hidden="true">location_on</span>
+            <span id="locationText">현재 위치 확인 중</span>
+          </button>
+          <span class="data-badge">바깥 대기</span>
+        </div>
 
-    <div class="card">
-      <div class="card-title">😷 초미세먼지 팩트 체크</div>
-      <div class="dust-compare">
-        <div class="dust-box korea" id="korBox">
-          <div class="box-title">국내 환경부 기준</div>
-          <div class="box-status" id="korStatus">분석중</div>
-          <div class="box-value pm-value">-- ㎍/㎥</div>
+        <div class="status-main">
+          <div>
+            <p class="status-kicker">초미세먼지 PM2.5</p>
+            <h1 class="status-title" id="statusTitle">불러오는 중</h1>
+            <p class="status-summary" id="statusSummary">현재 위치의 대기 정보를 확인하고 있어요.</p>
+          </div>
+          <div class="pm-reading">
+            <span class="pm-number" id="pm25Value">--</span>
+            <span class="pm-unit">㎍/㎥</span>
+          </div>
         </div>
-        <div class="dust-box who" id="whoBox">
-          <div class="box-title">WHO 국제 기준</div>
-          <div class="box-status" id="whoStatus">분석중</div>
-          <div class="box-value pm-value">-- ㎍/㎥</div>
+
+        <div class="grade-scale" id="gradeScale" aria-label="국내 초미세먼지 등급">
+          <span class="grade-step" data-grade="good">좋음</span>
+          <span class="grade-step" data-grade="moderate">보통</span>
+          <span class="grade-step" data-grade="bad">나쁨</span>
+          <span class="grade-step" data-grade="very-bad">매우 나쁨</span>
         </div>
+
+        <div class="updated-row">
+          <span class="material-symbols-rounded" aria-hidden="true">schedule</span>
+          <span id="updatedText">데이터 연결 중</span>
+        </div>
+      </section>
+
+      <div class="error-banner" id="errorBanner" role="alert">
+        <span class="material-symbols-rounded" aria-hidden="true">error</span>
+        <span id="errorText">정보를 불러오지 못했어요. 잠시 후 다시 시도해 주세요.</span>
       </div>
-      <div class="warning-box" id="dustWarningBox">데이터 분석 중...</div>
-    </div>
 
-    <div class="card">
-      <div class="card-title">💧 실내 습도 경고</div>
-      <div class="humidity-value" id="humidityText">--%</div>
-      <div class="warning-box" id="humWarningBox">데이터 분석 중...</div>
-    </div>
+      <section class="section" aria-labelledby="standardHeading">
+        <h2 class="section-heading" id="standardHeading">기준을 나란히 봐요</h2>
+        <div class="comparison-grid">
+          <article class="comparison-card">
+            <div class="comparison-label">
+              <span class="material-symbols-rounded" aria-hidden="true">flag</span>
+              국내 등급
+            </div>
+            <p class="comparison-value" id="koreaStatus">--</p>
+            <p class="comparison-detail" id="koreaDetail">PM2.5 현재값 기준</p>
+          </article>
+          <article class="comparison-card">
+            <div class="comparison-label">
+              <span class="material-symbols-rounded" aria-hidden="true">public</span>
+              WHO 권고치
+            </div>
+            <p class="comparison-value" id="whoStatus">--</p>
+            <p class="comparison-detail" id="whoDetail">24시간 평균 15 ㎍/㎥</p>
+          </article>
+        </div>
+        <div class="standard-note">
+          <span class="material-symbols-rounded" aria-hidden="true">info</span>
+          <span>WHO 수치는 ‘실시간 등급’이 아니라 24시간 평균 권고치예요. 현재값과의 비교는 상담용 참고로만 봐주세요.</span>
+        </div>
+      </section>
 
-    <a href="https://search.naver.com/search.naver?query=현재위치+미세먼지" target="_blank" class="naver-btn">
-      🇳 네이버 실시간 미세먼지 확인
-    </a>
+      <section class="section" aria-labelledby="weatherHeading">
+        <h2 class="section-heading" id="weatherHeading">바깥 상태</h2>
+        <div class="metric-grid">
+          <article class="metric-card">
+            <div class="metric-icon"><span class="material-symbols-rounded" aria-hidden="true">air</span></div>
+            <div class="metric-label">미세먼지</div>
+            <div class="metric-value" id="pm10Value">--</div>
+            <div class="metric-caption" id="pm10Status">PM10</div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-icon"><span class="material-symbols-rounded" aria-hidden="true">device_thermostat</span></div>
+            <div class="metric-label">기온</div>
+            <div class="metric-value" id="temperatureValue">--</div>
+            <div class="metric-caption" id="weatherDescription">바깥 기온</div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-icon"><span class="material-symbols-rounded" aria-hidden="true">humidity_percentage</span></div>
+            <div class="metric-label">바깥 습도</div>
+            <div class="metric-value" id="humidityValue">--</div>
+            <div class="metric-caption">실내 측정값 아님</div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="conversationHeading">
+        <h2 class="section-heading" id="conversationHeading">고객 안내 한마디</h2>
+        <article class="conversation-card">
+          <h3 class="conversation-title">
+            <span class="material-symbols-rounded" aria-hidden="true">forum</span>
+            지금은 이렇게 안내해 보세요
+          </h3>
+          <p class="conversation-text" id="conversationText">대기 정보를 불러오면 상황에 맞는 안내 문구가 표시돼요.</p>
+          <p class="inside-note">
+            <span class="material-symbols-rounded" aria-hidden="true">sensors</span>
+            <span>이 화면은 바깥 대기 참고자료예요. 실제 실내 공기질과 습도는 실내 센서로 따로 확인해야 합니다.</span>
+          </p>
+        </article>
+        <div class="action-grid">
+          <a class="action-button" href="calc.html">
+            <span class="material-symbols-rounded" aria-hidden="true">air_purifier_gen</span>
+            공기청정기 제품 보기
+          </a>
+          <a class="action-button secondary" href="https://www.airkorea.or.kr/" target="_blank" rel="noopener noreferrer">
+            <span class="material-symbols-rounded" aria-hidden="true">open_in_new</span>
+            에어코리아
+          </a>
+        </div>
+      </section>
+
+      <footer class="source-footer">
+        대기·날씨 데이터: <a href="https://openweathermap.org/" target="_blank" rel="noopener noreferrer">OpenWeather</a><br>
+        등급 참고: 국내 대기환경 기준 · <a href="https://www.who.int/publications/i/item/9789240034228" target="_blank" rel="noopener noreferrer">WHO 2021 대기질 가이드라인</a>
+      </footer>
+    </main>
   </div>
 
   <script>
-    const WEATHER_KEY = "35847ad064da378714ab9a787830e7f2";
-    let currentGuName = "김해시";
-    const defaultLat = 35.2285;
-    const defaultLon = 128.8894;
+    (() => {
+      "use strict";
 
-    function getLocation() {
-      document.getElementById("locationText").innerText = "위치 탐색 중...";
-      if (navigator.geolocation) {
-        // 💎 속도 최적화: enableHighAccuracy를 false로 낮추어 기지국/IP 기반으로 0.1초 만에 로딩!
-        navigator.geolocation.getCurrentPosition(
-          (position) => { fetchAllData(position.coords.latitude, position.coords.longitude); },
-          (error) => { fetchAllData(defaultLat, defaultLon); }, 
-          { enableHighAccuracy: false, timeout: 4000, maximumAge: 300000 }
-        );
-      } else {
-        fetchAllData(defaultLat, defaultLon);
+      const WEATHER_KEY = "35847ad064da378714ab9a787830e7f2";
+      const DEFAULT_POSITION = { lat: 35.2285, lon: 128.8894 };
+      const WHO_PM25_24H = 15;
+      let hasReport = false;
+
+      const elements = {
+        statusCard: document.getElementById("statusCard"),
+        locationText: document.getElementById("locationText"),
+        locationButton: document.getElementById("locationButton"),
+        topRefreshButton: document.getElementById("topRefreshButton"),
+        statusTitle: document.getElementById("statusTitle"),
+        statusSummary: document.getElementById("statusSummary"),
+        pm25Value: document.getElementById("pm25Value"),
+        updatedText: document.getElementById("updatedText"),
+        koreaStatus: document.getElementById("koreaStatus"),
+        koreaDetail: document.getElementById("koreaDetail"),
+        whoStatus: document.getElementById("whoStatus"),
+        whoDetail: document.getElementById("whoDetail"),
+        pm10Value: document.getElementById("pm10Value"),
+        pm10Status: document.getElementById("pm10Status"),
+        temperatureValue: document.getElementById("temperatureValue"),
+        weatherDescription: document.getElementById("weatherDescription"),
+        humidityValue: document.getElementById("humidityValue"),
+        conversationText: document.getElementById("conversationText"),
+        errorBanner: document.getElementById("errorBanner"),
+        errorText: document.getElementById("errorText")
+      };
+
+      function getKoreaPm25Grade(value) {
+        if (value <= 15) return { key: "good", color: "#1b64da", label: "좋음", range: "0~15 ㎍/㎥", summary: "바깥 공기질이 좋아요.", talk: "바깥 공기 상태는 양호한 편이에요. 환기 후에는 실내 공기청정기 자동 모드와 필터 상태도 함께 확인해 보세요." };
+        if (value <= 35) return { key: "moderate", color: "#087443", label: "보통", range: "16~35 ㎍/㎥", summary: "무난하지만 민감한 분은 확인이 필요해요.", talk: "바깥 공기는 보통 수준이에요. 민감한 고객이라면 짧게 환기한 뒤 실내 공기질을 따로 확인하도록 안내해 보세요." };
+        if (value <= 75) return { key: "bad", color: "#b46900", label: "나쁨", range: "36~75 ㎍/㎥", summary: "장시간 환기는 줄여주세요.", talk: "초미세먼지가 나쁨 수준이에요. 불필요한 장시간 환기는 줄이고, 실내 공기청정기 가동과 필터 상태를 확인해 주세요." };
+        return { key: "very-bad", color: "#c92a38", label: "매우 나쁨", range: "76 ㎍/㎥ 이상", summary: "외출과 환기를 신중히 해주세요.", talk: "초미세먼지가 매우 나쁨 수준이에요. 바깥 공기 유입을 줄이고, 실내 공기청정기와 필터 상태를 점검해 주세요." };
       }
-    }
 
-    async function fetchAllData(lat, lon) {
-      try {
-        const geoRes = await fetch(`https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${WEATHER_KEY}`);
-        if(geoRes.ok) {
-            const geoData = await geoRes.json();
-            if(geoData && geoData.length > 0) {
-              currentGuName = geoData[0].local_names?.ko || geoData[0].name || "현재 위치";
-            }
+      function getKoreaPm10Grade(value) {
+        if (value <= 30) return { label: "좋음" };
+        if (value <= 80) return { label: "보통" };
+        if (value <= 150) return { label: "나쁨" };
+        return { label: "매우 나쁨" };
+      }
+
+      function formatTime(date = new Date()) {
+        return new Intl.DateTimeFormat("ko-KR", { hour: "numeric", minute: "2-digit", hour12: true }).format(date);
+      }
+
+      async function requestJson(url) {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.json();
+      }
+
+      function setLoading(isLoading) {
+        elements.statusCard.classList.toggle("is-loading", isLoading);
+        elements.topRefreshButton.classList.toggle("loading", isLoading);
+        elements.topRefreshButton.disabled = isLoading;
+        elements.locationButton.disabled = isLoading;
+        if (isLoading && !hasReport) {
+          elements.errorBanner.classList.remove("show");
+          elements.locationText.textContent = "현재 위치 확인 중";
+          elements.statusTitle.textContent = "불러오는 중";
+          elements.statusSummary.textContent = "현재 위치의 대기 정보를 확인하고 있어요.";
+          elements.updatedText.textContent = "데이터 연결 중";
         }
-      } catch(e) {}
-      document.getElementById('locationText').innerText = `${currentGuName} 실시간 리포트 (터치 시 재탐색)`;
-
-      try {
-        const weatherRes = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_KEY}`);
-        const weatherData = await weatherRes.json();
-        const humidity = weatherData.main.humidity;
-        document.getElementById('humidityText').innerText = `${humidity}%`;
-        updateHumidityUI(humidity);
-
-        const airRes = await fetch(`https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${WEATHER_KEY}`);
-        const airData = await airRes.json();
-        const pm25 = Math.round(airData.list[0].components.pm2_5);
-        updateDustUI(pm25);
-      } catch (error) {
-         document.getElementById('locationText').innerText = `데이터 연결 실패`;
       }
-    }
 
-    function updateDustUI(pm25) {
-      document.querySelectorAll('.pm-value').forEach(el => el.innerText = `${pm25} ㎍/㎥`);
-      const korStatus = document.getElementById('korStatus');
-      const whoStatus = document.getElementById('whoStatus');
-      const warningBox = document.getElementById('dustWarningBox');
-
-      if(pm25 <= 15) { 
-        korStatus.innerText = "좋음 🔵"; korStatus.style.color = "#2563eb"; 
-        whoStatus.innerText = "좋음 🔵"; whoStatus.style.color = "#2563eb"; 
-        warningBox.style.backgroundColor = "#f0fdf4";
-        warningBox.innerHTML = "<span style='color:#166534;'>😊 현재 공기질은 양호합니다! 환기하셔도 좋습니다.<br>(단, 매트리스 속 묵은 먼지는 코웨이 딥 케어가 필수입니다.)</span>";
-      } else if(pm25 <= 35) {
-        korStatus.innerText = "보통 🟢"; korStatus.style.color = "#16a34a"; 
-        whoStatus.innerText = "나쁨 🔴"; whoStatus.style.color = "#dc2626"; 
-        warningBox.style.backgroundColor = "#fffbeb";
-        warningBox.innerHTML = "<span style='color:#b45309;'>🤔 국내 기준은 보통이나, WHO 기준으로는 나쁨입니다.<br>미세먼지가 실내로 유입될 수 있으니 공기청정기 가동을 권장합니다.</span>";
-      } else { 
-        korStatus.innerText = "나쁨 🔴"; korStatus.style.color = "#dc2626"; 
-        whoStatus.innerText = "매우나쁨 🔴"; whoStatus.style.color = "#991b1b"; 
-        warningBox.style.backgroundColor = "#fef2f2";
-        warningBox.innerHTML = "<span style='color:#b91c1c;'>😡 비상! 환기 절대 불가 수준입니다.<br>이 초미세먼지가 다 매트리스로 가라앉습니다. 실내 공기청정기 가동이 시급합니다.</span>";
+      function setError(message) {
+        elements.errorText.textContent = message;
+        elements.errorBanner.classList.add("show");
+        if (hasReport) {
+          elements.updatedText.textContent = "업데이트 실패 · 기존 정보 표시 중";
+          return;
+        }
+        elements.locationText.textContent = "위치를 확인하지 못했어요";
+        elements.statusTitle.textContent = "연결 안 됨";
+        elements.statusSummary.textContent = "인터넷 연결을 확인하고 다시 측정해 주세요.";
+        elements.pm25Value.textContent = "--";
+        elements.updatedText.textContent = "표시할 수 있는 정보가 없어요";
       }
-    }
 
-    function updateHumidityUI(humidity) {
-      const warningBox = document.getElementById('humWarningBox');
-      if(humidity < 60) {
-        warningBox.style.backgroundColor = "#f0fdf4";
-        warningBox.innerHTML = "<span style='color:#166534;'>💧 현재 실내 습도는 쾌적한 수준입니다.<br>뽀송뽀송한 매트리스 컨디션을 유지하세요!</span>";
-      } else {
-        warningBox.style.backgroundColor = "#eff6ff";
-        warningBox.innerHTML = "<span style='color:#1d4ed8;'>🦠 비상! 집먼지진드기 번식 위험 구간!<br>습도 60% 이상 시 진드기 번식률이 평소의 5배로 폭증합니다. 매트리스 딥 클리닝이 시급합니다.</span>";
+      function updateGradeScale(activeKey) {
+        document.querySelectorAll(".grade-step").forEach((step) => {
+          step.classList.toggle("active", step.dataset.grade === activeKey);
+        });
       }
-    }
 
-    window.onload = function() { getLocation(); }
+      function updateReport({ pm25, pm10, temperature, humidity, description, location, usedFallback }) {
+        const pm25Grade = getKoreaPm25Grade(pm25);
+        const pm10Grade = getKoreaPm10Grade(pm10);
+        const whoRatio = pm25 / WHO_PM25_24H;
+        const whoWithin = pm25 <= WHO_PM25_24H;
+
+        elements.statusCard.dataset.tone = pm25Grade.key;
+        elements.locationText.textContent = `${usedFallback ? "기본 위치 · " : ""}${location}`;
+        elements.statusTitle.textContent = pm25Grade.label;
+        elements.statusSummary.textContent = pm25Grade.summary;
+        elements.pm25Value.textContent = String(pm25);
+        elements.updatedText.textContent = `${formatTime()} 업데이트 · 위치 버튼을 누르면 다시 측정`;
+        elements.koreaStatus.textContent = pm25Grade.label;
+        elements.koreaStatus.style.color = pm25Grade.color;
+        elements.koreaDetail.textContent = `국내 ${pm25Grade.range}`;
+        elements.whoStatus.textContent = whoWithin ? "권고치 이내" : `${whoRatio.toFixed(1)}배`;
+        elements.whoStatus.style.color = whoWithin ? "#1b64da" : "#c92a38";
+        elements.whoDetail.textContent = whoWithin ? `현재 ${pm25} · 24시간 권고치 ${WHO_PM25_24H}` : `현재값 ÷ 24시간 권고치 ${WHO_PM25_24H}`;
+        elements.pm10Value.textContent = String(pm10);
+        elements.pm10Status.textContent = `${pm10Grade.label} · ㎍/㎥`;
+        elements.temperatureValue.textContent = Number.isFinite(temperature) ? `${Math.round(temperature)}°` : "--";
+        elements.weatherDescription.textContent = description || "바깥 기온";
+        elements.humidityValue.textContent = Number.isFinite(humidity) ? `${Math.round(humidity)}%` : "--";
+        elements.conversationText.textContent = pm25Grade.talk;
+        updateGradeScale(pm25Grade.key);
+        hasReport = true;
+      }
+
+      async function resolveLocation(lat, lon) {
+        try {
+          const geo = await requestJson(`https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${WEATHER_KEY}`);
+          if (!Array.isArray(geo) || !geo.length) return "현재 위치";
+          return geo[0].local_names?.ko || geo[0].name || "현재 위치";
+        } catch (error) {
+          return "현재 위치";
+        }
+      }
+
+      async function fetchAllData(lat, lon, usedFallback = false) {
+        setLoading(true);
+        try {
+          const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&lang=kr&appid=${WEATHER_KEY}`;
+          const airUrl = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${WEATHER_KEY}`;
+          const [weather, air, location] = await Promise.all([requestJson(weatherUrl), requestJson(airUrl), resolveLocation(lat, lon)]);
+          const components = air?.list?.[0]?.components;
+          const pm25 = Math.round(Number(components?.pm2_5));
+          const pm10 = Math.round(Number(components?.pm10));
+          if (!Number.isFinite(pm25) || !Number.isFinite(pm10)) throw new Error("Missing air quality data");
+
+          updateReport({
+            pm25,
+            pm10,
+            temperature: Number(weather?.main?.temp),
+            humidity: Number(weather?.main?.humidity),
+            description: weather?.weather?.[0]?.description || "바깥 날씨",
+            location,
+            usedFallback
+          });
+          elements.errorBanner.classList.remove("show");
+        } catch (error) {
+          setError("대기 정보를 불러오지 못했어요. 인터넷 연결을 확인한 뒤 다시 측정해 주세요.");
+        } finally {
+          setLoading(false);
+        }
+      }
+
+      function useDefaultPosition() {
+        fetchAllData(DEFAULT_POSITION.lat, DEFAULT_POSITION.lon, true);
+      }
+
+      function getLocation() {
+        if (!navigator.geolocation) {
+          useDefaultPosition();
+          return;
+        }
+
+        setLoading(true);
+        navigator.geolocation.getCurrentPosition(
+          (position) => fetchAllData(position.coords.latitude, position.coords.longitude, false),
+          () => useDefaultPosition(),
+          { enableHighAccuracy: false, timeout: 6000, maximumAge: 300000 }
+        );
+      }
+
+      elements.locationButton.addEventListener("click", getLocation);
+      elements.topRefreshButton.addEventListener("click", getLocation);
+      window.addEventListener("load", getLocation, { once: true });
+    })();
   </script>
   <script src="app-nav.js"></script>
 </body>
