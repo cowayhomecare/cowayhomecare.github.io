@@ -54,11 +54,11 @@
     .topbar {
       position: relative;
       z-index: 10;
-      min-height: 82px;
+      min-height: calc(60px + env(safe-area-inset-top));
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: calc(10px + env(safe-area-inset-top)) 18px 10px;
+      padding: env(safe-area-inset-top) 18px 0;
       background: rgba(242, 244, 246, 0.92);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
@@ -67,7 +67,7 @@
     .back-btn,
     .refresh-top {
       position: absolute;
-      bottom: 10px;
+      bottom: 8px;
       width: 44px;
       height: 44px;
       display: grid;
@@ -87,8 +87,8 @@
     .refresh-top.loading .material-symbols-rounded { animation: spin 900ms linear infinite; }
 
     .brand-link { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; }
-    .page-title-logo { width: auto; height: 27px; object-fit: contain; }
-    main { padding: 4px 18px 28px; }
+    .page-title-logo { width: auto; height: 24px; object-fit: contain; }
+    main { padding: 0 18px 28px; }
 
     .status-card {
       position: relative;

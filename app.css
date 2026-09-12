@@ -70,7 +70,7 @@ a {
   position: sticky;
   top: 0;
   z-index: 40;
-  height: 68px;
+  height: 60px;
   display: flex;
   align-items: center;
   padding: 0 20px;
@@ -81,7 +81,7 @@ a {
 }
 
 .brand {
-  min-width: 96px;
+  min-width: 88px;
   height: 44px;
   display: inline-flex;
   align-items: center;
@@ -89,8 +89,8 @@ a {
 }
 
 .brand img {
-  width: 106px;
-  max-height: 30px;
+  width: 96px;
+  max-height: 27px;
   display: block;
   object-fit: contain;
   object-position: left center;
@@ -106,7 +106,7 @@ a {
 }
 
 .main-content {
-  padding: 10px 20px 28px;
+  padding: 4px 20px 28px;
 }
 
 .shopping-hero {
