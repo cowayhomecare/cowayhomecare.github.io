@@ -7,11 +7,11 @@
   <title>공간 갤러리 · COWAY</title>
   <link rel="icon" href="img/icon/logo.png" type="image/png">
   <link rel="stylesheet" href="app-nav.css">
-  <link rel="stylesheet" href="gallery.css?v=2">
+  <link rel="stylesheet" href="gallery.css?v=3">
   <script src="ui-config.js" defer></script>
-  <script src="gallery-data.js?v=2" defer></script>
+  <script src="gallery-data.js?v=3" defer></script>
   <script src="app-nav.js" defer></script>
-  <script src="gallery.js?v=2" defer></script>
+  <script src="gallery.js?v=3" defer></script>
 </head>
 <body data-app-page="gallery">
   <div class="app-container" id="galleryApp">
@@ -52,6 +52,11 @@
         <label class="search-box" id="searchBox" hidden><span data-icon="search"></span><input id="searchInput" type="search" placeholder="제품명이나 색상으로 검색" autocomplete="off" aria-label="사진 검색"><button type="button" id="searchClear" aria-label="검색어 지우기" data-icon="x"></button></label>
       </section>
 
+      <section id="modelAlbum" class="model-album" aria-label="선택한 모델" hidden>
+        <button type="button" id="albumBack"><span data-icon="chevron-left"></span>모델 목록</button>
+        <div class="album-heading"><h2 id="albumTitle"></h2><span id="albumCount"></span></div>
+        <div id="albumColors" class="album-colors" aria-label="이 모델의 색상"></div>
+      </section>
       <div class="results-heading"><h2 id="resultsTitle">설치 사진 <span id="resultCount"></span></h2><button type="button" id="resetFilters">필터 초기화</button></div>
       <p class="context-note" id="contextNote" hidden></p>
       <div id="galleryGrid" class="photo-grid" aria-label="설치 사진 목록"></div>
@@ -64,7 +69,11 @@
   <dialog id="photoViewer" class="photo-viewer" aria-labelledby="viewerTitle">
     <div class="viewer-top"><span id="viewerCounter"></span><div><button type="button" id="viewerSave" class="viewer-icon" aria-label="사진 모아두기" aria-pressed="false" data-icon="heart"></button><button type="button" id="viewerClose" class="viewer-icon" aria-label="사진 닫기" data-icon="x"></button></div></div>
     <div class="viewer-stage" id="viewerStage">
-      <img id="viewerImage" alt="" draggable="false">
+      <div class="viewer-track" id="viewerTrack" data-moving="false">
+        <div class="viewer-slide" aria-hidden="true"><img id="viewerPrevImage" alt="" draggable="false"></div>
+        <div class="viewer-slide"><img id="viewerImage" alt="" draggable="false"></div>
+        <div class="viewer-slide" aria-hidden="true"><img id="viewerNextImage" alt="" draggable="false"></div>
+      </div>
       <p id="viewerError" class="viewer-error" hidden>사진을 불러오지 못했어요.<br>연결 상태를 확인하고 다시 열어주세요.</p>
       <button type="button" id="viewerPrev" class="viewer-arrow prev" aria-label="이전 사진" data-icon="chevron-left"></button>
       <button type="button" id="viewerNext" class="viewer-arrow next" aria-label="다음 사진" data-icon="chevron-right"></button>

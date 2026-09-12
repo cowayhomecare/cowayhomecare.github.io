@@ -6,6 +6,7 @@ const path = require('node:path');
 const crypto = require('node:crypto');
 const { execFileSync } = require('node:child_process');
 const sharp = require('sharp');
+const CURATED_EQUIVALENTS = require('./curated-equivalents.json');
 
 const ROOT = path.resolve(__dirname, '../..');
 const RULES = {
@@ -44,7 +45,11 @@ function classify(relativeFile) {
   if (!section) section = tags.has('작업사진') || folders.length === 0 ? 'work' : 'bed';
   if (section === 'work') tags.add('작업사진');
   category = category || (section === 'work' ? '작업사진' : '프레임');
-  const model = labels[0] || (section === 'work' ? '설치 작업' : category);
+  let model = labels[0] || (section === 'work' ? '설치 작업' : category);
+  if(key(model)==='의류청정기'){section='air';category='의류청정기';}
+  if(['패밀리프레임','저상형패밀리프레임','저상형패밀리'].includes(key(model))){
+    model='저상형 패밀리 프레임';section='bed';category='프레임';tags.add('패밀리');
+  }
   const rawColor = section === 'bed' && category === '매트리스 세트' ? '' : labels[1] || '';
   const color = COLORS[key(rawColor)] || rawColor;
   let priority=PRIORITY[category] || 100;
@@ -79,7 +84,7 @@ function addedAt(root, file, fallback) {
   return fallback;
 }
 
-async function build(root = ROOT) {
+async function build(root = ROOT, equivalents = CURATED_EQUIVALENTS) {
   const source = path.join(root, 'img/gallery');
   const web = path.join(source, '_web');
   const thumb = path.join(source, '_thumbs');
@@ -96,7 +101,8 @@ async function build(root = ROOT) {
   const unique = new Map();
   for (const file of files) {
     const bytes = await fs.readFile(file.full);
-    const hash = crypto.createHash('sha256').update(bytes).digest('hex').slice(0,24);
+    const fullHash = crypto.createHash('sha256').update(bytes).digest('hex');
+    const hash = equivalents[fullHash] || fullHash.slice(0,24);
     const metadata = classify(file.relative);
     const info = await sharp(bytes,{limitInputPixels:100000000,failOn:'error'}).metadata();
     if (info.pages > 1) console.warn(`첫 프레임만 사용: ${file.relative}`);

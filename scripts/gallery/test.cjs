@@ -5,6 +5,7 @@ const fs=require('node:fs/promises');
 const os=require('node:os');
 const path=require('node:path');
 const sharp=require('sharp');
+const crypto=require('node:crypto');
 const {classify,build}=require('./build.cjs');
 
 test('Korean folder names, arbitrary filenames and combined tags',()=>{
@@ -23,6 +24,12 @@ test('Korean folder names, arbitrary filenames and combined tags',()=>{
  const family=classify('패밀리참고/파운데이션 2대 설치/가족 침대.jpg');
  assert.equal(family.referenceOnly,true);assert.equal(family.referenceKind,'family');assert(family.tags.includes('패밀리'));assert.equal(family.color,'');assert(family.priority<20);
  assert.equal(classify('투매트리스/코지 프레임/아이보리/아무 이름.jpg').referenceOnly,false);
+ for(const folder of ['프레임+패밀리/패밀리 프레임','저상형 패밀리 프레임','프레임/저상형패밀리']){
+  const low=classify(folder+'/블랙/4.jpg');assert.equal(low.model,'저상형 패밀리 프레임');assert.equal(low.color,'블랙');assert(low.tags.includes('패밀리'));assert.equal(low.section,'bed');
+ }
+ assert.equal(classify('청정기/의류청정기/실버(거울형)/20.jpg').color,'실버(거울형)');
+ assert.equal(classify('청정기/의류청정기/16.jpg').category,'의류청정기');
+ assert.equal(classify('청정기/의류청정기/16.jpg').color,'');
 });
 
 test('Build merges duplicate content, preserves source images, strips EXIF and supports moves/deletions',async()=>{
@@ -58,4 +65,18 @@ test('Reference-only status survives duplicates and reserved folders remain priv
  for(const folder of ['파운데이션/확인 전 모델','가드참고/가드 설치 참고'])await fs.writeFile(path.join(root,'img/gallery',folder,'같은 파일.jpg'),bytes);
  await fs.writeFile(path.join(root,'img/gallery/_보관','미반영.jpg'),'invalid non-image');
  const result=await build(root);assert.equal(result.photos.length,1);assert.equal(result.photos[0].referenceOnly,true);assert.equal(result.photos[0].model,'가드 설치 참고');
+});
+
+test('Reviewed original and optimized copies share one stable ID without merging other similar photographs',async()=>{
+ const root=await fs.mkdtemp(path.join(os.tmpdir(),'coway-gallery-curated-'));
+ const raw=await sharp({create:{width:42,height:32,channels:3,background:'#847654'}}).withExif({IFD0:{Artist:'private'}}).jpeg().toBuffer();
+ const cleaned=await sharp(raw).jpeg({quality:92}).toBuffer();
+ const different=await sharp({create:{width:42,height:32,channels:3,background:'#857654'}}).jpeg().toBuffer();
+ const sha=b=>crypto.createHash('sha256').update(b).digest('hex');const canonical=sha(cleaned).slice(0,24);
+ const fixtures=[['프레임+패밀리/패밀리 프레임/블랙/기존.jpg',cleaned],['Work+가드/저상형 패밀리 프레임/블랙/4.jpg',raw],['저상형 패밀리 프레임/블랙/다른사진.jpg',different]];
+ for(const [name,bytes] of fixtures){const file=path.join(root,'img/gallery',name);await fs.mkdir(path.dirname(file),{recursive:true});await fs.writeFile(file,bytes);}
+ const result=await build(root,{[sha(raw)]:canonical});assert.equal(result.photos.length,2);
+ const merged=result.photos.find(p=>p.id===canonical);assert(merged);assert(merged.own);assert(merged.tags.includes('패밀리'));assert(merged.tags.includes('가드'));assert.equal(merged.model,'저상형 패밀리 프레임');
+ assert.equal((await sharp(path.join(root,merged.src)).metadata()).exif,undefined);
+ for(const [name,bytes] of fixtures)assert.deepEqual(await fs.readFile(path.join(root,'img/gallery',name)),bytes);
 });
