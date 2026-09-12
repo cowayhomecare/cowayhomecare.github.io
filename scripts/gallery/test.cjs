@@ -18,6 +18,11 @@ test('Korean folder names, arbitrary filenames and combined tags',()=>{
  assert.equal(classify('매트리스세트/모디/중간(Medium)/1.jpg').color,'');
  assert.equal(classify('청정기/스퀘어핏 11평형/퓨어 화이트/1.jpg').section,'air');
  assert.equal(classify('힐링/페블체어2/헤이지 블루/1.jpg').color,'헤이지 블루');
+ const guard=classify('가드참고+패밀리/가드 설치 참고/아무 사진.jpg');
+ assert.equal(guard.referenceOnly,true);assert.equal(guard.referenceKind,'guard');assert.equal(guard.own,false);assert(guard.tags.includes('가드'));assert(guard.tags.includes('패밀리'));
+ const family=classify('패밀리참고/파운데이션 2대 설치/가족 침대.jpg');
+ assert.equal(family.referenceOnly,true);assert.equal(family.referenceKind,'family');assert(family.tags.includes('패밀리'));assert.equal(family.color,'');assert(family.priority<20);
+ assert.equal(classify('투매트리스/코지 프레임/아이보리/아무 이름.jpg').referenceOnly,false);
 });
 
 test('Build merges duplicate content, preserves source images, strips EXIF and supports moves/deletions',async()=>{
@@ -44,4 +49,13 @@ test('Legacy loose files become work photos; unsupported HEIC reports an actiona
  const b=await sharp({create:{width:20,height:30,channels:3,background:'#000'}}).jpeg().toBuffer();await fs.writeFile(path.join(root,'pade1.jpg'),b);
  const data=await build(root);assert.equal(data.photos[0].own,true);assert.equal(data.photos.length,1);
  await fs.writeFile(path.join(root,'img/gallery/phone.heic'),'test');await assert.rejects(build(root),/JPG/);
+});
+
+test('Reference-only status survives duplicates and reserved folders remain private to the builder',async()=>{
+ const root=await fs.mkdtemp(path.join(os.tmpdir(),'coway-gallery-reference-'));
+ for(const folder of ['파운데이션/확인 전 모델','가드참고/가드 설치 참고','_보관','_thumbs'])await fs.mkdir(path.join(root,'img/gallery',folder),{recursive:true});
+ const bytes=await sharp({create:{width:32,height:28,channels:3,background:'#3156ab'}}).jpeg().toBuffer();
+ for(const folder of ['파운데이션/확인 전 모델','가드참고/가드 설치 참고'])await fs.writeFile(path.join(root,'img/gallery',folder,'같은 파일.jpg'),bytes);
+ await fs.writeFile(path.join(root,'img/gallery/_보관','미반영.jpg'),'invalid non-image');
+ const result=await build(root);assert.equal(result.photos.length,1);assert.equal(result.photos[0].referenceOnly,true);assert.equal(result.photos[0].model,'가드 설치 참고');
 });

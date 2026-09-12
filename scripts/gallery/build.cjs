@@ -19,7 +19,8 @@ const RULES = {
   '청정기': ['air', '공기청정기'], '공기청정기': ['air', '공기청정기'],
   '힐링': ['healing', '힐링'], '안마의자': ['healing', '안마의자'], '안마베드': ['healing', '안마베드'],
   '정수기': ['water', '정수기'], '패밀리': [null, '패밀리'], '가드': [null, '가드'],
-  '가드설치': [null, '가드'], '2대설치': [null, '2대 설치']
+  '가드설치': [null, '가드'], '2대설치': [null, '2대 설치'],
+  '가드참고': ['bed', '가드 참고'], '패밀리참고': ['bed', '패밀리 참고']
 };
 const PRIORITY = { '파운데이션': 10, '투매트리스': 20, '수납프레임': 30, '단매트리스': 40, '마이프레임': 50, '프레임': 55, '매트리스 세트': 60 };
 const normalize = value => value.normalize('NFC').trim();
@@ -48,7 +49,11 @@ function classify(relativeFile) {
   const color = COLORS[key(rawColor)] || rawColor;
   let priority=PRIORITY[category] || 100;
   if(section==='air')priority=model.includes('스퀘어핏')?(model.includes('11평')?10:20):30;
-  return { section, category, model, color, tags: [...tags], own: tags.has('작업사진'), priority };
+  const referenceKind=category==='가드 참고'?'guard':category==='패밀리 참고'?'family':'';
+  const referenceOnly=!!referenceKind;
+  if(referenceKind==='family')priority=12;
+  if(referenceOnly)tags.add(referenceKind==='guard'?'가드':'패밀리');
+  return { section, category, model, color, tags: [...tags], own: tags.has('작업사진'), priority, referenceOnly, referenceKind };
 }
 
 async function exists(file) { try { await fs.access(file); return true; } catch { return false; } }
@@ -101,7 +106,7 @@ async function build(root = ROOT) {
       const old = unique.get(hash);
       old.tags = [...new Set([...old.tags,...metadata.tags])];
       old.own = old.own || metadata.own;
-      if (old.section === 'work' && metadata.section !== 'work') Object.assign(old,{section:metadata.section,category:metadata.category,model:metadata.model,color:metadata.color,priority:metadata.priority});
+      if (metadata.referenceOnly || (old.section === 'work' && metadata.section !== 'work' && !old.referenceOnly)) Object.assign(old,{section:metadata.section,category:metadata.category,model:metadata.model,color:metadata.color,priority:metadata.priority,referenceOnly:metadata.referenceOnly,referenceKind:metadata.referenceKind});
       if (date > old.addedAt) old.addedAt = date;
       continue;
     }
